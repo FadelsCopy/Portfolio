@@ -216,55 +216,125 @@
 
     .about p { max-width: 800px; margin: auto; text-align: center; font-size: 1.1rem; color: var(--text-secondary); }
 
-    /* ============ SERVICES (Accordion) ============ */
-    .services .service { 
-      background: var(--bg-card); 
-      border: 1px solid var(--glass-border); 
-      margin-bottom: 15px; 
-      border-radius: 6px; 
-      overflow: hidden;
-      transition: all 0.3s ease;
+    /* ============ SERVICES (Enhanced Card-Based Expansion) ============ */
+    .services {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
     }
-    .services .service:hover {
-      border-color: var(--accent);
-      box-shadow: 0 8px 24px var(--shadow-gold);
-    }
-    .service-header {
+    
+    .services-grid {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      cursor: pointer;
-      user-select: none;
+      flex-direction: column;
+      gap: 24px;
+      perspective: 1000px;
+      max-width: 900px;
+      margin: 0 auto;
     }
+
+    .service {
+      background: linear-gradient(135deg, var(--bg-card), rgba(21,27,43,0.6));
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      transform-style: preserve-3d;
+    }
+
+    .service:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 60px var(--shadow-gold);
+      border-color: var(--accent);
+    }
+
+    .service-header {
+      padding: 28px 24px;
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(135deg, rgba(212,175,55,0.05), transparent);
+    }
+
     .service-header h3 {
       color: var(--accent);
       margin: 0;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      transition: all 0.4s ease;
     }
-    .service-toggle {
-      color: var(--accent);
+
+    .service-icon {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 1.5rem;
-      font-weight: bold;
-      transition: transform 0.3s ease;
+      color: var(--accent);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .service.active .service-toggle {
-      transform: rotate(45deg);
+
+    .service.active .service-icon {
+      transform: rotate(360deg) scale(1.1);
+      background: var(--accent);
+      color: var(--bg-dark);
+      box-shadow: 0 8px 24px var(--shadow-gold);
     }
+
     .service-content {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s ease;
-      padding: 0 20px;
+      padding: 0 24px;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     .service.active .service-content {
-      max-height: 500px;
-      padding: 0 20px 20px 20px;
+      max-height: 400px;
+      opacity: 1;
+      transform: translateY(0);
+      padding: 0 24px 28px 24px;
     }
+
     .service-content p {
       color: var(--text-secondary);
       margin: 0;
-      line-height: 1.6;
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .service.active {
+      background: linear-gradient(135deg, rgba(21,27,43,0.95), rgba(21,27,43,0.8));
+      box-shadow: 0 24px 70px var(--shadow-gold);
+      border-color: var(--accent);
+      transform: scale(1.03);
+    }
+
+    .service::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Apply same animation to all service cards */
+    .service.active::before {
+      transform: scaleX(1);
     }
 
     /* ============ PORTFOLIO (with images and modal) ============ */
@@ -428,27 +498,6 @@
       border-top: 1px solid var(--glass-border);
     }
 
-    @media (max-width: 980px){
-      .hero { grid-template-columns: 1fr 320px; gap:24px; padding:60px 18px; }
-      .profile-frame { width:280px; height:320px; }
-      nav.main-nav { display:none; }
-      .hamburger { display:flex; }
-      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 720px){
-      .hero { grid-template-columns: 1fr; gap:18px; padding:36px 14px; }
-      .hero-profile { order:-1; display:flex; justify-content:center; }
-      .hero-card h1 { font-size:2rem; }
-      .hero-card h2 { font-size:1.05rem; }
-      .brand .meta .name { display:none; }
-      .hero { max-width: 94%; }
-      .profile-frame { width:220px; height:260px; transform:none; }
-      .mobile-menu { right:10px; left:10px; top:64px; min-width:auto; }
-      header.site-header { padding:10px 14px; }
-      .portfolio-grid { grid-template-columns: 1fr; }
-      .modal-content { padding: 30px 20px; }
-    }
-
     /* ============ NEW SECTIONS ============ */
     /* My Skills */
     .skills-grid {
@@ -486,6 +535,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 30px;
       padding: 0;
+      transition: transform 0.5s ease;
     }
     .client-card {
       background: linear-gradient(135deg, var(--bg-card), rgba(21,27,43,0.8));
@@ -549,7 +599,7 @@
       transform: scale(1.2);
     }
 
-    /* Navigation Arrows - Elegant Design */
+    /* Navigation Arrows */
     .clients-nav {
       display: none;
       justify-content: center;
@@ -598,9 +648,48 @@
     }
     .work-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
 
+    @media (max-width: 980px){
+      .hero { grid-template-columns: 1fr 320px; gap:24px; padding:60px 18px; }
+      .profile-frame { width:280px; height:320px; }
+      nav.main-nav { display:none; }
+      .hamburger { display:flex; }
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { max-width: 100%; }
+      .clients-slider { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    }
+    
+    @media (max-width: 720px){
+      .hero { grid-template-columns: 1fr; gap:18px; padding:36px 14px; }
+      .hero-profile { order:-1; display:flex; justify-content:center; }
+      .hero-card h1 { font-size:2rem; }
+      .hero-card h2 { font-size:1.05rem; }
+      .brand .meta .name { display:none; }
+      .hero { max-width: 94%; }
+      .profile-frame { width:220px; height:260px; transform:none; }
+      .mobile-menu { right:10px; left:10px; top:64px; min-width:auto; }
+      header.site-header { padding:10px 14px; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .modal-content { padding: 30px 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      
+      /* Mobile-responsive client feedback */
+      .clients-slider { 
+        grid-template-columns: 1fr; 
+        gap: 20px; 
+      }
+      .clients-nav { display: flex; }
+      .clients-dots { display: flex; }
+      .client-card {
+        display: none;
+      }
+      .client-card.active {
+        display: block;
+      }
+    }
+
   </style>
 </head>
-<body>
+<body id="top">
 
   <!-- ============ HEADER (sticky) ============ -->
   <header class="site-header">
@@ -612,7 +701,7 @@
       </div>
     </div>
     <nav class="main-nav" aria-label="Main Navigation">
-      <a href="#about">About</a>
+      <a href="#top">About</a>
       <a href="#services">Services</a>
       <a href="#portfolio">Works</a>
       <a href="#faq">Q&amp;A</a>
@@ -623,7 +712,7 @@
       <span></span>
     </button>
     <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-      <a href="#about">About</a>
+      <a href="#top">About</a>
       <a href="#services">Services</a>
       <a href="#portfolio">Works</a>
       <a href="#faq">Q&amp;A</a>
@@ -633,7 +722,7 @@
   </header>
 
   <!-- ============ HERO SECTION ============ -->
-  <section class="hero" aria-label="Hero">
+  <section class="hero" id="hero" aria-label="Hero">
     <div class="hero-card" aria-hidden="false">
       <div class="eyebrow">I am</div>
       <h1>Fadel — Digital Marketer + Copywriter</h1>
@@ -658,68 +747,71 @@
     </div>
   </section>
 
-  <!-- ============ SERVICES (Accordion) ============ -->
+  <!-- ============ SERVICES (Enhanced Card-Based Expansion) ============ -->
   <section class="services" id="services">
     <h2>Services</h2>
-    
-    <div class="service">
-      <div class="service-header">
-        <h3>Email Marketing</h3>
-        <span class="service-toggle">+</span>
+    <div class="services-grid">
+      
+      <div class="service">
+        <div class="service-header">
+          <h3>Email Marketing</h3>
+          <div class="service-icon">✉</div>
+        </div>
+        <div class="service-content">
+          <p>I create high-converting email campaigns that nurture leads and generate consistent revenue. From welcome sequences to promotional campaigns, I craft messages that resonate with your audience and drive action.</p>
+        </div>
       </div>
-      <div class="service-content">
-        <p>I create high-converting email campaigns that nurture leads and generate consistent revenue. From welcome sequences to promotional campaigns, I craft messages that resonate with your audience and drive action.</p>
-      </div>
-    </div>
 
-    <div class="service">
-      <div class="service-header">
-        <h3>Sales Copy</h3>
-        <span class="service-toggle">+</span>
+      <div class="service">
+        <div class="service-header">
+          <h3>Sales Copy</h3>
+          <div class="service-icon">💰</div>
+        </div>
+        <div class="service-content">
+          <p>Persuasive long-form and short-form copy designed to sell products, services, and offers. Whether it's a sales page, product description, or VSL script, I write copy that converts browsers into buyers.</p>
+        </div>
       </div>
-      <div class="service-content">
-        <p>Persuasive long-form and short-form copy designed to sell products, services, and offers. Whether it's a sales page, product description, or VSL script, I write copy that converts browsers into buyers.</p>
-      </div>
-    </div>
 
-    <div class="service">
-      <div class="service-header">
-        <h3>Web Copy</h3>
-        <span class="service-toggle">+</span>
+      <div class="service">
+        <div class="service-header">
+          <h3>Web Copy</h3>
+          <div class="service-icon">🌐</div>
+        </div>
+        <div class="service-content">
+          <p>Optimized website copy that engages visitors and turns them into customers. I create compelling homepage copy, about pages, and service descriptions that communicate your value and build trust.</p>
+        </div>
       </div>
-      <div class="service-content">
-        <p>Optimized website copy that engages visitors and turns them into customers. I create compelling homepage copy, about pages, and service descriptions that communicate your value and build trust.</p>
-      </div>
-    </div>
 
-    <div class="service">
-      <div class="service-header">
-        <h3>Ad Copy</h3>
-        <span class="service-toggle">+</span>
+      <div class="service">
+        <div class="service-header">
+          <h3>Ad Copy</h3>
+          <div class="service-icon">📢</div>
+        </div>
+        <div class="service-content">
+          <p>Compelling ad copy for Facebook, Instagram, Google, and beyond to drive clicks and sales. I write attention-grabbing headlines and persuasive ad text that stops the scroll and gets results.</p>
+        </div>
       </div>
-      <div class="service-content">
-        <p>Compelling ad copy for Facebook, Instagram, Google, and beyond to drive clicks and sales. I write attention-grabbing headlines and persuasive ad text that stops the scroll and gets results.</p>
-      </div>
-    </div>
 
-    <div class="service">
-      <div class="service-header">
-        <h3>Content Marketing</h3>
-        <span class="service-toggle">+</span>
+      <div class="service">
+        <div class="service-header">
+          <h3>Content Marketing</h3>
+          <div class="service-icon">📝</div>
+        </div>
+        <div class="service-content">
+          <p>Strategic blog posts and articles that build authority and attract organic traffic. I create valuable content that educates your audience, boosts SEO, and positions you as an industry leader.</p>
+        </div>
       </div>
-      <div class="service-content">
-        <p>Strategic blog posts and articles that build authority and attract organic traffic. I create valuable content that educates your audience, boosts SEO, and positions you as an industry leader.</p>
-      </div>
-    </div>
 
-    <div class="service">
-      <div class="service-header">
-        <h3>Marketing Strategy</h3>
-        <span class="service-toggle">+</span>
+      <div class="service">
+        <div class="service-header">
+          <h3>Marketing Strategy</h3>
+          <div class="service-icon">🎯</div>
+        </div>
+        <div class="service-content">
+          <p>Complete growth strategies tailored to your brand, from funnels to customer journeys. I develop data-driven marketing plans that align with your business goals and maximize ROI.</p>
+        </div>
       </div>
-      <div class="service-content">
-        <p>Complete growth strategies tailored to your brand, from funnels to customer journeys. I develop data-driven marketing plans that align with your business goals and maximize ROI.</p>
-      </div>
+
     </div>
   </section>
 
@@ -1013,36 +1105,53 @@ RESULTS:
   <!-- ============ CLIENTS FEEDBACK SECTION ============ -->
   <section class="clients" id="clients">
     <h2>Clients Feedback</h2>
-    <div class="clients-slider">
-      <div class="client-card">
-        <img src="client1.jpg" alt="Client 1">
-        <p>"Fadel's copy helped our conversion rates soar!"</p>
-        <h4>Jane Doe</h4>
-        <span>Marketing Manager</span>
+    <div class="clients-wrapper">
+      <div class="clients-slider" id="clientsSlider">
+        <div class="client-card active">
+          <img src="client1.jpg" alt="Client 1">
+          <p>"Fadel's copy helped our conversion rates soar!"</p>
+          <h4>Jane Doe</h4>
+          <span>Marketing Manager</span>
+        </div>
+        <div class="client-card">
+          <img src="client2.jpg" alt="Client 2">
+          <p>"Professional and highly skilled. Highly recommend!"</p>
+          <h4>John Smith</h4>
+          <span>CEO</span>
+        </div>
+        <div class="client-card">
+          <img src="client3.jpg" alt="Client 3">
+          <p>"The email campaign results were incredible!"</p>
+          <h4>Mary Johnson</h4>
+          <span>Founder</span>
+        </div>
+        <div class="client-card">
+          <img src="client4.jpg" alt="Client 4">
+          <p>"Top-notch strategy and execution. Fantastic work!"</p>
+          <h4>James Lee</h4>
+          <span>Product Manager</span>
+        </div>
+        <div class="client-card">
+          <img src="client5.jpg" alt="Client 5">
+          <p>"Fadel is a creative genius for marketing!"</p>
+          <h4>Linda Brown</h4>
+          <span>Entrepreneur</span>
+        </div>
       </div>
-      <div class="client-card">
-        <img src="client2.jpg" alt="Client 2">
-        <p>"Professional and highly skilled. Highly recommend!"</p>
-        <h4>John Smith</h4>
-        <span>CEO</span>
+      
+      <!-- Navigation Arrows -->
+      <div class="clients-nav">
+        <div class="nav-arrow" id="prevBtn">‹</div>
+        <div class="nav-arrow" id="nextBtn">›</div>
       </div>
-      <div class="client-card">
-        <img src="client3.jpg" alt="Client 3">
-        <p>"The email campaign results were incredible!"</p>
-        <h4>Mary Johnson</h4>
-        <span>Founder</span>
-      </div>
-      <div class="client-card">
-        <img src="client4.jpg" alt="Client 4">
-        <p>"Top-notch strategy and execution. Fantastic work!"</p>
-        <h4>James Lee</h4>
-        <span>Product Manager</span>
-      </div>
-      <div class="client-card">
-        <img src="client5.jpg" alt="Client 5">
-        <p>"Fadel is a creative genius for marketing!"</p>
-        <h4>Linda Brown</h4>
-        <span>Entrepreneur</span>
+      
+      <!-- Navigation Dots -->
+      <div class="clients-dots" id="clientsDots">
+        <span class="dot active" data-index="0"></span>
+        <span class="dot" data-index="1"></span>
+        <span class="dot" data-index="2"></span>
+        <span class="dot" data-index="3"></span>
+        <span class="dot" data-index="4"></span>
       </div>
     </div>
   </section>
@@ -1130,17 +1239,16 @@ RESULTS:
       mobileMenu.style.display = isOpen ? 'none' : 'block';
     });
 
-    // Services Accordion
-    const serviceHeaders = document.querySelectorAll('.service-header');
-    serviceHeaders.forEach(header => {
-      header.addEventListener('click', () => {
-        const service = header.parentElement;
+    // Services Card-Based Expansion (Enhanced Animation)
+    const services = document.querySelectorAll('.service');
+    services.forEach(service => {
+      service.addEventListener('click', () => {
         const isActive = service.classList.contains('active');
         
         // Close all services
-        document.querySelectorAll('.service').forEach(s => s.classList.remove('active'));
+        services.forEach(s => s.classList.remove('active'));
         
-        // Open clicked service if it wasn't active
+        // Only open the clicked service if it wasn't already active
         if (!isActive) {
           service.classList.add('active');
         }
@@ -1190,6 +1298,61 @@ RESULTS:
         modal.classList.remove('active');
       }
     });
+
+    // Client Feedback Slider for Mobile
+    let currentSlide = 0;
+    const clientCards = document.querySelectorAll('.client-card');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function showSlide(index) {
+      // Remove active class from all cards and dots
+      clientCards.forEach(card => card.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      // Add active class to current card and dot
+      if (clientCards[index]) {
+        clientCards[index].classList.add('active');
+      }
+      if (dots[index]) {
+        dots[index].classList.add('active');
+      }
+      
+      currentSlide = index;
+      
+      // Update button states
+      if (prevBtn && nextBtn) {
+        prevBtn.classList.toggle('disabled', currentSlide === 0);
+        nextBtn.classList.toggle('disabled', currentSlide === clientCards.length - 1);
+      }
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+          showSlide(currentSlide - 1);
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (currentSlide < clientCards.length - 1) {
+          showSlide(currentSlide + 1);
+        }
+      });
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const index = parseInt(dot.dataset.index);
+        showSlide(index);
+      });
+    });
+
+    // Initialize first slide
+    showSlide(0);
   </script>
 
 </body>
