@@ -4,351 +4,179 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fadel Portfolio</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      background-color: #fff;
-      color: #333;
-      line-height: 1.6;
-    }
-
-    header {
-      text-align: center;
-      padding: 80px 20px;
-      background: #f7f7f7;
-    }
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      font-weight: bold;
-    }
-    .hero-image {
-      width: 250px;
-      height: 250px;
-      background: blue;
-      margin: 0 auto;
-    }
-
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    section h2 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 40px;
-    }
-
-    /* About */
-    .about p {
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-      font-size: 1.1rem;
-    }
-
-    /* Services */
-    .services .service {
-      border: 1px solid #ddd;
-      margin-bottom: 15px;
-      padding: 20px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border-radius: 6px;
-    }
-    .services .service h3 {
-      margin: 0;
-      display: flex;
-      justify-content: space-between;
-      font-size: 1.3rem;
-    }
-    .services .service p {
-      display: none;
-      margin-top: 15px;
-      font-size: 1rem;
-    }
-    .services .service.active p {
-      display: block;
-    }
-
-    /* Portfolio */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .portfolio-item {
-      background: #f7f7f7;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .portfolio-item:hover {
-      transform: scale(1.02);
-    }
-    .portfolio-image {
-      width: 100%;
-      height: 200px;
-      background: blue;
-    }
-    .portfolio-info {
-      padding: 15px;
-      background: #fff;
-      text-align: center;
-    }
-    .portfolio-info h4 {
-      margin: 0 0 5px;
-    }
-    .portfolio-info span {
-      color: #777;
-      font-size: 0.9rem;
-    }
-
-    /* Modal for portfolio */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background: #fff;
-      padding: 30px;
-      max-width: 600px;
-      width: 90%;
-      border-radius: 8px;
-      position: relative;
-    }
-    .modal-content h3 {
-      margin-top: 0;
-    }
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      cursor: pointer;
-      font-size: 1.5rem;
-    }
-
-    /* Q&A */
-    .faq-item {
-      border: 1px solid #ddd;
-      margin-bottom: 15px;
-      padding: 20px;
-      cursor: pointer;
-      border-radius: 6px;
-    }
-    .faq-item h3 {
-      margin: 0;
-      font-size: 1.2rem;
-      display: flex;
-      justify-content: space-between;
-    }
-    .faq-item p {
-      display: none;
-      margin-top: 15px;
-    }
-    .faq-item.active p {
-      display: block;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      background: #f7f7f7;
-      font-size: 0.9rem;
-      color: #555;
-    }
-  </style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
-  <header>
-    <h1>Fadel – Marketing Strategist & Full-Stack Copywriter</h1>
-    <div class="hero-image"></div>
+  <!-- Header -->
+  <header id="header">
+    <div class="logo">Fadel</div>
+    <div class="contact-email">fadel@example.com</div>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#clients">Clients</a></li>
+      </ul>
+      <button class="cta-btn">Contact Me</button>
+    </nav>
+    <button class="mobile-menu-toggle">☰</button>
   </header>
 
-  <section class="about">
-    <h2>About Me</h2>
-    <p>
-      I’m Fadel, a marketing strategist and full-stack copywriter passionate about crafting powerful campaigns
-      that convert. My work blends creativity, strategy, and data-driven insights to deliver measurable results
-      for my clients worldwide.
-    </p>
+  <!-- Section 1: Hero / About Me -->
+  <section id="about" class="hero-section">
+    <div class="hero-left">
+      <h1>Fadel</h1>
+      <p>Paragraph about me goes here. Introduce yourself professionally.</p>
+      <div class="hero-buttons">
+        <button class="contact-btn">Contact Me</button>
+        <div class="socials">
+          <a href="#">LinkedIn</a>
+          <a href="#">Facebook</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="images/profile.jpg" alt="Fadel Profile">
+    </div>
   </section>
 
-  <section class="services">
+  <!-- Section 2: Services -->
+  <section id="services">
     <h2>Services</h2>
-    <div class="service">
-      <h3>Email Marketing <span>+</span></h3>
-      <p>I create high-converting email campaigns that nurture leads and generate consistent revenue.</p>
-    </div>
-    <div class="service">
-      <h3>Sales Copy <span>+</span></h3>
-      <p>Persuasive long-form and short-form copy designed to sell products, services, and offers.</p>
-    </div>
-    <div class="service">
-      <h3>Web Copy <span>+</span></h3>
-      <p>Optimized website copy that engages visitors and turns them into customers.</p>
-    </div>
-    <div class="service">
-      <h3>Ad Copy <span>+</span></h3>
-      <p>Compelling ad copy for Facebook, Instagram, Google, and beyond to drive clicks and sales.</p>
-    </div>
-    <div class="service">
-      <h3>Content Marketing <span>+</span></h3>
-      <p>Strategic blog posts and articles that build authority and attract organic traffic.</p>
-    </div>
-    <div class="service">
-      <h3>Marketing Strategy <span>+</span></h3>
-      <p>Complete growth strategies tailored to your brand, from funnels to customer journeys.</p>
-    </div>
-  </section>
-
-  <section class="portfolio">
-    <h2>Portfolio</h2>
-    <div class="portfolio-grid">
-      <div class="portfolio-item" data-title="Sales Email" data-client="Client A" data-content="Here’s the copy for Client A’s high-converting sales email.">
-        <div class="portfolio-image"></div>
-        <div class="portfolio-info">
-          <h4>Sales Email</h4>
-          <span>Client A</span>
-        </div>
+    <div class="services-container">
+      <div class="service-card" data-index="1">
+        <h3>Service 1</h3>
+        <p class="short-desc">Short description here...</p>
+        <p class="full-desc">Full detailed description appears when expanded.</p>
       </div>
-      <div class="portfolio-item" data-title="Landing Page" data-client="Client B" data-content="Landing page copy that increased Client B’s conversions by 45%.">
-        <div class="portfolio-image"></div>
-        <div class="portfolio-info">
-          <h4>Landing Page</h4>
-          <span>Client B</span>
-        </div>
+      <div class="service-card" data-index="2">
+        <h3>Service 2</h3>
+        <p class="short-desc">Short description here...</p>
+        <p class="full-desc">Full detailed description appears when expanded.</p>
       </div>
-      <div class="portfolio-item" data-title="Ad Campaign" data-client="Client C" data-content="A Facebook ad campaign that generated 500+ leads in 2 weeks.">
-        <div class="portfolio-image"></div>
-        <div class="portfolio-info">
-          <h4>Ad Campaign</h4>
-          <span>Client C</span>
-        </div>
+      <div class="service-card" data-index="3">
+        <h3>Service 3</h3>
+        <p class="short-desc">Short description here...</p>
+        <p class="full-desc">Full detailed description appears when expanded.</p>
       </div>
-      <div class="portfolio-item" data-title="Web Copy" data-client="Client D" data-content="Website copy that doubled Client D’s signups.">
-        <div class="portfolio-image"></div>
-        <div class="portfolio-info">
-          <h4>Web Copy</h4>
-          <span>Client D</span>
-        </div>
-      </div>
-      <div class="portfolio-item" data-title="Content Series" data-client="Client E" data-content="A content series that positioned Client E as an authority.">
-        <div class="portfolio-image"></div>
-        <div class="portfolio-info">
-          <h4>Content Series</h4>
-          <span>Client E</span>
-        </div>
-      </div>
-      <div class="portfolio-item" data-title="Funnel Strategy" data-client="Client F" data-content="A funnel strategy that scaled Client F to 6 figures.">
-        <div class="portfolio-image"></div>
-        <div class="portfolio-info">
-          <h4>Funnel Strategy</h4>
-          <span>Client F</span>
-        </div>
-      </div>
-      <div class="portfolio-item" data-title="Case Study" data-client="Client G" data-content="A case study showcasing Client G’s transformation.">
-        <div class="portfolio-image"></div>
-        <div class="portfolio-info">
-          <h4>Case Study</h4>
-          <span>Client G</span>
-        </div>
-      </div>
-      <div class="portfolio-item" data-title="Email Sequence" data-client="Client H" data-content="An automated email sequence that nurtured Client H’s leads into buyers.">
-        <div class="portfolio-image"></div>
-        <div class="portfolio-info">
-          <h4>Email Sequence</h4>
-          <span>Client H</span>
-        </div>
+      <div class="service-card" data-index="4">
+        <h3>Service 4</h3>
+        <p class="short-desc">Short description here...</p>
+        <p class="full-desc">Full detailed description appears when expanded.</p>
       </div>
     </div>
   </section>
 
-  <section class="faq">
-    <h2>Q&A</h2>
-    <div class="faq-item">
-      <h3>Why should I choose you? <span>+</span></h3>
-      <p>Because I bring both strategy and execution to the table. I don’t just write words — I design campaigns that convert.</p>
+  <!-- Section 3: Recent Work -->
+  <section id="work">
+    <h2>Recent Work</h2>
+    <div class="work-filters">
+      <button class="filter-btn" data-type="all">All</button>
+      <button class="filter-btn" data-type="social">Social Media</button>
+      <button class="filter-btn" data-type="sms">SMS</button>
+      <button class="filter-btn" data-type="email">Email</button>
+      <button class="filter-btn" data-type="script">Ad Script</button>
     </div>
-    <div class="faq-item">
-      <h3>How do you work with clients? <span>+</span></h3>
-      <p>I work closely to understand your brand, goals, and audience, then craft a custom strategy and copy tailored to your needs.</p>
-    </div>
-    <div class="faq-item">
-      <h3>What industries do you specialize in? <span>+</span></h3>
-      <p>I’ve worked with coaches, SaaS, e-commerce, agencies, and more. My methods adapt to your industry.</p>
-    </div>
-    <div class="faq-item">
-      <h3>What’s the investment? <span>+</span></h3>
-      <p>Each project is unique, but my clients see the cost as an investment — because the ROI is far greater than the spend.</p>
+    <div class="work-container">
+      <!-- Work items will go here -->
     </div>
   </section>
 
+  <!-- Section 4: Skills -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-container">
+      <div class="skill">Copywriting</div>
+      <div class="skill">Email Marketing</div>
+      <div class="skill">Ad Copy</div>
+      <div class="skill">Sales Page</div>
+      <div class="skill">Video Sales Letter</div>
+      <div class="skill">SMS Marketing</div>
+    </div>
+  </section>
+
+  <!-- Section 5: Clients Feedback -->
+  <section id="clients">
+    <h2>Clients Feedback</h2>
+    <div class="feedback-carousel">
+      <div class="feedback-card">
+        <img src="images/client1.jpg" alt="Client 1">
+        <p>"Feedback from client 1."</p>
+        <h4>Client Name</h4>
+        <span>Occupation</span>
+      </div>
+      <div class="feedback-card">
+        <img src="images/client2.jpg" alt="Client 2">
+        <p>"Feedback from client 2."</p>
+        <h4>Client Name</h4>
+        <span>Occupation</span>
+      </div>
+      <div class="feedback-card">
+        <img src="images/client3.jpg" alt="Client 3">
+        <p>"Feedback from client 3."</p>
+        <h4>Client Name</h4>
+        <span>Occupation</span>
+      </div>
+      <div class="feedback-card">
+        <img src="images/client4.jpg" alt="Client 4">
+        <p>"Feedback from client 4."</p>
+        <h4>Client Name</h4>
+        <span>Occupation</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Let's Work Together -->
+  <section id="work-together">
+    <h2>Let's Work Together</h2>
+    <p>Small paragraph encouraging contact or strategic call.</p>
+    <button class="contact-btn">Contact Me</button>
+    <button class="call-btn">Book a Call</button>
+  </section>
+
+  <!-- Section 7: FAQ -->
+  <section id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question">Question 1 <span>+</span></div>
+        <div class="faq-answer">Answer to question 1.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Question 2 <span>+</span></div>
+        <div class="faq-answer">Answer to question 2.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Question 3 <span>+</span></div>
+        <div class="faq-answer">Answer to question 3.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Question 4 <span>+</span></div>
+        <div class="faq-answer">Answer to question 4.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <p>© 2025 Fadel – All Rights Reserved</p>
+    <p>Fadel &copy; 2025 | fadel@example.com</p>
   </footer>
 
-  <script>
-    // Toggle services
-    document.querySelectorAll('.services .service').forEach(service => {
-      service.addEventListener('click', () => {
-        service.classList.toggle('active');
-      });
-    });
-
-    // Toggle FAQ
-    document.querySelectorAll('.faq-item').forEach(item => {
-      item.addEventListener('click', () => {
-        item.classList.toggle('active');
-      });
-    });
-
-    // Portfolio modal
-    const modal = document.createElement('div');
-    modal.classList.add('modal');
-    modal.innerHTML = `
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h3 id="modal-title"></h3>
-        <h4 id="modal-client"></h4>
-        <p id="modal-content-text"></p>
-      </div>`;
-    document.body.appendChild(modal);
-
-    const modalTitle = document.getElementById('modal-title');
-    const modalClient = document.getElementById('modal-client');
-    const modalContentText = document.getElementById('modal-content-text');
-    const closeBtn = modal.querySelector('.close');
-
-    document.querySelectorAll('.portfolio-item').forEach(item => {
-      item.addEventListener('click', () => {
-        modalTitle.textContent = item.getAttribute('data-title');
-        modalClient.textContent = item.getAttribute('data-client');
-        modalContentText.textContent = item.getAttribute('data-content');
-        modal.style.display = 'flex';
-      });
-    });
-
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) modal.style.display = 'none';
-    });
-  </script>
-
+  <!-- JS -->
+  <script src="libs/gsap.min.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/portfolio.js"></script>
+  <script src="js/skills.js"></script>
+  <script src="js/feedback.js"></script>
+  <script src="js/faq.js"></script>
 </body>
 </html>
