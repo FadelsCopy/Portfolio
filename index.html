@@ -75,10 +75,21 @@
       gap:12px;
     }
     .brand .name {
-      color: var(--text-primary);
-      font-weight:700;
-      font-size:1.2rem;
-      letter-spacing:0.3px;
+      color: var(--text-secondary);
+      font-weight:400;
+      font-size:0.95rem;
+      letter-spacing:0.2px;
+      text-decoration:none;
+      transition: all .18s ease;
+      padding:8px 10px;
+      border-radius:6px;
+      opacity:0.95;
+    }
+
+    .brand .name:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+      background: var(--glass);
     }
 
     nav.main-nav {
@@ -99,23 +110,6 @@
       color: var(--accent);
       transform: translateY(-2px);
       background: var(--glass);
-    }
-
-    .header-cta {
-      background: linear-gradient(90deg,var(--accent), #b8941f);
-      color: var(--bg-dark);
-      padding: 8px 14px;
-      border-radius: 10px;
-      box-shadow: 0 6px 24px var(--shadow-gold);
-      text-decoration:none;
-      font-weight:700;
-      font-size:0.95rem;
-      transition: transform .12s ease, box-shadow .12s ease;
-    }
-    .header-cta:hover{
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 12px 36px var(--shadow-gold);
-      background: linear-gradient(90deg,var(--accent-hover), var(--accent));
     }
 
     .hamburger {
@@ -226,12 +220,6 @@
     .hero-text {
       color: var(--text-primary);
     }
-
-    .hero-text .eyebrow { 
-      font-size:0.95rem; 
-      color: var(--text-muted); 
-      margin-bottom: 10px; 
-    }
     
     .hero-text h1 { 
       margin:0 0 12px 0; 
@@ -239,12 +227,13 @@
       letter-spacing:-0.6px; 
       color: var(--text-primary); 
     }
-    
+
     .hero-text h2 { 
       margin:0 0 18px 0; 
       font-size:1.4rem; 
       color: var(--accent); 
-      font-weight:600; 
+      font-weight:600;
+      text-align: left;  /* Add this line */
     }
     
     .hero-text p { 
@@ -337,7 +326,8 @@
       height: auto; 
       border-radius:20px; 
       box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-      border: 3px solid var(--glass-border);
+      background: linear-gradient(90deg,var(--accent), #b8941f); 
+      
     }
 
     section { padding: 60px 20px; width: 100%; position: relative; }
@@ -356,9 +346,7 @@
     .services {
       padding: 80px 20px;
       width: 100%;
-      background: 
-        linear-gradient(135deg, rgba(212,175,55,0.03) 0%, transparent 50%, rgba(212,175,55,0.03) 100%),
-        linear-gradient(45deg, #0f1420 0%, #1a1f35 50%, #0f1420 100%);
+      background: radial-gradient(circle at center, #1a1f35, #0a0e1a);
       position: relative;
       overflow: hidden;
     }
@@ -366,41 +354,19 @@
     .services::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
       background: 
-        radial-gradient(circle at 15% 20%, rgba(212,175,55,0.08), transparent 35%),
-        radial-gradient(circle at 85% 80%, rgba(212,175,55,0.08), transparent 35%),
-        radial-gradient(circle at 50% 50%, rgba(212,175,55,0.04), transparent 60%);
-      pointer-events: none;
-    }
-
-    .services::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: 
         repeating-linear-gradient(
-          90deg,
+          45deg,
           transparent,
-          transparent 100px,
-          rgba(212,175,55,0.02) 100px,
-          rgba(212,175,55,0.02) 101px
-        ),
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 100px,
-          rgba(212,175,55,0.02) 100px,
-          rgba(212,175,55,0.02) 101px
+          transparent 50px,
+          rgba(212,175,55,0.02) 50px,
+          rgba(212,175,55,0.02) 51px
         );
-      pointer-events: none;
-      opacity: 0.5;
+      animation: shimmer 20s linear infinite;
     }
     
     .services-grid {
@@ -982,15 +948,15 @@
 
   <header class="site-header">
     <div class="brand" style="flex:0 0 auto;">
-      <div class="name">fadel@fadelscopy.com</div>
+      <a class="name" href="mailto:fadel@fadelscopy.com"><b>fadel@fadelscopy.com</b></a>
     </div>
     <nav class="main-nav" aria-label="Main Navigation">
       <a href="#top">About</a>
       <a href="#services">Services</a>
-      <a href="#portfolio">Works</a>
+      <a href="#portfolio">Portfolio</a>
       <a href="#faq">Q&amp;A</a>
       <a href="mailto:fadel@fadelscopy.com" title="Contact me">Contact</a>
-      <a class="header-cta" href="https://calendly.com/fadelelhachimi20/30min" target="_blank" rel="noopener noreferrer">Book a Call</a>
+      <a href="https://calendly.com/fadelelhachimi20/30min" target="_blank" rel="noopener noreferrer">Book a Call</a>
     </nav>
     <button class="hamburger" aria-label="Open menu" id="hamburgerBtn">
       <span></span>
@@ -1008,16 +974,14 @@
   <section class="hero" id="hero">
     <div class="hero-content">
       <div class="hero-text">
-        <div class="eyebrow">I am</div>
-        <h1>Fadel — Digital Marketer + Copywriter</h1>
-        <h2>Marketing strategist & full-stack copywriter</h2>
+        <h1>Fadel El Hachimi</h1>
+        <h2>Marketing Strategist & Conversion Copywriter</h2>
         <p>
-          I craft high-performing marketing funnels, persuasive copy, and growth strategies that convert.
-          I blend creativity with analytics to design campaigns that scale and build strong brand narratives.
+          I specialize in the marketing that generates revenue. Through strategic funnels, conversion-focused copy, and data-driven campaigns, I help businesses transform their marketing from a cost center into a profit engine. If you're ready to see real ROI from your marketing budget, let's build something that works.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="mailto:fadel@fadelscopy.com">Contact Me</a>
-          <a class="btn btn-outline" href="https://calendly.com/fadelelhachimi20/30min" target="_blank" rel="noopener noreferrer">Book a Call</a>
+          <a class="btn btn-primary" href="https://calendly.com/fadelelhachimi20/30min" target="_blank" rel="noopener noreferrer">Book a Call</a>
+          <a class="btn btn-outline" href="mailto:fadel@fadelscopy.com">Contact Me</a>
         </div>
         <div class="socials">
           <a aria-label="Facebook" title="Facebook" href="https://www.facebook.com/profile.php?id=61575146784094" target="_blank" rel="noopener noreferrer">f</a>
@@ -1101,260 +1065,358 @@
     <h2 class="fade-in-up">Portfolio</h2>
     <div class="portfolio-grid">
       
-      <div class="portfolio-item stagger-item" data-title="Sales Email" data-client="Tech Startup Inc." data-content="Subject: Ready to 10X Your Productivity?
+      <div class="portfolio-item stagger-item" data-title="Story Email" data-client="Alec" data-content="Subject: Here's how I became a fluid player in under a year
 
-Hey [Name],
+In 2014, I was 15, just two years away from finishing high school… And I was quietly falling apart.
 
-I know you're busy. That's exactly why I'm reaching out.
+No real piano skills. No progress on guitar either. And yet, I wanted to become a professional musician.
 
-Our clients were spending 20+ hours per week on manual data entry. Now? They've automated 90% of it.
+The clock was ticking down, one year until college auditions. And I felt hopelessly behind.
 
-Here's what changed:
-- Real-time data sync across all platforms
-- Automated reporting that saves 15 hours/week
-- Zero manual errors
+From the time I was little, I knew music was it for me. But by the time I hit 16… I started questioning everything.
 
-The result? Teams are focusing on what matters: growth.
+The vision I had of being a masterful, confident musician was clashing with the brutal truth: I was painfully average.
 
-Want to see how it works for your business?
+Sure, I played Alto Sax in band class, but it wasn't enough. I couldn't improvise. Couldn't play what I heard in my head.
 
-Book a 15-min demo: [LINK]
+Every time I sat at the piano or picked up a guitar, I felt lost. Like music was a puzzle I couldn't solve.
 
-Best,
-Fadel">
+No matter how many YouTube videos I watched, how many hours I practiced, I couldn't break through that wall.
+
+I didn't have a teacher. And theory? It felt like it was written in another language.
+
+I remember looking at my reflection one night, hands resting on the keys… And wondering if I should just give up.
+
+But something inside me refused to quit.
+
+At the start of 11th grade, I made a decision: I was going to teach myself. All of it.
+
+I signed up for the AP Music Theory exam. Started learning piano from scratch.
+
+When I told the music teacher, he laughed. Tried to get me to drop the exam. 'It's too hard,' he said.
+
+I didn't care. I had already decided.
+
+So I sat down, and I got strategic. Practice. Ear training. Real-world application.
+
+Then... something shifted.
+
+I started hearing music differently. Not as notes and keys and confusing charts, but as language. As emotion. As meaning.
+
+After just 3 months, I could identify the chords in almost any mainstream song. A skill that once felt completely out of reach.
+
+By the time the year was over, I didn't just pass that exam. I crushed it.
+
+A year later, I got into Berklee.
+
+When I walked into my first classes, surrounded by musicians who had been playing since they were in Kindergarten… They didn't believe I had only been playing piano for two years.
+
+And honestly? Sometimes I couldn't believe it either.
+
+What worked for me back then? I've now turned it into something you can follow too.
+
+It's called the Chord Mastery Bootcamp, and it's built to do one thing: Get your real results by locking in pro-level chord mastery, fast.
+
+No overwhelm. Just clear action steps that train your ears, hands, and musical brain, one focused task at a time.
+
+Click here to join Chord Mastery Bootcamp now
+
+A year from now, you could be looking back at this moment as the turning point. Or… you stay where you are now.
+
+Your choice.
+
+Alec">
         <div class="portfolio-image">📧</div>
         <div class="portfolio-info">
-          <h4>Sales Email</h4>
-          <span>Tech Startup Inc.</span>
+          <h4>Story Email</h4>
+          <span>Alec</span>
         </div>
       </div>
 
-      <div class="portfolio-item stagger-item" data-title="Landing Page" data-client="Fitness Brand Co." data-content="TRANSFORM YOUR BODY IN 90 DAYS
-(Without Spending Hours at the Gym)
+      <div class="portfolio-item stagger-item" data-title="Sales Email" data-client="All Win Trading Academy" data-content="Subject: What the Top 0.1% Traders Know That You Don't
 
-Busy professionals are building the body they want with just 30 minutes a day.
+99.9% of traders fail. Only 0.1% ever make it.
 
-✓ Custom workout plans that fit YOUR schedule
-✓ Meal prep guides (no boring chicken & broccoli)
-✓ Weekly coaching calls with certified trainers
-✓ Private community of 500+ members crushing their goals
+And the wild part? That failure is decided before they even place their first trade.
 
-Sarah lost 35 lbs in 12 weeks while working full-time.
-Mike gained 15 lbs of muscle training from home.
-Jessica finally got her energy back at age 42.
+Because the way trading is taught today… It's setting you up for failure.
 
-Ready to write your success story?
+Let me show you what I mean:
 
-👇 START YOUR FREE 7-DAY TRIAL 👇
-[CTA BUTTON]
+You open up your charts, trying to spot a setup. You've watched 10 different YouTube strategies this week, and now they're all tangled in your head.
 
-Zero risk. Cancel anytime. Results guaranteed or your money back.">
-        <div class="portfolio-image">🌐</div>
+You hesitate. Your heart's racing. Should I buy? Should I wait?
+
+You finally jump in, and the market flips on you. Instant red. You panic. You close too early.
+
+Or worse… You hold, hoping it turns. It doesn't.
+
+Now you're staring at your screen. Angry. Confused. Lost.
+
+Wondering what the hell just happened.
+
+You beat yourself up. 'I should've waited.' 'I knew that wasn't the right setup.' 'I just need a better strategy.'
+
+So you dive into another course. You join a Discord. You start copying signals.
+
+And for a second, it feels like you're learning. But when it's time to pull the trigger? You freeze. Or you force it. And you lose.
+
+Over and over again.
+
+Sound familiar?
+
+It should. Because I was in that exact same cycle.
+
+The late nights. The blown accounts. The pressure of trading money I couldn't afford to lose.
+
+At one point, I had to tell my parents I was on the edge of bankruptcy, at just 20 years old.
+
+But that breakdown was the breakthrough.
+
+Because it forced me to see the real truth: The problem wasn't strategy. The problem was my psychology.
+
+No strategy in the world will work if your mind isn't built to handle risk. Fear. Hesitation. Revenge trading.
+
+That's what destroys traders, not a lack of knowledge, but a lack of mental control.
+
+The top 0.1% of traders don't just know how to trade… They know how to think.
+
+And once I made that shift, everything changed.
+
+I stopped trading my own money. I stopped letting emotions run the show. I learned how to stay calm, precise, and consistent.
+
+That's what I now teach inside Win Academy.
+
+And listen, budget isn't a problem anymore. Inside the program, you'll learn to trade using investor-backed capital.
+
+That means you don't need a $10K account or to blow more savings.
+
+Just ask Joe, who was behind on rent when he joined. Now? He trades full-time, quit his job, and pays rent off a single trade.
+
+Or Mercy, who didn't know what a candlestick was… and five months later, moved out and changed her entire life.
+
+This system works, but only if you do.
+
+And here's the deal: I work with only 10 traders at a time, and that's not just a marketing gimmick.
+
+Because this is one-on-one, personalized mentorship, not some recycled course or group program.
+
+Click here now to find out if you have what it takes to join the 0.1% of traders who actually win.
+
+Talk soon,
+Sai
+
+P.S. If you're still stuck in the same losing cycle months from now… you'll wish you took this chance today.">
+        <div class="portfolio-image">📱</div>
         <div class="portfolio-info">
-          <h4>Landing Page</h4>
-          <span>Fitness Brand Co.</span>
+          <h4>Sales Email</h4>
+          <span>All Win Trading Academy</span>
         </div>
       </div>
 
-      <div class="portfolio-item stagger-item" data-title="Facebook Ad Campaign" data-client="E-commerce Store" data-content="AD 1 - Image: Product in use
-'Stop wasting money on skincare that doesn't work 😤'
+      <div class="portfolio-item stagger-item" data-title="Promo Email Sequence" data-client="Leslie Thomas" data-content="EMAIL 1:
+Subject: Your Family's Future: Here's Your Next Step
 
-I used to spend $200/month on products that did NOTHING.
+Hi [First Name],
 
-Then I found [Product Name].
+At yesterday's webinar, we uncovered a harsh reality: too many Texas families face costly probate, bitter disputes, and endless delays.
 
-✨ Cleared my acne in 3 weeks
-✨ No harsh chemicals
-✨ Actually affordable
+All because they don't have the right plan in place.
 
-Now my skin? *chef's kiss*
+Most either skip estate planning altogether or rely on quick online forms that seem fine until it's too late.
 
->>> Try it risk-free for 30 days
-[SHOP NOW]
+That's how families end up trapped in probate court for months or even years, losing $10,000 to $15,000 from the inheritance meant for their kids and grandkids.
+
+Even worse, they watch a lifetime of hard work unravel in costly legal battles, while their loved ones suffer the consequences.
+
+But it doesn't have to be that way for your family.
+
+With a custom plan tailored to your unique situation, you can protect everything you've built and make sure it goes directly to those you love.
+
+Schedule your free call now.
 
 ---
 
-AD 2 - Carousel: Before/After
-'1,247 verified reviews. 4.9 stars. See why everyone's switching.'
+EMAIL 2:
+Subject: How one family lost $16,500 to probate… and another paid just $1,200 to settle everything
 
-⭐⭐⭐⭐⭐ 'My skin hasn't looked this good in YEARS' - Jenny M.
-⭐⭐⭐⭐⭐ 'Finally, a product that delivers' - Marcus T.
+Hi [First Name],
 
-Limited time: 25% off your first order
-[SHOP THE SALE]">
-        <div class="portfolio-image">📱</div>
-        <div class="portfolio-info">
-          <h4>Facebook Ad Campaign</h4>
-          <span>E-commerce Store</span>
-        </div>
-      </div>
+Last summer in Fort Worth, Sharon Lewis lost her husband Tom to a sudden heart attack at just 62.
 
-      <div class="portfolio-item stagger-item" data-title="Website Copy" data-client="SaaS Company" data-content="HOMEPAGE HERO:
-Manage Your Entire Business
-From One Simple Dashboard
+They had talked about getting their affairs in order many times, but life was busy, and it always seemed like something they could handle later.
 
-Stop juggling 10 different tools. Everything you need to run your business, in one place.
+Without a proper plan, Sharon and her two daughters spent over fourteen painful months tied up in probate court.
 
-[Start Free Trial] [Watch Demo]
+They paid more than $16,500 in legal fees alone, not counting countless hours away from work and family.
 
-FEATURES SECTION:
-→ Project Management: Keep your team aligned and on track
-→ Client Portal: Impress clients with professional communication
-→ Invoicing & Payments: Get paid faster (average 40% quicker)
-→ Time Tracking: Know exactly where your hours go
+Sharon told me how she would sit alone on a hard courtroom bench, wishing she could just be at home grieving in peace.
 
-SOCIAL PROOF:
-'This tool saved our agency 15+ hours every week. Game changer.'
-— Sarah K., Creative Director
+Just a few months later, in San Antonio, David Martinez lost his father, Manuel, after a long illness.
 
-ABOUT SECTION:
-Built by entrepreneurs, for entrepreneurs.
+But years before, Manuel had worked with us to put a clear estate plan in place.
 
-We got tired of overpaying for bloated software that nobody uses. So we built something better: simple, powerful, and actually affordable.
+Within six weeks of his passing, everything was settled. The total cost came to under $1,200 in simple filing fees, with no court battles or family disputes.
 
-Join 12,000+ businesses already growing with [Product Name].">
-        <div class="portfolio-image">💻</div>
-        <div class="portfolio-info">
-          <h4>Website Copy</h4>
-          <span>SaaS Company</span>
-        </div>
-      </div>
+The only real difference between these two families was one simple decision made ahead of time.
 
-      <div class="portfolio-item stagger-item" data-title="Content Marketing Series" data-client="Financial Advisor" data-content="BLOG POST 1: '7 Money Mistakes Costing You $10K+ Per Year'
+Reserve your free session before our calendar fills up.
 
-Introduction hooks readers with relatable scenarios, then provides actionable advice on avoiding common financial pitfalls. Includes calculator tools and downloadable checklist.
+---
 
-BLOG POST 2: 'The 50/30/20 Rule: Budgeting That Actually Works'
+EMAIL 3:
+Subject: Why families wait and why that can cost them dearly
 
-Step-by-step guide with real examples. Breaks down complex financial concepts into simple, actionable steps anyone can follow.
+Hi [First Name],
 
-BLOG POST 3: 'How to Start Investing with Just $100'
+I've spoken with so many Texas families over the years, and I can't tell you how often I hear the same reasons for putting off estate planning.
 
-Demystifies investing for beginners. Removes intimidation factor and provides clear path forward with low barrier to entry.
+'We still have time.'
+'Life is hectic right now. We'll do it when things slow down.'
+'It feels uncomfortable to even think about.'
 
-RESULT: 300% increase in organic traffic, 150+ qualified leads generated, positioned client as go-to expert in their niche.">
-        <div class="portfolio-image">✍️</div>
-        <div class="portfolio-info">
-          <h4>Content Marketing Series</h4>
-          <span>Financial Advisor</span>
-        </div>
-      </div>
+I understand every one of those reasons. Truly, I do.
 
-      <div class="portfolio-item stagger-item" data-title="Sales Funnel Strategy" data-client="Online Coach" data-content="COMPLETE FUNNEL ARCHITECTURE:
+It's human nature to avoid planning for something we hope is far off.
 
-STAGE 1 - AWARENESS (Free Lead Magnet):
-'5-Day Email Course: Build Your First $10K Month'
-→ Captures emails, builds trust, provides immediate value
+But estate planning isn't really about you.
 
-STAGE 2 - CONSIDERATION (Value Sequence):
-Days 1-3: Educational content establishing authority
-Days 4-5: Case studies showing transformations
-Day 6: Soft pitch for discovery call
+It's about sparing your family from stress, painful court battles, and thousands in unnecessary fees if something happens unexpectedly.
 
-STAGE 3 - CONVERSION (Sales Call):
-15-min qualifying call → 45-min strategy session
-Custom proposal sent within 24 hours
+That's exactly why I'm still offering you a completely free call.
 
-STAGE 4 - RETENTION (Onboarding):
-Welcome video, client portal access, weekly check-ins
-Community access for peer support
+Reserve your spot today before our calendar closes.
 
-RESULTS:
-- Conversion rate: 23% (industry avg: 8%)
-- Client LTV increased by 40%
-- Scaled from $8K/mo to $45K/mo in 6 months">
-        <div class="portfolio-image">🎯</div>
-        <div class="portfolio-info">
-          <h4>Sales Funnel Strategy</h4>
-          <span>Online Coach</span>
-        </div>
-      </div>
-
-      <div class="portfolio-item stagger-item" data-title="Case Study" data-client="Local Restaurant" data-content="CASE STUDY: How We Filled a Restaurant 6 Nights/Week
-
-THE CHALLENGE:
-Newly opened restaurant struggling with inconsistent bookings. Owner was stressed, staff underutilized, food waste high.
-
-THE STRATEGY:
-1. Created Instagram content strategy showcasing dishes
-2. Launched targeted Facebook ads to local foodies
-3. Implemented SMS marketing for reservations
-4. Developed loyalty program for repeat customers
-5. Email campaigns for special events/themed nights
-
-THE EXECUTION:
-- 3x weekly Instagram posts (behind-the-scenes + food)
-- $500/month ad spend targeting 5-mile radius
-- Automated SMS reminders reducing no-shows by 60%
-- Monthly themed dinner events promoted via email
-
-THE RESULTS:
-✓ From 30% capacity to 85% capacity in 3 months
-✓ 40% of customers now repeat visitors
-✓ 500+ person email list built from scratch
-✓ $15K → $42K monthly revenue
-✓ Fully booked Friday & Saturday for next 2 months
-
-'Fadel helped us go from struggling to thriving. We're now planning expansion!' - Restaurant Owner">
-        <div class="portfolio-image">📊</div>
-        <div class="portfolio-info">
-          <h4>Case Study</h4>
-          <span>Local Restaurant</span>
-        </div>
-      </div>
-
-      <div class="portfolio-item stagger-item" data-title="Email Sequence" data-client="Digital Product Creator" data-content="AUTOMATED WELCOME SEQUENCE (7 EMAILS)
-
-EMAIL 1 (Immediate):
-Subject: Your free guide is here! 🎉
-+ Delivers lead magnet
-+ Sets expectations for future emails
-+ Quick win tip they can use today
-
-EMAIL 2 (Day 2):
-Subject: The #1 mistake everyone makes...
-+ Addresses common problem
-+ Shares personal story
-+ Builds connection
-
-EMAIL 3 (Day 4):
-Subject: Here's what's working right now
-+ Current strategy/trend
-+ Actionable tips
-+ Social proof
-
-EMAIL 4 (Day 6):
-Subject: [Name], I have a question for you
-+ Interactive email asking about their biggest challenge
-+ Personalizes future communication
-+ Shows you care
-
-EMAIL 5 (Day 8):
-Subject: My best free resource (don't miss this)
-+ Delivers unexpected bonus value
-+ Overdelivers on promise
-+ Deepens trust
-
-EMAIL 6 (Day 10):
-Subject: Ready to go deeper?
-+ Soft pitch for paid product
-+ Shows transformation possible
-+ Low-pressure CTA
-
-EMAIL 7 (Day 12):
-Subject: Last chance (closing soon)
-+ Urgency-based offer
-+ Addresses objections
-+ Clear next steps
-
-RESULTS:
-→ 45% open rate (industry avg: 21%)
-→ 12% conversion rate to paid product
-→ Generated $28K in first month">
+Warm regards,
+Leslie Thomas
+Estate Planning Attorney">
         <div class="portfolio-image">💌</div>
         <div class="portfolio-info">
-          <h4>Email Sequence</h4>
-          <span>Digital Product Creator</span>
+          <h4>Promo Email Sequence</h4>
+          <span>Leslie Thomas</span>
+        </div>
+      </div>
+
+      <div class="portfolio-item stagger-item" data-title="Reel Script" data-client="Ma Ananda Sarita" data-content="Hook:
+Did you know that 7 out of 10 women secretly hate their breasts?
+
+Relatability with Data:
+A global study across 40 countries found that only 29% of women are satisfied.
+
+That means most women wake up judging themselves in the mirror, carrying shame, insecurity, and self-criticism throughout the day.
+
+Tease Solution:
+But a small group of women is breaking free of this shame, without surgery, without changing their bodies at all.
+
+Insight:
+They're using an ancient practice, hidden in Tantric temples for over 4,000 years.
+
+And it's not about fixing your breasts, it's about awakening your heart CHAKRA and finally embracing your body as it is.
+
+Turning them from a source of insecurity into portals of self-love and feminine radiance.
+
+Testimonial Teaser:
+After just 21 days, Devi said it felt like her breasts were actually becoming bigger energetically.
+
+Full Testimonial:
+'It almost felt like my breasts were becoming bigger, not physically, but energetically. I really started to fall in love with my own breasts. I was feeling more at home and at ease, really feeling very feminine and more in that soft quality of the heart inside.'
+
+CTA:
+If you want to fall in love with your breasts again, just comment RADIANCE below, and I'll send you the exact practice Devi used.
+
+Caption:
+Comment RADIANCE, and I'll send you the exact practice Devi used.">
+        <div class="portfolio-image">🎬</div>
+        <div class="portfolio-info">
+          <h4>Reel Script</h4>
+          <span>Ma Ananda Sarita</span>
+        </div>
+      </div>
+
+      <div class="portfolio-item stagger-item" data-title="Ad Script" data-client="Ma Ananda Sarita" data-content="THE AD COPY:
+Feeling closed off, disconnected, or dimmed in your radiance?
+
+The reason might shock you… It's in your breasts.
+
+For 35+ years, Tantra master Ma Ananda Sarita has helped over 12,000 women heal disconnection, shame, and numbness through ancient practices that restore feminine radiance.
+
+Now, for the first time, she's bringing this work online in the Sacred Breast Activation, a 21-day journey of massage, meditation, and ritual to help you feel alive, magnetic, and at home in your body again.
+
+Click below to reconnect with your feminine essence.
+
+---
+
+THE VIDEO SCRIPT:
+
+Hook:
+Your heart has been closed for years... And the reason might shock you.
+
+Most women try meditation, therapy, or even plant medicine to feel open again.
+
+But they're missing the most direct pathway: their breasts.
+
+Relatability:
+So many of us feel disconnected here.
+
+We judge ourselves in the mirror, we carry shame, or we notice our natural radiance has dimmed.
+
+Deep down, we long to feel alive again, magnetic, and at home in our feminine essence.
+
+Authority / Personal Intro:
+Hi, I'm Ma Ananda Sarita. At 17, I felt this same disconnection, so I left everything and spent 17 years in India studying under Osho.
+
+For 35 years, I've guided over 12,000 women through these practices to heal their wounds, reclaim their bodies, and awaken their natural radiance.
+
+Mechanism:
+Now, I've distilled these Tantric practices into the Sacred Breast Activation bundle, a 21-day journey of breast massage, meditation, and ritual that awakens sensitivity, heals emotional wounds, and restores your feminine magnetism.
+
+CTA:
+If you're ready to reconnect with your feminine power and radiance, click below now to begin your journey.">
+        <div class="portfolio-image">📢</div>
+        <div class="portfolio-info">
+          <h4>Ad Script</h4>
+          <span>Ma Ananda Sarita</span>
+        </div>
+      </div>
+
+      <div class="portfolio-item stagger-item" data-title="SMS Sequence" data-client="Neiva" data-content="FIRST SMS (send after 1 hour):
+Hello, [FirstName].
+
+We noticed you forgot some items in your shopping cart at Neiva Shop. Complete your order here before we run out of stock.
+
+---
+
+SECOND SMS (send after 1 day):
+Neiva Shop added a discount code for 10% off.
+
+Hey, [FirstName]. It seems to us that you left something behind. Use this 10% off code at checkout.
+
+---
+
+THIRD SMS (send after 3 days):
+Neiva Shop added a discount code for 15% OFF LAST CHANCE!
+
+Hey, [FirstName]. An item in your cart is almost sold out. Get 15% OFF on your whole order!">
+        <div class="portfolio-image">💬</div>
+        <div class="portfolio-info">
+          <h4>SMS Sequence</h4>
+          <span>Neiva</span>
+        </div>
+      </div>
+
+      <div class="portfolio-item stagger-item" data-title="Designed Email" data-client="Paragon" data-content="IMAGE">
+        <div class="portfolio-image">🎨</div>
+        <div class="portfolio-info">
+          <h4>Designed Email</h4>
+          <span>Paragon</span>
+        </div>
+      </div>
+
+      <div class="portfolio-item stagger-item" data-title="Funnel Strategy" data-client="Rachid" data-content="TEST TEST TEST">
+        <div class="portfolio-image">🎯</div>
+        <div class="portfolio-info">
+          <h4>Funnel Strategy</h4>
+          <span>Rachid</span>
         </div>
       </div>
 
