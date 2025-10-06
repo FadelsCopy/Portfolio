@@ -74,27 +74,11 @@
       align-items:center;
       gap:12px;
     }
-    .brand img.logo {
-      width:48px;
-      height:48px;
-      object-fit:cover;
-      border-radius:8px;
-      background: linear-gradient(135deg,var(--accent), #b8941f);
-      box-shadow: 0 4px 18px var(--shadow-gold);
-      display:block;
-    }
-    .brand .meta {
+    .brand .name {
       color: var(--text-primary);
-      line-height:1;
-    }
-    .brand .meta .name {
       font-weight:700;
-      font-size:0.95rem;
-      letter-spacing:0.2px;
-    }
-    .brand .meta .email {
-      font-size:0.8rem;
-      color: var(--text-muted);
+      font-size:1.2rem;
+      letter-spacing:0.3px;
     }
 
     nav.main-nav {
@@ -184,15 +168,17 @@
 
     /* ============ HERO ============ */
     .hero {
-      padding: 80px 20px 60px 20px;
-      max-width:1200px;
-      margin: 12px auto;
-      display:grid;
-      grid-template-columns: 1fr 420px;
-      gap: 36px;
+      min-height: 85vh;
+      padding: 60px 40px 60px 40px;
+      display:flex;
       align-items:center;
-      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-section) 100%);
+      justify-content:center;
+      background: 
+        radial-gradient(circle at 30% 20%, rgba(212,175,55,0.15), transparent 40%),
+        radial-gradient(circle at 70% 80%, rgba(212,175,55,0.1), transparent 40%),
+        linear-gradient(to bottom, #0a0e1a 0%, #0f1420 50%, #0a0e1a 100%);
       position: relative;
+      overflow: hidden;
     }
 
     .hero::before {
@@ -202,50 +188,156 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(circle at 20% 50%, rgba(212,175,55,0.1), transparent 50%);
+      background-image: 
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(212,175,55,0.03) 2px,
+          rgba(212,175,55,0.03) 4px
+        );
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 50% 50%, transparent 0%, rgba(10,14,26,0.4) 100%);
       pointer-events: none;
     }
 
-    .hero-card {
-      background: linear-gradient(135deg, var(--bg-card), rgba(21,27,43,0.6));
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 36px;
-      color: var(--text-primary);
-      position:relative;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    .hero-content {
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 60px;
+      align-items: center;
+      position: relative;
       z-index: 1;
     }
-    .hero-card .eyebrow { font-size:0.95rem; color: var(--text-muted); margin-bottom: 10px; }
-    .hero-card h1 { margin:0 0 12px 0; font-size:2.6rem; letter-spacing:-0.6px; color: var(--text-primary); }
-    .hero-card h2 { margin:0 0 18px 0; font-size:1.3rem; color: var(--accent); font-weight:600; }
-    .hero-card p { margin:0 0 20px 0; color: var(--text-secondary); max-width:46ch; line-height:1.5; }
-    .hero-actions { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-    .btn { display:inline-block; text-decoration:none; padding:10px 14px; border-radius:10px; font-weight:700; font-size:0.95rem; transition: transform .12s ease, box-shadow .12s ease; }
-    .btn-primary { background: linear-gradient(90deg,var(--accent), #b8941f); color:var(--bg-dark); box-shadow: 0 10px 30px var(--shadow-gold); }
-    .btn-primary:hover { transform: translateY(-3px) scale(1.02); background: linear-gradient(90deg,var(--accent-hover), var(--accent)); }
-    .btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); padding:9px 12px; }
-    .btn-outline:hover { background: var(--glass); transform: translateY(-3px); }
-    .socials { display:flex; gap:10px; align-items:center; }
-    .socials a { display:inline-flex; align-items:center; justify-content:center; width:40px;height:40px;border-radius:8px; background: var(--glass); text-decoration:none;color:var(--accent); font-weight:700; border:1px solid var(--glass-border); transition: all .2s ease; }
-    .socials a:hover { background: var(--accent); color: var(--bg-dark); transform: translateY(-3px); }
 
-    .hero-profile { display:flex; align-items:center; justify-content:center; z-index: 1; }
-    .profile-frame {
-      width:320px; height:360px; border-radius:22px;
-      background: var(--bg-card);
-      border: 2px solid var(--glass-border);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-      display:flex; align-items:center; justify-content:center;
-      position:relative; overflow:hidden; transform: rotate(-3deg);
+    .hero-text {
+      color: var(--text-primary);
     }
-    .profile-frame img { width:86%; height:auto; border-radius:12px; object-fit:cover; box-shadow: 0 18px 48px rgba(0,0,0,0.5); }
 
-    .hero-card::after {
-      content:''; position:absolute; right:-40px; bottom:-40px; width:220px; height:220px;
-      background: radial-gradient(circle at 30% 30%, rgba(212,175,55,0.15), transparent 60%);
-      filter: blur(30px); pointer-events:none;
+    .hero-text .eyebrow { 
+      font-size:0.95rem; 
+      color: var(--text-muted); 
+      margin-bottom: 10px; 
+    }
+    
+    .hero-text h1 { 
+      margin:0 0 12px 0; 
+      font-size:2.8rem; 
+      letter-spacing:-0.6px; 
+      color: var(--text-primary); 
+    }
+    
+    .hero-text h2 { 
+      margin:0 0 18px 0; 
+      font-size:1.4rem; 
+      color: var(--accent); 
+      font-weight:600; 
+    }
+    
+    .hero-text p { 
+      margin:0 0 30px 0; 
+      color: var(--text-secondary); 
+      max-width:50ch; 
+      line-height:1.7;
+      font-size: 1.05rem;
+    }
+
+    .hero-actions { 
+      display:flex; 
+      gap:12px; 
+      align-items:center; 
+      flex-wrap:wrap; 
+      margin-bottom: 20px;
+    }
+
+    .btn { 
+      display:inline-block; 
+      text-decoration:none; 
+      padding:12px 24px; 
+      border-radius:10px; 
+      font-weight:700; 
+      font-size:0.95rem; 
+      transition: transform .12s ease, box-shadow .12s ease; 
+    }
+
+    .btn-primary { 
+      background: linear-gradient(90deg,var(--accent), #b8941f); 
+      color:var(--bg-dark); 
+      box-shadow: 0 10px 30px var(--shadow-gold); 
+    }
+
+    .btn-primary:hover { 
+      transform: translateY(-3px) scale(1.02); 
+      background: linear-gradient(90deg,var(--accent-hover), var(--accent)); 
+    }
+
+    .btn-outline { 
+      background: transparent; 
+      color: var(--accent); 
+      border: 2px solid var(--accent); 
+      padding:10px 22px; 
+    }
+
+    .btn-outline:hover { 
+      background: var(--glass); 
+      transform: translateY(-3px); 
+    }
+
+    .socials { 
+      display:flex; 
+      gap:10px; 
+      align-items:center; 
+    }
+
+    .socials a { 
+      display:inline-flex; 
+      align-items:center; 
+      justify-content:center; 
+      width:44px;
+      height:44px;
+      border-radius:10px; 
+      background: var(--glass); 
+      text-decoration:none;
+      color:var(--accent); 
+      font-weight:700; 
+      font-size: 1.1rem;
+      border:1px solid var(--glass-border); 
+      transition: all .2s ease; 
+    }
+
+    .socials a:hover { 
+      background: var(--accent); 
+      color: var(--bg-dark); 
+      transform: translateY(-3px); 
+      box-shadow: 0 8px 20px var(--shadow-gold);
+    }
+
+    .hero-image {
+      display:flex; 
+      align-items:center; 
+      justify-content:center;
+    }
+
+    .hero-image img { 
+      width: 100%;
+      max-width: 400px;
+      height: auto; 
+      border-radius:20px; 
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      border: 3px solid var(--glass-border);
     }
 
     section { padding: 60px 20px; width: 100%; position: relative; }
@@ -264,8 +356,11 @@
     .services {
       padding: 80px 20px;
       width: 100%;
-      background: linear-gradient(135deg, #1a1f35 0%, #0f1420 100%);
+      background: 
+        linear-gradient(135deg, rgba(212,175,55,0.03) 0%, transparent 50%, rgba(212,175,55,0.03) 100%),
+        linear-gradient(45deg, #0f1420 0%, #1a1f35 50%, #0f1420 100%);
       position: relative;
+      overflow: hidden;
     }
 
     .services::before {
@@ -276,9 +371,36 @@
       right: 0;
       bottom: 0;
       background: 
-        radial-gradient(circle at 80% 20%, rgba(212,175,55,0.05), transparent 40%),
-        radial-gradient(circle at 20% 80%, rgba(212,175,55,0.05), transparent 40%);
+        radial-gradient(circle at 15% 20%, rgba(212,175,55,0.08), transparent 35%),
+        radial-gradient(circle at 85% 80%, rgba(212,175,55,0.08), transparent 35%),
+        radial-gradient(circle at 50% 50%, rgba(212,175,55,0.04), transparent 60%);
       pointer-events: none;
+    }
+
+    .services::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 100px,
+          rgba(212,175,55,0.02) 100px,
+          rgba(212,175,55,0.02) 101px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 100px,
+          rgba(212,175,55,0.02) 100px,
+          rgba(212,175,55,0.02) 101px
+        );
+      pointer-events: none;
+      opacity: 0.5;
     }
     
     .services-grid {
@@ -357,10 +479,10 @@
     }
 
     .service.active .service-content {
-      max-height: 400px;
+      max-height: 800px;
       opacity: 1;
       transform: translateY(0);
-      padding: 0 24px 28px 24px;
+      padding: 20px 24px 28px 24px;
     }
 
     .service-content p {
@@ -564,6 +686,9 @@
       color: var(--bg-dark);
       padding: 30px 20px;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: 700;
       border-radius: 12px;
       cursor: pointer;
@@ -813,28 +938,29 @@
     }
 
     @media (max-width: 980px){
-      .hero { grid-template-columns: 1fr 320px; gap:24px; padding:60px 18px; }
-      .profile-frame { width:280px; height:320px; }
+      .hero-content { grid-template-columns: 1fr 320px; gap:40px; }
       nav.main-nav { display:none; }
       .hamburger { display:flex; }
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
       .services-grid { max-width: 100%; }
       .clients-slider { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .hero { padding: 100px 30px 60px 30px; }
     }
     
     @media (max-width: 720px){
-      .hero { grid-template-columns: 1fr; gap:18px; padding:36px 14px; }
-      .hero-profile { order:-1; display:flex; justify-content:center; }
-      .hero-card h1 { font-size:2rem; }
-      .hero-card h2 { font-size:1.05rem; }
+      .hero-content { grid-template-columns: 1fr; gap:30px; }
+      .hero-image { order:-1; }
+      .hero-text h1 { font-size:2.2rem; }
+      .hero-text h2 { font-size:1.15rem; }
+      .hero-text p { max-width: 100%; }
+      .hero-image img { max-width: 280px; }
       .brand .meta .name { display:none; }
-      .hero { max-width: 94%; }
-      .profile-frame { width:220px; height:260px; transform:none; }
       .mobile-menu { right:10px; left:10px; top:64px; min-width:auto; }
       header.site-header { padding:10px 14px; }
       .portfolio-grid { grid-template-columns: 1fr; }
       .modal-content { padding: 30px 20px; }
       .services-grid { grid-template-columns: 1fr; }
+      .hero { padding: 50px 20px 60px 20px; min-height: auto; }
       
       .clients-slider { 
         grid-template-columns: 1fr; 
@@ -856,19 +982,15 @@
 
   <header class="site-header">
     <div class="brand" style="flex:0 0 auto;">
-      <img src="logo.png" alt="Fadel logo" class="logo" />
-      <div class="meta">
-        <div class="name">Fadel EL</div>
-        <div class="email">fadel@example.com</div>
-      </div>
+      <div class="name">fadel@fadelscopy.com</div>
     </div>
     <nav class="main-nav" aria-label="Main Navigation">
       <a href="#top">About</a>
       <a href="#services">Services</a>
       <a href="#portfolio">Works</a>
       <a href="#faq">Q&amp;A</a>
-      <a href="mailto:fadel@example.com" title="Contact me">Contact</a>
-      <a class="header-cta" href="https://calendly.com/fadel" target="_blank" rel="noopener noreferrer">Book a Call</a>
+      <a href="mailto:fadel@fadelscopy.com" title="Contact me">Contact</a>
+      <a class="header-cta" href="https://calendly.com/fadelelhachimi20/30min" target="_blank" rel="noopener noreferrer">Book a Call</a>
     </nav>
     <button class="hamburger" aria-label="Open menu" id="hamburgerBtn">
       <span></span>
@@ -878,31 +1000,31 @@
       <a href="#services">Services</a>
       <a href="#portfolio">Works</a>
       <a href="#faq">Q&amp;A</a>
-      <a href="mailto:fadel@example.com">Contact</a>
-      <a href="https://calendly.com/fadel" target="_blank" rel="noopener noreferrer">Book a Call</a>
+      <a href="mailto:fadel@fadelscopy.com">Contact</a>
+      <a href="https://calendly.com/fadelelhachimi20/30min" target="_blank" rel="noopener noreferrer">Book a Call</a>
     </div>
   </header>
 
-  <section class="hero" id="hero" aria-label="Hero">
-    <div class="hero-card" aria-hidden="false">
-      <div class="eyebrow">I am</div>
-      <h1>Fadel — Digital Marketer + Copywriter</h1>
-      <h2>Marketing strategist & full-stack copywriter</h2>
-      <p>
-        I craft high-performing marketing funnels, persuasive copy, and growth strategies that convert.
-        I blend creativity with analytics to design campaigns that scale and build strong brand narratives.
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="mailto:fadel@example.com">Contact Me</a>
-        <a class="btn btn-outline" href="https://calendly.com/fadel" target="_blank" rel="noopener noreferrer">Book a Call</a>
-        <div style="margin-left:auto" class="socials" aria-hidden="false">
-          <a aria-label="Facebook" title="Facebook" href="https://facebook.com/" target="_blank" rel="noopener noreferrer">f</a>
-          <a aria-label="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">in</a>
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="eyebrow">I am</div>
+        <h1>Fadel — Digital Marketer + Copywriter</h1>
+        <h2>Marketing strategist & full-stack copywriter</h2>
+        <p>
+          I craft high-performing marketing funnels, persuasive copy, and growth strategies that convert.
+          I blend creativity with analytics to design campaigns that scale and build strong brand narratives.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:fadel@fadelscopy.com">Contact Me</a>
+          <a class="btn btn-outline" href="https://calendly.com/fadelelhachimi20/30min" target="_blank" rel="noopener noreferrer">Book a Call</a>
+        </div>
+        <div class="socials">
+          <a aria-label="Facebook" title="Facebook" href="https://www.facebook.com/profile.php?id=61575146784094" target="_blank" rel="noopener noreferrer">f</a>
+          <a aria-label="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/fadel-el-hachimi-06984735a/" target="_blank" rel="noopener noreferrer">in</a>
         </div>
       </div>
-    </div>
-    <div class="hero-profile" aria-hidden="false">
-      <div class="profile-frame" role="img" aria-label="Fadel portrait">
+      <div class="hero-image">
         <img src="profile.png" alt="Fadel portrait" />
       </div>
     </div>
@@ -914,31 +1036,21 @@
       
       <div class="service stagger-item">
         <div class="service-header">
-          <h3>Email Marketing</h3>
-          <div class="service-icon">✉</div>
-        </div>
-        <div class="service-content">
-          <p>I create high-converting email campaigns that nurture leads and generate consistent revenue. From welcome sequences to promotional campaigns, I craft messages that resonate with your audience and drive action.</p>
-        </div>
-      </div>
-
-      <div class="service stagger-item">
-        <div class="service-header">
           <h3>Sales Copy</h3>
           <div class="service-icon">💰</div>
         </div>
         <div class="service-content">
-          <p>Persuasive long-form and short-form copy designed to sell products, services, and offers. Whether it's a sales page, product description, or VSL script, I write copy that converts browsers into buyers.</p>
+          <p>Sales copy is where persuasion meets conversion. I craft both short-form and long-form sales copy designed to move prospects through your funnel and into customers. This includes high-converting landing pages, video sales letter scripts, webinar registration and replay pages, and complete funnel buildouts that guide your audience from curiosity to purchase. Every word is strategically placed to address objections, amplify desire, and drive action. The focus is always on conversion—turning traffic into revenue with copy that sells while you scale.</p>
         </div>
       </div>
 
       <div class="service stagger-item">
         <div class="service-header">
-          <h3>Web Copy</h3>
-          <div class="service-icon">🌐</div>
+          <h3>Email Marketing</h3>
+          <div class="service-icon">✉</div>
         </div>
         <div class="service-content">
-          <p>Optimized website copy that engages visitors and turns them into customers. I create compelling homepage copy, about pages, and service descriptions that communicate your value and build trust.</p>
+          <p>Email marketing is about building relationships that generate revenue. I develop comprehensive email marketing strategies powered by persuasive copy that leverages storytelling and psychological triggers to captivate your audience. This includes automated sequences like welcome series, nurturing campaigns, and promotional sequences that convert subscribers into buyers. I also implement list segmentation to deliver the right message to the right people, dramatically increasing engagement and results. Plus, I optimize for deliverability—keeping your emails out of spam folders, away from promotion tabs, and maintaining low bounce rates so your messages actually reach inboxes and get opened.</p>
         </div>
       </div>
 
@@ -948,17 +1060,7 @@
           <div class="service-icon">📢</div>
         </div>
         <div class="service-content">
-          <p>Compelling ad copy for Facebook, Instagram, Google, and beyond to drive clicks and sales. I write attention-grabbing headlines and persuasive ad text that stops the scroll and gets results.</p>
-        </div>
-      </div>
-
-      <div class="service stagger-item">
-        <div class="service-header">
-          <h3>Content Marketing</h3>
-          <div class="service-icon">📝</div>
-        </div>
-        <div class="service-content">
-          <p>Strategic blog posts and articles that build authority and attract organic traffic. I create valuable content that educates your audience, boosts SEO, and positions you as an industry leader.</p>
+          <p>Ad copy is your frontline for customer acquisition. I write scroll-stopping ad copy for Meta (Facebook/Instagram), TikTok, Google Ads, and other platforms that's built to scale profitably. The approach combines testing new marketing angles to reach untapped audiences while refining proven winners for maximum conversion. Every ad is crafted to capture attention in crowded feeds, communicate value instantly, and compel clicks from your ideal customers. It's about finding the messaging that resonates and turns paid traffic into predictable profit.</p>
         </div>
       </div>
 
@@ -968,7 +1070,27 @@
           <div class="service-icon">🎯</div>
         </div>
         <div class="service-content">
-          <p>Complete growth strategies tailored to your brand, from funnels to customer journeys. I develop data-driven marketing plans that align with your business goals and maximize ROI.</p>
+          <p>Marketing strategy is the blueprint that turns scattered efforts into systematic growth. I create comprehensive marketing strategies for product launches, complete marketing funnels that take prospects from lead generation through closing deals, and systems for upsells, cross-sells, and scaling. This isn't just about getting customers—it's about maximizing lifetime value at every stage of the buyer journey. The strategy maps out how to attract the right people, convert them efficiently, and extract maximum revenue from every relationship. It's the difference between guessing and knowing exactly how to grow.</p>
+        </div>
+      </div>
+
+      <div class="service stagger-item">
+        <div class="service-header">
+          <h3>Web Copy</h3>
+          <div class="service-icon">🌐</div>
+        </div>
+        <div class="service-content">
+          <p>Web copy is your digital storefront, and every page needs to work strategically. I write conversion-focused copy for your entire website—from homepage messaging that immediately communicates who you serve and how you help, to compelling product or service descriptions that sell benefits, to authentic About pages that build trust and connection. Each page is crafted to guide visitors deeper into your site, answer their questions before they ask, and position your business as the obvious choice. It's about creating a cohesive brand voice that turns curious visitors into convinced customers.</p>
+        </div>
+      </div>
+
+      <div class="service stagger-item">
+        <div class="service-header">
+          <h3>Content Copy</h3>
+          <div class="service-icon">📝</div>
+        </div>
+        <div class="service-content">
+          <p>Content copy is how you build authority, stay top-of-mind, and convert through value. I write viral-ready Reels and TikTok scripts that capture attention and drive engagement, YouTube video scripts that educate while promoting, strategic social media posts for Facebook, LinkedIn, and Instagram that spark conversations, Story sequences that build daily connection, and SEO-optimized blog content that attracts organic traffic and establishes expertise. Every piece of content serves a purpose—whether it's awareness, engagement, or moving your audience closer to becoming customers. It's content that works as hard as your ads, without the ad spend.</p>
         </div>
       </div>
 
@@ -988,9 +1110,9 @@ I know you're busy. That's exactly why I'm reaching out.
 Our clients were spending 20+ hours per week on manual data entry. Now? They've automated 90% of it.
 
 Here's what changed:
-• Real-time data sync across all platforms
-• Automated reporting that saves 15 hours/week
-• Zero manual errors
+- Real-time data sync across all platforms
+- Automated reporting that saves 15 hours/week
+- Zero manual errors
 
 The result? Teams are focusing on what matters: growth.
 
@@ -1138,9 +1260,9 @@ Welcome video, client portal access, weekly check-ins
 Community access for peer support
 
 RESULTS:
-• Conversion rate: 23% (industry avg: 8%)
-• Client LTV increased by 40%
-• Scaled from $8K/mo to $45K/mo in 6 months">
+- Conversion rate: 23% (industry avg: 8%)
+- Client LTV increased by 40%
+- Scaled from $8K/mo to $45K/mo in 6 months">
         <div class="portfolio-image">🎯</div>
         <div class="portfolio-info">
           <h4>Sales Funnel Strategy</h4>
@@ -1161,10 +1283,10 @@ THE STRATEGY:
 5. Email campaigns for special events/themed nights
 
 THE EXECUTION:
-• 3x weekly Instagram posts (behind-the-scenes + food)
-• $500/month ad spend targeting 5-mile radius
-• Automated SMS reminders reducing no-shows by 60%
-• Monthly themed dinner events promoted via email
+- 3x weekly Instagram posts (behind-the-scenes + food)
+- $500/month ad spend targeting 5-mile radius
+- Automated SMS reminders reducing no-shows by 60%
+- Monthly themed dinner events promoted via email
 
 THE RESULTS:
 ✓ From 30% capacity to 85% capacity in 3 months
@@ -1251,11 +1373,16 @@ RESULTS:
   <section class="skills" id="skills">
     <h2 class="fade-in-up">My Skills</h2>
     <div class="skills-grid">
-      <div class="skill-card stagger-item">Writing Persuasive Copy</div>
-      <div class="skill-card stagger-item">Ad Copy</div>
-      <div class="skill-card stagger-item">Landing Pages</div>
-      <div class="skill-card stagger-item">Marketing Strategy</div>
-      <div class="skill-card stagger-item">SMS Marketing</div>
+      <div class="skill-card stagger-item">Sales Copywriting</div>
+      <div class="skill-card stagger-item">Email Marketing & Automation</div>
+      <div class="skill-card stagger-item">Conversion Rate Optimization</div>
+      <div class="skill-card stagger-item">Marketing Funnel Strategy</div>
+      <div class="skill-card stagger-item">Paid Advertising</div>
+      <div class="skill-card stagger-item">Landing Page Optimization</div>
+      <div class="skill-card stagger-item">Customer Psychology & Persuasion</div>
+      <div class="skill-card stagger-item">Content Strategy</div>
+      <div class="skill-card stagger-item">Marketing Analytics & Data</div>
+      <div class="skill-card stagger-item">Brand Messaging & Positioning</div>
     </div>
   </section>
 
@@ -1311,68 +1438,101 @@ RESULTS:
   </section>
 
   <section class="work-together" id="work-together">
-    <h2 class="fade-in-up">Let's Work Together</h2>
+    <h2 class="fade-in-up">You're One Decision Away From Different Results</h2>
     <p class="fade-in-up">
-      I help brands grow by crafting persuasive copy, smart marketing strategies, and engaging campaigns that convert.
-      Let's join forces and create results-driven marketing that elevates your business to the next level.
+      You didn't land here by accident.<br><br>
+      Something brought you to this page. <br><br>
+      Maybe your current marketing isn't delivering the returns you need. <br><br>
+      Maybe you're tired of spending money on campaigns that sound good but don't actually move the needle. <br><br>
+      Or maybe you've hit a ceiling and you know the next level requires a different approach.<br><br>
+      Here's what I know: you're not looking for more promises. <br><br>
+      You're looking for someone who understands what it takes to turn attention into revenue. <br><br>
+      Someone who can look at your business and see exactly where the gaps are and how to fill them.<br><br>
+      That's where I come in.<br><br>
+      I don't write copy that just "sounds nice." I build marketing systems that generate measurable results. <br><br>
+      The kind that show up in your bank account, not just your analytics dashboard.<br><br>
+      But none of this happens until we talk.<br><br>
+      Because every business is different. Your audience, your offer, and your market position all require a strategy built specifically for you. And I can't build that strategy without understanding where you are and where you want to go.<br><br>
+      So if you're serious about growth, let's have a conversation. <br><br>
+
     </p>
     <div class="work-actions fade-in-up">
-      <a class="btn btn-primary" href="mailto:fadel@example.com">Contact Me</a>
-      <a class="btn btn-outline" href="https://calendly.com/fadel" target="_blank" rel="noopener noreferrer">Book a Call</a>
+      <a class="btn btn-primary" href="mailto:fadel@fadelscopy.com">Contact Me</a>
+      <a class="btn btn-outline" href="https://calendly.com/fadelelhachimi20/30min" target="_blank" rel="noopener noreferrer">Book a Call</a>
     </div>
   </section>
 
   <section class="faq" id="faq">
-    <h2 class="fade-in-up">Q&A</h2>
+    <h2 class="fade-in-up">Still Not Sure? Let's Clear That Up</h2>
     <div class="faq-container">
     
     <div class="faq-item stagger-item">
       <div class="faq-header">
-        <span>What services do you offer?</span>
+        <span>I've worked with copywriters before. How are you different?</span>
         <span class="faq-toggle">+</span>
       </div>
       <div class="faq-content">
-        <p>I offer a full range of copywriting and marketing services including email marketing, sales copy, website copy, ad copy, content marketing, and complete marketing strategy development. Each service is tailored to your specific business needs and goals.</p>
+        <p>Fair question. Most copywriters write pretty words and call it a day. I focus on one thing: does it make you money? I'm not interested in copy that "sounds good." I build marketing systems that convert. Every word is there for a reason, and that reason is results. If you've been burned before, I get it. Let's talk about what went wrong and how we'll do it differently.</p>
       </div>
     </div>
 
     <div class="faq-item stagger-item">
       <div class="faq-header">
-        <span>How long does a project take?</span>
+        <span>How do I know this will work for MY business?</span>
         <span class="faq-toggle">+</span>
       </div>
       <div class="faq-content">
-        <p>Project timelines vary based on scope and complexity. A simple email sequence might take 1-2 weeks, while a complete marketing funnel could take 4-6 weeks. I'll provide a clear timeline during our initial consultation and keep you updated throughout the process.</p>
+        <p>You don't. Not yet. That's why we start with a conversation, not a contract. I need to understand your business, your audience, and your goals before I can tell you if I'm the right fit. If I don't think I can help you get results, I'll tell you upfront. But if I take you on, it's because I see exactly how to move the needle for you.</p>
       </div>
     </div>
 
     <div class="faq-item stagger-item">
       <div class="faq-header">
-        <span>What are your rates?</span>
+        <span>I'm not sure I can afford this right now.</span>
         <span class="faq-toggle">+</span>
       </div>
       <div class="faq-content">
-        <p>My rates depend on the project scope, deliverables, and timeline. I offer both project-based pricing and monthly retainer options. Let's schedule a call to discuss your needs, and I'll provide a custom quote that fits your budget and goals.</p>
+        <p>Let me flip that: can you afford to keep doing what you're doing? Every month you're running campaigns that underperform, you're losing money. Good marketing doesn't cost. It pays. My clients see returns that make the investment look small. But I also work with businesses at different stages. Let's talk about what makes sense for you.</p>
       </div>
     </div>
 
     <div class="faq-item stagger-item">
       <div class="faq-header">
-        <span>Do you work with businesses in my industry?</span>
+        <span>What if I don't have a big marketing budget?</span>
         <span class="faq-toggle">+</span>
       </div>
       <div class="faq-content">
-        <p>I've worked with clients across various industries including SaaS, e-commerce, coaching, consulting, fitness, finance, and more. The principles of great copywriting and marketing strategy apply universally. I take time to understand your specific market and audience to create tailored solutions.</p>
+        <p>You don't need a massive budget. You need the right strategy. I've helped businesses go from $8K to $45K monthly revenue with smart copy and focused campaigns. It's not about how much you spend. It's about spending it in the right places. We'll build something that fits your budget and delivers ROI.</p>
       </div>
     </div>
 
     <div class="faq-item stagger-item">
       <div class="faq-header">
-        <span>What results can I expect?</span>
+        <span>I'm already doing okay. Do I really need this?</span>
         <span class="faq-toggle">+</span>
       </div>
       <div class="faq-content">
-        <p>While results vary by industry and current situation, my clients typically see improved conversion rates, increased engagement, higher ROI on ad spend, and better customer retention. I focus on measurable outcomes and provide regular reports to track progress and optimize campaigns.</p>
+        <p>"Okay" is the enemy of great. If you're doing okay, imagine what happens when you optimize. When your email sequence converts at 12% instead of 3%. When your landing page turns 40% more visitors into customers. When your ads pay for themselves. "Okay" leaves a lot of money on the table. The question is: are you fine with that?</p>
+      </div>
+    </div>
+
+    <div class="faq-item stagger-item">
+      <div class="faq-header">
+        <span>How involved will I need to be?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-content">
+        <p>As much or as little as you want. I need some input upfront: your goals, your brand voice, access to data. After that, I handle the heavy lifting. You review, approve, and watch the results come in. I'm not here to create extra work for you. I'm here to take work off your plate.</p>
+      </div>
+    </div>
+
+    <div class="faq-item stagger-item">
+      <div class="faq-header">
+        <span>What if we start working together and it's not a good fit?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-content">
+        <p>Then we part ways professionally. I'm not interested in holding anyone hostage. But here's what usually happens: we start with a smaller project first. A campaign, a funnel, an email sequence. You see the results. You see how I work. Then we decide together if we want to go deeper.</p>
       </div>
     </div>
 
@@ -1380,7 +1540,7 @@ RESULTS:
   </div>
 
   <footer>
-    &copy; 2025 Fadel EL. All rights reserved.
+    &copy; 2025 Fadel El Hachimi. All rights reserved.
   </footer>
 
   <script>
