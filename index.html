@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fadel Portfolio</title>
-  <link rel="icon" type="image/png" href="favicon1.png">
+  <link rel="icon" type="image/png" href="favicon.png">
   <style>
     /* ============ Base / reset ============ */
     :root{
@@ -75,6 +75,16 @@
       align-items:center;
       gap:12px;
     }
+    .brand-logo {
+      height: 50px;  /* Adjust this value to make logo bigger/smaller */
+      width: auto;   /* Keeps proportions */
+      transition: transform 0.3s ease;
+    }
+
+    .brand-logo:hover {
+      transform: scale(1.05);
+    }
+
     .brand .name {
       color: var(--text-secondary);
       font-weight:400;
@@ -949,6 +959,7 @@
 
   <header class="site-header">
     <div class="brand" style="flex:0 0 auto;">
+      <img src="logo.png" alt="Fadel's Logo" class="brand-logo" />
       <a class="name" href="mailto:fadel@fadelscopy.com"><b>fadel@fadelscopy.com</b></a>
     </div>
     <nav class="main-nav" aria-label="Main Navigation">
@@ -992,7 +1003,7 @@
         -->
       </div>
       <div class="hero-image">
-        <img src="profile0.png" alt="Fadel portrait" />
+        <img src="profile.png" alt="Fadel portrait" />
       </div>
     </div>
   </section>
