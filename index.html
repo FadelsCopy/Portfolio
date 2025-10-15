@@ -218,14 +218,16 @@
     }
 
     .hero-content {
-      max-width: 1200px;
+      max-width: 1100px;  /* CHANGED from 1200px */
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 400px;
       gap: 60px;
       align-items: center;
+      justify-items: center;  /* ADDED THIS LINE */
       position: relative;
       z-index: 1;
+      margin: 0 auto;  /* ADDED THIS LINE */
     }
 
     .hero-text {
