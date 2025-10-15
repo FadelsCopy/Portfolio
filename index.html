@@ -335,6 +335,8 @@
       filter: drop-shadow(0 30px 60px rgba(212,175,55,0.4)) 
               drop-shadow(0 10px 30px rgba(0,0,0,0.6));
       transition: transform 0.4s ease, filter 0.4s ease;
+      mask-image: linear-gradient(to bottom, black 60%, transparent 100%);  /* ADD THIS LINE */
+      -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);  /* ADD THIS LINE */
     }
 
     .hero-image img:hover {
