@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Hero from './components/Hero'; 
@@ -6,17 +6,25 @@ import Marquee from './components/Marquee';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
 import Qa from './components/Qa';
-import PortfolioPage from './components/PortfolioPage'; // Ensure this is imported
+import ComingSoon from './components/ComingSoon';
+import PortfolioPage from './components/PortfolioPage';
 
-function App() {
+function Layout() {
+  const location = useLocation();
+
+  // hide on Coming Soon page
+  const hideHeaderFooter = location.pathname === "/";
+
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        
-        <Routes>
-          {/* Home Page: Everything you want to see on the landing page */}
-          <Route path="/" element={
+    <div className="App">
+      {!hideHeaderFooter && <Header />}
+
+      <Routes>
+        <Route path="/" element={<ComingSoon />} />
+
+        <Route
+          path="/dev"
+          element={
             <>
               <Hero />
               <Marquee />
@@ -24,14 +32,21 @@ function App() {
               <Portfolio />
               <Qa />
             </>
-          } />
-          
-          {/* Portfolio Page: Only the content for the portfolio page */}
-          <Route path="/portfolio" element={<PortfolioPage />} />
-        </Routes>
+          }
+        />
 
-        <Footer />
-      </div>
+        <Route path="/portfolio" element={<PortfolioPage />} />
+      </Routes>
+
+      {!hideHeaderFooter && <Footer />}
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Layout />
     </Router>
   );
 }
