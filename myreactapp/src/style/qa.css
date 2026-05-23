@@ -1,0 +1,432 @@
+/* ==========================================================================
+
+   PART 6: INTERACTIVE ACCORDION ARCHITECTURE & TICKER ENGINE OVERRIDES
+
+   ========================================================================= */
+
+
+
+/* CREATIVE STRATEGY BRAND TICKER (THICK, UNSTOPPABLE, UNHOVERABLE) */
+
+.brand-ticker-section {
+
+  width: 100%;
+
+  background-color: #99ff00 !important; /* Brand green stays locked on the logo background bar */
+
+  padding: 44px 0;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+  
+
+  /* FORCE UNCLICKABLE / UNHOVERABLE STATUS */
+
+  pointer-events: none !important; 
+
+  user-select: none !important;
+
+}
+
+
+
+.ticker-wrapper {
+
+  display: flex;
+
+  width: 100%;
+
+}
+
+
+
+.ticker-track {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-around;
+
+  min-width: 100%;
+
+  flex-shrink: 0;
+
+  gap: 100px;
+
+  padding-right: 100px;
+
+  animation: scrollLeftToRight 25s linear infinite !important;
+
+}
+
+
+
+/* JPEG IMAGE FORMAT HARNESS */
+
+.ticker-logo {
+
+  height: 40px; 
+
+  width: auto;
+
+  display: block;
+
+  object-fit: contain;
+
+  filter: brightness(0); /* Turns your placeholder layout graphics into solid black accents */
+
+}
+
+
+
+/* HARDWARE ACCELERATED INFINITE ENGINE (LEFT TO RIGHT) */
+
+@keyframes scrollLeftToRight {
+
+  0% { transform: translateX(-100%); }
+
+  100% { transform: translateX(0%); }
+
+}
+
+
+
+/* FAQ CONTAINER */
+
+.main-content-section {
+
+  padding: 100px 40px;
+
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  width: 100%;
+ 
+   
+
+}
+
+
+
+.qa-container {
+
+  max-width: 800px;
+
+  margin: 0 auto;
+
+}
+
+
+
+.qa-block {
+
+  border-bottom: 1px solid var(--border-color, #1a1d24);
+
+  margin-bottom: 8px;
+
+  border-radius: 8px;
+
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+
+}
+
+
+
+.qa-block.is-active {
+
+  background-color: var(--bg-secondary, #0b0e14);
+
+  border-bottom: 1px solid transparent;
+
+}
+
+
+
+/* FIXED: Explicit label selector locked back to your brand green */
+
+.main-content-section .section-label {
+
+  font-size: 1.15rem;
+
+  font-weight: 800;
+
+  color: #99ff00 !important; 
+
+  letter-spacing: 0.18em;
+
+  margin-bottom: 16px;
+
+  text-transform: uppercase;
+
+}
+
+
+
+.section-headline {
+
+  font-size: 2.5rem;
+
+  font-weight: 800;
+
+  letter-spacing: -0.03em;
+
+  color: var(--text-main, #ffffff);
+
+  margin-bottom: 50px;
+
+}
+
+
+
+.qa-trigger {
+
+  width: 100% !important;
+
+  display: flex !important;
+
+  justify-content: space-between !important;
+
+  align-items: center !important;
+
+  text-align: left !important;
+
+  background: transparent !important;
+
+  border: none !important;
+
+  outline: none !important;
+
+  padding: 32px 24px !important;
+
+  cursor: pointer !important;
+
+  margin: 0 !important;
+
+  color: inherit !important;
+
+  font: inherit !important;
+
+}
+
+
+
+.qa-trigger * {
+
+  pointer-events: none;
+
+}
+
+
+
+.qa-question {
+
+  font-size: 1.35rem;
+
+  font-weight: 800;
+
+  color: var(--text-main, #ffffff);
+
+  letter-spacing: -0.01em;
+
+  padding-right: 24px;
+
+  transition: color 0.3s ease;
+
+}
+
+
+
+/* FIXED SPECIFICITY: Only touches the actual question line inside the triggers */
+
+.qa-trigger:hover .qa-question,
+
+.qa-block.is-active .qa-trigger .qa-question {
+
+  color: #00f0ff !important; 
+
+}
+
+
+
+/* ACCORDION EXPANSION PLUS / MINUS ICONS */
+
+.accordion-icon {
+
+  position: relative;
+
+  width: 14px;
+
+  height: 14px;
+
+  flex-shrink: 0;
+
+  margin-right: 8px;
+
+}
+
+
+
+.accordion-icon::before,
+
+.accordion-icon::after {
+
+  content: "";
+
+  position: absolute;
+
+  background-color: var(--text-muted, #888888);
+
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+
+}
+
+
+
+.accordion-icon::before { top: 6px; left: 0; width: 14px; height: 2px; }
+
+.accordion-icon::after { top: 0; left: 6px; width: 2px; height: 14px; }
+
+
+
+/* Swaps open active icon cross transforms to blue */
+
+.qa-block.is-active .accordion-icon::before {
+
+  transform: rotate(180deg);
+
+  background-color: #00f0ff !important;
+
+}
+
+.qa-block.is-active .accordion-icon::after {
+
+  transform: rotate(90deg) scale(0);
+
+  background-color: #00f0ff !important;
+
+}
+
+
+
+/* SMOOTH TRANSITION HARNESS ENGINE */
+
+.qa-answer-wrapper {
+
+  height: 0;
+
+  overflow: hidden;
+
+  transition: height 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+
+  will-change: height;
+
+}
+
+
+
+.qa-answer {
+
+  color: #f1f2f4; 
+
+  line-height: 1.75;
+
+  font-size: 1.05rem;
+
+  padding: 0 48px 40px 48px;
+
+  border-left: 3px solid transparent;
+
+  transition: border-color 0.5s ease;
+
+}
+
+
+
+/* Left accent vertical indicator border line matches blue theme exactly */
+
+.qa-block.is-active .qa-answer {
+
+  border-left: 3px solid #00f0ff !important;
+
+}
+
+
+
+.qa-answer p { margin-bottom: 16px; }
+
+.qa-answer p:last-child { margin-bottom: 0; }
+
+.qa-answer h4 { font-size: 1.15rem; font-weight: 800; color: var(--text-main, #ffffff); margin-bottom: 10px; }
+
+
+
+.qa-bullet-list { list-style: none; padding: 0; margin: 18px 0 22px 4px; }
+
+.qa-bullet-list li { position: relative; padding-left: 22px; margin-bottom: 12px; font-size: 1rem; color: #f1f2f4; }
+
+.qa-bullet-list li::before { content: "—"; position: absolute; left: 0; color: #00f0ff !important; font-weight: 700; }
+
+
+
+/* SYSTEM FIX: Strongly protects the green strategy workflow steps against cross-contamination */
+
+.qa-block .qa-answer .process-highlight,
+
+.qa-block.is-active .qa-answer .process-highlight {
+
+  color: #99ff00 !important; 
+
+  font-weight: 700;
+
+  letter-spacing: 0.02em;
+
+  font-size: 0.95rem;
+
+  background: rgba(153, 255, 0, 0.04) !important; /* Soft complementary green glow housing shadow */
+
+  padding: 12px 16px;
+
+  border-radius: 6px;
+
+  border: 1px solid rgba(153, 255, 0, 0.25) !important;
+
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+}
+
+
+
+/* MOBILE SCREEN RESPONSIVE SCALING OVERRIDES */
+
+@media (max-width: 768px) {
+
+  .brand-ticker-section { padding: 28px 0; }
+
+  .ticker-logo { height: 28px; }
+
+  .ticker-track { gap: 60px; padding-right: 60px; }
+
+  .main-content-section { padding: 60px 20px; }
+
+  .section-headline { font-size: 1.9rem; margin-bottom: 30px; }
+
+  .qa-trigger { padding: 24px 16px !important; }
+
+  .qa-question { font-size: 1.15rem; }
+
+  .qa-answer { padding: 0 24px 32px 24px; }
+
+}
+

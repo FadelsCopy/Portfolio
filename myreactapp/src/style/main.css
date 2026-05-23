@@ -1,0 +1,10 @@
+/* Importing all your component styles */
+@import './header.css';
+@import './hero.css';
+@import './marquee.css';
+@import './services.css';
+@import './portfolio.css';
+@import './qa.css';
+@import './footer.css';
+@import './variables.css';
+@import './PortfolioPage.css';

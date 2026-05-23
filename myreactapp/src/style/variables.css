@@ -1,0 +1,29 @@
+/* variables.css */
+:root {
+  --bg-primary: #09090b;       /* Pure Deep Onyx Background */
+  --bg-secondary: #141417;     /* Charcoal Black Canvas for cards/headers */
+  --accent-main: #00f0ff;      /* High-Voltage Electric Cyan */
+  --accent-glow: rgba(0, 240, 255, 0.15); /* Premium background neon lighting */
+  --accent-spark: #ccff00;     /* Vivid Neon Lime for quick callouts */
+  --text-main: #f4f4f5;        /* Premium Chalk White for main typography */
+  --text-muted: #a1a1aa;       /* Smooth steel grey for descriptions */
+  --border-color: #27272a;     /* Sharp, crisp layout boundaries */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+}

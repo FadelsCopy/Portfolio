@@ -1,0 +1,131 @@
+/* ==========================================================================
+   PART 4: SERVICES OFFERS GRID CARD SETTING
+   ========================================================================== */
+
+/* NEW: The section wrapper that holds the atmospheric lighting */
+.services-section {
+  position: relative;
+  background: #05070a; /* Ensure base matches your global theme */
+  padding: 100px 0;
+  overflow: hidden;
+}
+
+/* Atmospheric "Break" Effects */
+.services-section::before,
+.services-section::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  pointer-events: none;
+}
+
+.services-section::before {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0, 240, 255, 0.03), transparent);
+}
+
+.services-section::after {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 240, 255, 0.03), transparent);
+}
+
+/* Standard content container */
+.main-content-section {
+  padding: 0 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1; /* Keeps content above the glow effects */
+}
+
+.section-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-spark);
+  letter-spacing: 0.15em;
+  margin-bottom: 12px;
+}
+
+.section-headline {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 850px;
+  margin-bottom: 50px;
+  font-weight: 400;
+}
+
+/* Grid Layout */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.service-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 40px;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.service-card:hover {
+  border-color: var(--accent-main);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 240, 255, 0.05);
+}
+
+.service-number {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-main);
+  font-family: monospace;
+  margin-bottom: 24px;
+  display: inline-block;
+}
+
+.service-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.service-card p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 1rem;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* RESPONSIVE LAYOUT OVERRIDES */
+@media (max-width: 992px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .services-section { padding: 60px 0; }
+  .main-content-section { padding: 0 20px; }
+  .section-headline { font-size: 1.9rem; margin-bottom: 24px; }
+  .section-subtitle { font-size: 1.05rem; margin-bottom: 35px; }
+  .services-grid { grid-template-columns: 1fr; gap: 20px; }
+  .service-card { padding: 30px; }
+}

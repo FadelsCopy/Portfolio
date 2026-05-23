@@ -1,0 +1,269 @@
+/* portfolio.css */
+
+.portfolio-showcase {
+  background-color: #05070a;
+  width: 100%;
+}
+
+.main-content-section {
+  padding: 100px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.section-label {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #99ff00; /* Neon brand accent green */
+  letter-spacing: 0.18em;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.section-headline {
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #888888;
+  max-width: 800px;
+  margin-bottom: 50px;
+  font-weight: 400;
+}
+
+/* PORTFOLIO MATRIX GRID SYSTEM */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  margin-bottom: 50px;
+}
+
+.project-preview-card {
+  background: #0b0e14;
+  border: 1px solid #1a1d24;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-preview-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 240, 255, 0.25);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* UPDATED MASK BOX CONTAINER TO HANDLE GRAPHICS TRANSFORMS CLEANLY */
+.project-image-box {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #131722;
+  overflow: hidden; /* Crucial mask wrapper rule for containment on hover expansion scaling */
+  border-bottom: 1px solid #1a1d24;
+  position: relative;
+}
+
+/* ULTRA-PREMIUM GRAPHICS INTERACTION ENGINE RULES */
+.project-preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Holds crisp pixel aspects across fluid viewports without stretching */
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Subtle image magnification drift on card hover state */
+.project-preview-card:hover .project-preview-image {
+  transform: scale(1.04);
+}
+
+.project-details {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* NEW CLEAN TYPOGRAPHIC LAYER FOR MICRO CATEGORIES INSIDE CARDS */
+.card-micro-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.project-details h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+.project-details p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #a0a5b1;
+  margin-bottom: 28px;
+  flex-grow: 1;
+}
+
+.project-link {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #00f0ff; /* Ambient cyan-blue link */
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.25s ease, transform 0.25s ease;
+  width: max-content;
+}
+
+.project-preview-card:hover .project-link {
+  transform: translateX(4px);
+}
+
+/* PREMIUM INTERACTIVE TOOLACTION MATRIX ENGINE */
+.premium-tooltip-container {
+  position: relative;
+  display: inline-block;
+  width: max-content;
+}
+
+.premium-tooltip-badge {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 0;
+  background: #121824;
+  color: #00f0ff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 10px rgba(0,240,255,0.05);
+  white-space: nowrap;
+  
+  /* Initial hidden state parameters positioned down slightly */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+              visibility 0.3s;
+  pointer-events: none;
+}
+
+/* Tooltip Little Triangle Pointer Arrow */
+.premium-tooltip-badge::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 24px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: #121824 transparent transparent transparent;
+}
+
+/* Trigger animation cleanly on container hover or click holding */
+.premium-tooltip-container:hover .premium-tooltip-badge,
+.premium-tooltip-container:active .premium-tooltip-badge {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Muted link default design state */
+.disabled-link {
+  color: #4b4f5a !important;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+/* Subtle non-intrusive accent lighting glow feedback loop on hover */
+.premium-tooltip-container:hover .disabled-link {
+  color: rgba(0, 240, 255, 0.75) !important;
+}
+
+.coming-soon-card:hover .project-link {
+  transform: none !important; /* Locks positional sliding out on disabled cards */
+}
+
+/* BOTTOM ACTION CENTER PANEL BUTTON */
+.portfolio-action-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn-large-vault {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 36px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: transparent;
+  border: 2px solid #00f0ff;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.btn-large-vault:hover {
+  background-color: rgba(0, 240, 255, 0.04);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+  transform: scale(1.02);
+}
+
+/* PREMIUM REDACTED STYLING */
+.redacted-text {
+  background: #1a1d24;
+  color: #4b4f5a;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  letter-spacing: 0.05em;
+  border: 1px solid #2d313a;
+  font-size: 0.9em;
+  cursor: help;
+  transition: all 0.3s ease;
+}
+
+/* Subtle reveal effect on hover to add to the curiosity */
+.redacted-text:hover {
+  color: #a0a5b1;
+  border-color: #00f0ff;
+}
+
+/* RESPONSIVE LAYOUT ENGINE SCALING */
+@media (max-width: 992px) {
+  .section-headline { font-size: 2.3rem; }
+  .portfolio-grid { grid-template-columns: 1fr; gap: 24px; }
+  .main-content-section { padding: 60px 24px; }
+}
+
+@media (max-width: 576px) {
+  .section-headline { font-size: 1.8rem; }
+  .section-subtitle { font-size: 1.05rem; margin-bottom: 32px; }
+  .project-details { padding: 24px; }
+  .project-details h3 { font-size: 1.35rem; }
+  .btn-large-vault { width: 100%; padding: 16px 24px; font-size: 1rem; }
+  .premium-tooltip-badge { left: 50%; transform: translateX(-50%) translateY(6px); }
+  .premium-tooltip-badge::after { left: 50%; transform: translateX(-50%); }
+  .premium-tooltip-container:hover .premium-tooltip-badge { transform: translateX(-50%) translateY(0); }
+}

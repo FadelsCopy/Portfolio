@@ -1,0 +1,257 @@
+/* ========================================
+   marquee.css
+======================================== */
+
+.ticker-showcase-section {
+  background: #05070a;
+
+  /* More room for glow */
+  padding: 120px 0;
+
+  width: 100%;
+
+  overflow: hidden;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.ticker-header {
+  max-width: 1200px;
+
+  margin: 0 auto 40px;
+
+  padding: 0 40px;
+
+  text-align: center;
+}
+
+.ticker-pre-title {
+  display: block;
+
+  color: #00f0ff;
+
+  font-size: 0.85rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+
+  margin-bottom: 10px;
+}
+
+.ticker-main-title {
+  color: white;
+
+  font-size: 2.8rem;
+
+  font-weight: 800;
+
+  line-height: 1.15;
+
+  text-transform: uppercase;
+}
+
+/* =========================
+   VIEWPORT
+========================= */
+
+.ticker-viewport {
+  width: 100%;
+
+  overflow: visible;
+
+  display: flex;
+
+  position: relative;
+
+  padding: 60px 0;
+}
+
+/* =========================
+   MOVING GROUP
+========================= */
+
+.ticker-group {
+  display: flex;
+
+  flex-shrink: 0;
+
+  will-change: transform;
+
+  /*
+    SPEED CONTROL
+
+    LOWER = faster
+    HIGHER = slower
+
+    Examples:
+
+    20s = fast
+    30s = balanced
+    45s = slow
+    60s = very slow
+  */
+
+  animation:
+    marquee 28s linear infinite;
+}
+
+/*
+PAUSE BOTH GROUPS
+ONLY WHEN A CARD IS HOVERED
+*/
+
+.ticker-viewport:has(.ticker-card:hover)
+.ticker-group {
+  animation-play-state: paused;
+}
+
+/* =========================
+   LEFT → RIGHT
+========================= */
+
+@keyframes marquee {
+
+  from {
+    transform:
+      translateX(-100%);
+  }
+
+  to {
+    transform:
+      translateX(0%);
+  }
+
+}
+
+/* =========================
+   CARD
+========================= */
+
+.ticker-card {
+  flex: 0 0 auto;
+
+  width: 260px;
+
+  padding-right: 28px;
+
+  position: relative;
+
+  cursor: pointer;
+
+  z-index: 2;
+}
+
+/* =========================
+   PREMIUM HOVER
+========================= */
+
+.ticker-media-9-16 {
+
+  width: 100%;
+
+  aspect-ratio: 9 / 16;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  background: #131822;
+
+  border:
+    1px solid rgba(255,255,255,.06);
+
+  transition:
+    transform .45s cubic-bezier(.22,.61,.36,1),
+    box-shadow .45s ease,
+    border-color .45s ease,
+    filter .45s ease;
+
+  transform-origin: center;
+
+}
+
+/* Glow + lift */
+
+.ticker-card:hover
+.ticker-media-9-16 {
+
+  transform: scale(1.06) translateY(-8px);
+  filter: brightness(1.1);
+  border-color: rgba(0, 240, 255, 0.5);
+  
+  /* This is the "Glow" implementation */
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.8),
+    0 0 15px rgba(0, 240, 255, 0.3),
+    0 0 40px rgba(0, 240, 255, 0.2),
+    0 0 100px rgba(0, 240, 255, 0.1),
+    inset 0 0 1px 1px rgba(0, 240, 255, 0.4);
+}
+
+/* Image movement */
+
+.ticker-preview-image {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  transition:
+    transform .6s ease;
+
+}
+
+.ticker-card:hover
+.ticker-preview-image {
+
+  transform:
+    scale(1.025);
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 992px) {
+
+  .ticker-showcase-section {
+    padding: 90px 0;
+  }
+
+  .ticker-main-title {
+    font-size: 2.2rem;
+  }
+
+  .ticker-card {
+    width: 210px;
+
+    padding-right: 20px;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  .ticker-showcase-section {
+    padding: 70px 0;
+  }
+
+  .ticker-main-title {
+    font-size: 1.7rem;
+  }
+
+  .ticker-card {
+    width: 175px;
+
+    padding-right: 16px;
+  }
+
+}

@@ -1,0 +1,93 @@
+/* ==========================================================================
+   PART 7: THE FOOTER (PREMIUM HIGH-VISIBILITY MINIMAL SYSTEM)
+   ========================================================================= */
+.minimal-premium-footer {
+  background: #05070a; /* Darkest layout layer to blend smoothly with your sections */
+  border-top: 1px solid var(--border-color); 
+  padding: 40px 0;
+  width: 100%;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Left Side: Ownership Text Layout */
+.footer-copyright p {
+  font-size: 0.95rem;
+  color: var(--text-muted); 
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.brand-highlight {
+  color: var(--text-main); 
+  font-weight: 600;
+}
+
+/* Right Side: Cyber Social Button Grid Configuration */
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* Clean tracking space between nodes */
+}
+
+/* Base style for all social media icons, including the new Gmail button */
+.social-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px; /* Tiny sizing bump for better click targets */
+  height: 44px;
+  background: #0f121a; /* Matches premium dark layout card themes */
+  
+  /* HIGH VISIBILITY BOOST: Crisp initial cyan border & ambient micro-glow shadow */
+  border: 1px solid rgba(0, 240, 255, 0.25); 
+  color: rgba(255, 255, 255, 0.85); /* High-contrast off-white vectors */
+  border-radius: 10px;
+  text-decoration: none;
+  
+  /* Permanent soft glow matrix baseline so they clearly stand out */
+  box-shadow: 0 4px 12px rgba(0, 240, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.social-icon {
+  width: 19px; /* Magnified vector icon paths slightly for instant readability */
+  height: 19px;
+  transition: transform 0.3s ease;
+}
+
+/* High-Ticket Instant Reactive Hover States */
+.social-btn:hover {
+  color: var(--accent-main); /* Icon vector instantly turns sharp electric cyan */
+  border-color: var(--accent-main); /* Border locks onto match theme glow */
+  background: rgba(0, 240, 255, 0.05); /* Enhanced ambient illumination inside frame */
+  transform: translateY(-4px); /* Premium vertical drift */
+  
+  /* Deep target neon glow overlay */
+  box-shadow: 0 10px 24px rgba(0, 240, 255, 0.3),
+              inset 0 0 8px rgba(0, 240, 255, 0.1);
+}
+
+.social-btn:hover .social-icon {
+  transform: scale(1.08); /* Crisp interior expansion engine metric */
+}
+
+/* RESPONSIVE STRUCTURES FOR DEVICE VIEWPORTS */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column; 
+    gap: 24px;
+    text-align: center;
+    padding: 30px 24px;
+  }
+  .footer-socials { 
+    justify-content: center; 
+  }
+}
