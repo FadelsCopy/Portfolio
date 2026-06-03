@@ -11,7 +11,7 @@ const allProjects = [
   { id: 6, title: "Static Ad 6", categories: ["Static Ads"], image: "/static6.png", type: "image", content: "" },
   { id: 7, title: "Static Ad 7", categories: ["Static Ads"], image: "/static7.png", type: "image", content: "" },
 
-  { id: 8, title: "VSL 1", categories: ["VSL"], image: "/script.jpg", type: "pdf", fileUrl: "/pdfs/VSL1.pdf" },
+  { id: 8, title: "VSL 1", categories: ["VSL"], image: "/portfoliopageimages/vsl1.jpg", type: "pdf", fileUrl: "/pdfs/VSL1.pdf" },
   { id: 9, title: "VSL 2", categories: ["VSL"], image: "/script.jpg", type: "pdf", fileUrl: "/pdfs/VSL2.pdf" },
   { id: 10, title: "VSL 3", categories: ["VSL"], image: "/script.jpg", type: "pdf", fileUrl: "/pdfs/VSL3.pdf" },
   { id: 11, title: "VSL 4", categories: ["VSL"], image: "/script.jpg", type: "pdf", fileUrl: "/pdfs/VSL4.pdf" },
@@ -23,7 +23,7 @@ const allProjects = [
   { id: 17, title: "VSL 10", categories: ["VSL"], image: "/script.jpg", type: "pdf", fileUrl: "/pdfs/VSL10.pdf" },
 
 
-  { id: 18, title: "Video 1", categories: ["Video Ads"], image: "/ai1.jpg", type: "video", content: "video1.mp4" },
+  { id: 18, title: "Video 1", categories: ["Video Ads"], image: "/portfoliopageimages/video1.jpg", type: "video", content: "video1.mp4" },
   { id: 19, title: "Video 2", categories: ["Video Ads"], image: "/ai2.jpg", type: "video", content: "video2.mp4" },
   { id: 20, title: "Video 3", categories: ["Video Ads"], image: "/ai3.jpg", type: "video", content: "video3.mp4" },
   { id: 21, title: "Video 4", categories: ["Video Ads"], image: "/ai4.jpg", type: "video", content: "video4.mp4" },
