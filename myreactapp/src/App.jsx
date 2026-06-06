@@ -1,5 +1,5 @@
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-
+import { useEffect } from 'react';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -11,6 +11,20 @@ import Qa from './components/Qa';
 import ComingSoon from './components/ComingSoon';
 import PortfolioPage from './components/PortfolioPage';
 
+function ScrollToTop() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant'
+    });
+  }, [location.pathname]);
+
+  return null;
+}
+
 function Layout() {
   const location = useLocation();
 
@@ -19,6 +33,8 @@ function Layout() {
 
   return (
     <div className="App">
+      <ScrollToTop />
+
       {!hideHeaderFooter && <Header />}
 
       <Routes>

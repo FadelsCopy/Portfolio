@@ -5,7 +5,7 @@
 .ticker-showcase-section {
   position: relative;
   background: #05070a;
-  padding: 120px 0 130px;
+  padding: 120px 0 25px;
   width: 100%;
   overflow: hidden;
 }
@@ -228,7 +228,7 @@ ONLY WHEN A CARD IS HOVERED
 
 @media (max-width: 576px) {
   .ticker-showcase-section {
-    padding: 70px 0 95px;
+    padding: 70px 0 20px;
   }
 
   .ticker-header {
