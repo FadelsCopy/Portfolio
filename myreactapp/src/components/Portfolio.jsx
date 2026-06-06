@@ -1,60 +1,70 @@
 import { Link } from 'react-router-dom';
 
 export default function Portfolio() {
-  const projects = [
+  const archiveStats = [
     {
-      label: "SELECTED STRATEGIC WORK",
-      title: "Creative Intelligence Archive",
-      description: "A curated collection of video, static, UGC, native, and AI-driven creative systems paired with strategic rationale, execution frameworks, messaging architecture, and performance-driven decision making.",
-      image: "/PSimg1.png",
-      link: "/portfolio", 
-      isComingSoon: false
+      value: "47+",
+      label: "Strategic Assets",
+      description: "A selected library of ads, scripts, sales assets, and paid media examples."
     },
     {
-      label: "FULL CASE DECONSTRUCTION",
-      title: <>Inside <span className="redacted-text">[REDACTED]</span> Brand</>,
-      description: "A complete strategic breakdown showing the full process from research and positioning to creative development, launch decisions, iteration cycles, and performance learning.",
-      image: "/PSimg2.png",
-      isComingSoon: true
+      value: "7",
+      label: "Creative Formats",
+      description: "Static ads, video ads, VSLs, advertorials, listicles, Google Ads, and YouTube Ads."
+    },
+    {
+      value: "20+",
+      label: "Static Ad Concepts",
+      description: "Hook-driven image ads built around attention, curiosity, and conversion intent."
+    },
+    {
+      value: "13",
+      label: "Video Ad Examples",
+      description: "Performance-focused video concepts shaped around clarity, speed, and buying desire."
     }
   ];
 
   return (
     <section className="portfolio-showcase" id="portfolio-part">
-      <div className="main-content-section">
-        <div className="section-label">STRATEGIC ARCHIVE</div>
-        <h2 className="section-headline">Inside The Creative Systems</h2>
-        <p className="section-subtitle">
-          A closer look at how strategy becomes execution through research, creative direction, testing logic, and performance analysis.
-        </p>
+      <div className="portfolio-content-shell">
+        <div className="archive-layout-grid">
+          <div className="archive-proof-copy">
+            <span className="archive-eyebrow">WORK ARCHIVE</span>
 
-        <div className="portfolio-grid">
-          {projects.map((project, index) => (
-            <div key={index} className={`project-preview-card ${project.isComingSoon ? 'coming-soon-card' : ''}`}>
-              <div className="project-image-box">
-                <img src={project.image} className="project-preview-image" alt={project.title} />
-              </div>
-              <div className="project-details">
-                <span className="card-micro-label">{project.label}</span>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                
-                {project.isComingSoon ? (
-                  <div className="premium-tooltip-container">
-                    <span className="premium-tooltip-badge">Asset Vault Launching Soon</span>
-                    {/* No link or click functionality here */}
-                    <span className="disabled-text">Case Study Coming Soon</span>
-                  </div>
-                ) : (
-                  <Link to={project.link} className="project-link">Explore Strategic Archive →</Link>
-                )}
-              </div>
+            <h2>
+              Explore the assets behind the strategy.
+            </h2>
+
+            <p>
+              A curated collection of creative work across different formats from
+              scroll-stopping static ads to video concepts, VSLs, advertorials,
+              listicles, and paid media examples.
+            </p>
+
+            <div className="archive-format-tags">
+              <span>Static Ads</span>
+              <span>Video Ads</span>
+              <span>VSLs</span>
+              <span>Advertorials</span>
+              <span>Listicles</span>
+              <span>Google Ads</span>
+              <span>YouTube Ads</span>
             </div>
-          ))}
-        </div>
 
-        <div className="portfolio-action-center">
-          <Link to="/portfolio" className="btn-large-vault">Access Full Strategic Archive</Link>
+            <Link to="/portfolio" className="archive-main-button">
+              Explore Full Archive →
+            </Link>
+          </div>
+
+          <div className="archive-stats-grid">
+            {archiveStats.map((stat, index) => (
+              <div className="archive-stat-card" key={index}>
+                <div className="archive-stat-value">{stat.value}</div>
+                <div className="archive-stat-label">{stat.label}</div>
+                <p>{stat.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -1,12 +1,43 @@
 /* hero.css */
+
 .hero-section {
   min-height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 40px;
-  background: radial-gradient(circle at 80% 40%, rgba(0, 240, 255, 0.04), transparent 60%);
+  padding: 80px 40px 110px;
+  background:
+    radial-gradient(circle at 78% 38%, rgba(0, 240, 255, 0.055), transparent 56%),
+    radial-gradient(circle at 12% 92%, rgba(0, 240, 255, 0.025), transparent 42%),
+    #05070a;
   position: relative;
+  overflow: hidden;
+}
+
+/* NEW: smooth lower transition into the Marquee section */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 220px;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at center bottom,
+      rgba(0, 240, 255, 0.07) 0%,
+      rgba(0, 240, 255, 0.028) 34%,
+      transparent 72%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(5, 7, 10, 0.34) 54%,
+      #05070a 100%
+    );
+  opacity: 0.95;
+  z-index: 0;
 }
 
 .hero-grid {
@@ -16,6 +47,8 @@
   grid-template-columns: 1.2fr 0.8fr;
   gap: 60px;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 .hero-content {
@@ -108,8 +141,9 @@
 }
 
 /* ==========================================================================
-   PORTRAIT ARCHITECTURE: ZERO-CIRCLE GRADIENT DITHERING FRAMEWORK
+   PORTRAIT ARCHITECTURE
    ========================================================================= */
+
 .hero-visual-frame {
   display: flex;
   justify-content: center;
@@ -120,14 +154,13 @@
 .premium-portrait-container {
   position: relative;
   width: 100%;
-  max-width: 440px; 
-  height: 540px;    
+  max-width: 440px;
+  height: 540px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* LAYER 1: Tech Blueprint Canvas + Advanced Edge Transparency Fading */
 .bg-grid-mask {
   position: absolute;
   top: -50px;
@@ -135,8 +168,7 @@
   left: -65px;
   right: -65px;
   z-index: 1;
-  
-  /* Retains global edge mask to make sure grid boundaries naturally dissipate */
+
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%),
                       linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%),
@@ -145,23 +177,18 @@
   mask-composite: intersect;
 }
 
-/* FIXED GLOW MATRIX: Uses an 8-stage mathematical curve distribution model. 
-  By steadily blending the blue profile into a deep navy-tinted void placeholder,
-  and pulling the final transparent point deep into the background-size margins,
-  the visible circle border is completely destroyed.
-*/
 .premium-profile-bg-smooth {
   background: radial-gradient(
-    circle at 50% 43%, 
-    rgba(0, 240, 255, 0.22) 0%,    /* Vibrant core center */
-    rgba(0, 240, 255, 0.16) 18%,   /* Micro-step falloff */
-    rgba(0, 240, 255, 0.09) 35%,   /* Ultra-smooth dissipation edge */
-    rgba(28, 35, 51, 0.35) 55%,    /* Matches your web dark layout layer */
-    rgba(28, 35, 51, 0.18) 72%,    /* Deep background feathering */
-    rgba(28, 35, 51, 0.05) 88%,    /* Extended fade threshold */
-    transparent 100%               /* Complete invisible termination */
+    circle at 50% 43%,
+    rgba(0, 240, 255, 0.2) 0%,
+    rgba(0, 240, 255, 0.14) 18%,
+    rgba(0, 240, 255, 0.08) 35%,
+    rgba(28, 35, 51, 0.32) 55%,
+    rgba(28, 35, 51, 0.16) 72%,
+    rgba(28, 35, 51, 0.05) 88%,
+    transparent 100%
   );
-  background-size: 115% 115%;     /* Stretches the scale curve wider to eliminate circular compression */
+  background-size: 115% 115%;
   background-position: center;
 }
 
@@ -175,7 +202,6 @@
   background-position: center;
 }
 
-/* LAYER 2: Isolated Photo Mask (Protects Head/Sides from Fading out) */
 .photo-bottom-fade-only {
   position: absolute;
   inset: 0;
@@ -185,36 +211,39 @@
   align-items: center;
   overflow: hidden;
 
-  /* Zero side/top fades. Clean fade transition strictly locked to the bottom 18% */
   -webkit-mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
 }
 
-/* Hard-locked 100% full visibility image engine */
 .profile-image-full-render {
   width: 100%;
   height: 100%;
   object-fit: contain !important;
-  object-position: bottom center; 
+  object-position: bottom center;
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.9));
 }
 
 /* ==========================================================================
-   HIGH-CONVERTING MOBILE VERSION RESPONSE REVERSAL MATRIX
-   ========================================================================== */
+   RESPONSIVE
+   ========================================================================= */
+
 @media (max-width: 992px) {
   .hero-section {
-    padding: 60px 24px;
+    padding: 60px 24px 90px;
   }
-  
+
+  .hero-section::after {
+    height: 180px;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 40px;
     text-align: center;
   }
-  
+
   .hero-content {
     grid-row: 2;
     text-align: center;
@@ -222,13 +251,13 @@
     display: flex;
     flex-direction: column;
   }
-  
+
   .hero-visual-frame {
     grid-row: 1;
     margin-top: 10px;
     margin-bottom: 20px;
   }
-  
+
   .premium-portrait-container {
     max-width: 340px;
     height: 420px;
@@ -240,7 +269,7 @@
     left: -40px;
     right: -40px;
   }
-  
+
   .hero-cta-group {
     justify-content: center;
     width: 100%;
@@ -248,28 +277,55 @@
 }
 
 @media (max-width: 576px) {
-  .hero-title { 
-    font-size: 2.8rem; 
+  .hero-section {
+    padding: 54px 20px 78px;
   }
-  .hero-subtitle { 
-    font-size: 1.3rem; 
+
+  .hero-section::after {
+    height: 150px;
+    background:
+      radial-gradient(
+        ellipse at center bottom,
+        rgba(0, 240, 255, 0.055) 0%,
+        rgba(0, 240, 255, 0.024) 36%,
+        transparent 74%
+      ),
+      linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(5, 7, 10, 0.36) 54%,
+        #05070a 100%
+      );
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
     margin-bottom: 20px;
   }
+
   .hero-description {
     font-size: 1.05rem;
     line-height: 1.6;
     margin-bottom: 32px;
   }
+
   .hero-cta-group {
     flex-direction: column;
     gap: 12px;
     width: 100%;
   }
-  .hero-btn-primary, .hero-btn-outline {
+
+  .hero-btn-primary,
+  .hero-btn-outline {
     width: 100%;
     text-align: center;
     padding: 14px 0;
   }
+
   .premium-portrait-container {
     max-width: 280px;
     height: 350px;
