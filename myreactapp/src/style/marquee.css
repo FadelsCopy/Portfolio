@@ -3,14 +3,37 @@
 ======================================== */
 
 .ticker-showcase-section {
+  position: relative;
   background: #05070a;
-
-  /* More room for glow */
-  padding: 120px 0;
-
+  padding: 120px 0 130px;
   width: 100%;
-
   overflow: hidden;
+}
+
+/* Soft premium transition into the next section */
+.ticker-showcase-section::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 180px;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at center bottom,
+      rgba(0, 240, 255, 0.075) 0%,
+      rgba(0, 240, 255, 0.035) 28%,
+      transparent 70%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(5, 7, 10, 0.2) 45%,
+      #05070a 100%
+    );
+  opacity: 0.9;
+  z-index: 0;
 }
 
 /* =========================
@@ -19,37 +42,27 @@
 
 .ticker-header {
   max-width: 1200px;
-
   margin: 0 auto 40px;
-
   padding: 0 40px;
-
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .ticker-pre-title {
   display: block;
-
   color: #00f0ff;
-
   font-size: 0.85rem;
-
   font-weight: 700;
-
   letter-spacing: 0.2em;
-
   margin-bottom: 10px;
 }
 
 .ticker-main-title {
   color: white;
-
   font-size: 2.8rem;
-
   font-weight: 800;
-
   line-height: 1.15;
-
   text-transform: uppercase;
 }
 
@@ -59,14 +72,27 @@
 
 .ticker-viewport {
   width: 100%;
-
   overflow: visible;
-
   display: flex;
-
   position: relative;
-
   padding: 60px 0;
+  z-index: 2;
+
+  /* Premium edge fade so cards enter/exit smoothly */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
 }
 
 /* =========================
@@ -75,9 +101,7 @@
 
 .ticker-group {
   display: flex;
-
   flex-shrink: 0;
-
   will-change: transform;
 
   /*
@@ -94,8 +118,7 @@
     60s = very slow
   */
 
-  animation:
-    marquee 28s linear infinite;
+  animation: marquee 28s linear infinite;
 }
 
 /*
@@ -103,8 +126,7 @@ PAUSE BOTH GROUPS
 ONLY WHEN A CARD IS HOVERED
 */
 
-.ticker-viewport:has(.ticker-card:hover)
-.ticker-group {
+.ticker-viewport:has(.ticker-card:hover) .ticker-group {
   animation-play-state: paused;
 }
 
@@ -113,17 +135,13 @@ ONLY WHEN A CARD IS HOVERED
 ========================= */
 
 @keyframes marquee {
-
   from {
-    transform:
-      translateX(-100%);
+    transform: translateX(-100%);
   }
 
   to {
-    transform:
-      translateX(0%);
+    transform: translateX(0%);
   }
-
 }
 
 /* =========================
@@ -132,15 +150,10 @@ ONLY WHEN A CARD IS HOVERED
 
 .ticker-card {
   flex: 0 0 auto;
-
   width: 260px;
-
   padding-right: 28px;
-
   position: relative;
-
   cursor: pointer;
-
   z-index: 2;
 }
 
@@ -149,41 +162,30 @@ ONLY WHEN A CARD IS HOVERED
 ========================= */
 
 .ticker-media-9-16 {
-
   width: 100%;
-
   aspect-ratio: 9 / 16;
-
   overflow: hidden;
-
   border-radius: 18px;
-
   background: #131822;
-
-  border:
-    1px solid rgba(255,255,255,.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 
   transition:
-    transform .45s cubic-bezier(.22,.61,.36,1),
-    box-shadow .45s ease,
-    border-color .45s ease,
-    filter .45s ease;
+    transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.45s ease,
+    border-color 0.45s ease,
+    filter 0.45s ease;
 
   transform-origin: center;
-
 }
 
 /* Glow + lift */
 
-.ticker-card:hover
-.ticker-media-9-16 {
-
+.ticker-card:hover .ticker-media-9-16 {
   transform: scale(1.06) translateY(-8px);
   filter: brightness(1.1);
   border-color: rgba(0, 240, 255, 0.5);
-  
-  /* This is the "Glow" implementation */
-  box-shadow: 
+
+  box-shadow:
     0 20px 50px rgba(0, 0, 0, 0.8),
     0 0 15px rgba(0, 240, 255, 0.3),
     0 0 40px rgba(0, 240, 255, 0.2),
@@ -194,26 +196,15 @@ ONLY WHEN A CARD IS HOVERED
 /* Image movement */
 
 .ticker-preview-image {
-
   width: 100%;
-
   height: 100%;
-
   object-fit: cover;
-
   display: block;
-
-  transition:
-    transform .6s ease;
-
+  transition: transform 0.6s ease;
 }
 
-.ticker-card:hover
-.ticker-preview-image {
-
-  transform:
-    scale(1.025);
-
+.ticker-card:hover .ticker-preview-image {
+  transform: scale(1.025);
 }
 
 /* =========================
@@ -221,9 +212,8 @@ ONLY WHEN A CARD IS HOVERED
 ========================= */
 
 @media (max-width: 992px) {
-
   .ticker-showcase-section {
-    padding: 90px 0;
+    padding: 90px 0 110px;
   }
 
   .ticker-main-title {
@@ -231,27 +221,87 @@ ONLY WHEN A CARD IS HOVERED
   }
 
   .ticker-card {
-    width: 210px;
-
-    padding-right: 20px;
+    width: 230px;
+    padding-right: 22px;
   }
-
 }
 
 @media (max-width: 576px) {
-
   .ticker-showcase-section {
-    padding: 70px 0;
+    padding: 70px 0 95px;
   }
 
+  .ticker-header {
+    padding: 0 22px;
+    margin-bottom: 28px;
+  }
+
+  .ticker-pre-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    margin-bottom: 9px;
+  }
+
+  /* Slightly smaller mobile title */
   .ticker-main-title {
-    font-size: 1.7rem;
+    font-size: 1.42rem;
+    line-height: 1.18;
   }
 
-  .ticker-card {
-    width: 175px;
+  .ticker-viewport {
+    padding: 42px 0 50px;
 
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 5%,
+      black 95%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 5%,
+      black 95%,
+      transparent 100%
+    );
+  }
+
+  /* Bigger mobile cards */
+  .ticker-card {
+    width: 235px;
+    padding-right: 18px;
+  }
+
+  .ticker-media-9-16 {
+    border-radius: 16px;
+  }
+
+  .ticker-showcase-section::after {
+    height: 140px;
+    background:
+      radial-gradient(
+        ellipse at center bottom,
+        rgba(0, 240, 255, 0.07) 0%,
+        rgba(0, 240, 255, 0.03) 32%,
+        transparent 72%
+      ),
+      linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(5, 7, 10, 0.3) 48%,
+        #05070a 100%
+      );
+  }
+}
+
+@media (max-width: 380px) {
+  .ticker-card {
+    width: 220px;
     padding-right: 16px;
   }
 
+  .ticker-main-title {
+    font-size: 1.34rem;
+  }
 }
