@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import Header from './components/Header';
@@ -8,7 +8,6 @@ import Marquee from './components/Marquee';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
 import Qa from './components/Qa';
-import ComingSoon from './components/ComingSoon';
 import PortfolioPage from './components/PortfolioPage';
 
 function ScrollToTop() {
@@ -25,38 +24,38 @@ function ScrollToTop() {
   return null;
 }
 
+function HomePage() {
+  return (
+    <>
+      <Hero />
+      <Marquee />
+      <Services />
+      <Portfolio />
+      <Qa />
+    </>
+  );
+}
+
 function Layout() {
-  const location = useLocation();
-
-  // hide on Coming Soon page
-  const hideHeaderFooter = location.pathname === "/" || location.pathname === "";
-
   return (
     <div className="App">
       <ScrollToTop />
 
-      {!hideHeaderFooter && <Header />}
+      <Header />
 
       <Routes>
-        <Route path="*" element={<ComingSoon />} />
+        <Route path="/" element={<HomePage />} />
 
-        <Route
-          path="/dev"
-          element={
-            <>
-              <Hero />
-              <Marquee />
-              <Services />
-              <Portfolio />
-              <Qa />
-            </>
-          }
-        />
+        {/* Keep /dev working in case you still open the old link */}
+        <Route path="/dev" element={<HomePage />} />
 
         <Route path="/portfolio" element={<PortfolioPage />} />
+
+        {/* Any unknown route goes back to homepage */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
-      {!hideHeaderFooter && <Footer />}
+      <Footer />
     </div>
   );
 }
