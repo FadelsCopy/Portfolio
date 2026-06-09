@@ -38,7 +38,7 @@ export default function Portfolio() {
             <p>
               A curated collection of creative work across different formats from
               scroll-stopping static ads to video concepts, VSLs, advertorials,
-              listicles, and paid media examples.
+              listicles, and paid media.
             </p>
 
             <div className="archive-format-tags">
