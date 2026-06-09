@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import Header from './components/Header';
@@ -9,6 +9,7 @@ import Services from './components/Services';
 import Portfolio from './components/Portfolio';
 import Qa from './components/Qa';
 import PortfolioPage from './components/PortfolioPage';
+import NotFound from './components/NotFound';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -43,17 +44,19 @@ function Layout() {
 
       <Header />
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
+      <div className="page-shell">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
 
-        {/* Keep /dev working in case you still open the old link */}
-        <Route path="/dev" element={<HomePage />} />
+          {/* Keep /dev working in case you still open the old link */}
+          <Route path="/dev" element={<HomePage />} />
 
-        <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
 
-        {/* Any unknown route goes back to homepage */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+          {/* Custom branded 404 page */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
 
       <Footer />
     </div>
