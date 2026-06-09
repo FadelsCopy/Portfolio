@@ -386,8 +386,8 @@ Try it risk-free for 100 days. If it does not change your hair, you pay nothing.
   { id: 44, title: "Supplement", categories: ["Google Ads"], image: "/portfoliopageimages/googleads.jpeg", type: "pdf", fileUrl: "/pdfs/Google_Ads.pdf" },
   { id: 45, title: "Supplement", categories: ["YouTube Ads"], image: "/portfoliopageimages/youtubeads.jpeg", type: "pdf", fileUrl: "/pdfs/YouTube_Ads.pdf" },
 
-  { id: 46, title: "Advertorial", categories: ["Advertorial"], image: "/portfoliopageimages/advertorial1.jpeg", type: "pdf", fileUrl: "/pdfs/advertorial1.pdf"},
-  { id: 47, title: "Listicle", categories: ["Listicle"], image: "/portfoliopageimages/listicle1.jpeg", type: "pdf", fileUrl: "/pdfs/listicle1.pdf"},
+  { id: 46, title: "Supplement", categories: ["Advertorial"], image: "/portfoliopageimages/advertorial1.jpeg", type: "pdf", fileUrl: "/pdfs/advertorial1.pdf"},
+  { id: 47, title: "Orthopedic Shoes", categories: ["Listicle"], image: "/portfoliopageimages/listicle1.jpeg", type: "pdf", fileUrl: "/pdfs/listicle1.pdf"},
 
 ];
 

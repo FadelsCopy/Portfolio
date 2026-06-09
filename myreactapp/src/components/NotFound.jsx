@@ -13,7 +13,7 @@ export default function NotFound() {
 
         <p>
           Looks like this link is broken, moved, or never existed in the first place.
-          No worries — you’re still in the right place.
+          No worries, you’re still in the right place.
         </p>
 
         <div className="not-found-actions">
