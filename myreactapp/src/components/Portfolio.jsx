@@ -5,7 +5,7 @@ export default function Portfolio() {
     {
       value: "47+",
       label: "Strategic Assets",
-      description: "A selected library of ads, scripts, sales assets, and paid media examples."
+      description: "A selected library of ads, video ad scripts, sales assets, and paid media."
     },
     {
       value: "7",
@@ -15,7 +15,7 @@ export default function Portfolio() {
     {
       value: "20+",
       label: "Static Ad Concepts",
-      description: "Hook-driven image ads built around attention, curiosity, and conversion intent."
+      description: "Hook-driven image ads built around attention, curiosity, and conversion."
     },
     {
       value: "13",
@@ -37,7 +37,7 @@ export default function Portfolio() {
 
             <p>
               A curated collection of creative work across different formats from
-              scroll-stopping static ads to video concepts, VSLs, advertorials,
+              scroll-stopping static ads, video ad scripts to video concepts, advertorials,
               listicles, and paid media.
             </p>
 

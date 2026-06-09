@@ -356,16 +356,16 @@ Try it risk-free for 100 days. If it does not change your hair, you pay nothing.
   
   
   
-  { id: 21, title: "Hair Growth Gummies", categories: ["VSL"], image: "/portfoliopageimages/vsl1.jpeg", type: "pdf", fileUrl: "/pdfs/VSL1.pdf" },
-  { id: 22, title: "LED Face Mask", categories: ["VSL"], image: "/portfoliopageimages/vsl2.jpeg", type: "pdf", fileUrl: "/pdfs/VSL2.pdf" },
-  { id: 23, title: "Beard Growth Kit", categories: ["VSL"], image: "/portfoliopageimages/vsl3.jpeg", type: "pdf", fileUrl: "/pdfs/VSL3.pdf" },
-  { id: 24, title: "Hair Growth Gummies", categories: ["VSL"], image: "/portfoliopageimages/vsl4.jpeg", type: "pdf", fileUrl: "/pdfs/VSL4.pdf" },
-  { id: 25, title: "LED Face Mask", categories: ["VSL"], image: "/portfoliopageimages/vsl5.jpeg", type: "pdf", fileUrl: "/pdfs/VSL5.pdf" },
-  { id: 26, title: "Beard Growth Kit", categories: ["VSL"], image: "/portfoliopageimages/vsl6.jpeg", type: "pdf", fileUrl: "/pdfs/VSL6.pdf" },
-  { id: 27, title: "Hair Growth Gummies", categories: ["VSL"], image: "/portfoliopageimages/vsl7.jpeg", type: "pdf", fileUrl: "/pdfs/VSL7.pdf" },
-  { id: 28, title: "LED Face Mask", categories: ["VSL"], image: "/portfoliopageimages/vsl8.jpeg", type: "pdf", fileUrl: "/pdfs/VSL8.pdf" },
-  { id: 29, title: "Beard Growth Kit", categories: ["VSL"], image: "/portfoliopageimages/vsl9.jpeg", type: "pdf", fileUrl: "/pdfs/VSL9.pdf" },
-  { id: 30, title: "Hair Growth Gummies", categories: ["VSL"], image: "/portfoliopageimages/vsl10.jpeg", type: "pdf", fileUrl: "/pdfs/VSL10.pdf" },
+  { id: 21, title: "Hair Growth Gummies", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl1.jpeg", type: "pdf", fileUrl: "/pdfs/VSL1.pdf" },
+  { id: 22, title: "LED Face Mask", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl2.jpeg", type: "pdf", fileUrl: "/pdfs/VSL2.pdf" },
+  { id: 23, title: "Beard Growth Kit", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl3.jpeg", type: "pdf", fileUrl: "/pdfs/VSL3.pdf" },
+  { id: 24, title: "Hair Growth Gummies", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl4.jpeg", type: "pdf", fileUrl: "/pdfs/VSL4.pdf" },
+  { id: 25, title: "LED Face Mask", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl5.jpeg", type: "pdf", fileUrl: "/pdfs/VSL5.pdf" },
+  { id: 26, title: "Beard Growth Kit", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl6.jpeg", type: "pdf", fileUrl: "/pdfs/VSL6.pdf" },
+  { id: 27, title: "Hair Growth Gummies", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl7.jpeg", type: "pdf", fileUrl: "/pdfs/VSL7.pdf" },
+  { id: 28, title: "LED Face Mask", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl8.jpeg", type: "pdf", fileUrl: "/pdfs/VSL8.pdf" },
+  { id: 29, title: "Beard Growth Kit", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl9.jpeg", type: "pdf", fileUrl: "/pdfs/VSL9.pdf" },
+  { id: 30, title: "Hair Growth Gummies", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl10.jpeg", type: "pdf", fileUrl: "/pdfs/VSL10.pdf" },
   
   
   { id: 31, title: "Hair Growth Gummies", categories: ["Video Ads"], image: "/portfoliopageimages/video1.jpeg", type: "video", content: "video1.mp4" },
@@ -391,7 +391,7 @@ Try it risk-free for 100 days. If it does not change your hair, you pay nothing.
 
 ];
 
-const categories = ["All", "Static Ads", "Video Ads", "VSL", "Google Ads", "YouTube Ads", "Advertorial", "Listicle"];
+const categories = ["All", "Static Ads", "Video Ad Scripts", "Video Ads", "Google Ads", "YouTube Ads", "Advertorial", "Listicle"];
 
 function StaticAdModal({ project, onClose }) {
   return (

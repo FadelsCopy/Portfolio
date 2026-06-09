@@ -113,7 +113,7 @@ export default function Services() {
             <ServiceIcon type="ai" />
             <span className="service-number">06 / AI ACCELERATION</span>
             <h3>AI Powered Creative Systems</h3>
-            <p>Using advanced AI workflows across ideation, visual generation, voice synthesis, animation, scripting, and production with tools such as ElevenLabs, Runway, Midjourney, Veo, and specialized prompting systems to increase speed without compromising quality.</p>
+            <p>Using advanced AI workflows across ideation, visual generation, voice synthesis, animation, and production with tools such as Claude Code, Higgsfield, ElevenLabs, Runway, Midjourney, Veo... and specialized prompting systems to increase speed without compromising quality.</p>
           </div>
         </div>
       </div>
