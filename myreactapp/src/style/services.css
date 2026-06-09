@@ -9,6 +9,7 @@
     #05070a;
   padding: 65px 0 100px;
   overflow: hidden;
+  will-change: transform, opacity;
 }
 
 /* Atmospheric "Break" Effects */
@@ -42,12 +43,17 @@
   z-index: 1;
 }
 
+.services-heading-block {
+  will-change: transform, opacity;
+}
+
 .section-label {
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--accent-spark);
   letter-spacing: 0.15em;
   margin-bottom: 12px;
+  will-change: transform, opacity;
 }
 
 .section-headline {
@@ -56,6 +62,7 @@
   letter-spacing: -0.03em;
   color: var(--text-main);
   margin-bottom: 50px;
+  will-change: transform, opacity;
 }
 
 .section-subtitle {
@@ -92,6 +99,7 @@
     border-color 0.3s ease,
     box-shadow 0.3s ease,
     background-color 0.3s ease;
+  will-change: transform, opacity;
 }
 
 .service-card::after {
@@ -292,5 +300,21 @@
     font-size: 0.78rem;
     letter-spacing: -0.01em;
     padding-right: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-section,
+  .services-heading-block,
+  .section-label,
+  .section-headline,
+  .service-card {
+    transition: none !important;
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .service-icon {
+    transition: none !important;
   }
 }

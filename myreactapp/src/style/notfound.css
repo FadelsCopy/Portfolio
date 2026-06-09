@@ -188,4 +188,38 @@
   .not-found-secondary-btn {
     width: 100%;
   }
+
+  /* ==========================================================================
+   MOTION POLISH
+   ========================================================================== */
+
+.not-found-page,
+.not-found-card,
+.not-found-inner,
+.not-found-kicker,
+.not-found-card h1,
+.not-found-card p,
+.not-found-actions {
+  will-change: transform, opacity;
+}
+
+.not-found-card {
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .not-found-page,
+  .not-found-card,
+  .not-found-inner,
+  .not-found-kicker,
+  .not-found-card h1,
+  .not-found-card p,
+  .not-found-actions,
+  .not-found-primary-btn,
+  .not-found-secondary-btn {
+    transition: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+}
 }

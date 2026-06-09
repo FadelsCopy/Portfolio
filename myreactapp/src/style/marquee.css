@@ -8,6 +8,7 @@
   padding: 120px 0 25px;
   width: 100%;
   overflow: hidden;
+  will-change: transform, opacity;
 }
 
 /* Soft premium transition into the next section */
@@ -47,6 +48,7 @@
   text-align: center;
   position: relative;
   z-index: 2;
+  will-change: transform, opacity;
 }
 
 .ticker-pre-title {
@@ -56,6 +58,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   margin-bottom: 10px;
+  will-change: transform, opacity;
 }
 
 .ticker-main-title {
@@ -64,6 +67,7 @@
   font-weight: 800;
   line-height: 1.15;
   text-transform: uppercase;
+  will-change: transform, opacity;
 }
 
 /* =========================
@@ -77,8 +81,8 @@
   position: relative;
   padding: 60px 0;
   z-index: 2;
+  will-change: transform, opacity;
 
-  /* Premium edge fade so cards enter/exit smoothly */
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -103,21 +107,6 @@
   display: flex;
   flex-shrink: 0;
   will-change: transform;
-
-  /*
-    SPEED CONTROL
-
-    LOWER = faster
-    HIGHER = slower
-
-    Examples:
-
-    20s = fast
-    30s = balanced
-    45s = slow
-    60s = very slow
-  */
-
   animation: marquee 28s linear infinite;
 }
 
@@ -242,7 +231,6 @@ ONLY WHEN A CARD IS HOVERED
     margin-bottom: 9px;
   }
 
-  /* Slightly smaller mobile title */
   .ticker-main-title {
     font-size: 1.42rem;
     line-height: 1.18;
@@ -267,7 +255,6 @@ ONLY WHEN A CARD IS HOVERED
     );
   }
 
-  /* Bigger mobile cards */
   .ticker-card {
     width: 235px;
     padding-right: 18px;
@@ -303,5 +290,26 @@ ONLY WHEN A CARD IS HOVERED
 
   .ticker-main-title {
     font-size: 1.34rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-showcase-section,
+  .ticker-header,
+  .ticker-pre-title,
+  .ticker-main-title,
+  .ticker-viewport {
+    transition: none !important;
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .ticker-group {
+    animation-duration: 60s;
+  }
+
+  .ticker-media-9-16,
+  .ticker-preview-image {
+    transition: none !important;
   }
 }

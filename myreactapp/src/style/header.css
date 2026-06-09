@@ -14,12 +14,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  will-change: transform, opacity;
 }
 
 .brand {
   display: flex;
   align-items: center;
   gap: 16px;
+  will-change: transform, opacity;
 }
 
 .logo-link {
@@ -71,6 +73,7 @@
   display: flex;
   align-items: center;
   gap: 24px;
+  will-change: transform, opacity;
 }
 
 .main-nav a,
@@ -105,7 +108,7 @@
   background-color: #00f0ff;
   padding: 8px 16px;
   border-radius: 8px;
-  font-weight: 800;
+  font-weight: 650;
   box-shadow: 0 8px 22px rgba(0, 240, 255, 0.16);
   transition:
     transform 0.22s ease,
@@ -119,7 +122,7 @@
   box-shadow: 0 12px 28px rgba(0, 240, 255, 0.24);
 }
 
-/* Mobile: show only Portfolio/Home link */
+/* Mobile */
 @media (max-width: 768px) {
   .site-header {
     padding: 16px 20px;
@@ -133,12 +136,10 @@
     gap: 10px;
   }
 
-  /* Hide only Services + FAQ */
   .nav-btn-link {
     display: none !important;
   }
 
-  /* Keep Portfolio/Home visible */
   .nav-main-link {
     display: inline-flex;
     align-items: center;
@@ -161,7 +162,6 @@
     border-color: rgba(0, 240, 255, 0.36);
   }
 
-  /* Keep Book a Call visible */
   .main-nav .btn-nav-call {
     display: inline-flex !important;
     padding: 9px 13px;
@@ -172,5 +172,36 @@
 
   .logo-text {
     font-size: 1.22rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-header {
+    padding: 15px 16px;
+  }
+
+  .main-nav {
+    gap: 8px;
+  }
+
+  .nav-main-link,
+  .main-nav .btn-nav-call {
+    font-size: 0.78rem;
+    padding: 8px 10px;
+  }
+
+  .logo-text {
+    font-size: 1.14rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .brand,
+  .main-nav,
+  .main-nav .btn-nav-call {
+    transition: none !important;
+    animation: none !important;
+    will-change: auto;
   }
 }

@@ -1,7 +1,107 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
+
+function QaItem({ item, index, activeIndex, toggle }) {
+  const contentRef = useRef(null);
+  const isActive = activeIndex === index;
+
+  return (
+    <motion.div
+      className={`qa-block ${isActive ? 'is-active' : ''}`}
+      variants={faqItemReveal}
+    >
+      <button type="button" className="qa-trigger" onClick={() => toggle(index)}>
+        <span className="qa-question">{item.q}</span>
+        <span className="accordion-icon"></span>
+      </button>
+
+      <motion.div
+        className="qa-answer-wrapper"
+        initial={false}
+        animate={{
+          height: isActive ? contentRef.current?.scrollHeight || 'auto' : 0,
+        }}
+        transition={{
+          duration: 0.38,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      >
+        <div className="qa-answer" ref={contentRef}>
+          {item.a}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+const sectionReveal = {
+  hidden: {
+    opacity: 0,
+    y: 34,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.75,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const headingGroup = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const headingItem = {
+  hidden: {
+    opacity: 0,
+    y: 18,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.65,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const faqListReveal = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.075,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const faqItemReveal = {
+  hidden: {
+    opacity: 0,
+    y: 22,
+    scale: 0.985,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.58,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 export default function Qa() {
-  // This tracks which index is open. 'null' means nothing is open.
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggle = (index) => {
@@ -72,25 +172,47 @@ export default function Qa() {
   ];
 
   return (
-    <section className="main-content-section" id="qa-part">
-      <div className="section-label">FAQ</div>
-      <h2 className="section-headline">Questions Teams Ask Before Bringing Me Into Creative</h2>
-      
-      <div className="qa-container">
+    <motion.section
+      className="main-content-section"
+      id="qa-part"
+      variants={sectionReveal}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.18 }}
+    >
+      <motion.div
+        className="qa-heading-block"
+        variants={headingGroup}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.55 }}
+      >
+        <motion.div className="section-label" variants={headingItem}>
+          FAQ
+        </motion.div>
+
+        <motion.h2 className="section-headline" variants={headingItem}>
+          Questions Teams Ask Before Bringing Me Into Creative
+        </motion.h2>
+      </motion.div>
+
+      <motion.div
+        className="qa-container"
+        variants={faqListReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.16 }}
+      >
         {faqData.map((item, index) => (
-          <div key={index} className={`qa-block ${activeIndex === index ? 'is-active' : ''}`}>
-            <button type="button" className="qa-trigger" onClick={() => toggle(index)}>
-              <span className="qa-question">{item.q}</span>
-              <span className="accordion-icon"></span>
-            </button>
-            <div className="qa-answer-wrapper" style={{ height: activeIndex === index ? 'auto' : '0px', overflow: 'hidden', transition: 'height 0.3s ease' }}>
-              <div className="qa-answer">
-                {item.a}
-              </div>
-            </div>
-          </div>
+          <QaItem
+            key={index}
+            item={item}
+            index={index}
+            activeIndex={activeIndex}
+            toggle={toggle}
+          />
         ))}
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 }

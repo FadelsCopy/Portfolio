@@ -1,4 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function Header() {
   const location = useLocation();
@@ -19,22 +20,54 @@ export default function Header() {
   };
 
   return (
-    <header className="site-header">
-      <div className="brand">
+    <motion.header
+      className="site-header"
+      initial={{ opacity: 0, y: -18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.65,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      <motion.div
+        className="brand"
+        initial={{ opacity: 0, x: -14 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{
+          duration: 0.6,
+          delay: 0.12,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      >
         <Link to="/" className="logo-link">
-          <span className="logo-text">Fadel<span className="dot">.</span></span>
+          <span className="logo-text">
+            Fadel<span className="dot">.</span>
+          </span>
         </Link>
 
         <a className="email-link" href="mailto:fadel@fadelscopy.com">
           fadel@fadelscopy.com
         </a>
-      </div>
+      </motion.div>
 
-      <nav className="main-nav">
+      <motion.nav
+        className="main-nav"
+        initial={{ opacity: 0, x: 14 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{
+          duration: 0.6,
+          delay: 0.18,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      >
         {isPortfolioPage ? (
-          <Link to="/" className="nav-main-link">Home</Link>
+          <Link to="/" className="nav-main-link">
+            Home
+          </Link>
         ) : (
-          <Link to="/portfolio" className="nav-main-link">Portfolio</Link>
+          <Link to="/portfolio" className="nav-main-link">
+            Portfolio
+          </Link>
         )}
 
         <button onClick={() => handleNav('#services-part')} className="nav-btn-link">
@@ -53,7 +86,7 @@ export default function Header() {
         >
           Book a Call
         </a>
-      </nav>
-    </header>
+      </motion.nav>
+    </motion.header>
   );
 }

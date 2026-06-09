@@ -1,5 +1,7 @@
 // src/components/Services.jsx
 
+import { motion } from 'framer-motion';
+
 function ServiceIcon({ type }) {
   const icons = {
     research: (
@@ -66,57 +68,166 @@ function ServiceIcon({ type }) {
   );
 }
 
+const sectionReveal = {
+  hidden: {
+    opacity: 0,
+    y: 34,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.75,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const headingGroup = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const headingItem = {
+  hidden: {
+    opacity: 0,
+    y: 18,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.65,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const gridReveal = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.18,
+    },
+  },
+};
+
+const cardReveal = {
+  hidden: {
+    opacity: 0,
+    y: 26,
+    scale: 0.975,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.62,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const services = [
+  {
+    icon: 'research',
+    number: '01 / MARKET INTELLIGENCE',
+    title: 'Research and Strategic Direction',
+    description:
+      'Studying customer psychology, competitor ecosystems, market sophistication, awareness levels, buying triggers, and behavioral patterns to identify opportunities and define the highest leverage creative direction.',
+  },
+  {
+    icon: 'messaging',
+    number: '02 / POSITIONING SYSTEMS',
+    title: 'Messaging and Creative Angles',
+    description:
+      'Translating research into positioning frameworks, emotional drivers, concepts, hooks, narratives, and differentiated angles designed to create attention and increase conversion potential.',
+  },
+  {
+    icon: 'creative',
+    number: '03 / CREATIVE DEVELOPMENT',
+    title: 'Asset and Campaign Creation',
+    description:
+      'Building concepts and execution systems across Meta, TikTok, landing experiences, static ads, video ads, UGC, AI UGC, native formats, scripts, visuals, and performance-focused creative assets.',
+  },
+  {
+    icon: 'operations',
+    number: '04 / CREATIVE OPERATIONS',
+    title: 'Execution and Team Alignment',
+    description:
+      'Leading creative workflows from concept to delivery while coordinating editors, designers, creators, and production systems to maintain quality, speed, and strategic consistency.',
+  },
+  {
+    icon: 'performance',
+    number: '05 / PERFORMANCE INTELLIGENCE',
+    title: 'Analysis and Optimization',
+    description:
+      'Reviewing performance data, identifying creative patterns, analyzing feedback loops, generating new hypotheses, improving weak assets, and continuously evolving the next generation of creative.',
+  },
+  {
+    icon: 'ai',
+    number: '06 / AI ACCELERATION',
+    title: 'AI Powered Creative Systems',
+    description:
+      'Using advanced AI workflows across ideation, visual generation, voice synthesis, animation, and production with tools such as Claude Code, Higgsfield, ElevenLabs, Runway, Midjourney, Veo... and specialized prompting systems to increase speed without compromising quality.',
+  },
+];
+
 export default function Services() {
   return (
-    <section className="services-section" id="services-part">
+    <motion.section
+      className="services-section"
+      id="services-part"
+      variants={sectionReveal}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.18 }}
+    >
       <div className="main-content-section">
-        <div className="section-label">CREATIVE OPERATING SYSTEM</div>
-        <h2 className="section-headline">How I Build Performance Creative</h2>
+        <motion.div
+          className="services-heading-block"
+          variants={headingGroup}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.55 }}
+        >
+          <motion.div className="section-label" variants={headingItem}>
+            CREATIVE OPERATING SYSTEM
+          </motion.div>
 
-        <div className="services-grid">
-          <div className="service-card">
-            <ServiceIcon type="research" />
-            <span className="service-number">01 / MARKET INTELLIGENCE</span>
-            <h3>Research and Strategic Direction</h3>
-            <p>Studying customer psychology, competitor ecosystems, market sophistication, awareness levels, buying triggers, and behavioral patterns to identify opportunities and define the highest leverage creative direction.</p>
-          </div>
-          
-          <div className="service-card">
-            <ServiceIcon type="messaging" />
-            <span className="service-number">02 / POSITIONING SYSTEMS</span>
-            <h3>Messaging and Creative Angles</h3>
-            <p>Translating research into positioning frameworks, emotional drivers, concepts, hooks, narratives, and differentiated angles designed to create attention and increase conversion potential.</p>
-          </div>
+          <motion.h2 className="section-headline" variants={headingItem}>
+            How I Build Performance Creative
+          </motion.h2>
+        </motion.div>
 
-          <div className="service-card">
-            <ServiceIcon type="creative" />
-            <span className="service-number">03 / CREATIVE DEVELOPMENT</span>
-            <h3>Asset and Campaign Creation</h3>
-            <p>Building concepts and execution systems across Meta, TikTok, landing experiences, static ads, video ads, UGC, AI UGC, native formats, scripts, visuals, and performance-focused creative assets.</p>
-          </div>
-
-          <div className="service-card">
-            <ServiceIcon type="operations" />
-            <span className="service-number">04 / CREATIVE OPERATIONS</span>
-            <h3>Execution and Team Alignment</h3>
-            <p>Leading creative workflows from concept to delivery while coordinating editors, designers, creators, and production systems to maintain quality, speed, and strategic consistency.</p>
-          </div>
-
-          <div className="service-card">
-            <ServiceIcon type="performance" />
-            <span className="service-number">05 / PERFORMANCE INTELLIGENCE</span>
-            <h3>Analysis and Optimization</h3>
-            <p>Reviewing performance data, identifying creative patterns, analyzing feedback loops, generating new hypotheses, improving weak assets, and continuously evolving the next generation of creative.</p>
-          </div>
-
-          <div className="service-card">
-            <ServiceIcon type="ai" />
-            <span className="service-number">06 / AI ACCELERATION</span>
-            <h3>AI Powered Creative Systems</h3>
-            <p>Using advanced AI workflows across ideation, visual generation, voice synthesis, animation, and production with tools such as Claude Code, Higgsfield, ElevenLabs, Runway, Midjourney, Veo... and specialized prompting systems to increase speed without compromising quality.</p>
-          </div>
-        </div>
+        <motion.div
+          className="services-grid"
+          variants={gridReveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.18 }}
+        >
+          {services.map((service) => (
+            <motion.div
+              className="service-card"
+              variants={cardReveal}
+              key={service.number}
+            >
+              <ServiceIcon type={service.icon} />
+              <span className="service-number">{service.number}</span>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

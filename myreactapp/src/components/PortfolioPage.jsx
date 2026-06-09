@@ -393,10 +393,141 @@ Try it risk-free for 100 days. If it does not change your hair, you pay nothing.
 
 const categories = ["All", "Static Ads", "Video Ad Scripts", "Video Ads", "Google Ads", "YouTube Ads", "Advertorial", "Listicle"];
 
+const pageReveal = {
+  hidden: {
+    opacity: 0,
+    y: 28,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.75,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const headerGroup = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.09,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const headerItem = {
+  hidden: {
+    opacity: 0,
+    y: 18,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.62,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const gridReveal = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.045,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const cardReveal = {
+  hidden: {
+    opacity: 0,
+    y: 22,
+    scale: 0.982,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 10,
+    scale: 0.985,
+    transition: {
+      duration: 0.22,
+      ease: [0.4, 0, 1, 1],
+    },
+  },
+};
+
+const modalOverlay = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.25,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.18,
+    },
+  },
+};
+
+const modalCard = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+    scale: 0.965,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 12,
+    scale: 0.98,
+    transition: {
+      duration: 0.18,
+    },
+  },
+};
+
 function StaticAdModal({ project, onClose }) {
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content static-modal-content" onClick={(e) => e.stopPropagation()}>
+    <motion.div
+      className="modal-overlay"
+      onClick={onClose}
+      variants={modalOverlay}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
+      <motion.div
+        className="modal-content static-modal-content"
+        onClick={(e) => e.stopPropagation()}
+        variants={modalCard}
+      >
         <button className="close-btn" onClick={onClose}>&times;</button>
 
         <div className="static-modal-inner">
@@ -416,21 +547,15 @@ function StaticAdModal({ project, onClose }) {
                 <p className="ad-copy-text">{project.primaryText}</p>
               </div>
 
-              <div className="ad-copy-divider" />
-
               <div className="ad-copy-block">
                 <span className="ad-copy-label">HEADLINE</span>
                 <p className="ad-copy-text">{project.headline}</p>
               </div>
 
-              <div className="ad-copy-divider" />
-
               <div className="ad-copy-block">
                 <span className="ad-copy-label">DESCRIPTION</span>
                 <p className="ad-copy-text">{project.description}</p>
               </div>
-
-              <div className="ad-copy-divider" />
 
               <div className="ad-copy-block ad-copy-cta-block">
                 <span className="ad-copy-label">CTA</span>
@@ -439,17 +564,29 @@ function StaticAdModal({ project, onClose }) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
 function ProjectModal({ project, onClose }) {
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+    <motion.div
+      className="modal-overlay"
+      onClick={onClose}
+      variants={modalOverlay}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
+      <motion.div
+        className="modal-content"
+        onClick={(e) => e.stopPropagation()}
+        variants={modalCard}
+      >
         <button className="close-btn" onClick={onClose}>&times;</button>
         <h2>{project.title}</h2>
+
         <div className="modal-body">
           {project.type === "video" && (
             <video
@@ -461,12 +598,13 @@ function ProjectModal({ project, onClose }) {
               src={`/videos/${project.content}`}
             />
           )}
+
           {project.type === "image" && (
             <img src={project.image} alt={project.title} className="modal-media" />
           )}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -478,14 +616,14 @@ export default function PortfolioPage() {
 
   const filtered = active === "All"
     ? shuffled
-    : allProjects.filter(p => p.categories.includes(active));
-
+    : allProjects.filter((p) => p.categories.includes(active));
 
   const handleCardClick = (proj) => {
     if (proj.type === "pdf") {
       if (proj.fileUrl) window.open(proj.fileUrl, "_blank");
       return;
     }
+
     setSelected(proj);
   };
 
@@ -493,74 +631,101 @@ export default function PortfolioPage() {
 
   const isStaticAd = selected && selected.categories.includes("Static Ads");
 
-  // Lock body scroll when modal is open
   useEffect(() => {
     if (selected) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ""; };
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [selected]);
 
   return (
-    <section className="portfolio-page-section">
-      <header className="portfolio-page-header">
-        <h2 className="section-headline">Work Archive</h2>
-        <div className="portfolio-filter-nav">
+    <motion.section
+      className="portfolio-page-section"
+      variants={pageReveal}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.header
+        className="portfolio-page-header"
+        variants={headerGroup}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.h2 className="section-headline" variants={headerItem}>
+          Work Archive
+        </motion.h2>
+
+        <motion.div className="portfolio-filter-nav" variants={headerItem}>
           {categories.map((c) => (
-            <button
+            <motion.button
               key={c}
               onClick={() => setActive(c)}
               className={active === c ? "active" : ""}
+              whileTap={{ scale: 0.97 }}
             >
               {c}
               {active === c && (
                 <motion.div className="nav-indicator" layoutId="activeTab" />
               )}
-            </button>
+            </motion.button>
           ))}
-        </div>
-      </header>
+        </motion.div>
+      </motion.header>
 
       <div className="portfolio-page-grid-wrapper">
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
             className="portfolio-page-grid"
+            variants={gridReveal}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
           >
             {filtered.length > 0 ? (
-              filtered.map(proj => (
-                <div
+              filtered.map((proj) => (
+                <motion.div
                   key={proj.id}
                   className="portfolio-page-card"
+                  variants={cardReveal}
+                  exit="exit"
                   onClick={() => handleCardClick(proj)}
+                  whileHover={{ y: -7 }}
+                  whileTap={{ scale: 0.985 }}
                 >
                   <div className="portfolio-page-media">
                     <img src={proj.image} alt={proj.title} />
                   </div>
+
                   <div className="portfolio-page-info">
                     <span>{proj.categories[0]}</span>
                     <h3>{proj.title}</h3>
                   </div>
-                </div>
+                </motion.div>
               ))
             ) : (
-              <div className="no-projects-message">No projects found.</div>
+              <motion.div className="no-projects-message" variants={cardReveal}>
+                No projects found.
+              </motion.div>
             )}
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {selected && isStaticAd && (
-        <StaticAdModal project={selected} onClose={handleClose} />
-      )}
-      {selected && !isStaticAd && (
-        <ProjectModal project={selected} onClose={handleClose} />
-      )}
-    </section>
+      <AnimatePresence>
+        {selected && isStaticAd && (
+          <StaticAdModal project={selected} onClose={handleClose} />
+        )}
+
+        {selected && !isStaticAd && (
+          <ProjectModal project={selected} onClose={handleClose} />
+        )}
+      </AnimatePresence>
+    </motion.section>
   );
 }
