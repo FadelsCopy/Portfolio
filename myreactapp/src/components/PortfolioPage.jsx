@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const allProjects = [
@@ -514,7 +515,7 @@ const modalCard = {
 };
 
 function StaticAdModal({ project, onClose }) {
-  return (
+  return createPortal(
     <motion.div
       className="modal-overlay"
       onClick={onClose}
@@ -528,7 +529,9 @@ function StaticAdModal({ project, onClose }) {
         onClick={(e) => e.stopPropagation()}
         variants={modalCard}
       >
-        <button className="close-btn" onClick={onClose}>&times;</button>
+        <button type="button" className="close-btn" onClick={onClose}>
+          &times;
+        </button>
 
         <div className="static-modal-inner">
           <div className="static-modal-image-col">
@@ -565,12 +568,13 @@ function StaticAdModal({ project, onClose }) {
           </div>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 }
 
 function ProjectModal({ project, onClose }) {
-  return (
+  return createPortal(
     <motion.div
       className="modal-overlay"
       onClick={onClose}
@@ -584,7 +588,10 @@ function ProjectModal({ project, onClose }) {
         onClick={(e) => e.stopPropagation()}
         variants={modalCard}
       >
-        <button className="close-btn" onClick={onClose}>&times;</button>
+        <button type="button" className="close-btn" onClick={onClose}>
+          &times;
+        </button>
+
         <h2>{project.title}</h2>
 
         <div className="modal-body">
@@ -604,7 +611,8 @@ function ProjectModal({ project, onClose }) {
           )}
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 }
 
@@ -718,14 +726,14 @@ export default function PortfolioPage() {
       </div>
 
       <AnimatePresence>
-        {selected && isStaticAd && (
-          <StaticAdModal project={selected} onClose={handleClose} />
-        )}
+      {selected && isStaticAd && (
+        <StaticAdModal project={selected} onClose={handleClose} />
+      )}
 
-        {selected && !isStaticAd && (
-          <ProjectModal project={selected} onClose={handleClose} />
-        )}
-      </AnimatePresence>
+      {selected && !isStaticAd && (
+        <ProjectModal project={selected} onClose={handleClose} />
+      )}
+    </AnimatePresence>
     </motion.section>
   );
 }

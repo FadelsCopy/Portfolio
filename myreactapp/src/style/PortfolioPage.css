@@ -852,3 +852,32 @@
     font-size: 1.02rem;
   }
 }
+
+/* ==========================================================================
+   MODAL PORTAL FIX
+   ========================================================================== */
+
+.modal-overlay {
+  z-index: 99999;
+  isolation: isolate;
+}
+
+.modal-content {
+  z-index: 1;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.static-modal-content {
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay,
+  .modal-content,
+  .static-modal-content {
+    transition: none !important;
+    animation: none !important;
+    will-change: auto !important;
+  }
+}
