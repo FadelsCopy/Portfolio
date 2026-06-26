@@ -72,7 +72,9 @@ description: `It has nothing to do with stress, diet, or genetics. Read the full
 cta: "Learn More" 
 },
 
-  { id: 4, title: "Hormonal Balance Supplement", categories: ["Static Ads"], image: "/portfoliopageimages/static4.jpeg", type: "image", content: "", 
+  { id: 4, title: "Native Ad", categories: ["Static Ads"], image: "/portfoliopageimages/longadcopy1.jpeg", type: "pdf", fileUrl: "/pdfs/NativeAd1.pdf"},
+
+  { id: 5, title: "Hormonal Balance Supplement", categories: ["Static Ads"], image: "/portfoliopageimages/static4.jpeg", type: "image", content: "", 
     primaryText: `Why juggle multiple supplements when you can simplify it into one?
 
 Babe Balance combines all the necessary ingredients (Magnesium, DIM, Inositol, Ashwagandha, Chaste Berry, Selenium, Chromium, and Black Cohosh)
@@ -83,7 +85,7 @@ One formula to stabilize your mood, reduce fatigue, and restore hormonal balance
     description: `Support mood, energy & hormone wellness in one routine.`, 
     cta: "Buy Now" },
   
-  { id: 5, title: "Skin Cleanser", categories: ["Static Ads"], image: "/portfoliopageimages/static5.jpeg", type: "image", content: "", 
+  { id: 6, title: "Skin Cleanser", categories: ["Static Ads"], image: "/portfoliopageimages/static5.jpeg", type: "image", content: "", 
     primaryText: `No More Acne!! ✨
 
 Say goodbye to stubborn breakouts, redness, and stressed-out skin 👋
@@ -101,7 +103,7 @@ Your glass skin era starts here.
     description: `After just 3 Days, many customers reported noticeable improvements.`, 
     cta: "Order Now" 
   },
-  { id: 6, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static6.jpeg", type: "image", content: "", 
+  { id: 7, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static6.jpeg", type: "image", content: "", 
     primaryText: `If you are tired of watching your hair fall out every time you shower, this is for you.
 
 Here is what changes when you finally give your follicles what they have been missing:
@@ -126,7 +128,7 @@ Tap below and get yours before stock runs out.
     description: `Verified by the USA consumer study. Try SugarbearPRO risk-free for 100 days.`, 
     cta: "Shop Now" 
   },
-  { id: 7, title: "Dog Chews", categories: ["Static Ads"], image: "/portfoliopageimages/static7.jpeg", type: "image", content: "", 
+  { id: 8, title: "Dog Chews", categories: ["Static Ads"], image: "/portfoliopageimages/static7.jpeg", type: "image", content: "", 
     primaryText: `That tail isn't going to wag forever. 🐾
 
 But it can wag a whole lot longer.
@@ -152,7 +154,7 @@ Click below and get yours now. 👇
     headline: `"I Wish I'd Started This Sooner"`, 
     description: `Risk-free for 90 days.`, 
     cta: "Buy Now" },
-  { id: 8, title: "Native Ad", categories: ["Static Ads"], image: "/portfoliopageimages/static8.jpeg", type: "image", content: "", 
+  { id: 9, title: "Native Ad", categories: ["Static Ads"], image: "/portfoliopageimages/static8.jpeg", type: "image", content: "", 
     primaryText: `If this is what your shower looks like every morning, keep reading.
 
 Because most women who see this much hair in their drains have been told the same things. 
@@ -168,7 +170,10 @@ Tap Learn More to read her full story.`,
     description: `It is neither stressful nor aging. The real reason is something most women never find out. Read the full story.`, 
     cta: "Learn More" 
   },
-  { id: 9, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static9.jpeg", type: "image", content: "", 
+
+  { id: 10, title: "Native Ad",  categories: ["Static Ads"], image: "/portfoliopageimages/longadcopy2.jpeg", type: "pdf", fileUrl: "/pdfs/NativeAd2.pdf"},
+
+  { id: 11, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static9.jpeg", type: "image", content: "", 
     primaryText: `You have probably tried something for your hair before, and it did not work.
 
 So have 9,450 women who now will not stop reordering this.
@@ -183,7 +188,7 @@ Try it for 100 days. If nothing changes, you pay nothing.`,
     headline: `9,450 Women Can Not All Be Wrong`, 
     description: `Try SugarbearPRO risk-free for 100 days.`, 
     cta: "Order Now" },
-  { id: 10, title: "Fragrance", categories: ["Static Ads"], image: "/portfoliopageimages/static10.jpeg", type: "image", content: "", 
+  { id: 12, title: "Fragrance", categories: ["Static Ads"], image: "/portfoliopageimages/static10.jpeg", type: "image", content: "", 
     primaryText: `Smell expensive without spending a fortune ✨
 
 Get ALL 3 feminine fragrances for just $33.
@@ -197,7 +202,7 @@ Grab yours before the offer ends.`,
     description: `Limited stock available`, 
     cta: "Get Offer" 
   },
-  { id: 11, title: "Skin Cleanser", categories: ["Static Ads"], image: "/portfoliopageimages/static11.jpeg", type: "image", content: "", 
+  { id: 13, title: "Skin Cleanser", categories: ["Static Ads"], image: "/portfoliopageimages/static11.jpeg", type: "image", content: "", 
     primaryText: `14 DAYS TRANSFORMATION ✨
 
 Sarah went from painful-looking breakouts and redness… to visibly calmer, clearer-looking skin in just 14 days using The Breakout Hack Spot Cleanser.
@@ -207,7 +212,7 @@ Now’s your turn 👇`,
     description: `⭐⭐⭐⭐⭐ 569+ Happy Customers`, 
     cta: "Order Now" 
   },
-  { id: 12, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static12.jpeg", type: "image", content: "", 
+  { id: 14, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static12.jpeg", type: "image", content: "", 
     primaryText: `For $1 a day you can stop the shedding, grow thicker, fuller hair, and finally feel confident about your hair again.
 
 That is exactly what the SugarbearPRO 3 Month Bundle gives you. Three full months of SmartRoot Complex and 6000mcg Biotin, plus a FREE hair brush, all for $90.
@@ -219,7 +224,7 @@ Grab yours before the stock runs out.`,
     description: `3 Month Supply + FREE Hair Brush. Stock is running out fast.`, 
     cta: "Get Offer" 
   },
-  { id: 13, title: "Native Ad", categories: ["Static Ads"], image: "/portfoliopageimages/static13.jpeg", type: "image", content: "", 
+  { id: 15, title: "Native Ad", categories: ["Static Ads"], image: "/portfoliopageimages/static13.jpeg", type: "image", content: "", 
     primaryText: `Nobody expects to be losing their hair at 24.
 
 But it is happening to more young women than anyone talks about. And the reason is almost never what they think it is.
@@ -238,7 +243,7 @@ Tap Learn More to read her full story.`,
     cta: "Learn more" 
   },
 
-  { id: 14, title: "Hormonal Balance Supplement", categories: ["Static Ads"], image: "/portfoliopageimages/static14.jpeg", type: "image", content: "", 
+  { id: 16, title: "Hormonal Balance Supplement", categories: ["Static Ads"], image: "/portfoliopageimages/static14.jpeg", type: "image", content: "", 
     primaryText: `A simple daily routine designed to support balance.
 
 Babe Balance combines clinically studied ingredients (Magnesium, DIM, Inositol, Ashwagandha, Chaste Berry, Selenium, Chromium, and Black Cohosh) to stabilize your mood, reduce fatigue, and restore hormonal balance for total well-being.`, 
@@ -246,7 +251,7 @@ Babe Balance combines clinically studied ingredients (Magnesium, DIM, Inositol, 
     description: `Support mood, calm, energy & hormone wellness.`, 
     cta: "Buy Now" 
   },
-  { id: 15, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static15.jpeg", type: "image", content: "", 
+  { id: 17, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static15.jpeg", type: "image", content: "", 
     primaryText: `If your ponytail has been getting thinner and you have tried everything without seeing real results, keep reading.
 
 Because what you are looking at is the same woman, 30 days apart, and the only thing she changed was adding one SugarbearPRO gummy to her morning routine.
@@ -265,7 +270,7 @@ That is the difference you are seeing between Day 1 and Day 30.
     description: `Try risk-free for 100 days.`, 
     cta: "Order Now" 
   },
-  { id: 16, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static16.jpeg", type: "image", content: "", 
+  { id: 18, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static16.jpeg", type: "image", content: "", 
     primaryText: `Bad news. Our 50% OFF sale is coming to an end, and stock is running out faster than we expected.
 
 If you are looking to stop excessive shedding, grow thicker, fuller hair, and finally feel confident about your hair again, pay attention.
@@ -284,7 +289,7 @@ Once stock is gone, the regular price is back.`,
     description: `⭐⭐⭐⭐⭐ (4,9/5)`, 
     cta: "Shop Now" 
   },
-  { id: 17, title: "Native Ad", categories: ["Static Ads"], image: "/portfoliopageimages/static17.jpeg", type: "image", content: "", 
+  { id: 19, title: "Native Ad", categories: ["Static Ads"], image: "/portfoliopageimages/static17.jpeg", type: "image", content: "", 
     primaryText: `She had tried everything on that counter.
 
 The rosemary oil. The biotin pills. The scalp serum. The Olaplex. The hair masks. The droppers she could never remember to use consistently.
@@ -299,7 +304,7 @@ Tap Learn More to read what she found out.`,
   headline: `She Replaced Her Entire Hair Routine With This, And It Worked`, 
   description: `Read the full story.`, 
   cta: "Learn More" },
-  { id: 18, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static18.jpeg", type: "image", content: "", 
+  { id: 20, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static18.jpeg", type: "image", content: "", 
     primaryText: `“I wish I had started sooner” - Leanne
 
 Most women who try SugarbearPRO say the exact same thing. Because the shedding they lived with for years stopped within weeks.
@@ -314,7 +319,7 @@ Today is your turn.`,
     headline: `100 Days Risk-Free. No Results, No Charge.`, 
     description: `50,000+ happy women.`, 
     cta: "Order Now" },
-  { id: 19, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static19.jpeg", type: "image", content: "", 
+  { id: 21, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static19.jpeg", type: "image", content: "", 
     primaryText: `You know that version of you.
 
 The one who never thought twice about her hair.
@@ -340,7 +345,7 @@ It tastes like candy, so you will never miss a day.
     description: `90% of women start to see results in the first 4 weeks`, 
     cta: "Order Now" 
   },
-  { id: 20, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static20.jpeg", type: "image", content: "", 
+  { id: 22, title: "Hair Growth Gummies", categories: ["Static Ads"], image: "/portfoliopageimages/static20.jpeg", type: "image", content: "", 
     primaryText: `“I will take it every day for the rest of my life!” - Ashley B.
 
 Ashley found something that stopped the shedding, gave her thicker, fuller hair, and became the one thing in her routine she will never give up.
@@ -357,42 +362,53 @@ Try it risk-free for 100 days. If it does not change your hair, you pay nothing.
   
   
   
-  { id: 21, title: "Hair Growth Gummies", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl1.jpeg", type: "pdf", fileUrl: "/pdfs/VSL1.pdf" },
-  { id: 22, title: "LED Face Mask", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl2.jpeg", type: "pdf", fileUrl: "/pdfs/VSL2.pdf" },
-  { id: 23, title: "Beard Growth Kit", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl3.jpeg", type: "pdf", fileUrl: "/pdfs/VSL3.pdf" },
-  { id: 24, title: "Hair Growth Gummies", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl4.jpeg", type: "pdf", fileUrl: "/pdfs/VSL4.pdf" },
-  { id: 25, title: "LED Face Mask", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl5.jpeg", type: "pdf", fileUrl: "/pdfs/VSL5.pdf" },
-  { id: 26, title: "Beard Growth Kit", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl6.jpeg", type: "pdf", fileUrl: "/pdfs/VSL6.pdf" },
-  { id: 27, title: "Hair Growth Gummies", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl7.jpeg", type: "pdf", fileUrl: "/pdfs/VSL7.pdf" },
-  { id: 28, title: "LED Face Mask", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl8.jpeg", type: "pdf", fileUrl: "/pdfs/VSL8.pdf" },
-  { id: 29, title: "Beard Growth Kit", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl9.jpeg", type: "pdf", fileUrl: "/pdfs/VSL9.pdf" },
-  { id: 30, title: "Hair Growth Gummies", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl10.jpeg", type: "pdf", fileUrl: "/pdfs/VSL10.pdf" },
+  { id: 23, title: "Hair Growth Gummies", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl1.jpeg", type: "pdf", fileUrl: "/pdfs/VSL1.pdf" },
+  { id: 24, title: "LED Face Mask", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl2.jpeg", type: "pdf", fileUrl: "/pdfs/VSL2.pdf" },
+  { id: 25, title: "Beard Growth Kit", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl3.jpeg", type: "pdf", fileUrl: "/pdfs/VSL3.pdf" },
+  { id: 26, title: "Hair Growth Gummies", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl4.jpeg", type: "pdf", fileUrl: "/pdfs/VSL4.pdf" },
+  { id: 27, title: "LED Face Mask", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl5.jpeg", type: "pdf", fileUrl: "/pdfs/VSL5.pdf" },
+  { id: 28, title: "Beard Growth Kit", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl6.jpeg", type: "pdf", fileUrl: "/pdfs/VSL6.pdf" },
+  { id: 29, title: "Hair Growth Gummies", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl7.jpeg", type: "pdf", fileUrl: "/pdfs/VSL7.pdf" },
+  { id: 30, title: "LED Face Mask", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl8.jpeg", type: "pdf", fileUrl: "/pdfs/VSL8.pdf" },
+  { id: 31, title: "Beard Growth Kit", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl9.jpeg", type: "pdf", fileUrl: "/pdfs/VSL9.pdf" },
+  { id: 32, title: "Hair Growth Gummies", categories: ["Video Ad Scripts"], image: "/portfoliopageimages/vsl10.jpeg", type: "pdf", fileUrl: "/pdfs/VSL10.pdf" },
   
   
-  { id: 31, title: "Hair Growth Gummies", categories: ["Video Ads"], image: "/portfoliopageimages/video1.jpeg", type: "video", content: "video1.mp4" },
-  { id: 32, title: "Protein Drink", categories: ["Video Ads"], image: "/portfoliopageimages/video2.jpeg", type: "video", content: "video2.mp4" },
-  { id: 33, title: "Fashion", categories: ["Video Ads"], image: "/portfoliopageimages/video3.jpeg", type: "video", content: "video3.mp4" },
-  { id: 34, title: "Fashion", categories: ["Video Ads"], image: "/portfoliopageimages/video4.jpeg", type: "video", content: "video4.mp4" },
-  { id: 35, title: "Hair Growth Gummies", categories: ["Video Ads"], image: "/portfoliopageimages/video5.jpeg", type: "video", content: "video5.mp4" },
-  { id: 36, title: "Fashion", categories: ["Video Ads"], image: "/portfoliopageimages/video6.jpeg", type: "video", content: "video6.mp4" },
-  { id: 37, title: "Hair Growth Gummies", categories: ["Video Ads"], image: "/portfoliopageimages/video7.jpeg", type: "video", content: "video7.mp4" },
-  { id: 38, title: "Hair Growth Gummies", categories: ["Video Ads"], image: "/portfoliopageimages/video8.jpeg", type: "video", content: "video8.mp4" },
-  { id: 39, title: "Hair Growth Gummies", categories: ["Video Ads"], image: "/portfoliopageimages/video9.jpeg", type: "video", content: "video9.mp4" },
-  { id: 40, title: "Protein Drink", categories: ["Video Ads"], image: "/portfoliopageimages/video10.jpeg", type: "video", content: "video10.mp4" },
-  { id: 41, title: "Hair Growth Gummies", categories: ["Video Ads"], image: "/portfoliopageimages/video11.jpeg", type: "video", content: "video11.mp4" },
-  { id: 42, title: "Respiratory Muscle Training", categories: ["Video Ads"], image: "/portfoliopageimages/video12.jpeg", type: "video", content: "video12.mp4" },
-  { id: 43, title: "Treadmill", categories: ["Video Ads"], image: "/portfoliopageimages/video13.jpeg", type: "video", content: "video13.mp4" },
+  { id: 33, title: "Hair Growth Gummies", categories: ["Video Ads"], image: "/portfoliopageimages/video1.jpeg", type: "video", content: "video1.mp4" },
+  { id: 34, title: "Protein Drink", categories: ["Video Ads"], image: "/portfoliopageimages/video2.jpeg", type: "video", content: "video2.mp4" },
+  { id: 35, title: "Fashion", categories: ["Video Ads"], image: "/portfoliopageimages/video3.jpeg", type: "video", content: "video3.mp4" },
+  { id: 36, title: "Fashion", categories: ["Video Ads"], image: "/portfoliopageimages/video4.jpeg", type: "video", content: "video4.mp4" },
+  { id: 37, title: "Hair Growth Gummies", categories: ["Video Ads"], image: "/portfoliopageimages/video5.jpeg", type: "video", content: "video5.mp4" },
+  { id: 38, title: "Fashion", categories: ["Video Ads"], image: "/portfoliopageimages/video6.jpeg", type: "video", content: "video6.mp4" },
+  { id: 39, title: "Hair Growth Gummies", categories: ["Video Ads"], image: "/portfoliopageimages/video7.jpeg", type: "video", content: "video7.mp4" },
+  { id: 40, title: "Hair Growth Gummies", categories: ["Video Ads"], image: "/portfoliopageimages/video8.jpeg", type: "video", content: "video8.mp4" },
+  { id: 41, title: "Hair Growth Gummies", categories: ["Video Ads"], image: "/portfoliopageimages/video9.jpeg", type: "video", content: "video9.mp4" },
+  { id: 42, title: "Protein Drink", categories: ["Video Ads"], image: "/portfoliopageimages/video10.jpeg", type: "video", content: "video10.mp4" },
+  { id: 43, title: "Hair Growth Gummies", categories: ["Video Ads"], image: "/portfoliopageimages/video11.jpeg", type: "video", content: "video11.mp4" },
+  { id: 44, title: "Respiratory Muscle Training", categories: ["Video Ads"], image: "/portfoliopageimages/video12.jpeg", type: "video", content: "video12.mp4" },
+  { id: 45, title: "Treadmill", categories: ["Video Ads"], image: "/portfoliopageimages/video13.jpeg", type: "video", content: "video13.mp4" },
   
   
-  { id: 44, title: "Supplement", categories: ["Google Ads"], image: "/portfoliopageimages/googleads.jpeg", type: "pdf", fileUrl: "/pdfs/Google_Ads.pdf" },
-  { id: 45, title: "Supplement", categories: ["YouTube Ads"], image: "/portfoliopageimages/youtubeads.jpeg", type: "pdf", fileUrl: "/pdfs/YouTube_Ads.pdf" },
+  { id: 46, title: "Supplement", categories: ["Google Ads"], image: "/portfoliopageimages/googleads.jpeg", type: "pdf", fileUrl: "/pdfs/Google_Ads.pdf" },
+  { id: 47, title: "Supplement", categories: ["YouTube Ads"], image: "/portfoliopageimages/youtubeads.jpeg", type: "pdf", fileUrl: "/pdfs/YouTube_Ads.pdf" },
 
-  { id: 46, title: "Supplement", categories: ["Advertorial"], image: "/portfoliopageimages/advertorial1.jpeg", type: "pdf", fileUrl: "/pdfs/advertorial1.pdf"},
-  { id: 47, title: "Orthopedic Shoes", categories: ["Listicle"], image: "/portfoliopageimages/listicle1.jpeg", type: "pdf", fileUrl: "/pdfs/listicle1.pdf"},
+
+  { id: 48, title: "Supplement", categories: ["Advertorial"], image: "/portfoliopageimages/advertorial1.jpeg", type: "pdf", fileUrl: "/pdfs/advertorial1.pdf"},
+  { id: 49, title: "Orthopedic Shoes", categories: ["Listicle"], image: "/portfoliopageimages/listicle1.jpeg", type: "pdf", fileUrl: "/pdfs/listicle1.pdf"},
+
+
+  { id: 50, title: "Designed Email", categories: ["Emails"], image: "/portfoliopageimages/email1.jpeg", type: "pdf", fileUrl: "/pdfs/VioletAuroraDesignedEmail.pdf" },
+  { id: 51, title: "Designed Email", categories: ["Emails"], image: "/portfoliopageimages/email2.jpeg", type: "pdf", fileUrl: "/pdfs/HugterraDesignedEmail.pdf" },
+  { id: 52, title: "Designed Email", categories: ["Emails"], image: "/portfoliopageimages/email3.jpeg", type: "pdf", fileUrl: "/pdfs/AmraDesignedEmail.pdf" },
+  { id: 53, title: "Abandoned Cart Seq", categories: ["Emails"], image: "/portfoliopageimages/email4.jpeg", type: "pdf", fileUrl: "/pdfs/AbandonedCartSequence.pdf" },
+  { id: 54, title: "Post-Webinar Seq", categories: ["Emails"], image: "/portfoliopageimages/email5.jpeg", type: "pdf", fileUrl: "/pdfs/PostWebinarEmailSequence.pdf" },
+  { id: 55, title: "Cold Outreach Seq", categories: ["Emails"], image: "/portfoliopageimages/email6.jpeg", type: "pdf", fileUrl: "/pdfs/B2BColdOutreachSequence.pdf" },
+  { id: 56, title: "Educational Email", categories: ["Emails"], image: "/portfoliopageimages/email7.png", type: "pdf", fileUrl: "/pdfs/EducationalEmail.pdf" },
+  { id: 57, title: "Re-engagement Seq", categories: ["Emails"], image: "/portfoliopageimages/email8.jpeg", type: "pdf", fileUrl: "/pdfs/ReengagementSequence.pdf" },
 
 ];
 
-const categories = ["All", "Static Ads", "Video Ad Scripts", "Video Ads", "Google Ads", "YouTube Ads", "Advertorial", "Listicle"];
+const categories = ["All", "Static Ads", "Video Ad Scripts", "Video Ads", "Emails", "Google Ads", "YouTube Ads", "Advertorial", "Listicle"];
 
 const pageReveal = {
   hidden: {

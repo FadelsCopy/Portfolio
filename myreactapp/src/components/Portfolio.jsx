@@ -96,19 +96,19 @@ const statCard = {
 export default function Portfolio() {
   const archiveStats = [
     {
-      value: "47+",
+      value: "57+",
       label: "Strategic Assets",
-      description: "A selected library of ads, video ad scripts, sales assets, and paid media."
+      description: "A selected library of ads, emails, video ad scripts, sales assets, and paid media."
     },
     {
-      value: "7",
+      value: "9",
       label: "Creative Formats",
-      description: "Static ads, video ads, VSLs, advertorials, listicles, Google Ads, and YouTube Ads."
+      description: "Static ads, native ads, video ads, VSLs, advertorials, listicles, Google Ads, YouTube Ads, and emails."
     },
     {
-      value: "20+",
-      label: "Static Ad Concepts",
-      description: "Hook-driven image ads built around attention, curiosity, and conversion."
+      value: "22+",
+      label: "Static & Native Ad Concepts",
+      description: "Hook-driven image ads and native-style assets built around attention, curiosity, and conversion."
     },
     {
       value: "13",
@@ -144,9 +144,9 @@ export default function Portfolio() {
             </motion.h2>
 
             <motion.p variants={copyItem}>
-              A curated collection of creative work across different formats from
-              scroll-stopping static ads, video ad scripts to video concepts, advertorials,
-              listicles, and paid media.
+              A curated collection of creative work across different formats — from
+              static ads, native ads, video ads, VSLs, advertorials, listicles,
+              Google Ads, YouTube Ads, and emails.
             </motion.p>
 
             <motion.div
@@ -157,12 +157,14 @@ export default function Portfolio() {
               viewport={{ once: true, amount: 0.6 }}
             >
               <motion.span variants={tagItem}>Static Ads</motion.span>
+              <motion.span variants={tagItem}>Native Ads</motion.span>
               <motion.span variants={tagItem}>Video Ads</motion.span>
               <motion.span variants={tagItem}>VSLs</motion.span>
               <motion.span variants={tagItem}>Advertorials</motion.span>
               <motion.span variants={tagItem}>Listicles</motion.span>
               <motion.span variants={tagItem}>Google Ads</motion.span>
               <motion.span variants={tagItem}>YouTube Ads</motion.span>
+              <motion.span variants={tagItem}>Emails</motion.span>
             </motion.div>
 
             <motion.div variants={copyItem}>
