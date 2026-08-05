@@ -13555,3 +13555,819 @@ a.creative-op-sop-item:hover {
     grid-template-columns: 1fr;
   }
 }
+/* ==========================================================================
+   Main overview simplification — no global header or duplicate stage sidebar
+   ========================================================================== */
+
+.creative-op-desktop-experience {
+  height: 100vh;
+}
+
+.creative-op-app-shell {
+  grid-template-columns:
+    minmax(760px, 1fr)
+    minmax(320px, 370px);
+}
+
+.creative-op-main-map {
+  padding: 38px 36px 60px;
+}
+
+.creative-op-home-logo {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  margin-bottom: 20px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.creative-op-home-logo:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.creative-op-home-logo-text {
+  color: var(--text-main, #f8fafc);
+  font-size: 1.38rem;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+}
+
+.creative-op-home-logo-dot {
+  color: var(--accent-main, #00e5f2);
+}
+
+@media (min-width: 1100px) and (max-width: 1380px) {
+  .creative-op-app-shell {
+    grid-template-columns:
+      minmax(690px, 1fr)
+      330px;
+  }
+
+  .creative-op-main-map {
+    padding: 30px 24px 50px;
+  }
+}
+
+/* ========================================================================== 
+   Final overview refinements — wrapping map and resizable details panel
+   ========================================================================== */
+
+.creative-op-page,
+.creative-op-desktop-experience,
+.creative-op-app-shell,
+.creative-op-main-map {
+  max-width: 100%;
+}
+
+.creative-op-app-shell {
+  grid-template-columns:
+    minmax(0, 1fr)
+    10px
+    var(--creative-op-detail-width, 370px);
+  overflow: hidden;
+}
+
+.creative-op-main-map {
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.creative-op-map-introduction {
+  align-items: flex-start;
+}
+
+.creative-op-map-introduction > div:first-child {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.creative-op-home-logo {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.creative-op-map-introduction .creative-op-section-eyebrow {
+  display: block;
+  width: 100%;
+  margin-top: 0;
+}
+
+.creative-op-map-introduction h1 {
+  font-size: clamp(1.85rem, 2.6vw, 2.75rem);
+  line-height: 1.05;
+  margin: 10px 0 13px;
+}
+
+.creative-op-map-grid {
+  width: 100%;
+  min-width: 0;
+  grid-template-columns:
+    repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+  gap: 20px;
+  padding-inline: 0;
+}
+
+.creative-op-map-stage-wrapper {
+  min-width: 0;
+}
+
+.creative-op-horizontal-connector {
+  display: none;
+}
+
+.creative-op-system-stats {
+  max-width: 100%;
+}
+
+.creative-op-feedback-grid {
+  grid-template-columns:
+    repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+}
+
+.creative-op-continuous-system {
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+}
+
+.creative-op-detail-resizer {
+  position: relative;
+  z-index: 8;
+  width: 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: col-resize;
+  touch-action: none;
+  background: rgba(255, 255, 255, 0.012);
+  border-left: 1px solid rgba(255, 255, 255, 0.035);
+  border-right: 1px solid rgba(255, 255, 255, 0.035);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.creative-op-detail-resizer > span {
+  width: 3px;
+  height: 58px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.32);
+  box-shadow: 0 0 12px rgba(0, 229, 242, 0.05);
+  transition:
+    height 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.creative-op-detail-resizer:hover,
+.creative-op-detail-resizer:focus-visible {
+  outline: none;
+  background: rgba(0, 229, 242, 0.045);
+  border-color: rgba(0, 229, 242, 0.16);
+}
+
+.creative-op-detail-resizer:hover > span,
+.creative-op-detail-resizer:focus-visible > span,
+.creative-op-is-resizing .creative-op-detail-resizer > span {
+  height: 82px;
+  background: #00e5f2;
+  box-shadow: 0 0 18px rgba(0, 229, 242, 0.3);
+}
+
+.creative-op-is-resizing,
+.creative-op-is-resizing * {
+  cursor: col-resize !important;
+  user-select: none !important;
+}
+
+.creative-op-detail-panel {
+  min-width: 0;
+}
+
+@media (min-width: 1100px) and (max-width: 1380px) {
+  .creative-op-app-shell {
+    grid-template-columns:
+      minmax(0, 1fr)
+      10px
+      var(--creative-op-detail-width, 370px);
+  }
+
+  .creative-op-map-grid {
+    grid-template-columns:
+      repeat(auto-fit, minmax(min(165px, 100%), 1fr));
+    gap: 18px;
+  }
+
+  .creative-op-map-introduction h1 {
+    font-size: clamp(1.8rem, 2.5vw, 2.35rem);
+  }
+
+  .creative-op-continuous-system {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+
+  .creative-op-continuous-system button {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+
+/* ========================================================================== 
+   Final card-size correction
+   Restores the original visual scale while keeping the overview non-scrollable
+   horizontally and every stage card equal in size.
+   ========================================================================== */
+
+.creative-op-main-map {
+  overflow-x: hidden;
+}
+
+.creative-op-map-grid {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 20px 36px;
+  padding: 18px 6px 28px;
+}
+
+.creative-op-map-stage-wrapper {
+  min-width: 0;
+  height: 100%;
+}
+
+.creative-op-map-stage {
+  width: 100%;
+  height: 100%;
+  min-height: 190px;
+  padding: 16px;
+}
+
+.creative-op-map-stage-body h3 {
+  font-size: 1.03rem;
+  line-height: 1.2;
+}
+
+.creative-op-map-stage-body p {
+  font-size: 0.7rem;
+  line-height: 1.45;
+}
+
+.creative-op-map-stage-category {
+  font-size: 0.59rem;
+}
+
+.creative-op-map-stage-number {
+  font-size: 0.76rem;
+}
+
+.creative-op-map-stage-footer {
+  font-size: 0.64rem;
+}
+
+.creative-op-map-stage-icon {
+  width: 38px;
+  height: 38px;
+}
+
+/* Keep cards readable when the resizable details panel becomes wider. */
+@media (min-width: 1381px) and (max-width: 1600px) {
+  .creative-op-map-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 20px 30px;
+  }
+}
+
+@media (min-width: 1100px) and (max-width: 1380px) {
+  .creative-op-map-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px 28px;
+  }
+
+  .creative-op-map-stage {
+    min-height: 190px;
+    padding: 16px;
+  }
+}
+/* ==========================================================================
+   Overview details panel — hidden by default, slide-in, closeable
+   ========================================================================== */
+
+/*
+  The overview uses one column when no stage is selected.
+  When a card is clicked, the resizer and details panel are added.
+*/
+.creative-op-app-shell {
+  grid-template-columns: minmax(0, 1fr);
+  transition: grid-template-columns 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.creative-op-app-shell.is-detail-open {
+  grid-template-columns:
+    minmax(0, 1fr)
+    10px
+    var(--creative-op-detail-width);
+}
+
+.creative-op-app-shell.is-detail-closed {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.creative-op-main-map {
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.creative-op-detail-panel {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+  box-shadow:
+    -24px 0 56px rgba(0, 0, 0, 0.28),
+    -1px 0 0 rgba(255, 255, 255, 0.045);
+}
+
+.creative-op-detail-resizer {
+  position: relative;
+  z-index: 12;
+  width: 10px;
+  height: 100%;
+  cursor: col-resize;
+  touch-action: none;
+  background: transparent;
+}
+
+.creative-op-detail-resizer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.07);
+  transition:
+    width 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.creative-op-detail-resizer:hover::before,
+.creative-op-detail-resizer:focus-visible::before,
+.creative-op-is-resizing .creative-op-detail-resizer::before {
+  width: 2px;
+  background: rgba(0, 229, 242, 0.52);
+  box-shadow: 0 0 18px rgba(0, 229, 242, 0.3);
+}
+
+.creative-op-detail-resizer > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 54px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(159, 176, 197, 0.7) 0 2px,
+      transparent 2px 6px
+    );
+  opacity: 0.52;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.creative-op-detail-resizer:hover > span,
+.creative-op-detail-resizer:focus-visible > span {
+  opacity: 1;
+  transform: translate(-50%, -50%) scaleY(1.08);
+}
+
+
+.creative-op-detail-header {
+  padding-top: 62px;
+}
+
+/*
+  Keep the original card dimensions while letting the full-width overview
+  use the newly available space cleanly.
+*/
+.creative-op-app-shell.is-detail-closed .creative-op-map-grid {
+  grid-template-columns: repeat(6, minmax(180px, 1fr));
+}
+
+.creative-op-app-shell.is-detail-open .creative-op-map-grid {
+  grid-template-columns: repeat(5, minmax(180px, 1fr));
+}
+
+@media (min-width: 1700px) {
+  .creative-op-app-shell.is-detail-closed .creative-op-map-grid {
+    grid-template-columns: repeat(6, minmax(190px, 1fr));
+  }
+
+  .creative-op-app-shell.is-detail-open .creative-op-map-grid {
+    grid-template-columns: repeat(5, minmax(190px, 1fr));
+  }
+}
+
+@media (min-width: 1381px) and (max-width: 1699px) {
+  .creative-op-app-shell.is-detail-closed .creative-op-map-grid {
+    grid-template-columns: repeat(5, minmax(180px, 1fr));
+  }
+
+  .creative-op-app-shell.is-detail-open .creative-op-map-grid {
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+  }
+}
+
+@media (min-width: 1100px) and (max-width: 1380px) {
+  .creative-op-app-shell,
+  .creative-op-app-shell.is-detail-closed {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .creative-op-app-shell.is-detail-open {
+    grid-template-columns:
+      minmax(0, 1fr)
+      10px
+      var(--creative-op-detail-width);
+  }
+
+  .creative-op-app-shell.is-detail-closed .creative-op-map-grid {
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+  }
+
+  .creative-op-app-shell.is-detail-open .creative-op-map-grid {
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .creative-op-app-shell {
+    transition: none;
+  }
+}
+/* ==========================================================================
+   Final overview interaction polish
+   ========================================================================== */
+
+/* Larger homepage logo with cleaner spacing before the system label. */
+.creative-op-home-logo {
+  display: inline-flex;
+  width: max-content;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.creative-op-home-logo-text {
+  color: #f8fafc;
+  font-size: clamp(2rem, 2.6vw, 2.75rem);
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+}
+
+.creative-op-home-logo-dot {
+  color: #00e5f2;
+}
+
+.creative-op-map-introduction .creative-op-section-eyebrow {
+  display: block;
+  margin-top: 2px;
+}
+
+/* Remove the repetitive label and divider under every stage card. */
+.creative-op-map-stage-footer {
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 14px;
+  padding-top: 0;
+  border-top: 0;
+  color: #6f7e92;
+}
+
+.creative-op-map-stage-footer svg {
+  transition:
+    transform 0.22s ease,
+    color 0.22s ease;
+}
+
+.creative-op-map-stage:hover .creative-op-map-stage-footer svg,
+.creative-op-map-stage.is-active .creative-op-map-stage-footer svg {
+  color: var(--stage-color);
+  transform: translateX(3px);
+}
+
+/*
+  Premium collapse handle:
+  icon-only, visually attached to the panel's left edge.
+*/
+.creative-op-detail-collapse-handle {
+  position: absolute;
+  z-index: 20;
+  top: 24px;
+  left: -18px;
+
+  width: 36px;
+  height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border-radius: 14px 0 0 14px;
+
+  color: #c3cfdd;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(31, 44, 61, 0.98),
+      rgba(18, 29, 44, 0.98)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-right: 0;
+
+  box-shadow:
+    -12px 10px 28px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  cursor: pointer;
+
+  transition:
+    width 0.22s ease,
+    color 0.22s ease,
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.creative-op-detail-collapse-handle::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 50%;
+  width: 2px;
+  height: 20px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.creative-op-detail-collapse-handle:hover {
+  width: 40px;
+  color: var(--stage-color);
+  transform: translateX(-2px);
+  border-color:
+    color-mix(
+      in srgb,
+      var(--stage-color) 42%,
+      rgba(255, 255, 255, 0.08)
+    );
+  box-shadow:
+    -16px 12px 32px rgba(0, 0, 0, 0.32),
+    0 0 22px
+      color-mix(
+        in srgb,
+        var(--stage-color) 10%,
+        transparent
+      );
+}
+
+.creative-op-detail-collapse-handle:focus-visible {
+  outline: 2px solid var(--stage-color);
+  outline-offset: 3px;
+}
+
+.creative-op-detail-header {
+  padding-top: 30px;
+}
+
+/*
+  Prevent the previous "camera jump":
+  the grid remains in its open layout until the panel finishes sliding out.
+*/
+.creative-op-app-shell {
+  transition:
+    grid-template-columns 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.creative-op-detail-panel {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.creative-op-main-map {
+  min-width: 0;
+  contain: layout paint;
+}
+
+.creative-op-is-resizing,
+.creative-op-is-resizing * {
+  cursor: col-resize !important;
+  user-select: none !important;
+}
+/* ==========================================================================
+   Final no-shake panel + refined header spacing
+   ========================================================================== */
+
+/* Refined logo size and spacing */
+.creative-op-home-logo {
+  margin-bottom: 28px;
+}
+
+.creative-op-home-logo-text {
+  font-size: clamp(1.65rem, 2vw, 2.15rem);
+  letter-spacing: -0.045em;
+}
+
+.creative-op-map-introduction .creative-op-section-eyebrow {
+  margin-top: 0;
+  margin-bottom: 14px;
+  letter-spacing: 0.2em;
+}
+
+.creative-op-map-introduction h1 {
+  margin-top: 0;
+  margin-bottom: 17px;
+  letter-spacing: -0.025em;
+  word-spacing: 0.08em;
+}
+
+/*
+  Keep the overview fixed while the panel opens/closes.
+  The panel overlays from the right, so there is no grid reflow,
+  no camera jump, and no shaking.
+*/
+.creative-op-app-shell,
+.creative-op-app-shell.is-detail-open,
+.creative-op-app-shell.is-detail-closed {
+  position: relative;
+  display: block;
+  grid-template-columns: none;
+  transition: none;
+  overflow: hidden;
+}
+
+.creative-op-main-map {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  contain: none;
+}
+
+.creative-op-detail-panel {
+  position: absolute;
+  z-index: 30;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  width: var(--creative-op-detail-width);
+  height: 100%;
+
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+
+  box-shadow:
+    -24px 0 54px rgba(0, 0, 0, 0.3),
+    -1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.creative-op-detail-resizer {
+  position: absolute;
+  z-index: 31;
+  top: 0;
+  bottom: 0;
+  right: calc(var(--creative-op-detail-width) - 5px);
+
+  width: 10px;
+  height: 100%;
+}
+
+/* Minimal premium SaaS collapse control */
+.creative-op-detail-collapse-handle {
+  position: absolute;
+  z-index: 40;
+  top: 18px;
+  left: 16px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border-radius: 10px;
+
+  color: #c5d0dd;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.095);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.creative-op-detail-collapse-handle > span {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1.5px solid currentColor;
+  opacity: 0.9;
+}
+
+.creative-op-detail-collapse-handle > span::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  left: 3px;
+  width: 1px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.9;
+}
+
+.creative-op-detail-collapse-handle:hover {
+  transform: translateY(-1px);
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 8%,
+      rgba(255, 255, 255, 0.055)
+    );
+  border-color:
+    color-mix(
+      in srgb,
+      var(--stage-color) 36%,
+      rgba(255, 255, 255, 0.08)
+    );
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.24),
+    0 0 18px
+      color-mix(
+        in srgb,
+        var(--stage-color) 8%,
+        transparent
+      );
+}
+
+.creative-op-detail-collapse-handle:active {
+  transform: translateY(0);
+}
+
+.creative-op-detail-collapse-handle:focus-visible {
+  outline: 2px solid var(--stage-color);
+  outline-offset: 3px;
+}
+
+.creative-op-detail-header {
+  padding-top: 66px;
+}
+
+/* Keep overview cards stable regardless of panel state */
+.creative-op-app-shell.is-detail-open .creative-op-map-grid,
+.creative-op-app-shell.is-detail-closed .creative-op-map-grid {
+  grid-template-columns: repeat(5, minmax(180px, 1fr));
+}
+
+@media (min-width: 1700px) {
+  .creative-op-app-shell.is-detail-open .creative-op-map-grid,
+  .creative-op-app-shell.is-detail-closed .creative-op-map-grid {
+    grid-template-columns: repeat(6, minmax(185px, 1fr));
+  }
+}
+
+@media (min-width: 1100px) and (max-width: 1380px) {
+  .creative-op-app-shell.is-detail-open .creative-op-map-grid,
+  .creative-op-app-shell.is-detail-closed .creative-op-map-grid {
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+  }
+}

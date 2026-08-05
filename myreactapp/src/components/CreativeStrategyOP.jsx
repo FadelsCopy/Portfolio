@@ -1,6 +1,6 @@
 // src/components/CreativeStrategyOP.jsx
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -70,96 +70,23 @@ const stageReveal = {
 
 const detailReveal = {
   hidden: {
-    opacity: 0,
-    x: 18,
+    x: '100%',
   },
   visible: {
-    opacity: 1,
     x: 0,
     transition: {
-      duration: 0.38,
+      duration: 0.34,
       ease: [0.22, 1, 0.36, 1],
     },
   },
   exit: {
-    opacity: 0,
-    x: 10,
+    x: '100%',
     transition: {
-      duration: 0.18,
+      duration: 0.3,
+      ease: [0.4, 0, 1, 1],
     },
   },
 };
-
-function StageNavigator({
-  stages,
-  selectedStageId,
-  onSelectStage,
-}) {
-  return (
-    <aside className="creative-op-sidebar">
-      <div className="creative-op-sidebar-heading">
-        <span className="creative-op-sidebar-label">
-          SYSTEM NAVIGATION
-        </span>
-
-        <h2>Creative Flow</h2>
-
-        <p>
-          Select any stage to inspect its purpose, systems, outputs,
-          tools, and SOPs.
-        </p>
-      </div>
-
-      <nav
-        className="creative-op-stage-navigation"
-        aria-label="Creative Strategy OP stages"
-      >
-        {stages.map((stage) => {
-          const isActive = selectedStageId === stage.id;
-
-          const categoryColor =
-            creativeStrategyOPCategories[stage.category]?.color ||
-            '#00e5f2';
-
-          return (
-            <button
-              key={stage.id}
-              type="button"
-              className={`creative-op-nav-stage ${
-                isActive ? 'is-active' : ''
-              }`}
-              onClick={() => onSelectStage(stage.id)}
-              style={{
-                '--stage-color': categoryColor,
-              }}
-            >
-              <span className="creative-op-nav-stage-number">
-                {stage.number}
-              </span>
-
-              <span className="creative-op-nav-stage-icon">
-                <CreativeStrategyOPIcon
-                  type={stage.icon}
-                  size={17}
-                />
-              </span>
-
-              <span className="creative-op-nav-stage-copy">
-                <span className="creative-op-nav-stage-title">
-                  {stage.shortTitle}
-                </span>
-
-                <span className="creative-op-nav-stage-category">
-                  {stage.category}
-                </span>
-              </span>
-            </button>
-          );
-        })}
-      </nav>
-    </aside>
-  );
-}
 
 function StageCard({
   stage,
@@ -214,12 +141,13 @@ function StageCard({
           <p>{stage.title}</p>
         </div>
 
-        <div className="creative-op-map-stage-footer">
-          <span>Inspect stage</span>
-
+        <div
+          className="creative-op-map-stage-footer"
+          aria-hidden="true"
+        >
           <CreativeStrategyOPIcon
             type="arrowRight"
-            size={15}
+            size={16}
           />
         </div>
       </button>
@@ -435,7 +363,7 @@ function SOPList({ sops = [] }) {
   );
 }
 
-function StageDetailPanel({ stage, onOpenDeepDive }) {
+function StageDetailPanel({ stage, onOpenDeepDive, onClose }) {
   const categoryColor =
     creativeStrategyOPCategories[stage.category]?.color ||
     '#00e5f2';
@@ -450,7 +378,6 @@ function StageDetailPanel({ stage, onOpenDeepDive }) {
       : '';
 
   return (
-    <AnimatePresence mode="wait">
       <motion.aside
         key={stage.id}
         className="creative-op-detail-panel"
@@ -462,6 +389,16 @@ function StageDetailPanel({ stage, onOpenDeepDive }) {
           '--stage-color': categoryColor,
         }}
       >
+        <button
+          type="button"
+          className="creative-op-detail-collapse-handle"
+          onClick={onClose}
+          aria-label="Collapse stage details"
+          title="Collapse stage details"
+        >
+          <span aria-hidden="true" />
+        </button>
+
         <div className="creative-op-detail-header">
           <div className="creative-op-detail-stage-identity">
             <span className="creative-op-detail-stage-icon">
@@ -880,7 +817,6 @@ function StageDetailPanel({ stage, onOpenDeepDive }) {
           <SOPList sops={stage.sops} />
         </div>
       </motion.aside>
-    </AnimatePresence>
   );
 }
 
@@ -1012,29 +948,122 @@ function SmallScreenMessage() {
   );
 }
 
+const DETAIL_PANEL_MIN_WIDTH = 370;
+const DETAIL_PANEL_MAX_WIDTH = 555;
+const DETAIL_PANEL_DEFAULT_WIDTH = 370;
+
 export default function CreativeStrategyOP() {
   const [selectedStageId, setSelectedStageId] =
-    useState('research');
+    useState(null);
+  const [isDetailPanelOpen, setIsDetailPanelOpen] =
+    useState(false);
+  const [isDetailLayoutOpen, setIsDetailLayoutOpen] =
+    useState(false);
   const [activeDeepDive, setActiveDeepDive] =
     useState(null);
+  const [detailPanelWidth, setDetailPanelWidth] =
+    useState(DETAIL_PANEL_DEFAULT_WIDTH);
+
+  const resizeStartXRef = useRef(0);
+  const resizeStartWidthRef = useRef(DETAIL_PANEL_DEFAULT_WIDTH);
 
   const selectedStage = useMemo(
     () =>
-      getCreativeStrategyOPStage(selectedStageId) ||
-      creativeStrategyOPStages[0],
+      selectedStageId
+        ? getCreativeStrategyOPStage(selectedStageId)
+        : null,
     [selectedStageId]
   );
 
-  const handleResetView = () => {
-    setSelectedStageId('research');
+  const handleSelectStage = (stageId) => {
+    setSelectedStageId(stageId);
+    setIsDetailLayoutOpen(true);
+    requestAnimationFrame(() => {
+      setIsDetailPanelOpen(true);
+    });
+  };
 
-    document
-      .querySelector('.creative-op-main-map')
-      ?.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      });
+  const handleCloseDetailPanel = () => {
+    setIsDetailPanelOpen(false);
+  };
+
+  const handleDetailExitComplete = () => {
+    if (!isDetailPanelOpen) {
+      setIsDetailLayoutOpen(false);
+      setSelectedStageId(null);
+    }
+  };
+
+  const clampDetailPanelWidth = (width) =>
+    Math.min(
+      DETAIL_PANEL_MAX_WIDTH,
+      Math.max(DETAIL_PANEL_MIN_WIDTH, width)
+    );
+
+  const handleResizePointerDown = (event) => {
+    event.preventDefault();
+
+    resizeStartXRef.current = event.clientX;
+    resizeStartWidthRef.current = detailPanelWidth;
+
+    const handlePointerMove = (moveEvent) => {
+      const horizontalMovement =
+        resizeStartXRef.current - moveEvent.clientX;
+
+      setDetailPanelWidth(
+        clampDetailPanelWidth(
+          resizeStartWidthRef.current + horizontalMovement
+        )
+      );
+    };
+
+    const handlePointerUp = () => {
+      window.removeEventListener(
+        'pointermove',
+        handlePointerMove
+      );
+      window.removeEventListener(
+        'pointerup',
+        handlePointerUp
+      );
+
+      document.body.classList.remove(
+        'creative-op-is-resizing'
+      );
+    };
+
+    document.body.classList.add('creative-op-is-resizing');
+
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp);
+  };
+
+  const handleResizeKeyDown = (event) => {
+    const resizeStep = event.shiftKey ? 40 : 20;
+
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      setDetailPanelWidth((currentWidth) =>
+        clampDetailPanelWidth(currentWidth + resizeStep)
+      );
+    }
+
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      setDetailPanelWidth((currentWidth) =>
+        clampDetailPanelWidth(currentWidth - resizeStep)
+      );
+    }
+
+    if (event.key === 'Home') {
+      event.preventDefault();
+      setDetailPanelWidth(DETAIL_PANEL_MIN_WIDTH);
+    }
+
+    if (event.key === 'End') {
+      event.preventDefault();
+      setDetailPanelWidth(DETAIL_PANEL_MAX_WIDTH);
+    }
   };
 
   return (
@@ -1048,41 +1077,7 @@ export default function CreativeStrategyOP() {
       <div className="creative-op-glow creative-op-glow-one" />
       <div className="creative-op-glow creative-op-glow-two" />
 
-      <header className="creative-op-topbar">
-        <Link
-          to="/"
-          className="creative-op-back-button"
-        >
-          <span aria-hidden="true">←</span>
-          Back to Homepage
-        </Link>
 
-        <div className="creative-op-brand">
-          <span className="creative-op-brand-mark">
-            Fadel.
-          </span>
-
-          <span className="creative-op-brand-divider" />
-
-          <span className="creative-op-brand-name">
-            Creative Strategy OP
-          </span>
-        </div>
-
-        <div className="creative-op-topbar-actions">
-          <button
-            type="button"
-            className="creative-op-reset-button"
-            onClick={handleResetView}
-          >
-            Reset View
-          </button>
-
-          <span className="creative-op-version">
-            VERSION 1.0
-          </span>
-        </div>
-      </header>
 
      <section className="creative-op-desktop-experience">
         <AnimatePresence mode="wait">
@@ -1169,7 +1164,14 @@ export default function CreativeStrategyOP() {
             ) : (
             <motion.div
                 key="full-system"
-                className="creative-op-app-shell"
+                className={`creative-op-app-shell ${
+                  isDetailLayoutOpen
+                    ? 'is-detail-open'
+                    : 'is-detail-closed'
+                }`}
+                style={{
+                  '--creative-op-detail-width': `${detailPanelWidth}px`,
+                }}
                 initial={{ opacity: 0, scale: 0.99 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.99 }}
@@ -1178,15 +1180,19 @@ export default function CreativeStrategyOP() {
                 ease: [0.22, 1, 0.36, 1],
                 }}
             >
-                <StageNavigator
-                stages={creativeStrategyOPStages}
-                selectedStageId={selectedStageId}
-                onSelectStage={setSelectedStageId}
-                />
-
                 <main className="creative-op-main-map">
                 <section className="creative-op-map-introduction">
                     <div>
+                    <Link
+                        to="/"
+                        className="creative-op-home-logo"
+                        aria-label="Go to homepage"
+                    >
+                        <span className="creative-op-home-logo-text">
+                        Fadel<span className="creative-op-home-logo-dot">.</span>
+                        </span>
+                    </Link>
+
                     <span className="creative-op-section-eyebrow">
                         CREATIVE INTELLIGENCE SYSTEM
                     </span>
@@ -1232,7 +1238,7 @@ export default function CreativeStrategyOP() {
                         key={stage.id}
                         stage={stage}
                         selectedStageId={selectedStageId}
-                        onSelectStage={setSelectedStageId}
+                        onSelectStage={handleSelectStage}
                         index={index}
                         />
                     )
@@ -1240,7 +1246,7 @@ export default function CreativeStrategyOP() {
                 </motion.section>
 
                 <DecisionLoops
-                    onSelectStage={setSelectedStageId}
+                    onSelectStage={handleSelectStage}
                 />
 
                 <section className="creative-op-continuous-system">
@@ -1269,7 +1275,7 @@ export default function CreativeStrategyOP() {
                     <button
                     type="button"
                     onClick={() =>
-                        setSelectedStageId('knowledge')
+                        handleSelectStage('knowledge')
                     }
                     >
                     Open Knowledge Library
@@ -1282,10 +1288,41 @@ export default function CreativeStrategyOP() {
                 </section>
                 </main>
 
-                <StageDetailPanel
-                stage={selectedStage}
-                onOpenDeepDive={setActiveDeepDive}
-                />
+                <AnimatePresence
+                  initial={false}
+                  onExitComplete={handleDetailExitComplete}
+                >
+                  {isDetailPanelOpen && selectedStage && (
+                    <>
+                      <motion.div
+                        key="detail-resizer"
+                        className="creative-op-detail-resizer"
+                        role="separator"
+                        aria-label="Resize stage details panel"
+                        aria-orientation="vertical"
+                        aria-valuemin={DETAIL_PANEL_MIN_WIDTH}
+                        aria-valuemax={DETAIL_PANEL_MAX_WIDTH}
+                        aria-valuenow={detailPanelWidth}
+                        tabIndex={0}
+                        onPointerDown={handleResizePointerDown}
+                        onKeyDown={handleResizeKeyDown}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <span aria-hidden="true" />
+                      </motion.div>
+
+                      <StageDetailPanel
+                        key={`detail-${selectedStage.id}`}
+                        stage={selectedStage}
+                        onOpenDeepDive={setActiveDeepDive}
+                        onClose={handleCloseDetailPanel}
+                      />
+                    </>
+                  )}
+                </AnimatePresence>
             </motion.div>
             )}
         </AnimatePresence>
