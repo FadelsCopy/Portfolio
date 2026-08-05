@@ -1,53 +1,57 @@
-/* portfolio.css */
+/* portfolio.css - World-Class Showcase & Archive Section */
 
 .portfolio-showcase {
   position: relative;
   background:
-    radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.035), transparent 36%),
-    #05070a;
+    radial-gradient(ellipse at 50% 0%, var(--orb-glow-1), transparent 45%),
+    radial-gradient(ellipse at 20% 80%, var(--orb-glow-2), transparent 40%),
+    var(--bg-primary);
   width: 100%;
-  padding: 90px 0;
+  padding: 100px 0;
   overflow: hidden;
   will-change: transform, opacity;
+  transition: background-color 0.35s ease;
 }
 
+/* Atmospheric Seamless Blending into adjacent sections */
 .portfolio-showcase::before,
 .portfolio-showcase::after {
   content: "";
   position: absolute;
   left: 0;
   width: 100%;
-  height: 140px;
+  height: 200px;
   pointer-events: none;
+  z-index: 1;
 }
 
 .portfolio-showcase::before {
   top: 0;
-  background: linear-gradient(to bottom, rgba(0, 240, 255, 0.025), transparent);
+  background: linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%);
 }
 
 .portfolio-showcase::after {
   bottom: 0;
-  background: linear-gradient(to top, rgba(0, 240, 255, 0.025), transparent);
+  background: linear-gradient(to top, var(--bg-primary) 0%, transparent 100%);
 }
 
 .portfolio-content-shell {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 40px;
 }
 
-/* Clean layout without big outer box */
+/* Grid Layout */
 .archive-layout-grid {
   display: grid;
   grid-template-columns: 0.92fr 1.08fr;
-  gap: 46px;
+  gap: 48px;
   align-items: center;
 }
 
-/* Left copy */
+/* Left Copy */
 .archive-proof-copy {
   display: flex;
   flex-direction: column;
@@ -58,33 +62,40 @@
 .archive-eyebrow {
   display: inline-block;
   width: max-content;
-  color: rgba(0, 240, 255, 0.9);
-  font-size: 0.72rem;
+  color: var(--accent-main);
+  font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   margin-bottom: 16px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-color);
   will-change: transform, opacity;
+  transition: color 0.35s ease, background-color 0.35s ease;
 }
 
 .archive-proof-copy h2 {
-  color: #ffffff;
-  font-size: 2.35rem;
-  line-height: 1.08;
+  color: var(--text-main);
+  font-size: 2.45rem;
+  line-height: 1.1;
   letter-spacing: -0.045em;
   margin-bottom: 18px;
   font-weight: 850;
   max-width: 520px;
   will-change: transform, opacity;
+  transition: color 0.35s ease;
 }
 
 .archive-proof-copy p {
-  color: #a0a5b1;
-  font-size: 1.06rem;
-  line-height: 1.68;
+  color: var(--text-muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
   margin: 0 0 26px;
   max-width: 560px;
   will-change: transform, opacity;
+  transition: color 0.35s ease;
 }
 
 .archive-format-tags {
@@ -97,14 +108,22 @@
 }
 
 .archive-format-tags span {
-  color: rgba(255, 255, 255, 0.76);
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.075);
+  color: var(--text-main);
+  background: var(--bg-glass);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
   border-radius: 999px;
-  padding: 8px 12px;
+  padding: 8px 14px;
   font-size: 0.78rem;
   font-weight: 650;
   line-height: 1;
+  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease, transform 0.2s ease;
+}
+
+.archive-format-tags span:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-glass-hover);
+  transform: translateY(-1px);
 }
 
 .archive-main-button {
@@ -113,46 +132,48 @@
   justify-content: center;
   width: max-content;
   text-decoration: none;
-  color: #000000;
-  background: #00f0ff;
-  padding: 14px 24px;
+  color: var(--text-inverse);
+  background: linear-gradient(135deg, var(--accent-main), var(--accent-hover));
+  padding: 14px 28px;
   border-radius: 10px;
   font-size: 0.98rem;
   font-weight: 800;
-  box-shadow: 0 10px 26px rgba(0, 240, 255, 0.18);
+  box-shadow: var(--shadow-glow);
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
-    background-color 0.25s ease;
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
 .archive-main-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 34px rgba(0, 240, 255, 0.26);
-  background: #23f3ff;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
 }
 
-/* Stat cards only */
+/* Stat Cards Grid */
 .archive-stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 18px;
 }
 
 .archive-stat-card {
   position: relative;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 46%),
-    #0f121a;
-  border: 1px solid rgba(255, 255, 255, 0.075);
-  border-radius: 16px;
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
   padding: 28px;
   min-height: 185px;
+  box-shadow: var(--shadow-card);
   transition:
-    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background-color 0.35s ease;
   will-change: transform, opacity;
 }
 
@@ -161,21 +182,20 @@
   position: absolute;
   top: -40%;
   right: -35%;
-  width: 160px;
-  height: 160px;
+  width: 170px;
+  height: 170px;
   border-radius: 999px;
-  background: rgba(0, 240, 255, 0.055);
-  filter: blur(28px);
+  background: var(--accent-glow);
+  filter: blur(30px);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.35s ease;
 }
 
 .archive-stat-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(0, 240, 255, 0.24);
-  box-shadow:
-    0 18px 36px rgba(0, 0, 0, 0.3),
-    0 0 24px rgba(0, 240, 255, 0.045);
+  transform: translateY(-5px);
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
 }
 
 .archive-stat-card:hover::after {
@@ -183,30 +203,33 @@
 }
 
 .archive-stat-value {
-  color: #00f0ff;
-  font-size: 2.25rem;
+  color: var(--accent-main);
+  font-size: 2.35rem;
   line-height: 1;
-  font-weight: 850;
+  font-weight: 900;
   letter-spacing: -0.055em;
   margin-bottom: 12px;
+  transition: color 0.35s ease;
 }
 
 .archive-stat-label {
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 1rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   margin-bottom: 10px;
+  transition: color 0.35s ease;
 }
 
 .archive-stat-card p {
-  color: #8f96a3;
+  color: var(--text-muted);
   font-size: 0.92rem;
-  line-height: 1.55;
+  line-height: 1.58;
   margin: 0;
+  transition: color 0.35s ease;
 }
 
-/* Responsive */
+/* RESPONSIVE */
 @media (max-width: 992px) {
   .portfolio-showcase {
     padding: 80px 0;
@@ -239,26 +262,6 @@
     gap: 30px;
   }
 
-  .archive-proof-copy h2 {
-    font-size: 1.68rem;
-    line-height: 1.14;
-  }
-
-  .archive-proof-copy p {
-    font-size: 0.98rem;
-    line-height: 1.62;
-  }
-
-  .archive-format-tags {
-    gap: 8px;
-    margin-bottom: 26px;
-  }
-
-  .archive-format-tags span {
-    font-size: 0.74rem;
-    padding: 8px 11px;
-  }
-
   .archive-main-button {
     width: 100%;
     padding: 14px 20px;
@@ -272,24 +275,6 @@
   .archive-stat-card {
     min-height: auto;
     padding: 22px;
-  }
-
-  .archive-stat-value {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 420px) {
-  .portfolio-content-shell {
-    padding: 0 16px;
-  }
-
-  .archive-proof-copy h2 {
-    font-size: 1.54rem;
-  }
-
-  .archive-stat-card {
-    padding: 20px;
   }
 }
 
@@ -307,10 +292,8 @@
     will-change: auto;
   }
 }
-/* ==========================================================================
-   MOTION POLISH
-   ========================================================================== */
 
+/* Motion Polish */
 .portfolio-page-section,
 .portfolio-page-header,
 .portfolio-filter-nav,

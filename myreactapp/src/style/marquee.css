@@ -1,40 +1,56 @@
 /* ========================================
-   marquee.css
+   marquee.css - Theme Aware Ticker Showcase with Seamless Flow
 ======================================== */
 
 .ticker-showcase-section {
   position: relative;
-  background: #05070a;
-  padding: 120px 0 25px;
+  background: var(--bg-primary);
+  padding: 100px 0 35px;
   width: 100%;
   overflow: hidden;
   will-change: transform, opacity;
+  transition: background-color 0.35s ease;
 }
 
-/* Soft premium transition into the next section */
+/* Seamless Top Blend (from Hero) */
+.ticker-showcase-section::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 160px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    var(--bg-primary) 0%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+
+/* Seamless Bottom Blend (into Services) */
 .ticker-showcase-section::after {
   content: "";
   position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 180px;
+  height: 200px;
   pointer-events: none;
   background:
     radial-gradient(
       ellipse at center bottom,
-      rgba(0, 240, 255, 0.075) 0%,
-      rgba(0, 240, 255, 0.035) 28%,
+      var(--accent-glow) 0%,
       transparent 70%
     ),
     linear-gradient(
       to bottom,
       transparent 0%,
-      rgba(5, 7, 10, 0.2) 45%,
-      #05070a 100%
+      var(--bg-primary) 100%
     );
-  opacity: 0.9;
-  z-index: 0;
+  opacity: 0.95;
+  z-index: 1;
 }
 
 /* =========================
@@ -52,22 +68,29 @@
 }
 
 .ticker-pre-title {
-  display: block;
-  color: #00f0ff;
+  display: inline-block;
+  color: var(--accent-main);
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 750;
   letter-spacing: 0.2em;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-color);
   will-change: transform, opacity;
+  transition: color 0.35s ease, background-color 0.35s ease;
 }
 
 .ticker-main-title {
-  color: white;
+  color: var(--text-main);
   font-size: 2.8rem;
-  font-weight: 800;
+  font-weight: 900;
   line-height: 1.15;
   text-transform: uppercase;
+  letter-spacing: -0.03em;
   will-change: transform, opacity;
+  transition: color 0.35s ease;
 }
 
 /* =========================
@@ -79,7 +102,7 @@
   overflow: visible;
   display: flex;
   position: relative;
-  padding: 60px 0;
+  padding: 50px 0;
   z-index: 2;
   will-change: transform, opacity;
 
@@ -110,18 +133,9 @@
   animation: marquee 28s linear infinite;
 }
 
-/*
-PAUSE BOTH GROUPS
-ONLY WHEN A CARD IS HOVERED
-*/
-
 .ticker-viewport:has(.ticker-card:hover) .ticker-group {
   animation-play-state: paused;
 }
-
-/* =========================
-   LEFT → RIGHT
-========================= */
 
 @keyframes marquee {
   from {
@@ -155,34 +169,27 @@ ONLY WHEN A CARD IS HOVERED
   aspect-ratio: 9 / 16;
   overflow: hidden;
   border-radius: 18px;
-  background: #131822;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
 
   transition:
     transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
     box-shadow 0.45s ease,
     border-color 0.45s ease,
+    background-color 0.35s ease,
     filter 0.45s ease;
 
   transform-origin: center;
 }
 
 /* Glow + lift */
-
 .ticker-card:hover .ticker-media-9-16 {
   transform: scale(1.06) translateY(-8px);
-  filter: brightness(1.1);
-  border-color: rgba(0, 240, 255, 0.5);
-
-  box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.8),
-    0 0 15px rgba(0, 240, 255, 0.3),
-    0 0 40px rgba(0, 240, 255, 0.2),
-    0 0 100px rgba(0, 240, 255, 0.1),
-    inset 0 0 1px 1px rgba(0, 240, 255, 0.4);
+  filter: brightness(1.04);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-card), var(--shadow-hover);
 }
-
-/* Image movement */
 
 .ticker-preview-image {
   width: 100%;
@@ -193,16 +200,13 @@ ONLY WHEN A CARD IS HOVERED
 }
 
 .ticker-card:hover .ticker-preview-image {
-  transform: scale(1.025);
+  transform: scale(1.03);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
+/* RESPONSIVE */
 @media (max-width: 992px) {
   .ticker-showcase-section {
-    padding: 90px 0 110px;
+    padding: 80px 0 90px;
   }
 
   .ticker-main-title {
@@ -217,7 +221,7 @@ ONLY WHEN A CARD IS HOVERED
 
 @media (max-width: 576px) {
   .ticker-showcase-section {
-    padding: 70px 0 20px;
+    padding: 60px 0 20px;
   }
 
   .ticker-header {
@@ -228,7 +232,6 @@ ONLY WHEN A CARD IS HOVERED
   .ticker-pre-title {
     font-size: 0.72rem;
     letter-spacing: 0.18em;
-    margin-bottom: 9px;
   }
 
   .ticker-main-title {
@@ -237,59 +240,12 @@ ONLY WHEN A CARD IS HOVERED
   }
 
   .ticker-viewport {
-    padding: 42px 0 50px;
-
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 5%,
-      black 95%,
-      transparent 100%
-    );
+    padding: 40px 0 45px;
   }
 
   .ticker-card {
     width: 235px;
     padding-right: 18px;
-  }
-
-  .ticker-media-9-16 {
-    border-radius: 16px;
-  }
-
-  .ticker-showcase-section::after {
-    height: 140px;
-    background:
-      radial-gradient(
-        ellipse at center bottom,
-        rgba(0, 240, 255, 0.07) 0%,
-        rgba(0, 240, 255, 0.03) 32%,
-        transparent 72%
-      ),
-      linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(5, 7, 10, 0.3) 48%,
-        #05070a 100%
-      );
-  }
-}
-
-@media (max-width: 380px) {
-  .ticker-card {
-    width: 220px;
-    padding-right: 16px;
-  }
-
-  .ticker-main-title {
-    font-size: 1.34rem;
   }
 }
 

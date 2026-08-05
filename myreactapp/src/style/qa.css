@@ -1,17 +1,17 @@
 /* ==========================================================================
-   QA SECTION + ACCORDION
+   qa.css - World-Class FAQ Section, Accordions & Brand Ticker
    ========================================================================== */
 
 /* CREATIVE STRATEGY BRAND TICKER */
 .brand-ticker-section {
   width: 100%;
-  background-color: #99ff00 !important;
-  padding: 44px 0;
+  background: var(--accent-spark) !important;
+  padding: 40px 0;
   overflow: hidden;
   display: flex;
   align-items: center;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   pointer-events: none !important;
   user-select: none !important;
 }
@@ -59,96 +59,110 @@
   max-width: none;
   margin: 0;
   width: 100%;
-  padding: 90px 40px 110px;
+  padding: 95px 40px 120px;
   background:
-    radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.035), transparent 36%),
-    #05070a;
+    radial-gradient(ellipse at 50% 0%, var(--orb-glow-1), transparent 45%),
+    radial-gradient(ellipse at 75% 85%, var(--orb-glow-2), transparent 40%),
+    var(--bg-primary);
   overflow: hidden;
   will-change: transform, opacity;
+  transition: background-color 0.35s ease;
 }
 
+/* Atmospheric Seamless Blends */
 .main-content-section#qa-part::before,
 .main-content-section#qa-part::after {
   content: "";
   position: absolute;
   left: 0;
   width: 100%;
-  height: 140px;
+  height: 200px;
   pointer-events: none;
+  z-index: 1;
 }
 
 .main-content-section#qa-part::before {
   top: 0;
-  background: linear-gradient(to bottom, rgba(0, 240, 255, 0.025), transparent);
+  background: linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%);
 }
 
 .main-content-section#qa-part::after {
   bottom: 0;
-  background: linear-gradient(to top, rgba(0, 240, 255, 0.025), transparent);
+  background: linear-gradient(to top, var(--bg-primary) 0%, transparent 100%);
 }
 
 /* Header */
 .qa-heading-block {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   will-change: transform, opacity;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .main-content-section#qa-part .section-label {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   font-size: 0.78rem;
   font-weight: 800;
-  color: rgba(0, 240, 255, 0.9) !important;
+  color: var(--accent-main) !important;
   letter-spacing: 0.18em;
   margin-bottom: 14px;
   text-transform: uppercase;
   text-align: center;
-  display: block;
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-color);
   will-change: transform, opacity;
+  transition: color 0.35s ease;
 }
 
 .main-content-section#qa-part .section-headline {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 850px;
   font-size: 2.65rem;
-  font-weight: 850;
-  line-height: 1.08;
+  font-weight: 900;
+  line-height: 1.1;
   letter-spacing: -0.04em;
-  color: #ffffff;
-  margin: 0 auto 46px;
+  color: var(--text-main);
+  margin: 14px auto 46px;
   text-align: center;
   will-change: transform, opacity;
+  transition: color 0.35s ease;
 }
 
 /* FAQ Container */
 .qa-container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 900px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 /* FAQ Card */
 .qa-block {
   position: relative;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 46%),
-    #0f121a;
-  border: 1px solid rgba(255, 255, 255, 0.075);
-  border-radius: 16px;
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
   margin-bottom: 0;
+  box-shadow: var(--shadow-card);
   transition:
-    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    background-color 0.3s ease;
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background-color 0.35s ease;
   will-change: transform, opacity;
 }
 
@@ -157,22 +171,21 @@
   position: absolute;
   top: -45%;
   right: -22%;
-  width: 180px;
-  height: 180px;
+  width: 190px;
+  height: 190px;
   border-radius: 999px;
-  background: rgba(0, 240, 255, 0.055);
-  filter: blur(30px);
+  background: var(--accent-glow);
+  filter: blur(32px);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.35s ease;
   pointer-events: none;
 }
 
 .qa-block:hover,
 .qa-block.is-active {
-  border-color: rgba(0, 240, 255, 0.24);
-  box-shadow:
-    0 18px 36px rgba(0, 0, 0, 0.3),
-    0 0 24px rgba(0, 240, 255, 0.045);
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
 }
 
 .qa-block:hover {
@@ -210,16 +223,16 @@
 .qa-question {
   font-size: 1.22rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--text-main);
   letter-spacing: -0.025em;
   line-height: 1.32;
   padding-right: 24px;
-  transition: color 0.3s ease;
+  transition: color 0.35s ease;
 }
 
 .qa-trigger:hover .qa-question,
 .qa-block.is-active .qa-trigger .qa-question {
-  color: #00f0ff !important;
+  color: var(--accent-main) !important;
 }
 
 /* Accordion icon */
@@ -235,10 +248,10 @@
 .accordion-icon::after {
   content: "";
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.55);
+  background-color: var(--text-muted);
   transition:
     transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
-    background-color 0.3s ease;
+    background-color 0.35s ease;
 }
 
 .accordion-icon::before {
@@ -257,12 +270,12 @@
 
 .qa-block.is-active .accordion-icon::before {
   transform: rotate(180deg);
-  background-color: #00f0ff !important;
+  background-color: var(--accent-main) !important;
 }
 
 .qa-block.is-active .accordion-icon::after {
   transform: rotate(90deg) scale(0);
-  background-color: #00f0ff !important;
+  background-color: var(--accent-main) !important;
 }
 
 /* Smooth expansion */
@@ -275,12 +288,12 @@
 
 /* Answer */
 .qa-answer {
-  color: #c7ccd6;
+  color: var(--text-muted);
   line-height: 1.76;
   font-size: 1rem;
   padding: 0 32px 32px 32px;
   border-left: none;
-  transition: color 0.3s ease;
+  transition: color 0.35s ease;
 }
 
 .qa-block.is-active .qa-answer {
@@ -298,8 +311,9 @@
 .qa-answer h4 {
   font-size: 1.08rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--text-main);
   margin-bottom: 10px;
+  transition: color 0.35s ease;
 }
 
 /* Bullet list */
@@ -314,36 +328,34 @@
   padding-left: 22px;
   margin-bottom: 12px;
   font-size: 1rem;
-  color: #c7ccd6;
+  color: var(--text-muted);
+  transition: color 0.35s ease;
 }
 
 .qa-bullet-list li::before {
   content: "—";
   position: absolute;
   left: 0;
-  color: #00f0ff !important;
+  color: var(--accent-main) !important;
   font-weight: 700;
 }
 
 /* Process highlight */
 .qa-block .qa-answer .process-highlight,
 .qa-block.is-active .qa-answer .process-highlight {
-  color: #00f0ff !important;
+  color: var(--accent-main) !important;
   font-weight: 750;
   letter-spacing: 0.01em;
   font-size: 0.95rem;
-  background: rgba(0, 240, 255, 0.045) !important;
-  padding: 13px 16px;
+  background: var(--bg-glass-hover) !important;
+  padding: 13px 18px;
   border-radius: 12px;
-  border: 1px solid rgba(0, 240, 255, 0.13) !important;
+  border: 1px solid var(--border-hover) !important;
   display: inline-block;
   margin-bottom: 8px;
 }
 
-/* ==========================================================================
-   RESPONSIVE
-   ========================================================================== */
-
+/* RESPONSIVE */
 @media (max-width: 992px) {
   .main-content-section#qa-part {
     padding: 80px 24px;
@@ -363,32 +375,14 @@
     padding: 28px 0;
   }
 
-  .ticker-logo {
-    height: 28px;
-  }
-
-  .ticker-track {
-    gap: 60px;
-    padding-right: 60px;
-  }
-
   .main-content-section#qa-part {
     padding: 64px 20px;
-  }
-
-  .main-content-section#qa-part .section-label {
-    font-size: 0.74rem;
-    margin-bottom: 12px;
   }
 
   .main-content-section#qa-part .section-headline {
     font-size: 1.78rem;
     line-height: 1.14;
     margin-bottom: 30px;
-  }
-
-  .qa-container {
-    gap: 12px;
   }
 
   .qa-block {
@@ -401,53 +395,11 @@
 
   .qa-question {
     font-size: 1.08rem;
-    padding-right: 18px;
-  }
-
-  .accordion-icon {
-    width: 14px;
-    height: 14px;
-  }
-
-  .accordion-icon::before {
-    top: 6px;
-    width: 14px;
-  }
-
-  .accordion-icon::after {
-    left: 6px;
-    height: 14px;
   }
 
   .qa-answer {
     padding: 0 22px 28px 22px;
     font-size: 0.96rem;
-  }
-
-  .qa-bullet-list li {
-    font-size: 0.96rem;
-  }
-}
-
-@media (max-width: 420px) {
-  .main-content-section#qa-part {
-    padding: 58px 16px;
-  }
-
-  .main-content-section#qa-part .section-headline {
-    font-size: 1.58rem;
-  }
-
-  .qa-trigger {
-    padding: 22px 18px !important;
-  }
-
-  .qa-question {
-    font-size: 1rem;
-  }
-
-  .qa-answer {
-    padding: 0 20px 26px 20px;
   }
 }
 

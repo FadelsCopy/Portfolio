@@ -1,15 +1,23 @@
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom';
+
 import { useEffect } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Hero from './components/Hero'; 
+import Hero from './components/Hero';
 import Marquee from './components/Marquee';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
 import Qa from './components/Qa';
 import PortfolioPage from './components/PortfolioPage';
 import NotFound from './components/NotFound';
+import CreativeStrategyOP from './components/CreativeStrategyOP';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -18,7 +26,7 @@ function ScrollToTop() {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'instant'
+      behavior: 'instant',
     });
   }, [location.pathname]);
 
@@ -37,18 +45,16 @@ function HomePage() {
   );
 }
 
-function Layout() {
+function StandardWebsiteLayout() {
   return (
     <div className="App">
-      <ScrollToTop />
-
       <Header />
 
       <div className="page-shell">
         <Routes>
           <Route path="/" element={<HomePage />} />
 
-          {/* Keep /dev working in case you still open the old link */}
+          {/* Keep the old development link working */}
           <Route path="/dev" element={<HomePage />} />
 
           <Route path="/portfolio" element={<PortfolioPage />} />
@@ -63,11 +69,32 @@ function Layout() {
   );
 }
 
+function AppRoutes() {
+  const location = useLocation();
+
+  const isCreativeStrategyOP =
+    location.pathname === '/creative-strategy-op';
+
+  return (
+    <>
+      <ScrollToTop />
+
+      {isCreativeStrategyOP ? (
+        <CreativeStrategyOP />
+      ) : (
+        <StandardWebsiteLayout />
+      )}
+    </>
+  );
+}
+
 function App() {
   return (
-    <Router>
-      <Layout />
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </ThemeProvider>
   );
 }
 

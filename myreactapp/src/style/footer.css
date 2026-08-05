@@ -1,55 +1,58 @@
-/* footer.css */
+/* footer.css - World-Class Minimal Footer & Flow */
 
 .minimal-premium-footer {
   position: relative;
   width: 100%;
   background:
-    radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.035), transparent 34%),
-    #05070a;
-  border-top: 1px solid rgba(255, 255, 255, 0.075);
-  padding: 46px 0;
+    radial-gradient(ellipse at 50% 0%, var(--orb-glow-1), transparent 45%),
+    var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+  padding: 56px 0;
   overflow: hidden;
   will-change: transform, opacity;
+  transition: background-color 0.35s ease;
 }
 
+/* Seamless Top Blend from FAQ Section */
 .minimal-premium-footer::before {
   content: "";
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
-  height: 120px;
+  height: 150px;
   pointer-events: none;
-  background: linear-gradient(to bottom, rgba(0, 240, 255, 0.025), transparent);
+  background: linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%);
+  z-index: 1;
 }
 
 .footer-glow {
   position: absolute;
   border-radius: 999px;
-  filter: blur(90px);
+  filter: blur(100px);
   pointer-events: none;
   z-index: 0;
 }
 
 .footer-glow-one {
-  width: 260px;
-  height: 260px;
-  right: 12%;
-  top: -120px;
-  background: rgba(0, 240, 255, 0.055);
+  width: 300px;
+  height: 300px;
+  right: 10%;
+  top: -140px;
+  background: var(--orb-glow-1);
 }
 
 .footer-glow-two {
-  width: 220px;
-  height: 220px;
-  left: 8%;
-  bottom: -130px;
-  background: rgba(0, 240, 255, 0.035);
+  width: 250px;
+  height: 250px;
+  left: 6%;
+  bottom: -140px;
+  background: var(--orb-glow-2);
 }
 
 .footer-container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 40px;
@@ -67,22 +70,25 @@
 
 .footer-logo-text {
   display: inline-block;
-  color: #ffffff;
-  font-size: 1.24rem;
+  color: var(--text-main);
+  font-size: 1.3rem;
   font-weight: 850;
   letter-spacing: -0.04em;
   margin-bottom: 12px;
+  transition: color 0.35s ease;
 }
 
 .footer-logo-text span {
-  color: #00f0ff;
+  color: var(--accent-main);
+  transition: color 0.35s ease;
 }
 
 .footer-brand-block p {
-  color: rgba(255, 255, 255, 0.56);
+  color: var(--text-muted);
   font-size: 0.96rem;
-  line-height: 1.62;
+  line-height: 1.65;
   margin: 0;
+  transition: color 0.35s ease;
 }
 
 .footer-right-block {
@@ -96,25 +102,22 @@
 .footer-socials {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .social-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 42px;
-  height: 42px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 60%),
-    #0f121a;
-  border: 1px solid rgba(255, 255, 255, 0.075);
-  color: rgba(255, 255, 255, 0.72);
+  width: 44px;
+  height: 44px;
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
   border-radius: 12px;
   text-decoration: none;
-  box-shadow:
-    0 14px 26px rgba(0, 0, 0, 0.2),
-    0 0 18px rgba(0, 240, 255, 0.025);
+  box-shadow: var(--shadow-sm);
   transition:
     transform 0.25s ease,
     color 0.25s ease,
@@ -130,32 +133,32 @@
 }
 
 .social-btn:hover {
-  color: #00f0ff;
-  border-color: rgba(0, 240, 255, 0.28);
-  background: rgba(0, 240, 255, 0.055);
+  color: var(--accent-main);
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
   transform: translateY(-3px);
-  box-shadow:
-    0 18px 34px rgba(0, 0, 0, 0.26),
-    0 0 22px rgba(0, 240, 255, 0.12);
+  box-shadow: var(--shadow-glow);
 }
 
 .footer-copyright {
-  color: rgba(255, 255, 255, 0.42);
+  color: var(--text-dimmed);
   font-size: 0.86rem;
   font-weight: 550;
   margin: 0;
   text-align: right;
   will-change: transform, opacity;
+  transition: color 0.35s ease;
 }
 
 .footer-copyright span {
-  color: rgba(255, 255, 255, 0.74);
+  color: var(--text-main);
   font-weight: 700;
+  transition: color 0.35s ease;
 }
 
 @media (max-width: 768px) {
   .minimal-premium-footer {
-    padding: 42px 0;
+    padding: 46px 0;
   }
 
   .footer-container {

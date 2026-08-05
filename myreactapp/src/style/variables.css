@@ -1,13 +1,208 @@
-/* variables.css */
-:root {
-  --bg-primary: #09090b;       /* Pure Deep Onyx Background */
-  --bg-secondary: #141417;     /* Charcoal Black Canvas for cards/headers */
-  --accent-main: #00f0ff;      /* High-Voltage Electric Cyan */
-  --accent-glow: rgba(0, 240, 255, 0.15); /* Premium background neon lighting */
-  --accent-spark: #ccff00;     /* Vivid Neon Lime for quick callouts */
-  --text-main: #f4f4f5;        /* Premium Chalk White for main typography */
-  --text-muted: #a1a1aa;       /* Smooth steel grey for descriptions */
-  --border-color: #27272a;     /* Sharp, crisp layout boundaries */
+/* variables.css - World-Class Premium Design System */
+
+:root,
+[data-theme="dark"] {
+  /* Surface Color Architecture */
+  --bg-primary: #07090e;        /* Deep Obsidian Base */
+  --bg-secondary: #0c0f17;      /* Layered Slate Base */
+  --bg-tertiary: #121624;       /* Elevated Surface */
+  --bg-card: rgba(16, 21, 34, 0.72);
+  --bg-card-hover: rgba(22, 29, 46, 0.88);
+  --bg-header: rgba(7, 9, 14, 0.84);
+  --bg-glass: rgba(255, 255, 255, 0.035);
+  --bg-glass-hover: rgba(0, 240, 255, 0.06);
+
+  /* Accents & Brand Lighting */
+  --accent-main: #00f0ff;       /* Electric Cyan */
+  --accent-hover: #38f4ff;
+  --accent-secondary: #6366f1; /* Deep Electric Indigo */
+  --accent-glow: rgba(0, 240, 255, 0.16);
+  --accent-spark: #ccff00;      /* Neon Lime Callout */
+
+  /* Typography */
+  --text-main: #f8fafc;         /* Pure Platinum White */
+  --text-muted: #94a3b8;        /* Slate Metallic Grey */
+  --text-dimmed: #64748b;       /* Muted Charcoal */
+  --text-inverse: #030712;
+
+  /* Borders & Glass Dividers */
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(0, 240, 255, 0.32);
+  --border-glow: rgba(99, 102, 241, 0.25);
+
+  /* Shadows & Elevation */
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 16px 40px -10px rgba(0, 0, 0, 0.65);
+  --shadow-hover: 0 24px 50px -10px rgba(0, 240, 255, 0.16), 0 0 30px rgba(99, 102, 241, 0.12);
+  --shadow-glow: 0 0 30px rgba(0, 240, 255, 0.22);
+
+  /* Modals & Backdrops */
+  --modal-bg: #0d1019;
+  --modal-overlay: rgba(3, 5, 10, 0.84);
+
+  /* Atmospheric Orbs & Meshes */
+  --orb-glow-1: rgba(0, 240, 255, 0.12);
+  --orb-glow-2: rgba(99, 102, 241, 0.12);
+  --section-blend-top: linear-gradient(to bottom, rgba(0, 240, 255, 0.04), transparent);
+  --section-blend-bottom: linear-gradient(to top, rgba(99, 102, 241, 0.04), transparent);
+
+  /* Toggle Control */
+  --toggle-bg: rgba(255, 255, 255, 0.05);
+  --toggle-border: rgba(255, 255, 255, 0.12);
+  --toggle-color: #00f0ff;
+}
+
+[data-theme="light"] {
+  /* Rich, Vivid Light Surfaces */
+  --bg-primary: #dce7f3;
+  --bg-secondary: #cfdceb;
+  --bg-tertiary: #c4d3e5;
+  --bg-card: rgba(239, 245, 252, 0.72);
+  --bg-card-hover: rgba(246, 250, 255, 0.9);
+  --bg-header: rgba(220, 231, 243, 0.8);
+  --bg-glass: rgba(255, 255, 255, 0.22);
+  --bg-glass-hover: rgba(37, 99, 235, 0.1);
+
+  /* Premium Blue / Indigo Accents */
+  --accent-main: #0b66d3;
+  --accent-hover: #084fa8;
+  --accent-secondary: #4f46e5;
+  --accent-glow: rgba(11, 102, 211, 0.18);
+  --accent-spark: #0f766e;
+
+  /* Typography */
+  --text-main: #0f1f3d;
+  --text-muted: #334760;
+  --text-dimmed: #718198;
+  --text-inverse: #ffffff;
+
+  /* Borders & Glass Dividers */
+  --border-color: rgba(44, 72, 112, 0.14);
+  --border-hover: rgba(11, 102, 211, 0.34);
+  --border-glow: rgba(79, 70, 229, 0.2);
+
+  /* Shadows & Elevation */
+  --shadow-sm: 0 4px 14px rgba(58, 84, 122, 0.1);
+  --shadow-card: 0 18px 40px -16px rgba(45, 71, 110, 0.22), 0 2px 8px rgba(83, 110, 150, 0.08);
+  --shadow-hover: 0 24px 50px -14px rgba(11, 102, 211, 0.2), 0 0 28px rgba(79, 70, 229, 0.08);
+  --shadow-glow: 0 0 28px rgba(11, 102, 211, 0.2);
+
+  /* Modals & Backdrops */
+  --modal-bg: #e8f0f9;
+  --modal-overlay: rgba(31, 47, 74, 0.48);
+
+  /* Atmospheric Orbs & Meshes */
+  --orb-glow-1: rgba(45, 142, 255, 0.16);
+  --orb-glow-2: rgba(93, 90, 219, 0.12);
+  --section-blend-top: linear-gradient(to bottom, rgba(39, 103, 194, 0.08), transparent);
+  --section-blend-bottom: linear-gradient(to top, rgba(79, 70, 229, 0.07), transparent);
+
+  /* Toggle Control */
+  --toggle-bg: rgba(255, 255, 255, 0.28);
+  --toggle-border: rgba(35, 74, 128, 0.18);
+  --toggle-color: #0b66d3;
+}
+
+/* ========================================================================== 
+   LIGHT MODE — ATMOSPHERIC SECTION SYSTEM
+   Dark mode remains completely untouched.
+   ========================================================================== */
+
+[data-theme="light"] .site-header {
+  background:
+    linear-gradient(135deg, rgba(226, 236, 248, 0.88), rgba(207, 222, 239, 0.78));
+  border-bottom-color: rgba(50, 78, 118, 0.14);
+  box-shadow: 0 10px 30px rgba(52, 78, 113, 0.1);
+}
+
+[data-theme="light"] .hero-section {
+  background:
+    radial-gradient(ellipse at 78% 38%, rgba(52, 151, 255, 0.2), transparent 58%),
+    radial-gradient(ellipse at 10% 88%, rgba(91, 86, 215, 0.14), transparent 48%),
+    linear-gradient(135deg, #d5e3f2 0%, #c7d8ec 48%, #dce7f3 100%);
+}
+
+[data-theme="light"] .ticker-showcase-section {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.24), transparent 48%),
+    linear-gradient(180deg, #d9e5f2 0%, #cfdeed 100%);
+}
+
+[data-theme="light"] .services-section {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(64, 145, 235, 0.14), transparent 44%),
+    radial-gradient(ellipse at 82% 90%, rgba(85, 77, 210, 0.1), transparent 42%),
+    linear-gradient(180deg, #cfdeed 0%, #c8d8e9 100%);
+}
+
+[data-theme="light"] .portfolio-showcase {
+  background:
+    radial-gradient(ellipse at 18% 30%, rgba(53, 132, 224, 0.16), transparent 42%),
+    radial-gradient(ellipse at 80% 78%, rgba(78, 70, 205, 0.1), transparent 44%),
+    linear-gradient(180deg, #c8d8e9 0%, #d3e0ee 100%);
+}
+
+[data-theme="light"] .main-content-section#qa-part {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(39, 112, 206, 0.14), transparent 42%),
+    radial-gradient(ellipse at 78% 84%, rgba(90, 84, 210, 0.1), transparent 38%),
+    linear-gradient(180deg, #d3e0ee 0%, #c9d8e8 100%);
+}
+
+[data-theme="light"] .minimal-premium-footer {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(45, 120, 212, 0.12), transparent 42%),
+    linear-gradient(180deg, #c7d6e7 0%, #bdcee1 100%);
+}
+
+[data-theme="light"] .portfolio-page-section,
+[data-theme="light"] .not-found-page {
+  background:
+    radial-gradient(ellipse at 72% 24%, rgba(47, 143, 248, 0.18), transparent 46%),
+    radial-gradient(ellipse at 16% 86%, rgba(84, 75, 211, 0.12), transparent 42%),
+    linear-gradient(180deg, #d3e1f0 0%, #c8d8e9 100%);
+}
+
+[data-theme="light"] .service-card,
+[data-theme="light"] .archive-stat-card,
+[data-theme="light"] .qa-block,
+[data-theme="light"] .portfolio-page-card,
+[data-theme="light"] .not-found-card,
+[data-theme="light"] .social-btn {
+  background:
+    linear-gradient(145deg, rgba(242, 247, 253, 0.78), rgba(221, 232, 244, 0.7));
+  border-color: rgba(54, 84, 124, 0.16);
+}
+
+[data-theme="light"] .service-card:hover,
+[data-theme="light"] .archive-stat-card:hover,
+[data-theme="light"] .qa-block:hover,
+[data-theme="light"] .qa-block.is-active,
+[data-theme="light"] .portfolio-page-card:hover,
+[data-theme="light"] .social-btn:hover {
+  background:
+    linear-gradient(145deg, rgba(248, 251, 255, 0.9), rgba(226, 237, 249, 0.84));
+}
+
+[data-theme="light"] .portfolio-filter-nav,
+[data-theme="light"] .modal-content,
+[data-theme="light"] .static-modal-copy-col {
+  background:
+    linear-gradient(145deg, rgba(235, 243, 251, 0.94), rgba(215, 228, 242, 0.92));
+}
+
+[data-theme="light"] .static-modal-image-col {
+  background:
+    linear-gradient(145deg, #cbd9e9, #dbe6f1);
+}
+
+[data-theme="light"] .hero-btn-outline,
+[data-theme="light"] .email-link,
+[data-theme="light"] .theme-toggle-btn,
+[data-theme="light"] .archive-format-tags span,
+[data-theme="light"] .portfolio-filter-nav button,
+[data-theme="light"] .ad-copy-block {
+  background: rgba(236, 244, 252, 0.5);
 }
 
 * {
@@ -20,10 +215,233 @@ html {
   scroll-behavior: smooth;
   background-color: var(--bg-primary);
   color: var(--text-main);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 body {
   overflow-x: hidden;
   background-color: var(--bg-primary);
+  color: var(--text-main);
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* ==========================================================================
+   LIGHT MODE — PREMIUM CARD GLOW ONLY
+   Dark mode is untouched. Text, labels, icons, and inner elements do not glow.
+   ========================================================================== */
+
+[data-theme="light"] {
+  --shadow-hover:
+    0 22px 48px -18px rgba(15, 83, 170, 0.24),
+    0 0 0 1px rgba(15, 105, 220, 0.10),
+    0 0 26px rgba(79, 70, 229, 0.10);
+
+  --shadow-glow:
+    0 12px 30px -16px rgba(15, 83, 170, 0.22),
+    0 0 20px rgba(79, 70, 229, 0.08);
+}
+
+/* Main interactive cards only */
+[data-theme="light"] .service-card:hover,
+[data-theme="light"] .archive-stat-card:hover,
+[data-theme="light"] .qa-block:hover,
+[data-theme="light"] .qa-block.is-active,
+[data-theme="light"] .portfolio-page-card:hover,
+[data-theme="light"] .not-found-card:hover {
+  border-color: rgba(15, 105, 220, 0.34);
+  box-shadow:
+    0 26px 52px -20px rgba(15, 83, 170, 0.28),
+    0 10px 24px -16px rgba(79, 70, 229, 0.20),
+    0 0 0 1px rgba(15, 105, 220, 0.08),
+    0 0 24px rgba(79, 70, 229, 0.09);
+}
+
+/* Slightly refined glow for smaller outer controls */
+[data-theme="light"] .social-btn:hover,
+[data-theme="light"] .theme-toggle-btn:hover {
+  border-color: rgba(15, 105, 220, 0.30);
+  box-shadow:
+    0 14px 28px -16px rgba(15, 83, 170, 0.26),
+    0 0 18px rgba(79, 70, 229, 0.08);
+}
+
+/* Primary buttons: elegant outer glow only */
+[data-theme="light"] .hero-btn-primary:hover,
+[data-theme="light"] .archive-main-button:hover,
+[data-theme="light"] .main-nav .btn-nav-call:hover,
+[data-theme="light"] .not-found-primary-btn:hover {
+  box-shadow:
+    0 18px 34px -16px rgba(15, 83, 170, 0.32),
+    0 0 22px rgba(79, 70, 229, 0.10);
+}
+
+/* Secondary controls: border and surface glow only */
+[data-theme="light"] .hero-btn-outline:hover,
+[data-theme="light"] .email-link:hover,
+[data-theme="light"] .archive-format-tags span:hover,
+[data-theme="light"] .portfolio-filter-nav button:hover,
+[data-theme="light"] .portfolio-filter-nav button.active {
+  border-color: rgba(15, 105, 220, 0.30);
+  box-shadow:
+    0 12px 26px -18px rgba(15, 83, 170, 0.24),
+    0 0 16px rgba(79, 70, 229, 0.07);
+}
+
+/* Explicitly keep all text and icons clean */
+[data-theme="light"] .service-card *,
+[data-theme="light"] .archive-stat-card *,
+[data-theme="light"] .qa-block *,
+[data-theme="light"] .portfolio-page-card *,
+[data-theme="light"] .not-found-card *,
+[data-theme="light"] .social-btn *,
+[data-theme="light"] .theme-toggle-btn *,
+[data-theme="light"] .hero-btn-primary,
+[data-theme="light"] .hero-btn-outline,
+[data-theme="light"] .archive-main-button,
+[data-theme="light"] .main-nav .btn-nav-call,
+[data-theme="light"] .email-link,
+[data-theme="light"] .archive-format-tags span,
+[data-theme="light"] .portfolio-filter-nav button {
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+/* ==========================================================================
+   LIGHT MODE — REFINED HERO ONLY
+   Everything else stays exactly the same. Dark mode is untouched.
+   ========================================================================== */
+
+[data-theme="light"] .hero-section {
+  background:
+    radial-gradient(circle at 82% 34%, rgba(71, 150, 235, 0.18), transparent 31%),
+    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.34), transparent 28%),
+    linear-gradient(
+      135deg,
+      #d7e4f1 0%,
+      #c8d9ea 34%,
+      #bfd2e6 68%,
+      #d5e2ef 100%
+    );
+}
+
+[data-theme="light"] .hero-section::before {
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(38, 76, 122, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38, 76, 122, 0.12) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at 76% 44%, black 0%, transparent 66%);
+  -webkit-mask-image: radial-gradient(circle at 76% 44%, black 0%, transparent 66%);
+}
+
+[data-theme="light"] .hero-section::after {
+  background:
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(30, 112, 211, 0.10) 0%,
+      transparent 72%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      #d9e5f2 100%
+    );
+  opacity: 1;
+}
+
+[data-theme="light"] .hero-section-orb-one {
+  background: rgba(37, 129, 230, 0.14);
+}
+
+[data-theme="light"] .hero-section-orb-two {
+  background: rgba(72, 93, 190, 0.10);
+}
+
+[data-theme="light"] .portrait-glow-ring {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(37, 129, 230, 0.18),
+      rgba(92, 93, 207, 0.07) 48%,
+      transparent 72%
+    );
+  border-color: rgba(36, 105, 185, 0.22);
+  box-shadow:
+    0 22px 60px -28px rgba(26, 86, 158, 0.34),
+    0 0 0 1px rgba(255, 255, 255, 0.22);
+}
+
+[data-theme="light"] .premium-profile-bg-smooth {
+  background:
+    radial-gradient(
+      circle at 50% 43%,
+      rgba(57, 145, 238, 0.19) 0%,
+      rgba(111, 137, 190, 0.10) 40%,
+      transparent 76%
+    );
+}
+
+[data-theme="light"] .premium-profile-bg-smooth::before {
+  background-image:
+    linear-gradient(rgba(38, 76, 122, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38, 76, 122, 0.12) 1px, transparent 1px);
+}
+
+[data-theme="light"] .hero-tagline {
+  background: rgba(224, 235, 247, 0.42);
+  border-color: rgba(34, 92, 161, 0.16);
+  color: #087f77;
+}
+
+[data-theme="light"] .hero-btn-outline {
+  background: rgba(225, 236, 247, 0.46);
+  border-color: rgba(32, 77, 132, 0.18);
+}
+
+@media (max-width: 992px) {
+  [data-theme="light"] .hero-section {
+    background:
+      radial-gradient(circle at 50% 20%, rgba(62, 143, 231, 0.18), transparent 30%),
+      radial-gradient(circle at 8% 76%, rgba(83, 94, 196, 0.08), transparent 34%),
+      linear-gradient(
+        180deg,
+        #d6e3f0 0%,
+        #c7d8e9 48%,
+        #d7e3ef 100%
+      );
+  }
+
+  [data-theme="light"] .hero-section::before {
+    opacity: 0.16;
+    mask-image: radial-gradient(circle at 50% 28%, black 0%, transparent 64%);
+    -webkit-mask-image: radial-gradient(circle at 50% 28%, black 0%, transparent 64%);
+  }
+
+  [data-theme="light"] .portrait-glow-ring {
+    box-shadow:
+      0 18px 44px -26px rgba(26, 86, 158, 0.28),
+      0 0 0 1px rgba(255, 255, 255, 0.18);
+  }
+}
+
+@media (max-width: 576px) {
+  [data-theme="light"] .hero-section {
+    background:
+      radial-gradient(circle at 50% 18%, rgba(63, 145, 231, 0.15), transparent 27%),
+      linear-gradient(
+        180deg,
+        #d8e4f0 0%,
+        #c8d9ea 52%,
+        #d8e4f0 100%
+      );
+  }
+
+  [data-theme="light"] .hero-section::before {
+    opacity: 0.12;
+  }
+
+  [data-theme="light"] .hero-section-orb-one,
+  [data-theme="light"] .hero-section-orb-two {
+    opacity: 0.65;
+  }
 }

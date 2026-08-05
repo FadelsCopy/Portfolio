@@ -1,20 +1,19 @@
-/* header.css */
+/* header.css - Ultra-Polished SaaS Header */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background:
-    linear-gradient(180deg, rgba(5, 7, 10, 0.92), rgba(5, 7, 10, 0.82)),
-    rgba(5, 7, 10, 0.86);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+  background: var(--bg-header);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border-color);
   padding: 16px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   will-change: transform, opacity;
+  transition: background-color 0.35s ease, border-color 0.35s ease;
 }
 
 .brand {
@@ -30,69 +29,79 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .logo-link:hover {
-  opacity: 0.86;
+  opacity: 0.88;
+  transform: translateY(-1px);
 }
 
 .logo-text {
-  font-size: 1.3rem;
+  font-size: 1.38rem;
   font-weight: 850;
   letter-spacing: -0.04em;
-  color: #ffffff;
+  color: var(--text-main);
+  transition: color 0.35s ease;
 }
 
 .logo-text .dot {
-  color: #00f0ff;
+  color: var(--accent-main);
+  transition: color 0.35s ease;
 }
 
 .email-link {
-  color: rgba(255, 255, 255, 0.58);
+  color: var(--text-muted);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 550;
-  border: 1px solid rgba(255, 255, 255, 0.075);
-  padding: 7px 12px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-color);
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
   transition:
     color 0.25s ease,
     border-color 0.25s ease,
-    background-color 0.25s ease;
+    background-color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
 }
 
 .email-link:hover {
-  color: #00f0ff;
-  border-color: rgba(0, 240, 255, 0.24);
-  background: rgba(0, 240, 255, 0.045);
+  color: var(--accent-main);
+  border-color: var(--border-hover);
+  background: var(--bg-glass-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 .main-nav {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 22px;
   will-change: transform, opacity;
 }
 
 .main-nav a,
 .nav-main-link,
 .nav-btn-link {
-  color: rgba(255, 255, 255, 0.64);
+  color: var(--text-muted);
   text-decoration: none;
   font-size: 0.95rem;
-  font-weight: 550;
+  font-weight: 600;
   transition:
     color 0.2s ease,
     border-color 0.2s ease,
-    background-color 0.2s ease;
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .nav-main-link:hover,
 .nav-btn-link:hover,
 .main-nav a:hover {
-  color: #ffffff;
+  color: var(--text-main);
+  transform: translateY(-1px);
 }
 
 .nav-btn-link {
@@ -103,23 +112,62 @@
   font-family: inherit;
 }
 
+/* Premium Glass Theme Toggle */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
+  color: var(--toggle-color);
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease;
+  padding: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.08) rotate(12deg);
+  background: var(--bg-glass-hover);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-glow);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.94);
+}
+
+.theme-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
 .main-nav .btn-nav-call {
-  color: #000000 !important;
-  background-color: #00f0ff;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: 650;
-  box-shadow: 0 8px 22px rgba(0, 240, 255, 0.16);
+  color: var(--text-inverse) !important;
+  background: linear-gradient(135deg, var(--accent-main), var(--accent-hover));
+  padding: 9px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-glow);
   transition:
     transform 0.22s ease,
     box-shadow 0.22s ease,
-    background-color 0.22s ease;
+    background 0.22s ease;
 }
 
 .main-nav .btn-nav-call:hover {
-  transform: translateY(-1px);
-  background: #23f3ff;
-  box-shadow: 0 12px 28px rgba(0, 240, 255, 0.24);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
 }
 
 /* Mobile */
@@ -133,7 +181,7 @@
   }
 
   .main-nav {
-    gap: 10px;
+    gap: 12px;
   }
 
   .nav-btn-link {
@@ -144,27 +192,30 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #00f0ff !important;
-    background: rgba(0, 240, 255, 0.06);
-    border: 1px solid rgba(0, 240, 255, 0.26);
-    padding: 9px 13px;
+    color: var(--accent-main) !important;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-hover);
+    padding: 8px 12px;
     border-radius: 10px;
     font-size: 0.84rem;
     font-weight: 750;
-    box-shadow:
-      0 0 14px rgba(0, 240, 255, 0.12),
-      inset 0 0 8px rgba(0, 240, 255, 0.04);
+    box-shadow: var(--shadow-sm);
   }
 
   .nav-main-link:hover {
-    color: #00f0ff !important;
-    background: rgba(0, 240, 255, 0.085);
-    border-color: rgba(0, 240, 255, 0.36);
+    color: var(--accent-main) !important;
+    background: var(--bg-glass-hover);
+    border-color: var(--border-hover);
+  }
+
+  .theme-toggle-btn {
+    width: 36px;
+    height: 36px;
   }
 
   .main-nav .btn-nav-call {
     display: inline-flex !important;
-    padding: 9px 13px;
+    padding: 8px 12px;
     font-size: 0.84rem;
     border-radius: 10px;
     margin-left: 0;
@@ -177,7 +228,7 @@
 
 @media (max-width: 380px) {
   .site-header {
-    padding: 15px 16px;
+    padding: 14px 14px;
   }
 
   .main-nav {
@@ -187,7 +238,7 @@
   .nav-main-link,
   .main-nav .btn-nav-call {
     font-size: 0.78rem;
-    padding: 8px 10px;
+    padding: 7px 10px;
   }
 
   .logo-text {
@@ -199,7 +250,8 @@
   .site-header,
   .brand,
   .main-nav,
-  .main-nav .btn-nav-call {
+  .main-nav .btn-nav-call,
+  .theme-toggle-btn {
     transition: none !important;
     animation: none !important;
     will-change: auto;

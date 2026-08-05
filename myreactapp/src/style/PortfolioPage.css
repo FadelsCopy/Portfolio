@@ -1,16 +1,17 @@
-/* PortfolioPage.css */
+/* PortfolioPage.css - World-Class Archive & Glass Modals */
 
 /* ─── Base ─────────────────────────────────────────────────────────── */
 .portfolio-page-section {
   position: relative;
   padding: 76px 40px 96px;
   background:
-    radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.05), transparent 34%),
-    radial-gradient(circle at 12% 88%, rgba(0, 240, 255, 0.022), transparent 36%),
-    #05070a;
+    radial-gradient(ellipse at 50% 0%, var(--orb-glow-1), transparent 45%),
+    radial-gradient(ellipse at 12% 88%, var(--orb-glow-2), transparent 40%),
+    var(--bg-primary);
   min-height: 100vh;
   width: 100%;
   overflow: hidden;
+  transition: background-color 0.35s ease;
 }
 
 .portfolio-page-section::before,
@@ -19,64 +20,64 @@
   position: absolute;
   left: 0;
   width: 100%;
-  height: 150px;
+  height: 180px;
   pointer-events: none;
+  z-index: 1;
 }
 
 .portfolio-page-section::before {
   top: 0;
-  background: linear-gradient(to bottom, rgba(0, 240, 255, 0.028), transparent);
+  background: linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%);
 }
 
 .portfolio-page-section::after {
   bottom: 0;
-  background: linear-gradient(to top, rgba(0, 240, 255, 0.022), transparent);
+  background: linear-gradient(to top, var(--bg-primary) 0%, transparent 100%);
 }
 
 .portfolio-page-header {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   text-align: center;
   margin-bottom: 58px;
 }
 
 .portfolio-page-header .section-headline {
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 2.75rem;
-  font-weight: 850;
+  font-weight: 900;
   line-height: 1.08;
   letter-spacing: -0.04em;
   margin-bottom: 0;
+  transition: color 0.35s ease;
 }
 
-/* ─── Filter Nav ────────────────────────────────────────────────────── */
+/* ─── Glass Filter Nav ────────────────────────────────────────────────── */
 .portfolio-filter-nav {
   display: inline-flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.028), transparent 60%),
-    rgba(15, 18, 26, 0.72);
-  padding: 7px;
-  border-radius: 16px;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 8px;
+  border-radius: 20px;
   margin-top: 32px;
   gap: 6px;
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.075);
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.28),
-    0 0 22px rgba(0, 240, 255, 0.025),
-    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+  transition: background-color 0.35s ease, border-color 0.35s ease;
 }
 
 .portfolio-filter-nav button {
   position: relative;
   background: transparent;
   border: 1px solid transparent;
-  color: rgba(255, 255, 255, 0.62);
-  padding: 11px 18px;
-  border-radius: 11px;
+  color: var(--text-muted);
+  padding: 11px 20px;
+  border-radius: 14px;
   cursor: pointer;
   transition:
     color 0.25s ease,
@@ -91,20 +92,17 @@
 }
 
 .portfolio-filter-nav button:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.035);
-  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  background: var(--bg-glass-hover);
+  border-color: var(--border-color);
 }
 
 .portfolio-filter-nav button.active {
-  color: #00f0ff;
-  background: rgba(0, 240, 255, 0.065);
-  border-color: rgba(0, 240, 255, 0.3);
+  color: var(--accent-main);
+  background: var(--bg-glass-hover);
+  border-color: var(--border-hover);
   font-weight: 750;
-  text-shadow: none;
-  box-shadow:
-    0 0 16px rgba(0, 240, 255, 0.12),
-    inset 0 0 10px rgba(0, 240, 255, 0.045);
+  box-shadow: var(--shadow-glow);
 }
 
 .nav-indicator {
@@ -114,7 +112,7 @@
 /* ─── Grid ──────────────────────────────────────────────────────────── */
 .portfolio-page-grid-wrapper {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
 }
 
@@ -127,7 +125,7 @@
   margin: 0 auto;
 }
 
-/* ─── Premium Card Design ───────────────────────────────────────────── */
+/* ─── Glass Card Design ───────────────────────────────────────────── */
 .portfolio-page-card {
   position: relative;
   overflow: hidden;
@@ -136,17 +134,12 @@
   flex-direction: column;
   min-height: 304px;
 
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.038), transparent 48%),
-    linear-gradient(135deg, rgba(0, 240, 255, 0.028), transparent 40%),
-    #0f121a;
-
-  border: 1px solid rgba(255, 255, 255, 0.085);
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-color);
   border-radius: 20px;
-
-  box-shadow:
-    0 18px 38px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  box-shadow: var(--shadow-card);
 
   transition:
     transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
@@ -164,10 +157,10 @@
   background:
     linear-gradient(
       135deg,
-      rgba(0, 240, 255, 0.28),
-      transparent 28%,
-      transparent 72%,
-      rgba(255, 255, 255, 0.08)
+      var(--border-hover),
+      transparent 30%,
+      transparent 70%,
+      var(--border-color)
     );
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -187,7 +180,7 @@
   width: 210px;
   height: 210px;
   border-radius: 999px;
-  background: rgba(0, 240, 255, 0.06);
+  background: var(--accent-glow);
   filter: blur(34px);
   opacity: 0;
   transition: opacity 0.38s ease;
@@ -195,12 +188,10 @@
 }
 
 .portfolio-page-card:hover {
-  border-color: rgba(0, 240, 255, 0.28);
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
   transform: translateY(-7px);
-  box-shadow:
-    0 28px 58px rgba(0, 0, 0, 0.42),
-    0 0 30px rgba(0, 240, 255, 0.065),
-    inset 0 1px 0 rgba(255, 255, 255, 0.055);
+  box-shadow: var(--shadow-hover);
 }
 
 .portfolio-page-card:hover::before,
@@ -211,41 +202,12 @@
 .portfolio-page-media {
   width: 100%;
   aspect-ratio: 16 / 10;
-  background:
-    radial-gradient(circle at center, rgba(0, 240, 255, 0.04), transparent 52%),
-    #111722;
+  background: var(--bg-tertiary);
   flex-shrink: 0;
   overflow: hidden;
   position: relative;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
-}
-
-.portfolio-page-media::before {
-  content: "";
-  position: absolute;
-  inset: 14px;
-  z-index: 2;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.055);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-
-.portfolio-page-media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(to bottom, transparent 55%, rgba(5, 7, 10, 0.42)),
-    linear-gradient(to right, rgba(0, 240, 255, 0.05), transparent 42%);
-  pointer-events: none;
-  opacity: 0.78;
-}
-
-.portfolio-page-card:hover .portfolio-page-media::before {
-  opacity: 1;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.35s ease, border-color 0.35s ease;
 }
 
 .portfolio-page-media img {
@@ -261,7 +223,7 @@
 
 .portfolio-page-card:hover .portfolio-page-media img {
   transform: scale(1.055);
-  filter: brightness(1.055) contrast(1.025);
+  filter: brightness(1.05) contrast(1.025);
 }
 
 .portfolio-page-info {
@@ -277,25 +239,27 @@
 
 .portfolio-page-info span {
   width: max-content;
-  color: rgba(0, 240, 255, 0.92);
+  color: var(--accent-main);
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-size: 0.66rem;
   font-weight: 850;
   margin-bottom: 10px;
-  padding: 7px 9px;
+  padding: 6px 10px;
   border-radius: 999px;
-  background: rgba(0, 240, 255, 0.055);
-  border: 1px solid rgba(0, 240, 255, 0.12);
+  background: var(--bg-glass-hover);
+  border: 1px solid var(--border-hover);
+  transition: color 0.35s ease, background-color 0.35s ease;
 }
 
 .portfolio-page-info h3 {
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 1.12rem;
   line-height: 1.25;
   font-weight: 780;
   letter-spacing: -0.02em;
   margin: 0;
+  transition: color 0.35s ease;
 }
 
 /* ─── No Projects ───────────────────────────────────────────────────── */
@@ -303,13 +267,11 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: 64px 24px;
-  color: rgba(255, 255, 255, 0.38);
+  color: var(--text-muted);
   font-style: italic;
-  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border: 1px dashed var(--border-color);
   border-radius: 18px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 50%),
-    rgba(255, 255, 255, 0.018);
+  background: var(--bg-card);
 }
 
 /* ─── Modal Overlay ────────────────────────────────────────────────── */
@@ -319,13 +281,9 @@
   width: 100%;
   height: 100%;
 
-  background:
-    radial-gradient(circle at 50% 18%, rgba(0, 240, 255, 0.065), transparent 38%),
-    radial-gradient(circle at 80% 85%, rgba(0, 240, 255, 0.035), transparent 34%),
-    rgba(0, 0, 0, 0.9);
-
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--modal-overlay);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 
   display: flex;
   align-items: center;
@@ -349,42 +307,25 @@
   flex-direction: column;
   padding: 0 30px 30px;
 
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 45%),
-    linear-gradient(135deg, rgba(0, 240, 255, 0.025), transparent 42%),
-    #0b0e14;
-
-  border: 1px solid rgba(255, 255, 255, 0.115);
+  background: var(--modal-bg);
+  border: 1px solid var(--border-color);
   border-radius: 24px;
-
-  box-shadow:
-    0 34px 90px rgba(0, 0, 0, 0.68),
-    0 0 42px rgba(0, 240, 255, 0.085),
-    inset 0 1px 0 rgba(255, 255, 255, 0.045);
-}
-
-.modal-content::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background:
-    linear-gradient(135deg, rgba(0, 240, 255, 0.11), transparent 34%);
-  opacity: 0.55;
+  box-shadow: var(--shadow-card), var(--shadow-glow);
+  transition: background-color 0.35s ease, border-color 0.35s ease;
 }
 
 .modal-content h2 {
   position: relative;
   z-index: 1;
-  color: #ffffff;
+  color: var(--text-main);
   margin: 0 0 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 16px;
   padding-top: 26px;
   font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: -0.025em;
+  transition: color 0.35s ease, border-color 0.35s ease;
 }
 
 .close-btn {
@@ -401,20 +342,15 @@
   align-items: center;
   justify-content: center;
 
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 60%),
-    #111620;
-
-  border: 1px solid rgba(255, 255, 255, 0.095);
-  color: rgba(255, 255, 255, 0.78);
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
+  color: var(--text-main);
 
   font-size: 1.55rem;
   line-height: 1;
   cursor: pointer;
 
-  box-shadow:
-    0 12px 26px rgba(0, 0, 0, 0.32),
-    0 0 16px rgba(0, 240, 255, 0.025);
+  box-shadow: var(--shadow-sm);
 
   transition:
     color 0.22s ease,
@@ -425,13 +361,11 @@
 }
 
 .close-btn:hover {
-  color: #00f0ff;
-  border-color: rgba(0, 240, 255, 0.34);
-  background: rgba(0, 240, 255, 0.06);
+  color: var(--accent-main);
+  border-color: var(--border-hover);
+  background: var(--bg-glass-hover);
   transform: translateY(-1px);
-  box-shadow:
-    0 16px 30px rgba(0, 0, 0, 0.36),
-    0 0 22px rgba(0, 240, 255, 0.12);
+  box-shadow: var(--shadow-glow);
 }
 
 .modal-body {
@@ -446,8 +380,8 @@
   width: 100%;
   border-radius: 16px;
   margin-bottom: 0;
-  background: #05070a;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-card);
 }
 
 @media (min-width: 769px) {
@@ -480,18 +414,16 @@
   overflow: hidden;
 }
 
-/* Left column: image */
+/* Left Column: Image */
 .static-modal-image-col {
   flex: 0 0 42%;
-  background:
-    radial-gradient(circle at center, rgba(0, 240, 255, 0.06), transparent 54%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 60%),
-    #080b10;
+  background: var(--bg-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 36px;
-  border-right: 1px solid rgba(255, 255, 255, 0.085);
+  border-right: 1px solid var(--border-color);
+  transition: background-color 0.35s ease, border-color 0.35s ease;
 }
 
 .static-modal-image {
@@ -500,21 +432,18 @@
   object-fit: contain;
   border-radius: 16px;
   display: block;
-  box-shadow:
-    0 24px 54px rgba(0, 0, 0, 0.45),
-    0 0 22px rgba(0, 240, 255, 0.045);
+  box-shadow: var(--shadow-card);
 }
 
-/* Right column: copy */
+/* Right Column: Copy */
 .static-modal-copy-col {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   padding: 0;
-  background:
-    linear-gradient(135deg, rgba(0, 240, 255, 0.018), transparent 44%),
-    transparent;
+  background: var(--modal-bg);
+  transition: background-color 0.35s ease;
 }
 
 .static-modal-copy-header {
@@ -526,7 +455,7 @@
   display: inline-flex;
   align-items: center;
   width: max-content;
-  color: rgba(0, 240, 255, 0.92);
+  color: var(--accent-main);
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.64rem;
@@ -534,12 +463,12 @@
   margin-bottom: 10px;
   padding: 7px 10px;
   border-radius: 999px;
-  background: rgba(0, 240, 255, 0.055);
-  border: 1px solid rgba(0, 240, 255, 0.13);
+  background: var(--bg-glass-hover);
+  border: 1px solid var(--border-hover);
 }
 
 .static-modal-title {
-  color: #ffffff !important;
+  color: var(--text-main) !important;
   font-size: 1.45rem !important;
   font-weight: 820 !important;
   margin: 0 !important;
@@ -547,6 +476,7 @@
   letter-spacing: -0.03em !important;
   border-bottom: none !important;
   padding: 0 !important;
+  transition: color 0.35s ease;
 }
 
 /* Scrollable copy body */
@@ -556,10 +486,10 @@
   padding: 0 36px 36px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 
   scrollbar-width: thin;
-  scrollbar-color: rgba(0, 240, 255, 0.28) transparent;
+  scrollbar-color: var(--border-hover) transparent;
 }
 
 .static-modal-copy-body::-webkit-scrollbar {
@@ -571,27 +501,21 @@
 }
 
 .static-modal-copy-body::-webkit-scrollbar-thumb {
-  background: rgba(0, 240, 255, 0.24);
+  background: var(--border-hover);
   border-radius: 99px;
 }
 
-/* Ad copy blocks */
+/* Ad Copy Blocks */
 .ad-copy-block {
   display: flex;
   flex-direction: column;
   gap: 8px;
 
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 60%),
-    #0f121a;
-  border: 1px solid rgba(255, 255, 255, 0.075);
-  border-radius: 14px;
-
-  padding: 18px;
-}
-
-.ad-copy-divider {
-  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+  transition: background-color 0.35s ease, border-color 0.35s ease;
 }
 
 .ad-copy-label {
@@ -599,29 +523,31 @@
   font-weight: 850;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(0, 240, 255, 0.88);
+  color: var(--accent-main);
   display: block;
   margin-bottom: 2px;
+  transition: color 0.35s ease;
 }
 
 .ad-copy-text {
-  color: #c7ccd6;
+  color: var(--text-muted);
   font-size: 0.92rem;
   line-height: 1.76;
   margin: 0;
   white-space: pre-wrap;
   word-break: break-word;
+  transition: color 0.35s ease;
 }
 
-/* CTA block */
+/* CTA Block */
 .ad-copy-cta-block {
   flex-direction: row;
   align-items: center;
   gap: 12px;
-  background: rgba(0, 240, 255, 0.055);
-  border: 1px solid rgba(0, 240, 255, 0.16);
-  border-radius: 14px;
-  padding: 15px 18px;
+  background: var(--bg-glass-hover);
+  border: 1px solid var(--border-hover);
+  border-radius: 16px;
+  padding: 16px 20px;
   margin-top: 0;
 }
 
@@ -631,13 +557,14 @@
 }
 
 .ad-copy-cta-value {
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 0.95rem;
-  font-weight: 720;
+  font-weight: 750;
   letter-spacing: 0.02em;
+  transition: color 0.35s ease;
 }
 
-/* ─── Responsive ────────────────────────────────────────────────────── */
+/* RESPONSIVE */
 @media (max-width: 900px) {
   .portfolio-page-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -655,35 +582,9 @@
     padding: 34px 20px 70px;
   }
 
-  .portfolio-page-header {
-    margin-bottom: 34px;
-  }
-
-  .portfolio-page-header .section-headline {
-    display: none;
-  }
-
   .portfolio-page-grid {
     grid-template-columns: 1fr;
     gap: 22px;
-  }
-
-  .portfolio-page-card {
-    border-radius: 18px;
-    min-height: auto;
-  }
-
-  .portfolio-page-media {
-    aspect-ratio: 16 / 10.5;
-  }
-
-  .portfolio-page-info {
-    padding: 18px 18px 20px;
-    min-height: 92px;
-  }
-
-  .portfolio-page-info h3 {
-    font-size: 1.05rem;
   }
 
   .portfolio-filter-nav {
@@ -701,62 +602,20 @@
   }
 
   .portfolio-filter-nav button {
-    background: #0f121a;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.62);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
     padding: 9px 14px;
     border-radius: 10px;
     font-size: 0.76rem;
     font-weight: 650;
-    box-shadow: none;
-    text-shadow: none;
   }
 
   .portfolio-filter-nav button.active {
-    background: rgba(0, 240, 255, 0.075);
-    border: 1px solid rgba(0, 240, 255, 0.42);
-    color: #00f0ff;
-    box-shadow:
-      0 0 14px rgba(0, 240, 255, 0.18),
-      inset 0 0 10px rgba(0, 240, 255, 0.055);
-    text-shadow: none;
-  }
-
-  .portfolio-filter-nav button:hover {
-    background: #131822;
-    color: #ffffff;
-    border-color: rgba(0, 240, 255, 0.18);
-  }
-
-  .portfolio-filter-nav button.active:hover,
-  .portfolio-filter-nav button.active:focus,
-  .portfolio-filter-nav button.active:active {
-    color: #00f0ff;
-    background: rgba(0, 240, 255, 0.075);
-    border-color: rgba(0, 240, 255, 0.42);
-    text-shadow: none;
-    box-shadow:
-      0 0 14px rgba(0, 240, 255, 0.18),
-      inset 0 0 10px rgba(0, 240, 255, 0.055);
-  }
-
-  .modal-overlay {
-    padding: 18px;
-    align-items: center;
-  }
-
-  .modal-content {
-    padding: 0 20px 20px;
-    width: 100%;
-    max-width: 95vw;
-    border-radius: 20px;
-  }
-
-  .close-btn {
-    top: 12px;
-    right: 12px;
-    width: 36px;
-    height: 36px;
+    background: var(--bg-glass-hover);
+    border: 1px solid var(--border-hover);
+    color: var(--accent-main);
+    box-shadow: var(--shadow-glow);
   }
 
   .static-modal-content {
@@ -768,37 +627,17 @@
     flex-direction: column;
     max-height: 92vh;
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 240, 255, 0.28) transparent;
-  }
-
-  .static-modal-inner::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  .static-modal-inner::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .static-modal-inner::-webkit-scrollbar-thumb {
-    background: rgba(0, 240, 255, 0.24);
-    border-radius: 99px;
   }
 
   .static-modal-image-col {
     flex: none;
     border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--border-color);
     padding: 24px 20px;
   }
 
   .static-modal-image {
     max-height: 40vh;
-    border-radius: 14px;
-  }
-
-  .static-modal-copy-col {
-    overflow: visible;
   }
 
   .static-modal-copy-header {
@@ -806,57 +645,11 @@
   }
 
   .static-modal-copy-body {
-    overflow: visible;
     padding: 0 20px 22px;
-    gap: 10px;
-  }
-
-  .static-modal-title {
-    font-size: 1.22rem !important;
-  }
-
-  .ad-copy-block {
-    padding: 16px;
   }
 }
 
-@media (max-width: 420px) {
-  .portfolio-page-section {
-    padding: 30px 16px 70px;
-  }
-
-  .portfolio-page-header {
-    margin-bottom: 30px;
-  }
-
-  .portfolio-filter-nav {
-    gap: 7px;
-  }
-
-  .portfolio-filter-nav button {
-    padding: 8px 11px;
-    font-size: 0.72rem;
-  }
-
-  .portfolio-filter-nav button.active {
-    box-shadow:
-      0 0 12px rgba(0, 240, 255, 0.18),
-      inset 0 0 8px rgba(0, 240, 255, 0.055);
-  }
-
-  .portfolio-page-info span {
-    font-size: 0.62rem;
-  }
-
-  .portfolio-page-info h3 {
-    font-size: 1.02rem;
-  }
-}
-
-/* ==========================================================================
-   MODAL PORTAL FIX
-   ========================================================================== */
-
+/* Modal Portal Fix */
 .modal-overlay {
   z-index: 99999;
   isolation: isolate;
