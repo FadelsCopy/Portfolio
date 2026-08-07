@@ -1,66 +1,212 @@
 // src/components/CreativeStrategyOP.jsx
 
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import CreativeStrategyOPIcon from './CreativeStrategyOPIcon';
-import ResearchDeepDive from './ResearchDeepDive';
-import InsightsDeepDive from './InsightsDeepDive';
-import PersonasDeepDive from './PersonasDeepDive';
-import AnglesDeepDive from './AnglesDeepDive';
-import ValidationDeepDive from './ValidationDeepDive';
-import ConceptsDeepDive from './ConceptsDeepDive';
-import MVPDeepDive from './MVPDeepDive';
-import BriefingDeepDive from './BriefingDeepDive';
-import ProductionDeepDive from './ProductionDeepDive';
-import LaunchDeepDive from './LaunchDeepDive';
-import AnalysisDeepDive from './AnalysisDeepDive';
-import IterationDeepDive from './IterationDeepDive';
-import ScalingDeepDive from './ScalingDeepDive';
-import NewConceptsDeepDive from './NewConceptsDeepDive';
-import OperationsDeepDive from './OperationsDeepDive';
-import KnowledgeDeepDive from './KnowledgeDeepDive';
 
-import {
-  creativeStrategyOPStages,
-  creativeStrategyOPCategories,
-  getCreativeStrategyOPStage,
-} from '../data/creativeStrategyOPData';
+/*
+|--------------------------------------------------------------------------
+| STAGE COMPONENT AUTO-LOADER
+|--------------------------------------------------------------------------
+|
+| Vite automatically detects the JSX files inside /components.
+|
+| Each stage below includes a componentFile value such as:
+| BusinessContext.jsx
+|
+| Once that file contains a default export, clicking its card will display
+| it full-screen on the same page.
+|
+| Empty components will temporarily display a placeholder instead of
+| crashing the website.
+|
+*/
+
+const stageModules = import.meta.glob('./*.jsx');
+
+/*
+|--------------------------------------------------------------------------
+| CREATIVE STRATEGY STAGES
+|--------------------------------------------------------------------------
+*/
+
+const stages = [
+  {
+    id: 'business-context',
+    number: '00',
+    title: 'Business Context',
+    label: 'FOUNDATION',
+    icon: 'operations',
+    color: '#00e5f2',
+    componentFile: 'BusinessContext.jsx',
+  },
+  {
+    id: 'research',
+    number: '01',
+    title: 'Research',
+    label: 'MARKET INTELLIGENCE',
+    icon: 'research',
+    color: '#00e5f2',
+    componentFile: 'Research.jsx',
+  },
+  {
+    id: 'insight-synthesis',
+    number: '02',
+    title: 'Insight Synthesis',
+    label: 'INSIGHT SYSTEM',
+    icon: 'insights',
+    color: '#20e9f5',
+    componentFile: 'InsightSynthesis.jsx',
+  },
+  {
+    id: 'persona-mapping',
+    number: '03',
+    title: 'Persona Mapping',
+    label: 'CUSTOMER SYSTEM',
+    icon: 'personas',
+    color: '#7c83ff',
+    componentFile: 'PersonaMapping.jsx',
+  },
+  {
+    id: 'angle-development',
+    number: '04',
+    title: 'Angle Development',
+    label: 'ANGLE SYSTEM',
+    icon: 'angles',
+    color: '#ccff00',
+    componentFile: 'AngleDevelopment.jsx',
+  },
+  {
+    id: 'angle-qualification',
+    number: '05',
+    title: 'Angle Qualification & Prioritization',
+    label: 'DECISION SYSTEM',
+    icon: 'validation',
+    color: '#f4b84a',
+    componentFile: 'AngleQualification.jsx',
+  },
+  {
+    id: 'concept-development',
+    number: '06',
+    title: 'Concept Development',
+    label: 'CREATIVE DEVELOPMENT',
+    icon: 'concepts',
+    color: '#00e5f2',
+    componentFile: 'ConceptDevelopment.jsx',
+  },
+  {
+    id: 'minimum-viable-creative',
+    number: '07',
+    title: 'Minimum Viable Creative Test',
+    label: 'VALIDATION TEST',
+    icon: 'mvp',
+    color: '#7c83ff',
+    componentFile: 'MinimumViableCreativeTest.jsx',
+  },
+  {
+    id: 'creative-briefing',
+    number: '08',
+    title: 'Creative Briefing & Production Communication',
+    label: 'EXECUTION SYSTEM',
+    icon: 'briefing',
+    color: '#7c83ff',
+    componentFile: 'CreativeBriefing.jsx',
+  },
+  {
+    id: 'production-handoff',
+    number: '09',
+    title: 'Production Handoff & Launch Alignment',
+    label: 'PRODUCTION SYSTEM',
+    icon: 'production',
+    color: '#ff6b9e',
+    componentFile: 'ProductionHandoff.jsx',
+  },
+  {
+    id: 'performance-analysis',
+    number: '10',
+    title: 'Performance Analysis & Decision',
+    label: 'PERFORMANCE SYSTEM',
+    icon: 'analysis',
+    color: '#00e5f2',
+    componentFile: 'PerformanceAnalysis.jsx',
+  },
+  {
+    id: 'creative-iteration',
+    number: '11',
+    title: 'Creative Iteration',
+    label: 'ITERATION SYSTEM',
+    icon: 'iteration',
+    color: '#7c83ff',
+    componentFile: 'CreativeIteration.jsx',
+  },
+  {
+    id: 'creative-scaling',
+    number: '12',
+    title: 'Creative Scaling',
+    label: 'SCALING SYSTEM',
+    icon: 'scaling',
+    color: '#ccff00',
+    componentFile: 'CreativeScaling.jsx',
+  },
+  {
+    id: 'knowledge-learning',
+    number: '13',
+    title: 'Knowledge & Learning System',
+    label: 'SYSTEM MEMORY',
+    icon: 'knowledge',
+    color: '#20e9f5',
+    componentFile: 'KnowledgeLearningSystem.jsx',
+  },
+];
+
+const stageById = Object.fromEntries(
+  stages.map((stage) => [stage.id, stage]),
+);
+
+/*
+|--------------------------------------------------------------------------
+| ANIMATIONS
+|--------------------------------------------------------------------------
+*/
 
 const pageReveal = {
   hidden: {
     opacity: 0,
   },
+
   visible: {
     opacity: 1,
+
     transition: {
-      duration: 0.45,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.4,
+      staggerChildren: 0.055,
+      delayChildren: 0.08,
+    },
+  },
+
+  exit: {
+    opacity: 0,
+
+    transition: {
+      duration: 0.18,
     },
   },
 };
 
-const mapReveal = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.045,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const stageReveal = {
+const cardReveal = {
   hidden: {
     opacity: 0,
-    y: 18,
-    scale: 0.975,
+    y: 22,
+    scale: 0.98,
   },
+
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
+
     transition: {
       duration: 0.48,
       ease: [0.22, 1, 0.36, 1],
@@ -68,1266 +214,427 @@ const stageReveal = {
   },
 };
 
-const detailReveal = {
-  hidden: {
-    x: '100%',
-  },
-  visible: {
-    x: 0,
-    transition: {
-      duration: 0.34,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-  exit: {
-    x: '100%',
-    transition: {
-      duration: 0.3,
-      ease: [0.4, 0, 1, 1],
-    },
-  },
-};
+/*
+|--------------------------------------------------------------------------
+| STAGE CARD
+|--------------------------------------------------------------------------
+*/
 
-function StageCard({
-  stage,
-  selectedStageId,
-  onSelectStage,
-  index,
-}) {
-  const isActive = selectedStageId === stage.id;
-
-  const categoryColor =
-    creativeStrategyOPCategories[stage.category]?.color ||
-    '#00e5f2';
-
-  const isEndOfRow = (index + 1) % 6 === 0;
-  const isLastStage = index === creativeStrategyOPStages.length - 1;
-
+function StageCard({ stage, onOpen }) {
   return (
-    <motion.div
-      className="creative-op-map-stage-wrapper"
-      variants={stageReveal}
+    <motion.button
+      type="button"
+      className="creative-op-stage-card"
+      style={{
+        '--stage-color': stage.color,
+      }}
+      variants={cardReveal}
+      onClick={() => onOpen(stage.id)}
+      whileHover={{
+        y: -6,
+      }}
+      whileTap={{
+        scale: 0.985,
+      }}
+      aria-label={`Open ${stage.title}`}
     >
-      <button
-        type="button"
-        className={`creative-op-map-stage ${
-          isActive ? 'is-active' : ''
-        }`}
-        onClick={() => onSelectStage(stage.id)}
-        style={{
-          '--stage-color': categoryColor,
-        }}
-      >
-        <div className="creative-op-map-stage-top">
-          <span className="creative-op-map-stage-number">
-            {stage.number}
-          </span>
+      <span className="creative-op-stage-card-top">
+        <span className="creative-op-stage-number">
+          {stage.number}
+        </span>
 
-          <span className="creative-op-map-stage-icon">
-            <CreativeStrategyOPIcon
-              type={stage.icon}
-              size={20}
-            />
-          </span>
-        </div>
-
-        <div className="creative-op-map-stage-body">
-          <span className="creative-op-map-stage-category">
-            {stage.category}
-          </span>
-
-          <h3>{stage.shortTitle}</h3>
-
-          <p>{stage.title}</p>
-        </div>
-
-        <div
-          className="creative-op-map-stage-footer"
-          aria-hidden="true"
-        >
+        <span className="creative-op-stage-icon">
           <CreativeStrategyOPIcon
-            type="arrowRight"
-            size={16}
-          />
-        </div>
-      </button>
-
-      {!isEndOfRow && !isLastStage && (
-        <span
-          className="creative-op-horizontal-connector"
-          aria-hidden="true"
-        >
-          <span className="creative-op-horizontal-line" />
-          <CreativeStrategyOPIcon
-            type="arrowRight"
-            size={15}
+            type={stage.icon}
+            size={21}
           />
         </span>
-      )}
-    </motion.div>
+      </span>
+
+      <span className="creative-op-stage-card-copy">
+        <small>{stage.label}</small>
+
+        <strong>{stage.title}</strong>
+      </span>
+
+      <span className="creative-op-stage-card-footer">
+        <span>Open system</span>
+
+        <CreativeStrategyOPIcon
+          type="arrowRight"
+          size={15}
+        />
+      </span>
+    </motion.button>
   );
 }
 
-function InformationList({
-  title,
-  items = [],
-  icon = 'arrowRight',
-}) {
-  if (!items.length) return null;
-
-  return (
-    <section className="creative-op-detail-section">
-      <div className="creative-op-detail-section-heading">
-        <span className="creative-op-detail-section-icon">
-          <CreativeStrategyOPIcon
-            type={icon}
-            size={16}
-          />
-        </span>
-
-        <h3>{title}</h3>
-
-        <span className="creative-op-detail-count">
-          {items.length}
-        </span>
-      </div>
-
-      <ul className="creative-op-information-list">
-        {items.map((item) => (
-          <li key={item}>
-            <span className="creative-op-list-dot" />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
-function SourceGrid({ sources = [] }) {
-  if (!sources.length) return null;
-
-  return (
-    <section className="creative-op-detail-section">
-      <div className="creative-op-detail-section-heading">
-        <span className="creative-op-detail-section-icon">
-          <CreativeStrategyOPIcon
-            type="research"
-            size={16}
-          />
-        </span>
-
-        <h3>Research Sources</h3>
-
-        <span className="creative-op-detail-count">
-          {sources.length}
-        </span>
-      </div>
-
-      <div className="creative-op-source-grid">
-        {sources.map((source) => (
-          <div
-            className="creative-op-source-card"
-            key={source.name}
-          >
-            <span className="creative-op-source-icon">
-              <CreativeStrategyOPIcon
-                type={source.icon}
-                size={19}
-              />
-            </span>
-
-            <span className="creative-op-source-copy">
-              <strong>{source.name}</strong>
-              <small>{source.type}</small>
-            </span>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function ToolGrid({ tools = [] }) {
-  if (!tools.length) return null;
-
-  return (
-    <section className="creative-op-detail-section">
-      <div className="creative-op-detail-section-heading">
-        <span className="creative-op-detail-section-icon">
-          <CreativeStrategyOPIcon
-            type="operations"
-            size={16}
-          />
-        </span>
-
-        <h3>Tools</h3>
-
-        <span className="creative-op-detail-count">
-          {tools.length}
-        </span>
-      </div>
-
-      <div className="creative-op-tool-grid">
-        {tools.map((tool) => (
-          <span
-            className="creative-op-tool-badge"
-            key={tool}
-          >
-            {tool}
-          </span>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function SOPList({ sops = [] }) {
-  if (!sops.length) return null;
-
-  return (
-    <section className="creative-op-detail-section">
-      <div className="creative-op-detail-section-heading">
-        <span className="creative-op-detail-section-icon">
-          <CreativeStrategyOPIcon
-            type="knowledge"
-            size={16}
-          />
-        </span>
-
-        <h3>SOP Library</h3>
-
-        <span className="creative-op-detail-count">
-          {sops.length}
-        </span>
-      </div>
-
-      <div className="creative-op-sop-list">
-        {sops.map((sop) => {
-          const hasLink = Boolean(sop.url);
-
-          if (hasLink) {
-            return (
-              <a
-                key={sop.label}
-                href={sop.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="creative-op-sop-item"
-              >
-                <span className="creative-op-sop-icon">
-                  <CreativeStrategyOPIcon
-                    type="knowledge"
-                    size={17}
-                  />
-                </span>
-
-                <span className="creative-op-sop-copy">
-                  <strong>{sop.label}</strong>
-                  <small>Open SOP</small>
-                </span>
-
-                <CreativeStrategyOPIcon
-                  type="external"
-                  size={15}
-                />
-              </a>
-            );
-          }
-
-          return (
-            <div
-              key={sop.label}
-              className="creative-op-sop-item is-planned"
-            >
-              <span className="creative-op-sop-icon">
-                <CreativeStrategyOPIcon
-                  type="knowledge"
-                  size={17}
-                />
-              </span>
-
-              <span className="creative-op-sop-copy">
-                <strong>{sop.label}</strong>
-                <small>Document coming soon</small>
-              </span>
-
-              <span className="creative-op-sop-status">
-                PLANNED
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-function StageDetailPanel({ stage, onOpenDeepDive, onClose }) {
-  const categoryColor =
-    creativeStrategyOPCategories[stage.category]?.color ||
-    '#00e5f2';
-
-  const extendedInformation =
-    stage.insightTypes || stage.metrics || [];
-
-  const extendedTitle = stage.insightTypes
-    ? 'Insight Types'
-    : stage.metrics
-      ? 'Performance Metrics'
-      : '';
-
-  return (
-      <motion.aside
-        key={stage.id}
-        className="creative-op-detail-panel"
-        variants={detailReveal}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        style={{
-          '--stage-color': categoryColor,
-        }}
-      >
-        <button
-          type="button"
-          className="creative-op-detail-collapse-handle"
-          onClick={onClose}
-          aria-label="Collapse stage details"
-          title="Collapse stage details"
-        >
-          <span aria-hidden="true" />
-        </button>
-
-        <div className="creative-op-detail-header">
-          <div className="creative-op-detail-stage-identity">
-            <span className="creative-op-detail-stage-icon">
-              <CreativeStrategyOPIcon
-                type={stage.icon}
-                size={24}
-              />
-            </span>
-
-            <div>
-              <span className="creative-op-detail-number">
-                STAGE {stage.number}
-              </span>
-
-              <h2>{stage.title}</h2>
-            </div>
-          </div>
-
-          <span className="creative-op-detail-category">
-            {stage.category}
-          </span>
-        </div>
-
-        <div className="creative-op-detail-scroll">
-          <section className="creative-op-purpose-card">
-            <span>PURPOSE</span>
-            <p>{stage.purpose}</p>
-          </section>
-
-            {stage.id === 'research' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button"
-                onClick={() => onOpenDeepDive('research')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="research"
-                    size={18}
-                />
-
-                Open Research Engine
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'insights' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-insights-button"
-                onClick={() => onOpenDeepDive('insights')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="insights"
-                    size={18}
-                />
-
-                Open Insight Extraction
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'personas' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-personas-button"
-                onClick={() => onOpenDeepDive('personas')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="personas"
-                    size={18}
-                />
-
-                Open Persona Mapping
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'angles' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-angles-button"
-                onClick={() => onOpenDeepDive('angles')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="angles"
-                    size={18}
-                />
-
-                Open Angle Engine
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'validation' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-validation-button"
-                onClick={() => onOpenDeepDive('validation')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="validation"
-                    size={18}
-                />
-
-                Open Angle Validation
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'concepts' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-concepts-button"
-                onClick={() => onOpenDeepDive('concepts')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="concepts"
-                    size={18}
-                />
-
-                Open Concept Development
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'mvp' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-mvp-button"
-                onClick={() => onOpenDeepDive('mvp')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="mvp"
-                    size={18}
-                />
-
-                Open Minimum Viable Creative
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'briefing' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-briefing-button"
-                onClick={() => onOpenDeepDive('briefing')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="briefing"
-                    size={18}
-                />
-
-                Open Creative Briefing
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'production' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-production-button"
-                onClick={() => onOpenDeepDive('production')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="production"
-                    size={18}
-                />
-
-                Open Production & QA
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'launch' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-launch-button"
-                onClick={() => onOpenDeepDive('launch')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="launch"
-                    size={18}
-                />
-
-                Open Launch & Deployment
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'analysis' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-analysis-button"
-                onClick={() => onOpenDeepDive('analysis')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="analysis"
-                    size={18}
-                />
-
-                Open Performance Analysis
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'iteration' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-iteration-button"
-                onClick={() => onOpenDeepDive('iteration')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="iteration"
-                    size={18}
-                />
-
-                Open Creative Iteration
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'scaling' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-scaling-button"
-                onClick={() => onOpenDeepDive('scaling')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="scaling"
-                    size={18}
-                />
-
-                Open Scaling & Expansion
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'new-concepts' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-new-concepts-button"
-                onClick={() => onOpenDeepDive('new-concepts')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="newConcepts"
-                    size={18}
-                />
-
-                Open New Concept Pipeline
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'operations' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-operations-button"
-                onClick={() => onOpenDeepDive('operations')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="operations"
-                    size={18}
-                />
-
-                Open Creative Operations
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-            {stage.id === 'knowledge' && (
-            <button
-                type="button"
-                className="creative-op-open-stage-button creative-op-open-knowledge-button"
-                onClick={() => onOpenDeepDive('knowledge')}
-            >
-                <span>
-                <CreativeStrategyOPIcon
-                    type="knowledge"
-                    size={18}
-                />
-
-                Open Knowledge Library
-                </span>
-
-                <CreativeStrategyOPIcon
-                type="arrowRight"
-                size={17}
-                />
-            </button>
-            )}
-
-          <InformationList
-            title="Inputs"
-            items={stage.inputs}
-            icon="arrowRight"
-          />
-
-          <InformationList
-            title="Systems"
-            items={stage.systems}
-            icon={stage.icon}
-          />
-
-          <SourceGrid sources={stage.sources} />
-
-          {extendedInformation.length > 0 && (
-            <InformationList
-              title={extendedTitle}
-              items={extendedInformation}
-              icon={
-                stage.metrics
-                  ? 'analysis'
-                  : 'insights'
-              }
-            />
-          )}
-
-          <InformationList
-            title="Outputs"
-            items={stage.outputs}
-            icon="validation"
-          />
-
-          <ToolGrid tools={stage.tools} />
-
-          <SOPList sops={stage.sops} />
-        </div>
-      </motion.aside>
-  );
-}
-
-function DecisionLoops({ onSelectStage }) {
-  const loops = [
-    {
-      label: 'FAILED HYPOTHESIS',
-      title: 'Return to Angle Engine',
-      description:
-        'Document the learning, kill the failed execution, and develop a stronger hypothesis.',
-      target: 'angles',
-      icon: 'angles',
-      className: 'is-failure',
-    },
-    {
-      label: 'MIXED SIGNALS',
-      title: 'Controlled Iteration',
-      description:
-        'Protect the winning component, replace the weak component, and relaunch.',
-      target: 'iteration',
-      icon: 'iteration',
-      className: 'is-iteration',
-    },
-    {
-      label: 'VALIDATED WINNER',
-      title: 'Expand & Scale',
-      description:
-        'Create new hooks, creators, formats, offers, placements, and variations.',
-      target: 'scaling',
-      icon: 'scaling',
-      className: 'is-winner',
-    },
-    {
-      label: 'ALWAYS RUNNING',
-      title: 'New Concept Pipeline',
-      description:
-        'Continue discovering and testing fresh concepts while winners scale.',
-      target: 'new-concepts',
-      icon: 'newConcepts',
-      className: 'is-parallel',
-    },
-  ];
-
-  return (
-    <section className="creative-op-feedback-section">
-      <div className="creative-op-feedback-heading">
-        <div>
-          <span className="creative-op-section-eyebrow">
-            PERFORMANCE FEEDBACK LOOPS
-          </span>
-
-          <h2>
-            Every test creates a clear next action.
-          </h2>
-        </div>
-
-        <p>
-          The operating system is not linear. Analysis continuously
-          feeds iteration, scaling, new concepts, and the knowledge
-          library.
-        </p>
-      </div>
-
-      <div className="creative-op-feedback-grid">
-        {loops.map((loop) => (
-          <button
-            key={loop.target}
-            type="button"
-            className={`creative-op-feedback-card ${loop.className}`}
-            onClick={() => onSelectStage(loop.target)}
-          >
-            <span className="creative-op-feedback-icon">
-              <CreativeStrategyOPIcon
-                type={loop.icon}
-                size={22}
-              />
-            </span>
-
-            <span className="creative-op-feedback-copy">
-              <small>{loop.label}</small>
-              <strong>{loop.title}</strong>
-              <p>{loop.description}</p>
-            </span>
-
-            <CreativeStrategyOPIcon
-              type="arrowRight"
-              size={17}
-            />
-          </button>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function SmallScreenMessage() {
-  return (
-    <section className="creative-op-small-screen-message">
-      <div className="creative-op-small-screen-card">
-        <span
-          className="creative-op-small-screen-icon"
-          aria-hidden="true"
-        >
-          ◫
-        </span>
-
-        <span className="creative-op-small-screen-label">
-          DESKTOP EXPERIENCE
-        </span>
-
-        <h1>
-          Open Creative Strategy OP on a larger screen.
-        </h1>
-
-        <p>
-          This interactive operating system was designed for desktop
-          and laptop navigation. Please use a device with a wider
-          display.
-        </p>
-
-        <Link
-          to="/"
-          className="creative-op-mobile-back-button"
-        >
-          Back to Homepage
-        </Link>
-      </div>
-    </section>
-  );
-}
-
-const DETAIL_PANEL_MIN_WIDTH = 370;
-const DETAIL_PANEL_MAX_WIDTH = 555;
-const DETAIL_PANEL_DEFAULT_WIDTH = 370;
-
-export default function CreativeStrategyOP() {
-  const [selectedStageId, setSelectedStageId] =
-    useState(null);
-  const [isDetailPanelOpen, setIsDetailPanelOpen] =
-    useState(false);
-  const [isDetailLayoutOpen, setIsDetailLayoutOpen] =
-    useState(false);
-  const [activeDeepDive, setActiveDeepDive] =
-    useState(null);
-  const [detailPanelWidth, setDetailPanelWidth] =
-    useState(DETAIL_PANEL_DEFAULT_WIDTH);
-
-  const resizeStartXRef = useRef(0);
-  const resizeStartWidthRef = useRef(DETAIL_PANEL_DEFAULT_WIDTH);
-
-  const selectedStage = useMemo(
-    () =>
-      selectedStageId
-        ? getCreativeStrategyOPStage(selectedStageId)
-        : null,
-    [selectedStageId]
-  );
-
-  const handleSelectStage = (stageId) => {
-    setSelectedStageId(stageId);
-    setIsDetailLayoutOpen(true);
-    requestAnimationFrame(() => {
-      setIsDetailPanelOpen(true);
-    });
-  };
-
-  const handleCloseDetailPanel = () => {
-    setIsDetailPanelOpen(false);
-  };
-
-  const handleDetailExitComplete = () => {
-    if (!isDetailPanelOpen) {
-      setIsDetailLayoutOpen(false);
-      setSelectedStageId(null);
-    }
-  };
-
-  const clampDetailPanelWidth = (width) =>
-    Math.min(
-      DETAIL_PANEL_MAX_WIDTH,
-      Math.max(DETAIL_PANEL_MIN_WIDTH, width)
-    );
-
-  const handleResizePointerDown = (event) => {
-    event.preventDefault();
-
-    resizeStartXRef.current = event.clientX;
-    resizeStartWidthRef.current = detailPanelWidth;
-
-    const handlePointerMove = (moveEvent) => {
-      const horizontalMovement =
-        resizeStartXRef.current - moveEvent.clientX;
-
-      setDetailPanelWidth(
-        clampDetailPanelWidth(
-          resizeStartWidthRef.current + horizontalMovement
-        )
-      );
-    };
-
-    const handlePointerUp = () => {
-      window.removeEventListener(
-        'pointermove',
-        handlePointerMove
-      );
-      window.removeEventListener(
-        'pointerup',
-        handlePointerUp
-      );
-
-      document.body.classList.remove(
-        'creative-op-is-resizing'
-      );
-    };
-
-    document.body.classList.add('creative-op-is-resizing');
-
-    window.addEventListener('pointermove', handlePointerMove);
-    window.addEventListener('pointerup', handlePointerUp);
-  };
-
-  const handleResizeKeyDown = (event) => {
-    const resizeStep = event.shiftKey ? 40 : 20;
-
-    if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      setDetailPanelWidth((currentWidth) =>
-        clampDetailPanelWidth(currentWidth + resizeStep)
-      );
-    }
-
-    if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      setDetailPanelWidth((currentWidth) =>
-        clampDetailPanelWidth(currentWidth - resizeStep)
-      );
-    }
-
-    if (event.key === 'Home') {
-      event.preventDefault();
-      setDetailPanelWidth(DETAIL_PANEL_MIN_WIDTH);
-    }
-
-    if (event.key === 'End') {
-      event.preventDefault();
-      setDetailPanelWidth(DETAIL_PANEL_MAX_WIDTH);
-    }
-  };
-
+/*
+|--------------------------------------------------------------------------
+| MAIN STAGE GRID
+|--------------------------------------------------------------------------
+*/
+
+function StageGrid({ onOpenStage }) {
   return (
     <motion.main
+      key="creative-op-grid"
       className="creative-op-page"
       variants={pageReveal}
       initial="hidden"
       animate="visible"
+      exit="exit"
     >
-      <div className="creative-op-background-grid" />
-      <div className="creative-op-glow creative-op-glow-one" />
-      <div className="creative-op-glow creative-op-glow-two" />
+      <div className="creative-op-logo-row">
+        <Link
+          to="/"
+          className="creative-op-logo-link"
+          aria-label="Return to homepage"
+        >
+          <span className="creative-op-logo">
+            Fadel<span>.</span>
+          </span>
+        </Link>
+      </div>
 
+      <section className="creative-op-content">
+        <header className="creative-op-intro">
+          <motion.span
+            className="creative-op-eyebrow"
+            variants={cardReveal}
+          >
+            CREATIVE INTELLIGENCE SYSTEM
+          </motion.span>
 
+          <motion.h1 variants={cardReveal}>
+            Creative Strategy OP
+          </motion.h1>
 
-     <section className="creative-op-desktop-experience">
-        <AnimatePresence mode="wait">
-            {activeDeepDive === 'research' ? (
-            <ResearchDeepDive
-                key="research-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
+          <motion.p variants={cardReveal}>
+            A complete operating system for turning market intelligence
+            into scalable creative growth.
+          </motion.p>
+        </header>
+
+        <motion.section
+          className="creative-op-stage-grid"
+          variants={pageReveal}
+          initial="hidden"
+          animate="visible"
+        >
+          {stages.map((stage) => (
+            <StageCard
+              key={stage.id}
+              stage={stage}
+              onOpen={onOpenStage}
             />
-            ) : activeDeepDive === 'insights' ? (
-            <InsightsDeepDive
-                key="insights-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'personas' ? (
-            <PersonasDeepDive
-                key="personas-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'angles' ? (
-            <AnglesDeepDive
-                key="angles-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'validation' ? (
-                <ValidationDeepDive
-                key="validation-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'concepts' ? (
-            <ConceptsDeepDive
-                key="concepts-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'mvp' ? (
-            <MVPDeepDive
-                key="mvp-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'briefing' ? (
-            <BriefingDeepDive
-                key="briefing-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'production' ? (
-            <ProductionDeepDive
-                key="production-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'launch' ? (
-            <LaunchDeepDive
-                key="launch-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'analysis' ? (
-            <AnalysisDeepDive
-                key="analysis-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'iteration' ? (
-            <IterationDeepDive
-                key="iteration-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'scaling' ? (
-            <ScalingDeepDive
-                key="scaling-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'new-concepts' ? (
-            <NewConceptsDeepDive
-                key="new-concepts-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'operations' ? (
-            <OperationsDeepDive
-                key="operations-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : activeDeepDive === 'knowledge' ? (
-            <KnowledgeDeepDive
-                key="knowledge-deep-dive"
-                onBack={() => setActiveDeepDive(null)}
-            />
-            ) : (
-            <motion.div
-                key="full-system"
-                className={`creative-op-app-shell ${
-                  isDetailLayoutOpen
-                    ? 'is-detail-open'
-                    : 'is-detail-closed'
-                }`}
-                style={{
-                  '--creative-op-detail-width': `${detailPanelWidth}px`,
-                }}
-                initial={{ opacity: 0, scale: 0.99 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.99 }}
-                transition={{
-                duration: 0.3,
-                ease: [0.22, 1, 0.36, 1],
-                }}
-            >
-                <main className="creative-op-main-map">
-                <section className="creative-op-map-introduction">
-                    <div>
-                    <Link
-                        to="/"
-                        className="creative-op-home-logo"
-                        aria-label="Go to homepage"
-                    >
-                        <span className="creative-op-home-logo-text">
-                        Fadel<span className="creative-op-home-logo-dot">.</span>
-                        </span>
-                    </Link>
-
-                    <span className="creative-op-section-eyebrow">
-                        CREATIVE INTELLIGENCE SYSTEM
-                    </span>
-
-                    <h1>Creative Strategy OP</h1>
-
-                    <p>
-                        A complete system for researching, developing,
-                        testing, analyzing, iterating, and scaling
-                        performance creative.
-                    </p>
-                    </div>
-
-                    <div className="creative-op-system-stats">
-                    <div>
-                        <strong>
-                        {creativeStrategyOPStages.length}
-                        </strong>
-                        <span>Operating stages</span>
-                    </div>
-
-                    <div>
-                        <strong>01</strong>
-                        <span>Continuous system</span>
-                    </div>
-
-                    <div>
-                        <strong>∞</strong>
-                        <span>Learning cycles</span>
-                    </div>
-                    </div>
-                </section>
-
-                <motion.section
-                    className="creative-op-map-grid"
-                    variants={mapReveal}
-                    initial="hidden"
-                    animate="visible"
-                >
-                    {creativeStrategyOPStages.map(
-                    (stage, index) => (
-                        <StageCard
-                        key={stage.id}
-                        stage={stage}
-                        selectedStageId={selectedStageId}
-                        onSelectStage={handleSelectStage}
-                        index={index}
-                        />
-                    )
-                    )}
-                </motion.section>
-
-                <DecisionLoops
-                    onSelectStage={handleSelectStage}
-                />
-
-                <section className="creative-op-continuous-system">
-                    <div className="creative-op-continuous-icon">
-                    <CreativeStrategyOPIcon
-                        type="knowledge"
-                        size={25}
-                    />
-                    </div>
-
-                    <div>
-                    <span>CONTINUOUS INTELLIGENCE LAYER</span>
-
-                    <h2>
-                        Knowledge is captured at every stage.
-                    </h2>
-
-                    <p>
-                        Research findings, test results, winning patterns,
-                        failures, scripts, hooks, personas, and SOPs are
-                        stored in the Knowledge Library and reused across
-                        the full system.
-                    </p>
-                    </div>
-
-                    <button
-                    type="button"
-                    onClick={() =>
-                        handleSelectStage('knowledge')
-                    }
-                    >
-                    Open Knowledge Library
-
-                    <CreativeStrategyOPIcon
-                        type="arrowRight"
-                        size={16}
-                    />
-                    </button>
-                </section>
-                </main>
-
-                <AnimatePresence
-                  initial={false}
-                  onExitComplete={handleDetailExitComplete}
-                >
-                  {isDetailPanelOpen && selectedStage && (
-                    <>
-                      <motion.div
-                        key="detail-resizer"
-                        className="creative-op-detail-resizer"
-                        role="separator"
-                        aria-label="Resize stage details panel"
-                        aria-orientation="vertical"
-                        aria-valuemin={DETAIL_PANEL_MIN_WIDTH}
-                        aria-valuemax={DETAIL_PANEL_MAX_WIDTH}
-                        aria-valuenow={detailPanelWidth}
-                        tabIndex={0}
-                        onPointerDown={handleResizePointerDown}
-                        onKeyDown={handleResizeKeyDown}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <span aria-hidden="true" />
-                      </motion.div>
-
-                      <StageDetailPanel
-                        key={`detail-${selectedStage.id}`}
-                        stage={selectedStage}
-                        onOpenDeepDive={setActiveDeepDive}
-                        onClose={handleCloseDetailPanel}
-                      />
-                    </>
-                  )}
-                </AnimatePresence>
-            </motion.div>
-            )}
-        </AnimatePresence>
-        </section>
-      <SmallScreenMessage />
+          ))}
+        </motion.section>
+      </section>
     </motion.main>
+  );
+}
+
+/*
+|--------------------------------------------------------------------------
+| LOADING SCREEN
+|--------------------------------------------------------------------------
+*/
+
+function StageLoading({ stage, onBack }) {
+  return (
+    <main className="creative-op-stage-screen">
+      <button
+        type="button"
+        className="creative-op-back-button"
+        onClick={onBack}
+      >
+        <span aria-hidden="true">←</span>
+        Back to Creative Strategy OP
+      </button>
+
+      <section className="creative-op-stage-placeholder">
+        <span className="creative-op-eyebrow">
+          STAGE {stage.number}
+        </span>
+
+        <div
+          className="creative-op-placeholder-icon"
+          style={{
+            '--stage-color': stage.color,
+          }}
+        >
+          <CreativeStrategyOPIcon
+            type={stage.icon}
+            size={30}
+          />
+        </div>
+
+        <h1>{stage.title}</h1>
+
+        <p>Loading stage content...</p>
+      </section>
+    </main>
+  );
+}
+
+/*
+|--------------------------------------------------------------------------
+| EMPTY-COMPONENT PLACEHOLDER
+|--------------------------------------------------------------------------
+|
+| This appears while a stage JSX file is still empty.
+|
+*/
+
+function EmptyStagePlaceholder({ stage, onBack }) {
+  return (
+    <motion.main
+      key={stage.id}
+      className="creative-op-stage-screen"
+      initial={{
+        opacity: 0,
+        y: 16,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      exit={{
+        opacity: 0,
+        y: 10,
+      }}
+      transition={{
+        duration: 0.34,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      <button
+        type="button"
+        className="creative-op-back-button"
+        onClick={onBack}
+      >
+        <span aria-hidden="true">←</span>
+        Back to Creative Strategy OP
+      </button>
+
+      <section className="creative-op-stage-placeholder">
+        <span className="creative-op-eyebrow">
+          STAGE {stage.number}
+        </span>
+
+        <div
+          className="creative-op-placeholder-icon"
+          style={{
+            '--stage-color': stage.color,
+          }}
+        >
+          <CreativeStrategyOPIcon
+            type={stage.icon}
+            size={30}
+          />
+        </div>
+
+        <h1>{stage.title}</h1>
+
+        <p>
+          The JSX component for this stage is ready to receive its content.
+        </p>
+      </section>
+    </motion.main>
+  );
+}
+
+/*
+|--------------------------------------------------------------------------
+| DYNAMIC STAGE RENDERER
+|--------------------------------------------------------------------------
+|
+| This loads the JSX file connected to the clicked card.
+|
+| Every stage component will receive:
+|
+| onBack
+| stage
+|
+*/
+
+function DynamicStageRenderer({ stage, onBack }) {
+  const [StageComponent, setStageComponent] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let componentIsMounted = true;
+
+    const loadStageComponent = async () => {
+      setLoading(true);
+      setStageComponent(null);
+
+      const modulePath = `./${stage.componentFile}`;
+      const moduleLoader = stageModules[modulePath];
+
+      if (!moduleLoader) {
+        if (componentIsMounted) {
+          setLoading(false);
+        }
+
+        return;
+      }
+
+      try {
+        const importedModule = await moduleLoader();
+
+        if (!componentIsMounted) {
+          return;
+        }
+
+        if (typeof importedModule.default === 'function') {
+          setStageComponent(() => importedModule.default);
+        }
+      } catch (error) {
+        console.error(
+          `Unable to load ${stage.componentFile}:`,
+          error,
+        );
+      } finally {
+        if (componentIsMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadStageComponent();
+
+    return () => {
+      componentIsMounted = false;
+    };
+  }, [stage]);
+
+  if (loading) {
+    return (
+      <StageLoading
+        stage={stage}
+        onBack={onBack}
+      />
+    );
+  }
+
+  if (!StageComponent) {
+    return (
+      <EmptyStagePlaceholder
+        stage={stage}
+        onBack={onBack}
+      />
+    );
+  }
+
+  return (
+    <StageComponent
+      stage={stage}
+      onBack={onBack}
+    />
+  );
+}
+
+/*
+|--------------------------------------------------------------------------
+| MAIN COMPONENT
+|--------------------------------------------------------------------------
+*/
+
+export default function CreativeStrategyOP() {
+  const [activeStageId, setActiveStageId] = useState(null);
+
+  const activeStage = useMemo(
+    () => (
+      activeStageId
+        ? stageById[activeStageId]
+        : null
+    ),
+    [activeStageId],
+  );
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    });
+  };
+
+  useEffect(() => {
+    window.history.replaceState(
+      {
+        ...window.history.state,
+        creativeStrategyView: 'map',
+        creativeStrategyStageId: null,
+      },
+      document.title,
+    );
+
+    const handlePopState = (event) => {
+      const stageId = event.state?.creativeStrategyStageId;
+
+      setActiveStageId(
+        stageId && stageById[stageId]
+          ? stageId
+          : null,
+      );
+
+      scrollToTop();
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
+  const openStage = (stageId) => {
+    if (!stageById[stageId]) {
+      return;
+    }
+
+    window.history.pushState(
+      {
+        ...window.history.state,
+        creativeStrategyView: 'stage',
+        creativeStrategyStageId: stageId,
+      },
+      document.title,
+    );
+
+    setActiveStageId(stageId);
+    scrollToTop();
+  };
+
+  const closeStage = () => {
+    if (
+      window.history.state?.creativeStrategyView === 'stage'
+    ) {
+      window.history.back();
+      return;
+    }
+
+    setActiveStageId(null);
+    scrollToTop();
+  };
+
+  return (
+    <AnimatePresence mode="wait">
+      {activeStage ? (
+        <DynamicStageRenderer
+          key={activeStage.id}
+          stage={activeStage}
+          onBack={closeStage}
+        />
+      ) : (
+        <StageGrid
+          key="creative-op-grid"
+          onOpenStage={openStage}
+        />
+      )}
+    </AnimatePresence>
   );
 }
