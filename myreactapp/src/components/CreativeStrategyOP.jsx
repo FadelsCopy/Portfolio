@@ -1,6 +1,6 @@
 // src/components/CreativeStrategyOP.jsx
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -218,8 +218,8 @@ const pageReveal = {
 const cardReveal = {
   hidden: {
     opacity: 0,
-    y: 22,
-    scale: 0.98,
+    y: 18,
+    scale: 0.992,
   },
 
   visible: {
@@ -228,7 +228,34 @@ const cardReveal = {
     scale: 1,
 
     transition: {
-      duration: 0.48,
+      duration: 0.62,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const introReveal = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.11,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const introItemReveal = {
+  hidden: {
+    opacity: 0,
+    y: 18,
+    filter: 'blur(5px)',
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.72,
       ease: [0.22, 1, 0.36, 1],
     },
   },
@@ -273,7 +300,7 @@ const KILL_COLOR = '#ff5c5c';
 // Fixed design-pixel canvas. The desktop diagram is drawn once at this
 // size and centered — below the responsive breakpoint we swap to a
 // simplified linear layout instead of trying to reflow the diagram.
-const FLOW_CANVAS = { width: 980, height: 2470 };
+const FLOW_CANVAS = { width: 980, height: 2510 };
 
 const FLOW_NODES = [
   { id: 'business-context', shape: 'rect', x: 180, y: 30, w: 620, h: 118 },
@@ -309,7 +336,7 @@ const FLOW_NODES = [
     id: 'minimum-viable-creative',
     shape: 'rect',
     x: 150,
-    y: 1605,
+    y: 1593,
     w: 360,
     h: 104,
   },
@@ -326,15 +353,15 @@ const FLOW_NODES = [
     h: 118,
   },
 
-  { id: 'creative-iteration', shape: 'rect', x: 10, y: 2310, w: 300, h: 118 },
-  { id: 'creative-scaling', shape: 'rect', x: 340, y: 2310, w: 300, h: 118 },
+  { id: 'creative-iteration', shape: 'rect', x: 10, y: 2350, w: 300, h: 118 },
+  { id: 'creative-scaling', shape: 'rect', x: 340, y: 2350, w: 300, h: 118 },
 
   {
     key: 'kill',
     id: null,
     shape: 'rect',
     x: 670,
-    y: 2310,
+    y: 2350,
     w: 300,
     h: 118,
     label: 'Kill',
@@ -367,7 +394,7 @@ const FLOW_CONNECTORS = [
 
   /* Symmetrical MVP split */
   {
-    points: [[370, 1418], [330, 1418], [330, 1605]],
+    points: [[370, 1418], [330, 1418], [330, 1593]],
     color: '#7c83ff',
     label: { text: 'YES', x: 338, y: 1398 },
   },
@@ -379,7 +406,7 @@ const FLOW_CONNECTORS = [
 
   /* MVP Test → Briefing; balanced space above and below MVP Test */
   {
-    points: [[330, 1709], [330, 1764], [490, 1764], [490, 1812]],
+    points: [[330, 1697], [330, 1758], [490, 1758], [490, 1812]],
     color: '#7c83ff',
   },
 
@@ -389,28 +416,28 @@ const FLOW_CONNECTORS = [
 
   /* Analysis fan-out */
   {
-    points: [[490, 2246], [490, 2276], [160, 2276], [160, 2310]],
+    points: [[490, 2246], [490, 2298], [160, 2298], [160, 2350]],
     color: '#7c83ff',
   },
   {
-    points: [[490, 2246], [490, 2310]],
+    points: [[490, 2246], [490, 2350]],
     color: '#ccff00',
   },
   {
-    points: [[490, 2246], [490, 2276], [820, 2276], [820, 2310]],
+    points: [[490, 2246], [490, 2298], [820, 2298], [820, 2350]],
     color: KILL_COLOR,
   },
 
   /* Iteration return → left-center of Briefing */
   {
-    points: [[10, 2369], [28, 2369], [28, 1871], [180, 1871]],
+    points: [[10, 2409], [0, 2409], [0, 1871], [180, 1871]],
     color: '#7c83ff',
     dashed: true,
   },
 
   /* Kill return → right-center of Concept Development */
   {
-    points: [[970, 2369], [952, 2369], [952, 1219], [800, 1219]],
+    points: [[970, 2409], [980, 2409], [980, 1219], [800, 1219]],
     color: KILL_COLOR,
     dashed: true,
   },
@@ -500,7 +527,7 @@ function FlowConnector({ connector }) {
 
   return (
     <g>
-      <path
+      <motion.path
         d={d}
         fill="none"
         stroke={color}
@@ -508,10 +535,34 @@ function FlowConnector({ connector }) {
         strokeDasharray={dashed ? '7 6' : undefined}
         strokeLinecap="round"
         markerEnd={noArrow ? undefined : 'url(#creative-op-flow-arrow)'}
+        initial={
+          dashed
+            ? { opacity: 0 }
+            : { pathLength: 0, opacity: 0 }
+        }
+        whileInView={
+          dashed
+            ? { opacity: 1 }
+            : { pathLength: 1, opacity: 1 }
+        }
+        viewport={{
+          once: true,
+          amount: 0.18,
+          margin: '0px 0px -8% 0px',
+        }}
+        transition={{
+          pathLength: {
+            duration: 0.68,
+            ease: [0.22, 1, 0.36, 1],
+          },
+          opacity: {
+            duration: dashed ? 0.45 : 0.22,
+          },
+        }}
       />
 
       {label && (
-        <text
+        <motion.text
           x={label.x}
           y={label.y}
           fill={color}
@@ -521,15 +572,26 @@ function FlowConnector({ connector }) {
           fontSize="11"
           fontWeight="800"
           textAnchor="middle"
+          initial={{ opacity: 0, y: 3 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{
+            once: true,
+            amount: 0.5,
+            margin: '0px 0px -8% 0px',
+          }}
+          transition={{
+            duration: 0.32,
+            ease: [0.22, 1, 0.36, 1],
+          }}
         >
           {label.text}
-        </text>
+        </motion.text>
       )}
     </g>
   );
 }
 
-function FlowNode({ node, stage, onOpen }) {
+function FlowNode({ node, stage, onOpen, index }) {
   const isDiamond = node.shape === 'diamond';
   const isInteractive = Boolean(node.id);
   const label = node.label || flowLabels[node.id] || stage?.title;
@@ -548,6 +610,7 @@ function FlowNode({ node, stage, onOpen }) {
     height: node.h,
     '--stage-color': color,
   };
+
 
   const content = isDiamond && stage ? (
     <>
@@ -629,7 +692,7 @@ function FlowNode({ node, stage, onOpen }) {
 
   if (isInteractive) {
     return (
-      <button
+      <motion.button
         type="button"
         className={`creative-op-flow-node ${
           isDiamond ? 'is-diamond' : 'is-rect'
@@ -637,14 +700,33 @@ function FlowNode({ node, stage, onOpen }) {
         style={style}
         onClick={() => onOpen(node.id)}
         aria-label={`Open ${stage?.title || label}`}
+        initial={{
+          opacity: 0,
+          y: 22,
+          scale: 0.985,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          scale: 1,
+        }}
+        viewport={{
+          once: true,
+          amount: 0.42,
+          margin: '0px 0px -7% 0px',
+        }}
+        transition={{
+          duration: 0.62,
+          ease: [0.22, 1, 0.36, 1],
+        }}
       >
         {content}
-      </button>
+      </motion.button>
     );
   }
 
   return (
-    <div
+    <motion.div
       className={`creative-op-flow-node is-static ${
         isDiamond ? 'is-diamond' : 'is-rect'
       } ${node.variant === 'gate' ? 'is-gate' : ''} ${
@@ -652,9 +734,28 @@ function FlowNode({ node, stage, onOpen }) {
       }`}
       style={style}
       role="presentation"
+      initial={{
+        opacity: 0,
+        y: 22,
+        scale: 0.985,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        scale: 1,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.42,
+        margin: '0px 0px -7% 0px',
+      }}
+      transition={{
+        duration: 0.62,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
       {content}
-    </div>
+    </motion.div>
   );
 }
 
@@ -699,12 +800,13 @@ function CreativeStrategyFlowCanvas({ onOpenStage }) {
         ))}
       </svg>
 
-      {FLOW_NODES.map((node) => (
+      {FLOW_NODES.map((node, index) => (
         <FlowNode
           key={node.key || node.id}
           node={node}
           stage={node.id ? stageById[node.id] : null}
           onOpen={onOpenStage}
+          index={index}
         />
       ))}
     </div>
@@ -800,9 +902,12 @@ function CreativeStrategyFlow({ onOpenStage }) {
   return (
     <motion.div
       className="creative-op-flow"
-      variants={cardReveal}
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
     >
-      <CreativeStrategyFlowCanvas onOpenStage={onOpenStage} />
+      <CreativeStrategyFlowCanvas
+        onOpenStage={onOpenStage}
+      />
       <CreativeStrategyFlowMobile onOpenStage={onOpenStage} />
     </motion.div>
   );
@@ -814,7 +919,25 @@ function KnowledgeLearningCard({ onOpenStage }) {
   return (
     <motion.div
       className="creative-op-knowledge-block"
-      variants={cardReveal}
+      initial={{
+        opacity: 0,
+        y: 22,
+        scale: 0.99,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        scale: 1,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.35,
+        margin: '0px 0px -6% 0px',
+      }}
+      transition={{
+        duration: 0.68,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
       <div className="creative-op-knowledge-divider">
         <span>SYSTEM MEMORY</span>
@@ -866,9 +989,8 @@ function StageGrid({ onOpenStage }) {
     <motion.main
       key="creative-op-grid"
       className="creative-op-page"
-      variants={pageReveal}
-      initial="hidden"
-      animate="visible"
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
       exit="exit"
     >
       <div className="creative-op-desktop-only-message">
@@ -884,7 +1006,24 @@ function StageGrid({ onOpenStage }) {
         </div>
       </div>
 
-      <div className="creative-op-logo-row">
+      <motion.div
+        className="creative-op-logo-row"
+        initial={{
+          opacity: 0,
+          x: -12,
+          y: -6,
+        }}
+        whileInView={{
+          opacity: 1,
+          x: 0,
+          y: 0,
+        }}
+        viewport={{ once: true, amount: 0.7 }}
+        transition={{
+          duration: 0.58,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      >
         <Link
           to="/"
           className="creative-op-logo-link"
@@ -894,36 +1033,48 @@ function StageGrid({ onOpenStage }) {
             Fadel<span>.</span>
           </span>
         </Link>
-      </div>
+      </motion.div>
 
       <section className="creative-op-content">
-        <header className="creative-op-intro">
+        <motion.header
+          className="creative-op-intro"
+          variants={introReveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{
+            once: true,
+            amount: 0.55,
+          }}
+        >
           <motion.span
             className="creative-op-eyebrow"
-            variants={cardReveal}
+            variants={introItemReveal}
           >
             CREATIVE INTELLIGENCE SYSTEM
           </motion.span>
 
-          <motion.h1 variants={cardReveal}>
+          <motion.h1 variants={introItemReveal}>
             Creative Strategy OP
           </motion.h1>
 
-          <motion.p variants={cardReveal}>
+          <motion.p variants={introItemReveal}>
             A complete operating system for turning market intelligence
             into scalable creative growth.
           </motion.p>
-        </header>
+        </motion.header>
 
         <motion.section
           className="creative-op-flow-section"
-          variants={pageReveal}
-          initial="hidden"
-          animate="visible"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
         >
-          <CreativeStrategyFlow onOpenStage={onOpenStage} />
+          <CreativeStrategyFlow
+            onOpenStage={onOpenStage}
+          />
 
-          <KnowledgeLearningCard onOpenStage={onOpenStage} />
+          <KnowledgeLearningCard
+            onOpenStage={onOpenStage}
+          />
         </motion.section>
       </section>
     </motion.main>
@@ -1085,6 +1236,9 @@ function DynamicStageRenderer({ stage, onBack }) {
 export default function CreativeStrategyOP() {
   const [activeStageId, setActiveStageId] = useState(null);
 
+  const pendingMapScrollY = useRef(null);
+  const previousScrollRestoration = useRef(null);
+
   const activeStage = useMemo(
     () => (
       activeStageId
@@ -1102,12 +1256,18 @@ export default function CreativeStrategyOP() {
     });
   };
 
+
   useEffect(() => {
+    previousScrollRestoration.current = window.history.scrollRestoration;
+    window.history.scrollRestoration = 'manual';
+
     window.history.replaceState(
       {
         ...window.history.state,
         creativeStrategyView: 'map',
         creativeStrategyStageId: null,
+        creativeStrategyMapScrollY:
+          window.history.state?.creativeStrategyMapScrollY ?? window.scrollY,
       },
       document.title,
     );
@@ -1115,32 +1275,88 @@ export default function CreativeStrategyOP() {
     const handlePopState = (event) => {
       const stageId = event.state?.creativeStrategyStageId;
 
-      setActiveStageId(
-        stageId && stageById[stageId]
-          ? stageId
-          : null,
-      );
+      if (stageId && stageById[stageId]) {
+        pendingMapScrollY.current = null;
+        setActiveStageId(stageId);
+        scrollToTop();
+        return;
+      }
 
-      scrollToTop();
+      pendingMapScrollY.current =
+        typeof event.state?.creativeStrategyMapScrollY === 'number'
+          ? event.state.creativeStrategyMapScrollY
+          : 0;
+
+      setActiveStageId(null);
     };
 
     window.addEventListener('popstate', handlePopState);
 
     return () => {
       window.removeEventListener('popstate', handlePopState);
+
+      if (previousScrollRestoration.current) {
+        window.history.scrollRestoration =
+          previousScrollRestoration.current;
+      }
     };
   }, []);
+
+  useEffect(() => {
+    if (activeStageId !== null || pendingMapScrollY.current === null) {
+      return;
+    }
+
+    const scrollYToRestore = pendingMapScrollY.current;
+    pendingMapScrollY.current = null;
+
+    let frameOne;
+    let frameTwo;
+
+    frameOne = window.requestAnimationFrame(() => {
+      frameTwo = window.requestAnimationFrame(() => {
+        window.scrollTo({
+          top: scrollYToRestore,
+          left: 0,
+          behavior: 'instant',
+        });
+      });
+    });
+
+    return () => {
+      if (frameOne) {
+        window.cancelAnimationFrame(frameOne);
+      }
+
+      if (frameTwo) {
+        window.cancelAnimationFrame(frameTwo);
+      }
+    };
+  }, [activeStageId]);
 
   const openStage = (stageId) => {
     if (!stageById[stageId]) {
       return;
     }
 
+    const mapScrollY = window.scrollY;
+
+    window.history.replaceState(
+      {
+        ...window.history.state,
+        creativeStrategyView: 'map',
+        creativeStrategyStageId: null,
+        creativeStrategyMapScrollY: mapScrollY,
+      },
+      document.title,
+    );
+
     window.history.pushState(
       {
         ...window.history.state,
         creativeStrategyView: 'stage',
         creativeStrategyStageId: stageId,
+        creativeStrategyMapScrollY: mapScrollY,
       },
       document.title,
     );
@@ -1157,8 +1373,12 @@ export default function CreativeStrategyOP() {
       return;
     }
 
+    pendingMapScrollY.current =
+      typeof window.history.state?.creativeStrategyMapScrollY === 'number'
+        ? window.history.state.creativeStrategyMapScrollY
+        : 0;
+
     setActiveStageId(null);
-    scrollToTop();
   };
 
   return (

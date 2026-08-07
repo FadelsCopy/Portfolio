@@ -1329,7 +1329,7 @@
   display: none;
 }
 
-@media (max-width: 999px) {
+@media (max-width: 1099px) {
   .creative-op-page {
     min-height: 100vh;
     padding: 24px;
@@ -1413,7 +1413,7 @@
   }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1100px) {
   .creative-op-flow-canvas {
     display: block !important;
   }
@@ -1428,4 +1428,39 @@
 .creative-op-flow-node[style*="left: 340px"],
 .creative-op-flow-node[style*="left: 670px"] {
   padding-inline: 20px;
+}
+
+
+/* ==========================================================================
+   CREATIVE STRATEGY OP — OPENING MOTION POLISH
+   ========================================================================== */
+
+.creative-op-flow-canvas {
+  transform-origin: top center;
+}
+
+.creative-op-flow-svg {
+  will-change: opacity;
+}
+
+.creative-op-flow-node {
+  will-change: transform, opacity;
+}
+
+.creative-op-intro,
+.creative-op-logo-row,
+.creative-op-knowledge-block {
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .creative-op-flow-node,
+  .creative-op-flow-svg,
+  .creative-op-intro,
+  .creative-op-logo-row,
+  .creative-op-knowledge-block {
+    animation: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
 }
