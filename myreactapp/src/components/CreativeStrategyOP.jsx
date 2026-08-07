@@ -24,7 +24,22 @@ import CreativeStrategyOPIcon from './CreativeStrategyOPIcon';
 |
 */
 
-const stageModules = import.meta.glob('./*.jsx');
+const stageModules = import.meta.glob([
+  './BusinessContext.jsx',
+  './Research.jsx',
+  './InsightSynthesis.jsx',
+  './PersonaMapping.jsx',
+  './AngleDevelopment.jsx',
+  './AngleQualification.jsx',
+  './ConceptDevelopment.jsx',
+  './MinimumViableCreativeTest.jsx',
+  './CreativeBriefing.jsx',
+  './ProductionHandoff.jsx',
+  './PerformanceAnalysis.jsx',
+  './CreativeIteration.jsx',
+  './CreativeScaling.jsx',
+  './KnowledgeLearningSystem.jsx',
+]);
 
 /*
 |--------------------------------------------------------------------------
