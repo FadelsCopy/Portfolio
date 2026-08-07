@@ -236,56 +236,622 @@ const cardReveal = {
 
 /*
 |--------------------------------------------------------------------------
-| STAGE CARD
+| CREATIVE STRATEGY FLOW DIAGRAM
 |--------------------------------------------------------------------------
+|
+| This section renders the roadmap as a flow/graph instead of a plain
+| grid: a main spine, a qualification loop, an MVP decision gate, and a
+| results fan-out (Iterate / Scaling / Kill), matching the requested
+| structure while re-using the existing card visual language.
+|
+| Every node that maps to a real stage id stays fully clickable and opens
+| the exact same existing deep-dive. "Need MVP?" and "Kill" are visual
+| logic only and are intentionally not clickable.
+|
 */
 
-function StageCard({ stage, onOpen }) {
+const flowLabels = {
+  'business-context': 'Business Context',
+  research: 'Research',
+  'insight-synthesis': 'Insight Synthesis',
+  'persona-mapping': 'Persona Mapping',
+  'angle-development': 'Angle Development',
+  'angle-qualification': 'Angle Qualification & Prioritization',
+  'concept-development': 'Concept Development',
+  'minimum-viable-creative': 'Minimum Viable Creative Test',
+  'creative-briefing': 'Creative Briefing & Production Communication',
+  'production-handoff': 'Production Handoff & Launch Alignment',
+  'performance-analysis': 'Performance Analysis & Decision',
+  'creative-iteration': 'Creative Iteration',
+  'creative-scaling': 'Creative Scaling',
+  'knowledge-learning': 'Knowledge & Learning System',
+};
+
+const GATE_COLOR = '#5c9bff';
+const KILL_COLOR = '#ff5c5c';
+
+// Fixed design-pixel canvas. The desktop diagram is drawn once at this
+// size and centered — below the responsive breakpoint we swap to a
+// simplified linear layout instead of trying to reflow the diagram.
+const FLOW_CANVAS = { width: 980, height: 2470 };
+
+const FLOW_NODES = [
+  { id: 'business-context', shape: 'rect', x: 180, y: 30, w: 620, h: 118 },
+  { id: 'research', shape: 'rect', x: 180, y: 188, w: 620, h: 118 },
+  { id: 'insight-synthesis', shape: 'rect', x: 180, y: 346, w: 620, h: 118 },
+  { id: 'persona-mapping', shape: 'rect', x: 180, y: 504, w: 620, h: 118 },
+  { id: 'angle-development', shape: 'rect', x: 180, y: 662, w: 620, h: 118 },
+
+  {
+    id: 'angle-qualification',
+    shape: 'diamond',
+    x: 280,
+    y: 838,
+    w: 420,
+    h: 260,
+  },
+
+  { id: 'concept-development', shape: 'rect', x: 180, y: 1160, w: 620, h: 118 },
+
+  {
+    key: 'need-mvp',
+    id: null,
+    shape: 'diamond',
+    x: 370,
+    y: 1334,
+    w: 240,
+    h: 168,
+    label: 'Need MVP?',
+    variant: 'gate',
+  },
+
+  {
+    id: 'minimum-viable-creative',
+    shape: 'rect',
+    x: 150,
+    y: 1605,
+    w: 360,
+    h: 104,
+  },
+
+  { id: 'creative-briefing', shape: 'rect', x: 180, y: 1812, w: 620, h: 118 },
+  { id: 'production-handoff', shape: 'rect', x: 180, y: 1970, w: 620, h: 118 },
+
+  {
+    id: 'performance-analysis',
+    shape: 'rect',
+    x: 180,
+    y: 2128,
+    w: 620,
+    h: 118,
+  },
+
+  { id: 'creative-iteration', shape: 'rect', x: 10, y: 2310, w: 300, h: 118 },
+  { id: 'creative-scaling', shape: 'rect', x: 340, y: 2310, w: 300, h: 118 },
+
+  {
+    key: 'kill',
+    id: null,
+    shape: 'rect',
+    x: 670,
+    y: 2310,
+    w: 300,
+    h: 118,
+    label: 'Kill',
+    variant: 'kill',
+  },
+];
+
+const FLOW_CONNECTORS = [
+  /* Main spine — colorful */
+  { points: [[490, 148], [490, 188]], color: '#00e5f2' },
+  { points: [[490, 306], [490, 346]], color: '#20e9f5' },
+  { points: [[490, 464], [490, 504]], color: '#7c83ff' },
+  { points: [[490, 622], [490, 662]], color: '#ccff00' },
+  { points: [[490, 780], [490, 838]], color: '#f4b84a' },
+
+  /* Qualification decision */
+  {
+    points: [[490, 1098], [490, 1160]],
+    color: '#ccff00',
+    label: { text: 'APPROVED', x: 553, y: 1135 },
+  },
+  {
+    points: [[280, 968], [95, 968], [95, 721], [180, 721]],
+    color: '#ff5c72',
+    label: { text: 'REJECTED', x: 95, y: 895 },
+  },
+
+  /* Concept → MVP gate */
+  { points: [[490, 1278], [490, 1334]], color: '#5c9bff' },
+
+  /* Symmetrical MVP split */
+  {
+    points: [[370, 1418], [330, 1418], [330, 1605]],
+    color: '#7c83ff',
+    label: { text: 'YES', x: 338, y: 1398 },
+  },
+  {
+    points: [[610, 1418], [660, 1418], [660, 1768], [490, 1768], [490, 1812]],
+    color: GATE_COLOR,
+    label: { text: 'NO', x: 642, y: 1398 },
+  },
+
+  /* MVP Test → Briefing; balanced space above and below MVP Test */
+  {
+    points: [[330, 1709], [330, 1764], [490, 1764], [490, 1812]],
+    color: '#7c83ff',
+  },
+
+  /* Briefing → Production → Analysis */
+  { points: [[490, 1930], [490, 1970]], color: '#ff6b9e' },
+  { points: [[490, 2088], [490, 2128]], color: '#00e5f2' },
+
+  /* Analysis fan-out */
+  {
+    points: [[490, 2246], [490, 2276], [160, 2276], [160, 2310]],
+    color: '#7c83ff',
+  },
+  {
+    points: [[490, 2246], [490, 2310]],
+    color: '#ccff00',
+  },
+  {
+    points: [[490, 2246], [490, 2276], [820, 2276], [820, 2310]],
+    color: KILL_COLOR,
+  },
+
+  /* Iteration return → left-center of Briefing */
+  {
+    points: [[10, 2369], [28, 2369], [28, 1871], [180, 1871]],
+    color: '#7c83ff',
+    dashed: true,
+  },
+
+  /* Kill return → right-center of Concept Development */
+  {
+    points: [[970, 2369], [952, 2369], [952, 1219], [800, 1219]],
+    color: KILL_COLOR,
+    dashed: true,
+  },
+];
+
+const MOBILE_FLOW_SEQUENCE = [
+  { id: 'business-context' },
+  { id: 'research' },
+  { id: 'insight-synthesis' },
+  { id: 'persona-mapping' },
+  { id: 'angle-development' },
+  {
+    id: 'angle-qualification',
+    caption:
+      'Approved → continues to Concept Development. Rejected → returns to Angle Development.',
+  },
+  { id: 'concept-development' },
+  {
+    key: 'need-mvp',
+    label: 'Need MVP?',
+    variant: 'gate',
+    caption:
+      'Yes → Minimum Viable Creative Test. No → goes straight to Briefing.',
+  },
+  { id: 'minimum-viable-creative' },
+  { id: 'creative-briefing' },
+  { id: 'production-handoff' },
+  {
+    id: 'performance-analysis',
+    caption:
+      'Iterate → Creative Iteration → returns to Briefing. Scale → Creative Scaling. Kill → returns to Concept Development.',
+  },
+  { id: 'creative-iteration' },
+  { id: 'creative-scaling' },
+  { key: 'kill', label: 'Kill', variant: 'kill' },
+];
+
+// Builds a rounded-corner orthogonal SVG path through a list of
+// [x, y] waypoints, used for every connector/branch line in the diagram.
+function roundedElbowPath(points, radius = 14) {
+  if (!points || points.length < 2) {
+    return '';
+  }
+
+  const [start, ...rest] = points;
+  let d = `M ${start[0]} ${start[1]} `;
+
+  rest.forEach((curr, index) => {
+    const prev = index === 0 ? start : rest[index - 1];
+    const next = rest[index + 1];
+
+    if (!next) {
+      d += `L ${curr[0]} ${curr[1]} `;
+      return;
+    }
+
+    const dx1 = curr[0] - prev[0];
+    const dy1 = curr[1] - prev[1];
+    const len1 = Math.hypot(dx1, dy1) || 1;
+    const r1 = Math.min(radius, len1 / 2);
+    const p1x = curr[0] - (dx1 / len1) * r1;
+    const p1y = curr[1] - (dy1 / len1) * r1;
+
+    const dx2 = next[0] - curr[0];
+    const dy2 = next[1] - curr[1];
+    const len2 = Math.hypot(dx2, dy2) || 1;
+    const r2 = Math.min(radius, len2 / 2);
+    const p2x = curr[0] + (dx2 / len2) * r2;
+    const p2y = curr[1] + (dy2 / len2) * r2;
+
+    d += `L ${p1x} ${p1y} Q ${curr[0]} ${curr[1]} ${p2x} ${p2y} `;
+  });
+
+  return d.trim();
+}
+
+function FlowConnector({ connector }) {
+  const {
+    points,
+    color = 'rgba(255, 255, 255, 0.32)',
+    dashed = false,
+    noArrow = false,
+    label,
+  } = connector;
+
+  const d = roundedElbowPath(points, 14);
+
   return (
-    <motion.button
-      type="button"
-      className="creative-op-stage-card"
-      style={{
-        '--stage-color': stage.color,
-      }}
-      variants={cardReveal}
-      onClick={() => onOpen(stage.id)}
-      whileHover={{
-        y: -6,
-      }}
-      whileTap={{
-        scale: 0.985,
-      }}
-      aria-label={`Open ${stage.title}`}
-    >
-      <span className="creative-op-stage-card-top">
-        <span className="creative-op-stage-number">
-          {stage.number}
-        </span>
+    <g>
+      <path
+        d={d}
+        fill="none"
+        stroke={color}
+        strokeWidth={dashed ? 2 : 1.75}
+        strokeDasharray={dashed ? '7 6' : undefined}
+        strokeLinecap="round"
+        markerEnd={noArrow ? undefined : 'url(#creative-op-flow-arrow)'}
+      />
 
-        <span className="creative-op-stage-icon">
-          <CreativeStrategyOPIcon
-            type={stage.icon}
-            size={21}
-          />
-        </span>
-      </span>
+      {label && (
+        <text
+          x={label.x}
+          y={label.y}
+          fill={color}
+          stroke="#08111d"
+          strokeWidth="5"
+          paintOrder="stroke"
+          fontSize="11"
+          fontWeight="800"
+          textAnchor="middle"
+        >
+          {label.text}
+        </text>
+      )}
+    </g>
+  );
+}
 
-      <span className="creative-op-stage-card-copy">
-        <small>{stage.label}</small>
+function FlowNode({ node, stage, onOpen }) {
+  const isDiamond = node.shape === 'diamond';
+  const isInteractive = Boolean(node.id);
+  const label = node.label || flowLabels[node.id] || stage?.title;
 
-        <strong>{stage.title}</strong>
-      </span>
+  const color =
+    node.variant === 'kill'
+      ? KILL_COLOR
+      : node.variant === 'gate'
+        ? GATE_COLOR
+        : stage?.color || '#00e5f2';
 
-      <span className="creative-op-stage-card-footer">
-        <span>Open system</span>
+  const style = {
+    left: node.x,
+    top: node.y,
+    width: node.w,
+    height: node.h,
+    '--stage-color': color,
+  };
 
+  const content = isDiamond && stage ? (
+    <>
+      <span className="creative-op-flow-node-icon">
         <CreativeStrategyOPIcon
-          type="arrowRight"
-          size={15}
+          type={stage.icon}
+          size={18}
         />
       </span>
-    </motion.button>
+
+      <span className="creative-op-flow-node-copy">
+        <span className="creative-op-flow-node-diamond-meta">
+          <span className="creative-op-flow-node-number">
+            {stage.number}
+          </span>
+
+          <span className="creative-op-flow-node-eyebrow">
+            {stage.label}
+          </span>
+        </span>
+
+        <span className="creative-op-flow-node-label">
+          {label}
+        </span>
+      </span>
+
+      <span
+        className="creative-op-flow-node-arrow"
+        aria-hidden="true"
+      >
+        <CreativeStrategyOPIcon
+          type="arrowRight"
+          size={13}
+        />
+      </span>
+    </>
+  ) : (
+    <>
+      {stage && (
+        <span className="creative-op-flow-node-number">
+          {stage.number}
+        </span>
+      )}
+
+      {stage && (
+        <span className="creative-op-flow-node-icon">
+          <CreativeStrategyOPIcon
+            type={stage.icon}
+            size={17}
+          />
+        </span>
+      )}
+
+      <span className="creative-op-flow-node-copy">
+        {stage && (
+          <span className="creative-op-flow-node-eyebrow">
+            {stage.label}
+          </span>
+        )}
+
+        <span className="creative-op-flow-node-label">
+          {label}
+        </span>
+      </span>
+
+      {isInteractive && (
+        <span
+          className="creative-op-flow-node-arrow"
+          aria-hidden="true"
+        >
+          <CreativeStrategyOPIcon
+            type="arrowRight"
+            size={13}
+          />
+        </span>
+      )}
+    </>
+  );
+
+  if (isInteractive) {
+    return (
+      <button
+        type="button"
+        className={`creative-op-flow-node ${
+          isDiamond ? 'is-diamond' : 'is-rect'
+        }`}
+        style={style}
+        onClick={() => onOpen(node.id)}
+        aria-label={`Open ${stage?.title || label}`}
+      >
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <div
+      className={`creative-op-flow-node is-static ${
+        isDiamond ? 'is-diamond' : 'is-rect'
+      } ${node.variant === 'gate' ? 'is-gate' : ''} ${
+        node.variant === 'kill' ? 'is-kill' : ''
+      }`}
+      style={style}
+      role="presentation"
+    >
+      {content}
+    </div>
+  );
+}
+
+function CreativeStrategyFlowCanvas({ onOpenStage }) {
+  return (
+    <div
+      className="creative-op-flow-canvas"
+      style={{
+        width: FLOW_CANVAS.width,
+        height: FLOW_CANVAS.height,
+      }}
+    >
+      <svg
+        className="creative-op-flow-svg"
+        viewBox={`0 0 ${FLOW_CANVAS.width} ${FLOW_CANVAS.height}`}
+        width={FLOW_CANVAS.width}
+        height={FLOW_CANVAS.height}
+        aria-hidden="true"
+      >
+        <defs>
+          <marker
+            id="creative-op-flow-arrow"
+            viewBox="0 0 10 10"
+            refX="8"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto-start-reverse"
+          >
+            <path
+              d="M0,0 L10,5 L0,10 z"
+              fill="context-stroke"
+            />
+          </marker>
+        </defs>
+
+        {FLOW_CONNECTORS.map((connector, index) => (
+          <FlowConnector
+            key={index}
+            connector={connector}
+          />
+        ))}
+      </svg>
+
+      {FLOW_NODES.map((node) => (
+        <FlowNode
+          key={node.key || node.id}
+          node={node}
+          stage={node.id ? stageById[node.id] : null}
+          onOpen={onOpenStage}
+        />
+      ))}
+    </div>
+  );
+}
+
+function CreativeStrategyFlowMobile({ onOpenStage }) {
+  return (
+    <ol className="creative-op-flow-mobile">
+      {MOBILE_FLOW_SEQUENCE.map((item, index) => {
+        const stage = item.id ? stageById[item.id] : null;
+        const label = item.label || flowLabels[item.id];
+        const clickable = Boolean(item.id);
+
+        const color =
+          item.variant === 'kill'
+            ? KILL_COLOR
+            : item.variant === 'gate'
+              ? GATE_COLOR
+              : stage?.color || '#00e5f2';
+
+        return (
+          <li
+            key={item.key || item.id}
+            className="creative-op-flow-mobile-item"
+          >
+            {index > 0 && (
+              <span
+                className="creative-op-flow-mobile-connector"
+                aria-hidden="true"
+              />
+            )}
+
+            {clickable ? (
+              <button
+                type="button"
+                className="creative-op-flow-mobile-node"
+                style={{ '--stage-color': color }}
+                onClick={() => onOpenStage(item.id)}
+                aria-label={`Open ${stage?.title || label}`}
+              >
+                {stage && (
+                  <span className="creative-op-flow-mobile-number">
+                    {stage.number}
+                  </span>
+                )}
+
+                {stage && (
+                  <span className="creative-op-flow-mobile-icon">
+                    <CreativeStrategyOPIcon
+                      type={stage.icon}
+                      size={16}
+                    />
+                  </span>
+                )}
+
+                <span className="creative-op-flow-mobile-label">
+                  {label}
+                </span>
+
+                <CreativeStrategyOPIcon
+                  type="arrowRight"
+                  size={13}
+                />
+              </button>
+            ) : (
+              <div
+                className={`creative-op-flow-mobile-node is-static ${
+                  item.variant === 'kill' ? 'is-kill' : 'is-gate'
+                }`}
+                style={{ '--stage-color': color }}
+                role="presentation"
+              >
+                <span className="creative-op-flow-mobile-label">
+                  {label}
+                </span>
+              </div>
+            )}
+
+            {item.caption && (
+              <p className="creative-op-flow-mobile-caption">
+                {item.caption}
+              </p>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
+function CreativeStrategyFlow({ onOpenStage }) {
+  return (
+    <motion.div
+      className="creative-op-flow"
+      variants={cardReveal}
+    >
+      <CreativeStrategyFlowCanvas onOpenStage={onOpenStage} />
+      <CreativeStrategyFlowMobile onOpenStage={onOpenStage} />
+    </motion.div>
+  );
+}
+
+function KnowledgeLearningCard({ onOpenStage }) {
+  const stage = stageById['knowledge-learning'];
+
+  return (
+    <motion.div
+      className="creative-op-knowledge-block"
+      variants={cardReveal}
+    >
+      <div className="creative-op-knowledge-divider">
+        <span>SYSTEM MEMORY</span>
+      </div>
+
+      <button
+        type="button"
+        className="creative-op-knowledge-card"
+        style={{ '--stage-color': stage.color }}
+        onClick={() => onOpenStage(stage.id)}
+        aria-label={`Open ${stage.title}`}
+      >
+        <span className="creative-op-knowledge-icon">
+          <CreativeStrategyOPIcon
+            type={stage.icon}
+            size={22}
+          />
+        </span>
+
+        <span className="creative-op-knowledge-copy">
+          <small>{stage.label}</small>
+          <strong>{stage.title}</strong>
+          <p>
+            Sits apart from the main flow — it collects what every stage
+            learns and feeds it back into future runs of the system.
+          </p>
+        </span>
+
+        <span className="creative-op-knowledge-footer">
+          <span>Open system</span>
+          <CreativeStrategyOPIcon
+            type="arrowRight"
+            size={15}
+          />
+        </span>
+      </button>
+    </motion.div>
   );
 }
 
@@ -305,6 +871,19 @@ function StageGrid({ onOpenStage }) {
       animate="visible"
       exit="exit"
     >
+      <div className="creative-op-desktop-only-message">
+        <div className="creative-op-desktop-only-card">
+          <span className="creative-op-desktop-only-kicker">
+            WIDE SCREEN REQUIRED
+          </span>
+          <h2>Creative Strategy OP is built for desktop.</h2>
+          <p>
+            Please open this system on a laptop, desktop, or another wide-screen device
+            to view the full interactive roadmap.
+          </p>
+        </div>
+      </div>
+
       <div className="creative-op-logo-row">
         <Link
           to="/"
@@ -337,18 +916,14 @@ function StageGrid({ onOpenStage }) {
         </header>
 
         <motion.section
-          className="creative-op-stage-grid"
+          className="creative-op-flow-section"
           variants={pageReveal}
           initial="hidden"
           animate="visible"
         >
-          {stages.map((stage) => (
-            <StageCard
-              key={stage.id}
-              stage={stage}
-              onOpen={onOpenStage}
-            />
-          ))}
+          <CreativeStrategyFlow onOpenStage={onOpenStage} />
+
+          <KnowledgeLearningCard onOpenStage={onOpenStage} />
         </motion.section>
       </section>
     </motion.main>
