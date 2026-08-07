@@ -24,22 +24,27 @@ import CreativeStrategyOPIcon from './CreativeStrategyOPIcon';
 |
 */
 
-const stageModules = import.meta.glob([
-  './BusinessContext.jsx',
-  './Research.jsx',
-  './InsightSynthesis.jsx',
-  './PersonaMapping.jsx',
-  './AngleDevelopment.jsx',
-  './AngleQualification.jsx',
-  './ConceptDevelopment.jsx',
-  './MinimumViableCreativeTest.jsx',
-  './CreativeBriefing.jsx',
-  './ProductionHandoff.jsx',
-  './PerformanceAnalysis.jsx',
-  './CreativeIteration.jsx',
-  './CreativeScaling.jsx',
-  './KnowledgeLearningSystem.jsx',
-]);
+const stageModules = import.meta.glob(
+  [
+    './BusinessContext.jsx',
+    './Research.jsx',
+    './InsightSynthesis.jsx',
+    './PersonaMapping.jsx',
+    './AngleDevelopment.jsx',
+    './AngleQualification.jsx',
+    './ConceptDevelopment.jsx',
+    './MinimumViableCreativeTest.jsx',
+    './CreativeBriefing.jsx',
+    './ProductionHandoff.jsx',
+    './PerformanceAnalysis.jsx',
+    './CreativeIteration.jsx',
+    './CreativeScaling.jsx',
+    './KnowledgeLearningSystem.jsx',
+  ],
+  {
+    eager: true,
+  },
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -475,66 +480,11 @@ function EmptyStagePlaceholder({ stage, onBack }) {
 */
 
 function DynamicStageRenderer({ stage, onBack }) {
-  const [StageComponent, setStageComponent] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const modulePath = `./${stage.componentFile}`;
+  const importedModule = stageModules[modulePath];
+  const StageComponent = importedModule?.default;
 
-  useEffect(() => {
-    let componentIsMounted = true;
-
-    const loadStageComponent = async () => {
-      setLoading(true);
-      setStageComponent(null);
-
-      const modulePath = `./${stage.componentFile}`;
-      const moduleLoader = stageModules[modulePath];
-
-      if (!moduleLoader) {
-        if (componentIsMounted) {
-          setLoading(false);
-        }
-
-        return;
-      }
-
-      try {
-        const importedModule = await moduleLoader();
-
-        if (!componentIsMounted) {
-          return;
-        }
-
-        if (typeof importedModule.default === 'function') {
-          setStageComponent(() => importedModule.default);
-        }
-      } catch (error) {
-        console.error(
-          `Unable to load ${stage.componentFile}:`,
-          error,
-        );
-      } finally {
-        if (componentIsMounted) {
-          setLoading(false);
-        }
-      }
-    };
-
-    loadStageComponent();
-
-    return () => {
-      componentIsMounted = false;
-    };
-  }, [stage]);
-
-  if (loading) {
-    return (
-      <StageLoading
-        stage={stage}
-        onBack={onBack}
-      />
-    );
-  }
-
-  if (!StageComponent) {
+  if (typeof StageComponent !== 'function') {
     return (
       <EmptyStagePlaceholder
         stage={stage}
