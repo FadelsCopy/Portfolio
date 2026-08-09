@@ -337,3 +337,20 @@
     will-change: auto !important;
   }
 }
+
+/* =========================================================
+   MOBILE LIGHT MODE — HOMEPAGE CARD HOVER GLITCH
+   ========================================================= */
+
+@media (max-width: 768px) and (hover: none) and (pointer: coarse) {
+  [data-theme="light"] .archive-stat-card:hover {
+    transform: none !important;
+    background: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+    box-shadow: var(--shadow-card) !important;
+  }
+
+  [data-theme="light"] .archive-stat-card:hover::after {
+    opacity: 0 !important;
+  }
+}

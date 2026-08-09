@@ -674,3 +674,41 @@
     will-change: auto !important;
   }
 }
+
+/* =========================================================
+   MOBILE LIGHT MODE — FILTER NAV CLEANUP
+   Dark mode + desktop stay untouched
+   ========================================================= */
+
+@media (max-width: 768px) {
+  [data-theme="light"] .portfolio-filter-nav {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* =========================================================
+   MOBILE LIGHT MODE — REMOVE STICKY HOVER GLITCH
+   ========================================================= */
+
+@media (max-width: 768px) and (hover: none) and (pointer: coarse) {
+  [data-theme="light"] .portfolio-page-card:hover {
+    transform: none !important;
+    background: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+    box-shadow: var(--shadow-card) !important;
+  }
+
+  [data-theme="light"] .portfolio-page-card:hover::before,
+  [data-theme="light"] .portfolio-page-card:hover::after {
+    opacity: 0 !important;
+  }
+
+  [data-theme="light"] .portfolio-page-card:hover .portfolio-page-media img {
+    transform: none !important;
+    filter: none !important;
+  }
+}

@@ -1,5 +1,10 @@
 // src/components/CreativeBriefing.jsx
 
+import { lazy, Suspense, useState } from 'react';
+import './brief-builder/brief-builder.css';
+
+const BriefBuilder = lazy(() => import('./brief-builder/BriefBuilder'));
+
 import StageDeepDiveLayout, {
   StageCard,
   StageFlow,
@@ -491,7 +496,10 @@ const sops = [
 */
 
 export default function CreativeBriefing({ stage, onBack }) {
+  const [isBriefBuilderOpen, setIsBriefBuilderOpen] = useState(false);
+
   return (
+    <>
     <StageDeepDiveLayout
       stage={stage}
       onBack={onBack}
@@ -532,6 +540,22 @@ export default function CreativeBriefing({ stage, onBack }) {
             ]}
           />
         </StageHighlight>
+
+        <div className="brief-builder-launch-wrap">
+          <div className="brief-builder-launch-copy">
+            <span>CREATIVE PRODUCTION TOOL</span>
+            <strong>Turn the approved concept into a shareable production brief.</strong>
+          </div>
+
+          <button
+            type="button"
+            className="brief-builder-launch-button"
+            onClick={() => setIsBriefBuilderOpen(true)}
+          >
+            <span>Create Brief</span>
+            <span aria-hidden="true">↗</span>
+          </button>
+        </div>
 
         <StageGrid columns={2}>
           <StageCard title="The Brief Must Protect">
@@ -980,5 +1004,21 @@ export default function CreativeBriefing({ stage, onBack }) {
         </StageGrid>
       </StageSection>
     </StageDeepDiveLayout>
+
+      {isBriefBuilderOpen && (
+        <Suspense
+          fallback={
+            <div className="brief-builder-loading-overlay">
+              <div className="brief-builder-loading-card">
+                <span>CREATIVE BRIEF BUILDER</span>
+                <strong>Loading builder…</strong>
+              </div>
+            </div>
+          }
+        >
+          <BriefBuilder onClose={() => setIsBriefBuilderOpen(false)} />
+        </Suspense>
+      )}
+    </>
   );
 }
