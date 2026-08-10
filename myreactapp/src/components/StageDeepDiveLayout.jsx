@@ -278,7 +278,7 @@ function StageSOPPanel({
 */
 
 const SIDEBAR_MIN_WIDTH = 286;
-const SIDEBAR_DEFAULT_WIDTH = 286;
+const SIDEBAR_DEFAULT_WIDTH = 320;
 const SIDEBAR_MAX_WIDTH = 340;
 
 /*
