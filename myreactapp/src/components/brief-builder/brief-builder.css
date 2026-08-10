@@ -974,3 +974,46 @@
   min-width: 150px;
   text-align: left;
 }
+
+/* ==========================================================================
+   LAPTOP PREVIEW — SCALE PAGE TO AVAILABLE WIDTH
+   ========================================================================== */
+
+@media (min-width: 1181px) and (max-width: 1750px) {
+  .brief-builder-preview {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .brief-builder-preview-shell {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .brief-builder-preview-toolbar {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .brief-builder-paper {
+    width: 100%;
+    max-width: 600px;
+
+    box-sizing: border-box;
+  }
+
+  .brief-builder-paper.is-wide {
+    width: 100%;
+    max-width: 860px;
+
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 1181px) and (max-width: 1500px) {
+  .brief-builder-layout {
+    grid-template-columns:
+      minmax(500px, 0.85fr)
+      minmax(0, 1.15fr);
+  }
+}

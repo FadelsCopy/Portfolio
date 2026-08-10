@@ -6,6 +6,7 @@ import {
   isValidElement,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 
@@ -272,6 +273,16 @@ function StageSOPPanel({
 
 /*
 |--------------------------------------------------------------------------
+| SIDEBAR RESIZE CONSTANTS
+|--------------------------------------------------------------------------
+*/
+
+const SIDEBAR_MIN_WIDTH = 286;
+const SIDEBAR_DEFAULT_WIDTH = 286;
+const SIDEBAR_MAX_WIDTH = 340;
+
+/*
+|--------------------------------------------------------------------------
 | MAIN DASHBOARD LAYOUT
 |--------------------------------------------------------------------------
 */
@@ -292,6 +303,16 @@ export default function StageDeepDiveLayout({
   const [activeIndex, setActiveIndex] = useState(0);
   const [mobileNavigationOpen, setMobileNavigationOpen] =
     useState(false);
+
+  const [sidebarWidth, setSidebarWidth] = useState(
+    SIDEBAR_DEFAULT_WIDTH,
+  );
+  const [isSidebarResizing, setIsSidebarResizing] =
+    useState(false);
+  const sidebarResizeStartX = useRef(0);
+  const sidebarResizeStartWidth = useRef(
+    SIDEBAR_DEFAULT_WIDTH,
+  );
 
   const stageSections = useMemo(() => {
     return Children.toArray(children).filter((child) => {
@@ -344,6 +365,98 @@ export default function StageDeepDiveLayout({
     setMobileNavigationOpen(false);
   }, [stage?.number, stage?.title]);
 
+  useEffect(() => {
+    if (!isSidebarResizing) {
+      return undefined;
+    }
+
+    const handlePointerMove = (event) => {
+      const deltaX =
+        event.clientX - sidebarResizeStartX.current;
+
+      const nextWidth = Math.min(
+        SIDEBAR_MAX_WIDTH,
+        Math.max(
+          SIDEBAR_MIN_WIDTH,
+          sidebarResizeStartWidth.current + deltaX,
+        ),
+      );
+
+      setSidebarWidth(nextWidth);
+    };
+
+    const stopResizing = () => {
+      setIsSidebarResizing(false);
+    };
+
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', stopResizing);
+    window.addEventListener('pointercancel', stopResizing);
+
+    document.body.classList.add('is-stage-sidebar-resizing');
+
+    return () => {
+      window.removeEventListener(
+        'pointermove',
+        handlePointerMove,
+      );
+      window.removeEventListener('pointerup', stopResizing);
+      window.removeEventListener(
+        'pointercancel',
+        stopResizing,
+      );
+
+      document.body.classList.remove(
+        'is-stage-sidebar-resizing',
+      );
+    };
+  }, [isSidebarResizing]);
+
+  const handleSidebarResizeStart = (event) => {
+    if (window.innerWidth <= 1100) {
+      return;
+    }
+
+    event.preventDefault();
+
+    sidebarResizeStartX.current = event.clientX;
+    sidebarResizeStartWidth.current = sidebarWidth;
+
+    setIsSidebarResizing(true);
+  };
+
+  const handleSidebarResizeKeyDown = (event) => {
+    if (window.innerWidth <= 1100) {
+      return;
+    }
+
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+
+      setSidebarWidth((current) =>
+        Math.min(SIDEBAR_MAX_WIDTH, current + 8),
+      );
+    }
+
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+
+      setSidebarWidth((current) =>
+        Math.max(SIDEBAR_MIN_WIDTH, current - 8),
+      );
+    }
+
+    if (event.key === 'Home') {
+      event.preventDefault();
+      setSidebarWidth(SIDEBAR_MIN_WIDTH);
+    }
+
+    if (event.key === 'End') {
+      event.preventDefault();
+      setSidebarWidth(SIDEBAR_MAX_WIDTH);
+    }
+  };
+
   const handleNavigation = (index) => {
     setActiveIndex(index);
     setMobileNavigationOpen(false);
@@ -370,6 +483,7 @@ export default function StageDeepDiveLayout({
       className="stage-workspace-page"
       style={{
         '--stage-color': stageColor,
+        '--stage-sidebar-width': `${sidebarWidth}px`,
       }}
     >
       <div className="stage-workspace-background" />
@@ -505,6 +619,23 @@ export default function StageDeepDiveLayout({
             </div>
           )}
         </aside>
+
+        <div
+          className={`stage-workspace-sidebar-resizer ${
+            isSidebarResizing ? 'is-resizing' : ''
+          }`}
+          role="separator"
+          aria-orientation="vertical"
+          aria-label="Resize stage navigation"
+          aria-valuemin={SIDEBAR_MIN_WIDTH}
+          aria-valuemax={SIDEBAR_MAX_WIDTH}
+          aria-valuenow={Math.round(sidebarWidth)}
+          tabIndex={0}
+          onPointerDown={handleSidebarResizeStart}
+          onKeyDown={handleSidebarResizeKeyDown}
+        >
+          <span aria-hidden="true" />
+        </div>
 
         <section className="stage-workspace-main">
           <div className="stage-workspace-active-summary">
