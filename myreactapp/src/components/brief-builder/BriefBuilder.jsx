@@ -47,7 +47,11 @@ const initialData = {
   estimatedDuration: '',
   hook: '',
 
-  creativeNotes: '',
+  creatorName: '',
+  editorName: '',
+
+  creatorNotes: '',
+  editorNotes: '',
 
   briefFor: 'both',
 
@@ -300,6 +304,32 @@ const hasText = (
   );
 };
 
+const getCreatorNotesLabel = (
+  data
+) => {
+  const name =
+    String(
+      data.creatorName ?? ''
+    ).trim();
+
+  return name
+    ? `Notes for ${name}`
+    : 'Creator Notes';
+};
+
+const getEditorNotesLabel = (
+  data
+) => {
+  const name =
+    String(
+      data.editorName ?? ''
+    ).trim();
+
+  return name
+    ? `Notes for ${name}`
+    : 'Editor Notes';
+};
+
 function isCompleteRow(
   row,
   briefFor
@@ -414,12 +444,38 @@ function getValidationErrors(
   }
 
   if (
+    (
+      data.briefFor ===
+        'creator' ||
+      data.briefFor ===
+        'both'
+    ) &&
     !hasText(
-      data.creativeNotes
+      data.creatorNotes
     )
   ) {
     missing.push(
-      'Creative Notes'
+      getCreatorNotesLabel(
+        data
+      )
+    );
+  }
+
+  if (
+    (
+      data.briefFor ===
+        'editor' ||
+      data.briefFor ===
+        'both'
+    ) &&
+    !hasText(
+      data.editorNotes
+    )
+  ) {
+    missing.push(
+      getEditorNotesLabel(
+        data
+      )
     );
   }
 
@@ -649,27 +705,90 @@ function QuickViewForm({
         )}
       </div>
 
-      <label className="brief-builder-field brief-builder-notes-field">
-        <span>
-          Creative Notes *
-        </span>
+      <div
+        className={`brief-builder-dynamic-notes ${
+          data.briefFor ===
+          'both'
+            ? 'is-both'
+            : ''
+        }`}
+      >
+        {(
+          data.briefFor ===
+            'creator' ||
+          data.briefFor ===
+            'both'
+        ) && (
+          <label className="brief-builder-field brief-builder-notes-field">
+            <span>
+              {getCreatorNotesLabel(
+                data
+              )}{' '}
+              *
+            </span>
 
-        <textarea
-          value={
-            data.creativeNotes
-          }
-          placeholder="Add the concept context, execution notes, strategic reminders, references, or anything the team needs to understand before production…"
-          onChange={(
-            event
-          ) =>
-            setField(
-              'creativeNotes',
-              event.target
-                .value
-            )
-          }
-        />
-      </label>
+            <textarea
+              value={
+                data.creatorNotes
+              }
+              placeholder={
+                hasText(
+                  data.creatorName
+                )
+                  ? `Add notes for ${data.creatorName.trim()}…`
+                  : 'Add notes for the creator…'
+              }
+              onChange={(
+                event
+              ) =>
+                setField(
+                  'creatorNotes',
+                  event.target
+                    .value
+                )
+              }
+            />
+          </label>
+        )}
+
+        {(
+          data.briefFor ===
+            'editor' ||
+          data.briefFor ===
+            'both'
+        ) && (
+          <label className="brief-builder-field brief-builder-notes-field">
+            <span>
+              {getEditorNotesLabel(
+                data
+              )}{' '}
+              *
+            </span>
+
+            <textarea
+              value={
+                data.editorNotes
+              }
+              placeholder={
+                hasText(
+                  data.editorName
+                )
+                  ? `Add notes for ${data.editorName.trim()}…`
+                  : 'Add notes for the editor…'
+              }
+              onChange={(
+                event
+              ) =>
+                setField(
+                  'editorNotes',
+                  event.target
+                    .value
+                )
+              }
+            />
+          </label>
+        )}
+      </div>
     </section>
   );
 }
@@ -681,8 +800,8 @@ function QuickViewForm({
 */
 
 function RecipientSelector({
-  value,
-  onChange,
+  data,
+  setField,
 }) {
   const options = [
     [
@@ -733,13 +852,14 @@ function RecipientSelector({
               }
               type="button"
               className={
-                value ===
+                data.briefFor ===
                 key
                   ? 'is-active'
                   : ''
               }
               onClick={() =>
-                onChange(
+                setField(
+                  'briefFor',
                   key
                 )
               }
@@ -747,6 +867,81 @@ function RecipientSelector({
               {label}
             </button>
           )
+        )}
+      </div>
+
+      <div
+        className={`brief-builder-name-grid ${
+          data.briefFor ===
+          'both'
+            ? 'is-both'
+            : ''
+        }`}
+      >
+        {(
+          data.briefFor ===
+            'creator' ||
+          data.briefFor ===
+            'both'
+        ) && (
+          <label className="brief-builder-field">
+            <span>
+              Creator Name
+              <small>
+                Optional
+              </small>
+            </span>
+
+            <input
+              type="text"
+              value={
+                data.creatorName
+              }
+              placeholder="Enter name for the creator"
+              onChange={(
+                event
+              ) =>
+                setField(
+                  'creatorName',
+                  event.target
+                    .value
+                )
+              }
+            />
+          </label>
+        )}
+
+        {(
+          data.briefFor ===
+            'editor' ||
+          data.briefFor ===
+            'both'
+        ) && (
+          <label className="brief-builder-field">
+            <span>
+              Editor Name
+              <small>
+                Optional
+              </small>
+            </span>
+
+            <input
+              type="text"
+              value={
+                data.editorName
+              }
+              placeholder="Enter name for the editor"
+              onChange={(
+                event
+              ) =>
+                setField(
+                  'editorName',
+                  event.target
+                    .value
+                )
+              }
+            />
+          </label>
         )}
       </div>
     </section>
@@ -1044,18 +1239,59 @@ function Preview({
             )}
           </div>
 
-          <div className="brief-builder-paper-notes">
-            <span>
-              CREATIVE NOTES
-            </span>
+          <div
+            className={`brief-builder-preview-notes-grid ${
+              data.briefFor ===
+              'both'
+                ? 'is-both'
+                : ''
+            }`}
+          >
+            {(
+              data.briefFor ===
+                'creator' ||
+              data.briefFor ===
+                'both'
+            ) && (
+              <div className="brief-builder-paper-notes">
+                <span>
+                  {getCreatorNotesLabel(
+                    data
+                  )}
+                </span>
 
-            <p>
-              <LinkedText
-                text={
-                  data.creativeNotes
-                }
-              />
-            </p>
+                <p>
+                  <LinkedText
+                    text={
+                      data.creatorNotes
+                    }
+                  />
+                </p>
+              </div>
+            )}
+
+            {(
+              data.briefFor ===
+                'editor' ||
+              data.briefFor ===
+                'both'
+            ) && (
+              <div className="brief-builder-paper-notes">
+                <span>
+                  {getEditorNotesLabel(
+                    data
+                  )}
+                </span>
+
+                <p>
+                  <LinkedText
+                    text={
+                      data.editorNotes
+                    }
+                  />
+                </p>
+              </div>
+            )}
           </div>
         </section>
 
@@ -1512,16 +1748,11 @@ export default function BriefBuilder({
           />
 
           <RecipientSelector
-            value={
-              data.briefFor
+            data={
+              data
             }
-            onChange={(
-              briefFor
-            ) =>
-              setField(
-                'briefFor',
-                briefFor
-              )
+            setField={
+              setField
             }
           />
 

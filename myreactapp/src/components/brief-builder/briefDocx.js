@@ -21,53 +21,18 @@ import {
 |--------------------------------------------------------------------------
 */
 
-const URL_REGEX =
-  /(https?:\/\/[^\s]+)/gi;
+const URL_REGEX = /(https?:\/\/[^\s]+)/gi;
 
-/*
-|--------------------------------------------------------------------------
-| A4 DIMENSIONS IN TWIPS
-|--------------------------------------------------------------------------
-|
-| Word/DOCX table-grid widths use DXA / twips.
-|
-| A4 portrait:
-| 11906 x 16838 twips
-|
-| A4 landscape:
-| 16838 x 11906 twips
-|
-*/
+const A4_PORTRAIT_WIDTH = 11906;
+const A4_PORTRAIT_HEIGHT = 16838;
 
-const A4_PORTRAIT_WIDTH =
-  11906;
+const A4_LANDSCAPE_WIDTH = 16838;
+const A4_LANDSCAPE_HEIGHT = 11906;
 
-const A4_PORTRAIT_HEIGHT =
-  16838;
-
-const A4_LANDSCAPE_WIDTH =
-  16838;
-
-const A4_LANDSCAPE_HEIGHT =
-  11906;
-
-/*
-|--------------------------------------------------------------------------
-| PAGE MARGINS
-|--------------------------------------------------------------------------
-*/
-
-const PAGE_MARGIN_LEFT =
-  480;
-
-const PAGE_MARGIN_RIGHT =
-  480;
-
-const PAGE_MARGIN_TOP =
-  600;
-
-const PAGE_MARGIN_BOTTOM =
-  600;
+const PAGE_MARGIN_LEFT = 480;
+const PAGE_MARGIN_RIGHT = 480;
+const PAGE_MARGIN_TOP = 600;
+const PAGE_MARGIN_BOTTOM = 600;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,35 +44,53 @@ const clean = (
   value,
   fallback = '—'
 ) => {
-  const text =
-    String(
-      value ?? ''
-    ).trim();
+  const text = String(
+    value ?? ''
+  ).trim();
 
-  return (
-    text ||
-    fallback
-  );
+  return text || fallback;
 };
 
 const getAudienceLabel = (
   briefFor
 ) => {
   if (
-    briefFor ===
-    'creator'
+    briefFor === 'creator'
   ) {
     return 'Creator';
   }
 
   if (
-    briefFor ===
-    'editor'
+    briefFor === 'editor'
   ) {
     return 'Editor';
   }
 
   return 'Creator + Editor';
+};
+
+const getCreatorNotesLabel = (
+  data
+) => {
+  const name = String(
+    data.creatorName ?? ''
+  ).trim();
+
+  return name
+    ? `Notes for ${name}`
+    : 'Creator Notes';
+};
+
+const getEditorNotesLabel = (
+  data
+) => {
+  const name = String(
+    data.editorName ?? ''
+  ).trim();
+
+  return name
+    ? `Notes for ${name}`
+    : 'Editor Notes';
 };
 
 /*
@@ -120,8 +103,7 @@ function getUsablePageWidth(
   briefFor
 ) {
   const pageWidth =
-    briefFor ===
-    'both'
+    briefFor === 'both'
       ? A4_LANDSCAPE_WIDTH
       : A4_PORTRAIT_WIDTH;
 
@@ -150,34 +132,23 @@ function getColumns(
   */
 
   if (
-    briefFor ===
-    'creator'
+    briefFor === 'creator'
   ) {
     const half =
       Math.floor(
-        tableWidth /
-          2
+        tableWidth / 2
       );
 
     return [
       {
-        key:
-          'creatorVO',
-
-        label:
-          'VO',
-
-        width:
-          half,
+        key: 'creatorVO',
+        label: 'VO',
+        width: half,
       },
 
       {
-        key:
-          'creatorBrief',
-
-        label:
-          'Creator Brief',
-
+        key: 'creatorBrief',
+        label: 'Creator Brief',
         width:
           tableWidth -
           half,
@@ -193,34 +164,23 @@ function getColumns(
   */
 
   if (
-    briefFor ===
-    'editor'
+    briefFor === 'editor'
   ) {
     const half =
       Math.floor(
-        tableWidth /
-          2
+        tableWidth / 2
       );
 
     return [
       {
-        key:
-          'editorVO',
-
-        label:
-          'VO',
-
-        width:
-          half,
+        key: 'editorVO',
+        label: 'VO',
+        width: half,
       },
 
       {
-        key:
-          'editorBrief',
-
-        label:
-          'Editor Brief',
-
+        key: 'editorBrief',
+        label: 'Editor Brief',
         width:
           tableWidth -
           half,
@@ -237,51 +197,31 @@ function getColumns(
 
   const quarter =
     Math.floor(
-      tableWidth /
-        4
+      tableWidth / 4
     );
 
   return [
     {
-      key:
-        'creatorVO',
-
-      label:
-        'Creator VO',
-
-      width:
-        quarter,
+      key: 'creatorVO',
+      label: 'Creator VO',
+      width: quarter,
     },
 
     {
-      key:
-        'creatorBrief',
-
-      label:
-        'Creator Brief',
-
-      width:
-        quarter,
+      key: 'creatorBrief',
+      label: 'Creator Brief',
+      width: quarter,
     },
 
     {
-      key:
-        'editorVO',
-
-      label:
-        'Editor VO',
-
-      width:
-        quarter,
+      key: 'editorVO',
+      label: 'Editor VO',
+      width: quarter,
     },
 
     {
-      key:
-        'editorBrief',
-
-      label:
-        'Editor Brief',
-
+      key: 'editorBrief',
+      label: 'Editor Brief',
       width:
         tableWidth -
         quarter * 3,
@@ -300,9 +240,7 @@ function createLinkedRuns(
   options = {}
 ) {
   const text =
-    clean(
-      value
-    );
+    clean(value);
 
   const parts =
     text.split(
@@ -310,22 +248,18 @@ function createLinkedRuns(
     );
 
   return parts.map(
-    (
-      part
-    ) => {
+    (part) => {
       if (
         /^https?:\/\//i.test(
           part
         )
       ) {
         return new ExternalHyperlink({
-          link:
-            part,
+          link: part,
 
           children: [
             new TextRun({
-              text:
-                part,
+              text: part,
 
               style:
                 'Hyperlink',
@@ -333,8 +267,7 @@ function createLinkedRuns(
               color:
                 '007B91',
 
-              underline:
-                {},
+              underline: {},
 
               size:
                 options.size ??
@@ -345,8 +278,7 @@ function createLinkedRuns(
       }
 
       return new TextRun({
-        text:
-          part,
+        text: part,
 
         size:
           options.size ??
@@ -376,11 +308,8 @@ function createSectionHeading(
 ) {
   return new Paragraph({
     spacing: {
-      before:
-        180,
-
-      after:
-        150,
+      before: 180,
+      after: 150,
     },
 
     children: [
@@ -388,25 +317,20 @@ function createSectionHeading(
         text:
           `${number}  `,
 
-        bold:
-          true,
+        bold: true,
 
-        size:
-          16,
+        size: 16,
 
         color:
           '00AFC0',
       }),
 
       new TextRun({
-        text:
-          title,
+        text: title,
 
-        bold:
-          true,
+        bold: true,
 
-        size:
-          24,
+        size: 24,
 
         color:
           '0B1523',
@@ -420,11 +344,9 @@ function createSectionHeading(
 | QUICK VIEW
 |--------------------------------------------------------------------------
 |
-| EXACT DOCX WIDTH:
-|
-| 20% LABEL
-| 80% VALUE
-|
+| 20% label
+| 80% value
+|--------------------------------------------------------------------------
 */
 
 function createQuickViewTable(
@@ -433,8 +355,7 @@ function createQuickViewTable(
 ) {
   const labelWidth =
     Math.round(
-      tableWidth *
-        0.2
+      tableWidth * 0.2
     );
 
   const valueWidth =
@@ -471,109 +392,85 @@ function createQuickViewTable(
       'Hook',
       data.hook,
     ],
-
-    [
-      'Creative Notes',
-      data.creativeNotes,
-    ],
   ];
 
-  const createLabelCell =
-    (
-      label
-    ) =>
-      new TableCell({
-        width: {
-          size:
-            labelWidth,
+  const createLabelCell = (
+    label
+  ) =>
+    new TableCell({
+      width: {
+        size:
+          labelWidth,
 
-          type:
-            WidthType.DXA,
-        },
+        type:
+          WidthType.DXA,
+      },
 
-        shading: {
-          fill:
-            'EEF2F6',
-        },
+      shading: {
+        fill:
+          'EEF2F6',
+      },
 
-        margins: {
-          top:
-            100,
+      margins: {
+        top: 100,
+        bottom: 100,
+        left: 110,
+        right: 110,
+      },
 
-          bottom:
-            100,
+      children: [
+        new Paragraph({
+          children: [
+            new TextRun({
+              text:
+                label.toUpperCase(),
 
-          left:
-            110,
+              bold: true,
 
-          right:
-            110,
-        },
+              size: 14,
 
-        children: [
-          new Paragraph({
-            children: [
-              new TextRun({
-                text:
-                  label.toUpperCase(),
+              color:
+                '68758A',
+            }),
+          ],
+        }),
+      ],
+    });
 
-                bold:
-                  true,
+  const createValueCell = (
+    value
+  ) =>
+    new TableCell({
+      width: {
+        size:
+          valueWidth,
 
-                size:
-                  14,
+        type:
+          WidthType.DXA,
+      },
+
+      margins: {
+        top: 100,
+        bottom: 100,
+        left: 120,
+        right: 120,
+      },
+
+      children: [
+        new Paragraph({
+          children:
+            createLinkedRuns(
+              value,
+              {
+                size: 17,
 
                 color:
-                  '68758A',
-              }),
-            ],
-          }),
-        ],
-      });
-
-  const createValueCell =
-    (
-      value
-    ) =>
-      new TableCell({
-        width: {
-          size:
-            valueWidth,
-
-          type:
-            WidthType.DXA,
-        },
-
-        margins: {
-          top:
-            100,
-
-          bottom:
-            100,
-
-          left:
-            120,
-
-          right:
-            120,
-        },
-
-        children: [
-          new Paragraph({
-            children:
-              createLinkedRuns(
-                value,
-                {
-                  size:
-                    17,
-
-                  color:
-                    '172536',
-                }
-              ),
-          }),
-        ],
-      });
+                  '172536',
+              }
+            ),
+        }),
+      ],
+    });
 
   return new Table({
     width: {
@@ -589,12 +486,8 @@ function createQuickViewTable(
 
     /*
     |--------------------------------------------------------------------------
-    | IMPORTANT
+    | REAL WORD TABLE WIDTHS IN TWIPS
     |--------------------------------------------------------------------------
-    |
-    | These are REAL Word grid widths in twips.
-    | NOT percentages.
-    |
     */
 
     columnWidths: [
@@ -625,6 +518,167 @@ function createQuickViewTable(
 
 /*
 |--------------------------------------------------------------------------
+| CREATOR / EDITOR NOTES
+|--------------------------------------------------------------------------
+|
+| Creator only:
+| 100% Creator Notes
+|
+| Editor only:
+| 100% Editor Notes
+|
+| Both:
+| 50% Creator Notes
+| 50% Editor Notes
+|--------------------------------------------------------------------------
+*/
+
+function createNotesTable(
+  data,
+  tableWidth
+) {
+  const both =
+    data.briefFor ===
+    'both';
+
+  const noteItems = [];
+
+  if (
+    data.briefFor ===
+      'creator' ||
+    both
+  ) {
+    noteItems.push({
+      label:
+        getCreatorNotesLabel(
+          data
+        ),
+
+      value:
+        data.creatorNotes,
+    });
+  }
+
+  if (
+    data.briefFor ===
+      'editor' ||
+    both
+  ) {
+    noteItems.push({
+      label:
+        getEditorNotesLabel(
+          data
+        ),
+
+      value:
+        data.editorNotes,
+    });
+  }
+
+  const columnWidth =
+    both
+      ? Math.floor(
+          tableWidth / 2
+        )
+      : tableWidth;
+
+  const columnWidths =
+    both
+      ? [
+          columnWidth,
+
+          tableWidth -
+            columnWidth,
+        ]
+      : [
+          tableWidth,
+        ];
+
+  const cells =
+    noteItems.map(
+      (
+        item,
+        index
+      ) =>
+        new TableCell({
+          width: {
+            size:
+              columnWidths[
+                index
+              ],
+
+            type:
+              WidthType.DXA,
+          },
+
+          margins: {
+            top: 130,
+            bottom: 160,
+            left: 140,
+            right: 140,
+          },
+
+          children: [
+            new Paragraph({
+              spacing: {
+                after: 90,
+              },
+
+              children: [
+                new TextRun({
+                  text:
+                    item.label.toUpperCase(),
+
+                  bold: true,
+
+                  size: 14,
+
+                  color:
+                    '68758A',
+                }),
+              ],
+            }),
+
+            new Paragraph({
+              children:
+                createLinkedRuns(
+                  item.value,
+                  {
+                    size: 17,
+
+                    color:
+                      '172536',
+                  }
+                ),
+            }),
+          ],
+        })
+    );
+
+  return new Table({
+    width: {
+      size:
+        tableWidth,
+
+      type:
+        WidthType.DXA,
+    },
+
+    layout:
+      TableLayoutType.FIXED,
+
+    columnWidths,
+
+    rows: [
+      new TableRow({
+        children: cells,
+      }),
+    ],
+  });
+}
+
+/*
+|--------------------------------------------------------------------------
 | PRODUCTION HEADER CELL
 |--------------------------------------------------------------------------
 */
@@ -635,8 +689,7 @@ function createHeaderCell(
 ) {
   return new TableCell({
     width: {
-      size:
-        width,
+      size: width,
 
       type:
         WidthType.DXA,
@@ -648,31 +701,21 @@ function createHeaderCell(
     },
 
     margins: {
-      top:
-        110,
-
-      bottom:
-        110,
-
-      left:
-        110,
-
-      right:
-        110,
+      top: 110,
+      bottom: 110,
+      left: 110,
+      right: 110,
     },
 
     children: [
       new Paragraph({
         children: [
           new TextRun({
-            text:
-              label,
+            text: label,
 
-            bold:
-              true,
+            bold: true,
 
-            size:
-              15,
+            size: 15,
 
             color:
               'FFFFFF',
@@ -696,50 +739,38 @@ function createBodyCell(
 ) {
   return new TableCell({
     width: {
-      size:
-        width,
+      size: width,
 
       type:
         WidthType.DXA,
     },
 
     margins: {
-      top:
-        110,
-
-      bottom:
-        130,
-
-      left:
-        110,
-
-      right:
-        110,
+      top: 110,
+      bottom: 130,
+      left: 110,
+      right: 110,
     },
 
     children: [
       new Paragraph({
         spacing: {
-          after:
-            60,
+          after: 60,
         },
 
         children: [
           new TextRun({
             text:
               String(
-                rowIndex +
-                  1
+                rowIndex + 1
               ).padStart(
                 2,
                 '0'
               ),
 
-            bold:
-              true,
+            bold: true,
 
-            size:
-              12,
+            size: 12,
 
             color:
               '00AFC0',
@@ -752,8 +783,7 @@ function createBodyCell(
           createLinkedRuns(
             value,
             {
-              size:
-                16,
+              size: 16,
 
               color:
                 '334154',
@@ -784,30 +814,23 @@ function createProductionTable(
     Array.isArray(
       data.rows
     ) &&
-    data.rows.length >
-      0
+    data.rows.length > 0
       ? data.rows
       : [
           {
-            creatorVO:
-              '',
+            creatorVO: '',
 
-            creatorBrief:
-              '',
+            creatorBrief: '',
 
-            editorVO:
-              '',
+            editorVO: '',
 
-            editorBrief:
-              '',
+            editorBrief: '',
           },
         ];
 
   const columnWidths =
     columns.map(
-      (
-        column
-      ) =>
+      (column) =>
         column.width
     );
 
@@ -831,7 +854,7 @@ function createProductionTable(
 
     /*
     |--------------------------------------------------------------------------
-    | REAL TWIP WIDTHS
+    | REAL TWIP COLUMN WIDTHS
     |--------------------------------------------------------------------------
     */
 
@@ -839,14 +862,11 @@ function createProductionTable(
 
     rows: [
       new TableRow({
-        tableHeader:
-          true,
+        tableHeader: true,
 
         children:
           columns.map(
-            (
-              column
-            ) =>
+            (column) =>
               createHeaderCell(
                 column.label,
                 column.width
@@ -862,9 +882,7 @@ function createProductionTable(
           new TableRow({
             children:
               columns.map(
-                (
-                  column
-                ) =>
+                (column) =>
                   createBodyCell(
                     row[
                       column.key
@@ -902,7 +920,7 @@ export async function generateBriefDocx(
 
   /*
   |--------------------------------------------------------------------------
-  | REAL AVAILABLE WIDTH
+  | AVAILABLE PAGE WIDTH
   |--------------------------------------------------------------------------
   */
 
@@ -932,8 +950,7 @@ export async function generateBriefDocx(
               font:
                 'Arial',
 
-              size:
-                18,
+              size: 18,
 
               color:
                 '334154',
@@ -941,8 +958,7 @@ export async function generateBriefDocx(
 
             paragraph: {
               spacing: {
-                line:
-                  276,
+                line: 276,
               },
             },
           },
@@ -1004,8 +1020,7 @@ export async function generateBriefDocx(
                 AlignmentType.CENTER,
 
               spacing: {
-                after:
-                  70,
+                after: 70,
               },
 
               children: [
@@ -1013,11 +1028,9 @@ export async function generateBriefDocx(
                   text:
                     'FADEL.',
 
-                  bold:
-                    true,
+                  bold: true,
 
-                  size:
-                    26,
+                  size: 26,
 
                   color:
                     '0B1523',
@@ -1036,8 +1049,7 @@ export async function generateBriefDocx(
                 AlignmentType.CENTER,
 
               spacing: {
-                after:
-                  80,
+                after: 80,
               },
 
               children: [
@@ -1045,11 +1057,9 @@ export async function generateBriefDocx(
                   text:
                     'CREATIVE PRODUCTION BRIEF',
 
-                  bold:
-                    true,
+                  bold: true,
 
-                  size:
-                    17,
+                  size: 17,
 
                   color:
                     '00AFC0',
@@ -1068,8 +1078,7 @@ export async function generateBriefDocx(
                 AlignmentType.CENTER,
 
               spacing: {
-                after:
-                  240,
+                after: 240,
               },
 
               children: [
@@ -1080,11 +1089,9 @@ export async function generateBriefDocx(
                       'Untitled Creative'
                     ),
 
-                  bold:
-                    true,
+                  bold: true,
 
-                  size:
-                    32,
+                  size: 32,
 
                   color:
                     '0B1523',
@@ -1110,17 +1117,38 @@ export async function generateBriefDocx(
 
             /*
             |--------------------------------------------------------------------------
+            | SPACE BEFORE CREATOR / EDITOR NOTES
+            |--------------------------------------------------------------------------
+            */
+
+            new Paragraph({
+              spacing: {
+                before: 120,
+                after: 0,
+              },
+            }),
+
+            /*
+            |--------------------------------------------------------------------------
+            | CREATOR / EDITOR NOTES
+            |--------------------------------------------------------------------------
+            */
+
+            createNotesTable(
+              data,
+              tableWidth
+            ),
+
+            /*
+            |--------------------------------------------------------------------------
             | RECIPIENT
             |--------------------------------------------------------------------------
             */
 
             new Paragraph({
               spacing: {
-                before:
-                  160,
-
-                after:
-                  190,
+                before: 160,
+                after: 190,
               },
 
               children: [
@@ -1128,11 +1156,9 @@ export async function generateBriefDocx(
                   text:
                     'BRIEF FOR  ',
 
-                  bold:
-                    true,
+                  bold: true,
 
-                  size:
-                    14,
+                  size: 14,
 
                   color:
                     '68758A',
@@ -1144,11 +1170,9 @@ export async function generateBriefDocx(
                       data.briefFor
                     ),
 
-                  bold:
-                    true,
+                  bold: true,
 
-                  size:
-                    18,
+                  size: 18,
 
                   color:
                     '0B1523',
@@ -1183,8 +1207,7 @@ export async function generateBriefDocx(
                 AlignmentType.RIGHT,
 
               spacing: {
-                before:
-                  260,
+                before: 260,
               },
 
               children: [
@@ -1192,8 +1215,7 @@ export async function generateBriefDocx(
                   text:
                     'CREATIVE STRATEGY OP / BRIEFING SYSTEM',
 
-                  size:
-                    12,
+                  size: 12,
 
                   color:
                     '8D98A7',
@@ -1204,6 +1226,12 @@ export async function generateBriefDocx(
         },
       ],
     });
+
+  /*
+  |--------------------------------------------------------------------------
+  | GENERATE FILE
+  |--------------------------------------------------------------------------
+  */
 
   return Packer.toBlob(
     document

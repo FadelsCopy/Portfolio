@@ -127,8 +127,15 @@ const styles = StyleSheet.create({
     lineHeight: 1.35,
   },
 
-  notesCard: {
+  notesGrid: {
+    flexDirection: 'row',
+    gap: 8,
     marginTop: 8,
+  },
+
+  notesCard: {
+    flexGrow: 1,
+    flexBasis: 0,
     backgroundColor: COLORS.white,
     border: `1 solid ${COLORS.line}`,
     borderRadius: 8,
@@ -245,6 +252,22 @@ const QUICK_FIELDS = [
   ['Hook', 'hook'],
 ];
 
+const getCreatorNotesLabel = (data) => {
+  const name = String(data.creatorName || '').trim();
+
+  return name
+    ? `Notes for ${name}`
+    : 'Creator Notes';
+};
+
+const getEditorNotesLabel = (data) => {
+  const name = String(data.editorName || '').trim();
+
+  return name
+    ? `Notes for ${name}`
+    : 'Editor Notes';
+};
+
 function LinkedPdfText({ text }) {
   const value = String(text || '').trim();
 
@@ -321,12 +344,36 @@ function QuickView({ data }) {
         ))}
       </View>
 
-      <View style={styles.notesCard}>
-        <Text style={styles.quickLabel}>Creative Notes</Text>
+      <View style={styles.notesGrid}>
+        {(
+          data.briefFor === 'creator' ||
+          data.briefFor === 'both'
+        ) && (
+          <View style={styles.notesCard}>
+            <Text style={styles.quickLabel}>
+              {getCreatorNotesLabel(data)}
+            </Text>
 
-        <View style={styles.notesText}>
-          <LinkedPdfText text={data.creativeNotes} />
-        </View>
+            <View style={styles.notesText}>
+              <LinkedPdfText text={data.creatorNotes} />
+            </View>
+          </View>
+        )}
+
+        {(
+          data.briefFor === 'editor' ||
+          data.briefFor === 'both'
+        ) && (
+          <View style={styles.notesCard}>
+            <Text style={styles.quickLabel}>
+              {getEditorNotesLabel(data)}
+            </Text>
+
+            <View style={styles.notesText}>
+              <LinkedPdfText text={data.editorNotes} />
+            </View>
+          </View>
+        )}
       </View>
     </View>
   );

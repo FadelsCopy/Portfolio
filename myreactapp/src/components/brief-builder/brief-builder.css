@@ -1017,3 +1017,83 @@
       minmax(0, 1.15fr);
   }
 }
+
+/* ==========================================================================
+   BRIEF BUILDER V4 — OPTIONAL NAMES + RECIPIENT-SPECIFIC NOTES
+   ========================================================================== */
+
+.brief-builder-name-grid {
+  margin-top: 12px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.brief-builder-name-grid.is-both {
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+}
+
+.brief-builder-name-grid
+  .brief-builder-field
+  > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.brief-builder-name-grid
+  .brief-builder-field
+  > span
+  small {
+  color: #53647a;
+
+  font-size: 0.45rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
+.brief-builder-dynamic-notes {
+  margin-top: 12px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.brief-builder-dynamic-notes.is-both {
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+}
+
+.brief-builder-dynamic-notes
+  .brief-builder-notes-field {
+  margin-top: 0;
+}
+
+.brief-builder-preview-notes-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
+
+  margin-top: 7px;
+}
+
+.brief-builder-preview-notes-grid.is-both {
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+}
+
+.brief-builder-preview-notes-grid
+  .brief-builder-paper-notes {
+  margin-top: 0;
+}
+
+@media (max-width: 760px) {
+  .brief-builder-name-grid.is-both,
+  .brief-builder-dynamic-notes.is-both,
+  .brief-builder-preview-notes-grid.is-both {
+    grid-template-columns: 1fr;
+  }
+}
