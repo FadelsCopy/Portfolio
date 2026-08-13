@@ -1,14 +1,14 @@
 // src/components/CreativeBriefing.jsx
 
 import { lazy, Suspense, useState } from 'react';
-import './brief-builder/brief-builder.css';
+import '../brief-builder/brief-builder.css';
 
-const BriefBuilder = lazy(() => import('./brief-builder/BriefBuilder'));
+const BriefBuilder = lazy(() => import('../brief-builder/BriefBuilder'));
 
 import StageDeepDiveLayout, {
   StageFlow,
   StageSection,
-} from './StageDeepDiveLayout';
+} from '../shared/StageDeepDiveLayout';
 
 /*
 |--------------------------------------------------------------------------

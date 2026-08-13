@@ -6,7 +6,7 @@ import StageDeepDiveLayout, {
   StageFlow,
   StageHighlight,
   StageSection,
-} from './StageDeepDiveLayout';
+} from '../shared/StageDeepDiveLayout';
 
 /*
 |--------------------------------------------------------------------------

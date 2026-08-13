@@ -17,7 +17,7 @@ import Portfolio from './components/Portfolio';
 import Qa from './components/Qa';
 import PortfolioPage from './components/PortfolioPage';
 import NotFound from './components/NotFound';
-import CreativeStrategyOP from './components/CreativeStrategyOP';
+import CreativeStrategyOP from './components/creative-strategy-op/CreativeStrategyOP';
 
 function ScrollToTop() {
   const location = useLocation();

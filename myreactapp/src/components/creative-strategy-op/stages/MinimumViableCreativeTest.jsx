@@ -3,7 +3,7 @@
 import StageDeepDiveLayout, {
   StageFlow,
   StageSection,
-} from './StageDeepDiveLayout';
+} from '../shared/StageDeepDiveLayout';
 
 /*
 |--------------------------------------------------------------------------

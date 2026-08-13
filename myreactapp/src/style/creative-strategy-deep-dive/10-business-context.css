@@ -39,8 +39,8 @@
   color: var(--stage-color);
 
   font-family: monospace;
-  font-size: 0.54rem;
-  font-weight: 900;
+  font-size: 0.76rem;
+  font-weight: 950;
   letter-spacing: 0.11em;
 }
 
@@ -49,9 +49,9 @@
 
   color: #f5f8fb;
 
-  font-size: 0.94rem;
+  font-size: 1.04rem;
   line-height: 1.35;
-  font-weight: 850;
+  font-weight: 900;
 }
 
 .business-context-diagnosis-card.is-problem {
@@ -117,7 +117,7 @@
 
   color: var(--stage-color);
 
-  font-size: 0.53rem;
+  font-size: 0.74rem;
   font-weight: 950;
   letter-spacing: 0.13em;
 }
@@ -128,7 +128,7 @@
 
   color: #a8b4c4;
 
-  font-size: 0.74rem;
+  font-size: 0.86rem;
   line-height: 1.6;
 }
 
@@ -170,7 +170,7 @@
 
   color: #c6ff00;
 
-  font-size: 0.49rem;
+  font-size: 0.74rem;
   font-weight: 950;
   letter-spacing: 0.14em;
 }
@@ -180,8 +180,8 @@
 
   color: #f3f6fa;
 
-  font-size: 0.82rem;
-  font-weight: 850;
+  font-size: 1.04rem;
+  font-weight: 900;
 }
 
 .business-context-metric-list {
@@ -206,8 +206,8 @@
 
   color: #eef3f8;
 
-  font-size: 0.7rem;
-  font-weight: 850;
+  font-size: 0.82rem;
+  font-weight: 500;
 }
 
 .business-context-metric p {
@@ -215,7 +215,7 @@
 
   color: #8190a4;
 
-  font-size: 0.63rem;
+  font-size: 0.8rem;
   line-height: 1.45;
 }
 
@@ -235,7 +235,7 @@
 
   color: var(--stage-color);
 
-  font-size: 0.49rem;
+  font-size: 0.72rem;
   font-weight: 950;
   letter-spacing: 0.13em;
 }
@@ -257,14 +257,15 @@
 
   background: rgba(255, 255, 255, 0.02);
 
-  font-size: 0.64rem;
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
 .business-context-economics-decision i {
   color: var(--stage-color);
 
   font-style: normal;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 900;
 }
 
@@ -306,7 +307,7 @@
 
   color: var(--stage-color);
 
-  font-size: 0.49rem;
+  font-size: 0.74rem;
   font-weight: 950;
   letter-spacing: 0.13em;
 }
@@ -316,8 +317,8 @@
 
   color: #f4f7fa;
 
-  font-size: 0.87rem;
-  font-weight: 850;
+  font-size: 1.04rem;
+  font-weight: 900;
 }
 
 .business-context-evidence-card header p {
@@ -325,8 +326,8 @@
 
   color: #8291a5;
 
-  font-size: 0.65rem;
-  line-height: 1.47;
+  font-size: 0.84rem;
+  line-height: 1.5;
 }
 
 .business-context-funnel-flow {
@@ -353,15 +354,15 @@
   border: 1px solid var(--workspace-border);
   border-radius: 7px;
 
-  font-size: 0.55rem;
-  font-weight: 850;
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
 .business-context-funnel-flow i {
   color: var(--stage-color);
 
   font-style: normal;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 900;
 }
 
@@ -406,8 +407,8 @@
   color: var(--stage-color);
 
   font-family: monospace;
-  font-size: 0.55rem;
-  font-weight: 900;
+  font-size: 0.76rem;
+  font-weight: 950;
 }
 
 .business-context-intelligence-card h3 {
@@ -415,8 +416,8 @@
 
   color: #f3f6f9;
 
-  font-size: 0.82rem;
-  font-weight: 850;
+  font-size: 1.04rem;
+  font-weight: 900;
 }
 
 /* --------------------------------------------------------------------------
@@ -478,7 +479,7 @@
 
   color: var(--stage-color);
 
-  font-size: 0.5rem;
+  font-size: 0.74rem;
   font-weight: 950;
   letter-spacing: 0.13em;
 }
@@ -488,8 +489,8 @@
 
   color: #f4f7fa;
 
-  font-size: 0.86rem;
-  font-weight: 850;
+  font-size: 1.04rem;
+  font-weight: 900;
 }
 
 /* --------------------------------------------------------------------------
@@ -535,7 +536,7 @@
 
   color: var(--stage-color);
 
-  font-size: 0.51rem;
+  font-size: 0.74rem;
   font-weight: 950;
   letter-spacing: 0.14em;
 }
@@ -545,9 +546,9 @@
 
   color: #f4f7fa;
 
-  font-size: 0.91rem;
+  font-size: 1.08rem;
   line-height: 1.35;
-  font-weight: 850;
+  font-weight: 900;
 }
 
 .business-context-final-output p {
@@ -555,7 +556,7 @@
 
   color: #8c9bad;
 
-  font-size: 0.68rem;
+  font-size: 0.86rem;
   line-height: 1.55;
 }
 
@@ -587,13 +588,14 @@
   color: var(--stage-color);
 
   font-family: monospace;
-  font-size: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 950;
 }
 
 .business-context-final-output-list span {
   color: #a4b0c0;
 
-  font-size: 0.62rem;
+  font-size: 0.82rem;
   line-height: 1.4;
 }
 
@@ -634,4 +636,3 @@
     grid-column: auto;
   }
 }
-

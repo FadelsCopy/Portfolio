@@ -4,7 +4,7 @@ import StageDeepDiveLayout, {
   StageHighlight,
   StageList,
   StageSection,
-} from './StageDeepDiveLayout';
+} from '../shared/StageDeepDiveLayout';
 
 /*
 |--------------------------------------------------------------------------

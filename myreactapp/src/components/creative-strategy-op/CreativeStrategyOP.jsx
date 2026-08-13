@@ -26,20 +26,20 @@ import CreativeStrategyOPIcon from './CreativeStrategyOPIcon';
 
 const stageModules = import.meta.glob(
   [
-    './BusinessContext.jsx',
-    './Research.jsx',
-    './InsightSynthesis.jsx',
-    './PersonaMapping.jsx',
-    './AngleDevelopment.jsx',
-    './AngleQualification.jsx',
-    './ConceptDevelopment.jsx',
-    './MinimumViableCreativeTest.jsx',
-    './CreativeBriefing.jsx',
-    './ProductionHandoff.jsx',
-    './PerformanceAnalysis.jsx',
-    './CreativeIteration.jsx',
-    './CreativeScaling.jsx',
-    './KnowledgeLearningSystem.jsx',
+    './stages/BusinessContext.jsx',
+    './stages/Research.jsx',
+    './stages/InsightSynthesis.jsx',
+    './stages/PersonaMapping.jsx',
+    './stages/AngleDevelopment.jsx',
+    './stages/AngleQualification.jsx',
+    './stages/ConceptDevelopment.jsx',
+    './stages/MinimumViableCreativeTest.jsx',
+    './stages/CreativeBriefing.jsx',
+    './stages/ProductionHandoff.jsx',
+    './stages/PerformanceAnalysis.jsx',
+    './stages/CreativeIteration.jsx',
+    './stages/CreativeScaling.jsx',
+    './stages/KnowledgeLearningSystem.jsx',
   ],
   {
     eager: true,
@@ -1381,7 +1381,7 @@ function EmptyStagePlaceholder({ stage, onBack }) {
 */
 
 function DynamicStageRenderer({ stage, onBack }) {
-  const modulePath = `./${stage.componentFile}`;
+  const modulePath = `./stages/${stage.componentFile}`;
   const importedModule = stageModules[modulePath];
   const StageComponent = importedModule?.default;
 

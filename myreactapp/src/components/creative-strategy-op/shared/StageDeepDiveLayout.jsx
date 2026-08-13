@@ -11,7 +11,7 @@ import {
 } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import CreativeStrategyOPIcon from './CreativeStrategyOPIcon';
+import CreativeStrategyOPIcon from '../CreativeStrategyOPIcon';
 
 /*
 |--------------------------------------------------------------------------
