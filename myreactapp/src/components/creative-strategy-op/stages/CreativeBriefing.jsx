@@ -6,109 +6,281 @@ import '../brief-builder/brief-builder.css';
 const BriefBuilder = lazy(() => import('../brief-builder/BriefBuilder'));
 
 import StageDeepDiveLayout, {
-  StageFlow,
   StageSection,
 } from '../shared/StageDeepDiveLayout';
 
 /*
 |--------------------------------------------------------------------------
-| CREATIVE BRIEFING DATA
+| ROLE-SPECIFIC BRIEFING
 |--------------------------------------------------------------------------
 */
 
-const briefBlocks = [
-  {
-    label: 'STRATEGY',
-    title: 'What are we trying to communicate?',
-    items: [
-      'Persona / sub-persona',
-      'Awareness level',
-      'Qualified angle',
-      'Core concept',
-      'Main objective',
+const roleBriefs = {
+  editor: {
+    tab: 'Editor',
+    eyebrow: 'VIDEO EDITOR',
+    title: 'I remove strategic guesswork and leave execution room.',
+    description:
+      'The editor receives the strategic spine, the assets, the intended structure, and the required outputs. They should execute the idea, not have to invent what the idea is.',
+    rows: [
+      {
+        label: 'Strategy',
+        value:
+          'Persona, awareness level, angle, concept, core message, proof, offer, CTA, and the variable we are testing.',
+      },
+      {
+        label: 'Inputs',
+        value:
+          'Script or structure, VO / creator footage, B-roll, product shots, proof assets, brand files, and exact asset locations.',
+      },
+      {
+        label: 'Edit Direction',
+        value:
+          'Hook and first frame, beat order, pacing, captions, B-roll cues, product reveal, proof placement, CTA treatment, and useful references with timestamps.',
+      },
+      {
+        label: 'Deliverables',
+        value:
+          'Duration, aspect ratios, required versions, hook variations, naming, export requirements, and deadline.',
+      },
     ],
-  },
-  {
-    label: 'CREATIVE',
-    title: 'What needs to appear in the asset?',
-    items: [
-      'Format + duration',
-      'Hook / opening',
-      'Script or static copy',
-      'Proof + product role',
-      'Offer + CTA',
+    fixed: [
+      'Angle',
+      'Core message',
+      'Claim',
+      'Proof logic',
+      'Offer',
+      'CTA',
+      'Test variable',
     ],
-  },
-  {
-    label: 'PRODUCTION',
-    title: 'How should it be executed?',
-    items: [
-      'Creator / editor direction',
-      'Shots, B-roll + required assets',
-      'Visual / pacing direction',
-      'Deliverables + variations',
-      'Technical specs + deadline',
+    flexible: [
+      'Transitions',
+      'Music',
+      'Micro timing',
+      'Cut choices',
+      'Visual polish',
     ],
+    outcome:
+      'The editor can make strong editing decisions without accidentally changing the strategy being tested.',
   },
-  {
-    label: 'REFERENCES',
-    title: 'What should the team study?',
-    items: [
-      'Link or file',
-      'Relevant timestamp',
-      'Exact element to study',
-      'What should not be copied',
-      'How to adapt it to this concept',
-    ],
-  },
-];
 
-const speedRules = [
+  ugc: {
+    tab: 'UGC / Creator',
+    eyebrow: 'UGC / CREATOR',
+    title: 'I protect the message without scripting the humanity out of it.',
+    description:
+      'The creator needs enough context to understand who they are speaking to, what must land, and which visuals are required, while still sounding natural.',
+    rows: [
+      {
+        label: 'Strategy',
+        value:
+          'Persona, customer situation, angle, core belief, desired outcome, proof, offer, CTA, and the intended emotional takeaway.',
+      },
+      {
+        label: 'Talking Direction',
+        value:
+          'A final script when wording or claims must be controlled, or structured talking points when natural delivery matters more.',
+      },
+      {
+        label: 'Shot Direction',
+        value:
+          'Required hooks, product interaction, demonstrations, problem-state shots, desired-outcome shots, reactions, and B-roll.',
+      },
+      {
+        label: 'Delivery',
+        value:
+          'Tone, energy, pace, setting, creator perspective, native feel, references, deliverables, and deadline.',
+      },
+    ],
+    fixed: [
+      'Angle',
+      'Required claim',
+      'Key message',
+      'Required shots',
+      'Proof',
+      'Offer',
+      'CTA',
+    ],
+    flexible: [
+      'Natural phrasing',
+      'Gestures',
+      'Cadence',
+      'Small story choices',
+      'Personality',
+    ],
+    outcome:
+      'The creator sounds like a real person while still delivering the strategic message the concept requires.',
+  },
+
+  designer: {
+    tab: 'Designer',
+    eyebrow: 'STATIC / DESIGN',
+    title: 'I define the communication hierarchy, not every pixel.',
+    description:
+      'The designer should know exactly what the ad must communicate, what needs to dominate visually, and which assets or variants are required.',
+    rows: [
+      {
+        label: 'Strategy',
+        value:
+          'Persona, awareness level, angle, concept, main message, proof requirement, offer, CTA, and intended test.',
+      },
+      {
+        label: 'Message Hierarchy',
+        value:
+          'Headline, support copy, proof, product role, offer, CTA, and what should be understood first, second, and third.',
+      },
+      {
+        label: 'Visual Direction',
+        value:
+          'Dominant visual, product prominence, proof asset, demonstration needs, composition direction, and the intended visual language.',
+      },
+      {
+        label: 'Deliverables',
+        value:
+          'Placements, dimensions, variants, required copy or visual changes, references, source files, naming, and deadline.',
+      },
+    ],
+    fixed: [
+      'Message hierarchy',
+      'Claim',
+      'Proof',
+      'Product role',
+      'Offer',
+      'CTA',
+      'Test variable',
+    ],
+    flexible: [
+      'Layout exploration',
+      'Typography treatment',
+      'Spacing',
+      'Composition',
+      'Visual polish',
+    ],
+    outcome:
+      'The designer owns the visual solution while the strategic hierarchy remains intact.',
+  },
+};
+
+/*
+|--------------------------------------------------------------------------
+| DIRECTION VS AUTONOMY
+|--------------------------------------------------------------------------
+*/
+
+const autonomyLevels = [
   {
     number: '01',
-    title: 'One source of truth',
+    label: 'NEW PERSON / NEW FORMAT',
+    title: 'More structure',
     description:
-      'The brief, references, assets, deliverables, and latest feedback live in one place instead of being scattered across messages.',
+      'More explicit instructions, more examples, a smaller first deliverable, and an earlier checkpoint.',
   },
   {
     number: '02',
-    title: 'Separate creator and editor direction',
+    label: 'EXPERIENCED / NEW TO BRAND',
+    title: 'Clear boundaries + room',
     description:
-      'Each person sees only the context, instructions, assets, and decisions they actually need to execute their part correctly.',
+      'I explain the strategy, brand standards, non-negotiables, and expected output, then let their craft experience work.',
   },
   {
     number: '03',
-    title: 'Define non-negotiables vs creative freedom',
+    label: 'PROVEN COLLABORATOR',
+    title: 'Lighter brief + more autonomy',
     description:
-      'Protect the persona, angle, message, proof, offer, CTA, and test variable while leaving room for natural delivery and execution choices.',
-  },
-  {
-    number: '04',
-    title: 'Make references specific',
-    description:
-      'I never say “make it like this.” I mark the timestamp, the element to study, why it matters, and how it should be adapted.',
-  },
-  {
-    number: '05',
-    title: 'Use early checkpoints only when risk is high',
-    description:
-      'For new creators, new formats, or complex executions, I review one representative sample before the full asset is completed.',
-  },
-  {
-    number: '06',
-    title: 'Give consolidated, actionable feedback',
-    description:
-      'Feedback includes the exact location, what needs to change, why it matters, the requested fix, and a reference when useful.',
+      'Shared terminology, known standards, approved examples, and trust reduce the amount of instruction required.',
   },
 ];
 
-const feedbackFlow = [
-  'Brief',
-  'Align',
-  'Produce',
-  'Checkpoint if Needed',
-  'Consolidated Feedback',
-  'Final Approval',
+const autonomyFactors = [
+  'Skill',
+  'Brand familiarity',
+  'Format familiarity',
+  'Working history',
+  'Production risk',
+];
+
+/*
+|--------------------------------------------------------------------------
+| MICROMANAGEMENT
+|--------------------------------------------------------------------------
+*/
+
+const micromanagementRules = [
+  {
+    number: '01',
+    title: 'Align before production',
+    description:
+      'Objective, deliverable, references, ownership, and expectations are clear before execution begins.',
+  },
+  {
+    number: '02',
+    title: 'Separate fixed from flexible',
+    description:
+      'I protect the strategic variables being tested and leave specialist execution decisions to the person doing the work.',
+  },
+  {
+    number: '03',
+    title: 'Checkpoint only when risk justifies it',
+    description:
+      'New collaborator, new format, expensive shoot, or complex execution may justify one early sample. Otherwise I let them work.',
+  },
+  {
+    number: '04',
+    title: 'Review output, not activity',
+    description:
+      'I do not direct every cut, sentence, or pixel. I review the finished work against the agreed strategic intent.',
+  },
+];
+
+/*
+|--------------------------------------------------------------------------
+| MISALIGNMENT + FEEDBACK
+|--------------------------------------------------------------------------
+*/
+
+const feedbackSteps = [
+  'Exact location',
+  'What is mismatched',
+  'Why it matters',
+  'Requested correction',
+  'Reference if useful',
+];
+
+/*
+|--------------------------------------------------------------------------
+| COLLABORATION COMPOUNDS
+|--------------------------------------------------------------------------
+*/
+
+const collaborationStages = [
+  {
+    number: '01',
+    title: 'First projects',
+    description:
+      'More detailed brief, stronger references, clearer examples, and tighter alignment while we learn how each other works.',
+  },
+  {
+    number: '02',
+    title: 'Shared operating language',
+    description:
+      'We build common terminology, approved examples, feedback patterns, naming conventions, and reusable templates.',
+  },
+  {
+    number: '03',
+    title: 'Compounding collaboration',
+    description:
+      'Briefs get lighter, checkpoints decrease, feedback gets faster, and autonomy increases without losing strategic control.',
+  },
+];
+
+const collaborationAssets = [
+  'Shared terminology',
+  'Approved examples',
+  'Reusable templates',
+  'Brand rules',
+  'Naming conventions',
+  'Asset library',
+  'Known feedback patterns',
 ];
 
 /*
@@ -122,6 +294,9 @@ export default function CreativeBriefing({
   onBack,
 }) {
   const [isBriefBuilderOpen, setIsBriefBuilderOpen] = useState(false);
+  const [selectedRole, setSelectedRole] = useState('editor');
+
+  const activeBrief = roleBriefs[selectedRole];
 
   return (
     <>
@@ -130,13 +305,13 @@ export default function CreativeBriefing({
         onBack={onBack}
         eyebrow="PRODUCTION COMMUNICATION SYSTEM"
         title="Creative Briefing and Production Communication"
-        introduction="Turn the approved concept into instructions a creator or editor can execute correctly without guessing."
+        introduction="Turn the approved concept into clear instructions for the person executing it, then manage production without unnecessary micromanagement."
         process={[
-          'Approved Concept',
-          'Brief',
-          'Production',
-          'Feedback',
-          'Approval',
+          'Adapt Brief',
+          'Align',
+          'Give Ownership',
+          'Review',
+          'Improve System',
         ]}
         singlePage
       >
@@ -144,13 +319,18 @@ export default function CreativeBriefing({
           number="00"
           navTitle="Briefing"
           title="Creative Briefing"
-          description="The goal is simple: protect the strategy, remove guesswork, and make production move faster with less micromanagement."
+          description="How I brief different production roles, decide how much direction to give, avoid micromanagement, handle misalignment, and make collaboration faster over time."
         >
+          {/* ============================================================
+              TOP / LIVE BRIEF BUILDER
+             ============================================================ */}
+
           <div className="cb-top-launch">
             <div className="cb-top-launch-copy">
               <span>CREATIVE BRIEF SYSTEM</span>
+
               <strong>
-                Can another person execute the intended concept without guessing?
+                Can the person execute the intended concept correctly without guessing?
               </strong>
             </div>
 
@@ -164,63 +344,307 @@ export default function CreativeBriefing({
             </button>
           </div>
 
-          <div className="cb-brief-visual">
-            {briefBlocks.map((block) => (
-              <article key={block.label}>
-                <div className="cb-brief-block-head">
-                  <span>{block.label}</span>
-                  <h3>{block.title}</h3>
-                </div>
+          {/* ============================================================
+              01 — HOW I BRIEF BY ROLE
+             ============================================================ */}
 
-                <div className="cb-brief-items">
-                  {block.items.map((item) => (
-                    <span key={item}>{item}</span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="cb-brief-rule">
-            <span>BRIEFING RULE</span>
-            <strong>
-              If the creator or editor still has to guess the angle, hook,
-              deliverable, reference, asset, or deadline, the brief is not clear enough.
-            </strong>
-          </div>
-
-          <div className="cb-speed-section">
-            <div className="cb-speed-header">
+          <section className="cb-role-section">
+            <div className="cb-section-header">
               <div>
-                <span>REDUCE BACK AND FORTH</span>
-                <h3>Less micromanagement. Faster production.</h3>
+                <span>01 — HOW I BRIEF</span>
+                <h3>
+                  Same strategy. Different instructions for the person executing it.
+                </h3>
               </div>
 
               <p>
-                The brief should answer predictable questions before production
-                starts, then keep feedback specific and centralized.
+                I do not send one generic brief to everyone. The strategic core
+                stays consistent, but the execution information changes by role.
               </p>
             </div>
 
-            <div className="cb-speed-grid">
-              {speedRules.map((rule) => (
-                <article key={rule.number}>
-                  <span className="cb-speed-number">
-                    {rule.number}
-                  </span>
+            <div
+              className="cb-role-tabs"
+              role="tablist"
+              aria-label="Brief recipient"
+            >
+              {Object.entries(roleBriefs).map(([key, role]) => (
+                <button
+                  key={key}
+                  type="button"
+                  role="tab"
+                  aria-selected={selectedRole === key}
+                  className={selectedRole === key ? 'is-active' : ''}
+                  onClick={() => setSelectedRole(key)}
+                >
+                  {role.tab}
+                </button>
+              ))}
+            </div>
+
+            <div className="cb-role-panel">
+              <div className="cb-role-summary">
+                <span>{activeBrief.eyebrow}</span>
+                <h3>{activeBrief.title}</h3>
+                <p>{activeBrief.description}</p>
+              </div>
+
+              <div className="cb-role-table">
+                <div className="cb-role-table-head">
+                  <span>BRIEF AREA</span>
+                  <span>WHAT I GIVE THEM</span>
+                </div>
+
+                {activeBrief.rows.map((row) => (
+                  <div
+                    className="cb-role-table-row"
+                    key={row.label}
+                  >
+                    <strong>{row.label}</strong>
+                    <p>{row.value}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="cb-boundaries">
+                <article>
+                  <span>NON-NEGOTIABLES</span>
 
                   <div>
-                    <h4>{rule.title}</h4>
-                    <p>{rule.description}</p>
+                    {activeBrief.fixed.map((item) => (
+                      <strong key={item}>{item}</strong>
+                    ))}
                   </div>
+                </article>
+
+                <article className="is-flexible">
+                  <span>EXECUTION FREEDOM</span>
+
+                  <div>
+                    {activeBrief.flexible.map((item) => (
+                      <strong key={item}>{item}</strong>
+                    ))}
+                  </div>
+                </article>
+              </div>
+
+              <div className="cb-role-outcome">
+                <span>EXPECTED RESULT</span>
+                <strong>{activeBrief.outcome}</strong>
+              </div>
+            </div>
+          </section>
+
+          {/* ============================================================
+              02 — DIRECTION VS AUTONOMY
+             ============================================================ */}
+
+          <section className="cb-autonomy-section">
+            <div className="cb-section-header">
+              <div>
+                <span>02 — DIRECTION VS AUTONOMY</span>
+                <h3>
+                  I change the amount of direction based on the person and the risk.
+                </h3>
+              </div>
+
+              <p>
+                An experienced editor may need very little execution direction,
+                but still need more context when they are new to the brand or format.
+              </p>
+            </div>
+
+            <div className="cb-autonomy-track">
+              {autonomyLevels.map((level, index) => (
+                <article key={level.number}>
+                  <div className="cb-autonomy-card-top">
+                    <span>{level.number}</span>
+                    <small>{level.label}</small>
+                  </div>
+
+                  <h4>{level.title}</h4>
+                  <p>{level.description}</p>
+
+                  {index < autonomyLevels.length - 1 && (
+                    <i aria-hidden="true">→</i>
+                  )}
                 </article>
               ))}
             </div>
 
-            <div className="cb-feedback-flow">
-              <StageFlow items={feedbackFlow} />
+            <div className="cb-autonomy-factors">
+              <span>I CALIBRATE DIRECTION USING</span>
+
+              <div>
+                {autonomyFactors.map((factor) => (
+                  <strong key={factor}>{factor}</strong>
+                ))}
+              </div>
             </div>
+
+            <div className="cb-autonomy-rule">
+              <span>RULE</span>
+
+              <strong>
+                More uncertainty or production risk → more structure.
+                More proven understanding → more autonomy.
+              </strong>
+            </div>
+          </section>
+
+          {/* ============================================================
+              03 — MICROMANAGEMENT + MISALIGNMENT
+             ============================================================ */}
+
+          <div className="cb-management-grid">
+            <section className="cb-management-card">
+              <header>
+                <span>03 — HOW I AVOID MICROMANAGEMENT</span>
+
+                <h3>
+                  Clarity upfront. Ownership during execution.
+                </h3>
+              </header>
+
+              <div className="cb-management-rules">
+                {micromanagementRules.map((rule) => (
+                  <article key={rule.number}>
+                    <span>{rule.number}</span>
+
+                    <div>
+                      <h4>{rule.title}</h4>
+                      <p>{rule.description}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section className="cb-management-card cb-misalignment-card">
+              <header>
+                <span>04 — MISALIGNMENT + FEEDBACK</span>
+
+                <h3>
+                  Diagnose the mismatch before correcting it.
+                </h3>
+              </header>
+
+              <div className="cb-mismatch-grid">
+                <article>
+                  <span>IF MY BRIEF WAS UNCLEAR</span>
+                  <strong>Own the ambiguity.</strong>
+
+                  <p>
+                    Clarify the missing direction, align on the correction,
+                    then improve the brief or template so the same confusion
+                    does not repeat.
+                  </p>
+                </article>
+
+                <article>
+                  <span>IF EXECUTION DRIFTED</span>
+                  <strong>Point to the exact gap.</strong>
+
+                  <p>
+                    Show what was agreed, where the output drifted, why it
+                    matters strategically, and the correction required.
+                  </p>
+                </article>
+              </div>
+
+              <div className="cb-feedback-system">
+                <span>ACTIONABLE FEEDBACK</span>
+
+                <div>
+                  {feedbackSteps.map((step, index) => (
+                    <div key={step}>
+                      <strong>{step}</strong>
+
+                      {index < feedbackSteps.length - 1 && (
+                        <i aria-hidden="true">→</i>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="cb-feedback-example">
+                <span>PRACTICAL EXAMPLE</span>
+
+                <p>
+                  <strong>0:03 to 0:05:</strong> the product reveal happens
+                  before the problem is established. Move it after the problem
+                  beat because this concept depends on building recognition
+                  first. Use the reference at 0:07 for pacing, not for the
+                  exact visual.
+                </p>
+              </div>
+            </section>
           </div>
+
+          {/* ============================================================
+              05 — COLLABORATION COMPOUNDS
+             ============================================================ */}
+
+          <section className="cb-compound-section">
+            <div className="cb-section-header">
+              <div>
+                <span>05 — COLLABORATION COMPOUNDS</span>
+
+                <h3>
+                  The working system gets lighter as the relationship gets stronger.
+                </h3>
+              </div>
+
+              <p>
+                The goal is not to keep writing increasingly detailed briefs.
+                The goal is to build shared standards so less explanation is
+                required over time.
+              </p>
+            </div>
+
+            <div className="cb-compound-track">
+              {collaborationStages.map((item, index) => (
+                <article key={item.number}>
+                  <span>{item.number}</span>
+                  <h4>{item.title}</h4>
+                  <p>{item.description}</p>
+
+                  {index < collaborationStages.length - 1 && (
+                    <i aria-hidden="true">→</i>
+                  )}
+                </article>
+              ))}
+            </div>
+
+            <div className="cb-compound-assets">
+              <span>WHAT ACCUMULATES OVER TIME</span>
+
+              <div>
+                {collaborationAssets.map((item) => (
+                  <strong key={item}>{item}</strong>
+                ))}
+              </div>
+            </div>
+
+            <div className="cb-final-demo">
+              <div>
+                <span>SHOW IT PRACTICALLY</span>
+                <strong>
+                  Once the system is clear, I can build the actual production brief.
+                </strong>
+              </div>
+
+              <button
+                type="button"
+                className="cb-create-brief-button"
+                onClick={() => setIsBriefBuilderOpen(true)}
+              >
+                <span>Create Brief</span>
+                <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </section>
         </StageSection>
       </StageDeepDiveLayout>
 
