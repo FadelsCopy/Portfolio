@@ -1155,6 +1155,10 @@
    -------------------------------------------------------------------------- */
 
 .cb-final-demo {
+  position: relative;
+  z-index: 4;
+  isolation: isolate;
+
   padding: 16px 19px;
 
   display: flex;
@@ -1183,6 +1187,13 @@
   font-size: 0.83rem;
   line-height: 1.45;
   font-weight: 800;
+}
+
+.cb-final-create-brief-button {
+  position: relative;
+  z-index: 6;
+  pointer-events: auto;
+  touch-action: manipulation;
 }
 
 

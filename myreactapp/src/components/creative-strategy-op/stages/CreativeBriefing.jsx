@@ -298,6 +298,12 @@ export default function CreativeBriefing({
 
   const activeBrief = roleBriefs[selectedRole];
 
+  const openBriefBuilder = (event) => {
+    event?.preventDefault();
+    event?.stopPropagation();
+    setIsBriefBuilderOpen(true);
+  };
+
   return (
     <>
       <StageDeepDiveLayout
@@ -337,7 +343,7 @@ export default function CreativeBriefing({
             <button
               type="button"
               className="cb-create-brief-button"
-              onClick={() => setIsBriefBuilderOpen(true)}
+              onClick={openBriefBuilder}
             >
               <span>Create Brief</span>
               <span aria-hidden="true">↗</span>
@@ -637,8 +643,8 @@ export default function CreativeBriefing({
 
               <button
                 type="button"
-                className="cb-create-brief-button"
-                onClick={() => setIsBriefBuilderOpen(true)}
+                className="cb-create-brief-button cb-final-create-brief-button"
+                onClick={openBriefBuilder}
               >
                 <span>Create Brief</span>
                 <span aria-hidden="true">↗</span>
