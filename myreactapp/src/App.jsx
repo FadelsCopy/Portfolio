@@ -73,7 +73,7 @@ function AppRoutes() {
   const location = useLocation();
 
   const isCreativeStrategyOP =
-    location.pathname === '/CS';
+    location.pathname === '/creative-strategy-op';
 
   return (
     <>
