@@ -508,7 +508,7 @@ const competitorComparisonSignals = [
 */
 
 const creativeDiscoveryTools = [
-  'Aetheria',
+  'Atria',
   'Foreplay',
   'TrendTrack',
   'GetHooked AI',
