@@ -1,281 +1,213 @@
 // src/components/BusinessContext.jsx
 
 import StageDeepDiveLayout, {
-  StageCard,
-  StageFlow,
-  StageGrid,
   StageHighlight,
   StageList,
   StageSection,
 } from './StageDeepDiveLayout';
 
-/*
-|--------------------------------------------------------------------------
-| BUSINESS CONTEXT DATA
-|--------------------------------------------------------------------------
-*/
-
 const businessGoals = [
-  'Revenue and growth targets',
-  'Profitability targets',
-  'Scaling goals',
-  'New product launches',
-  'Market expansion',
+  'Revenue / growth target',
+  'Profitability target',
   'CPA or ROAS improvement',
-  'Creative fatigue problems',
-  'Testing velocity goals',
-  'Main business priority',
-  'Time horizon',
+  'Scale an existing product',
+  'Launch a new product',
+  'Expand into a new audience or market',
+  'Increase creative testing velocity',
 ];
 
-const businessEconomics = [
-  'Average order value',
+const creativeProblems = [
+  'Winner fatigue',
+  'Dependence on one angle or concept',
+  'Strong attention but weak conversion',
+  'Weak hooks or poor retention',
+  'Too many iterations and too few net-new concepts',
+  'Insufficient proof or differentiation',
+  'Slow production / testing velocity',
+];
+
+const acquisitionEconomics = [
   'Target CPA',
-  'Testing CPA',
   'Break-even CPA',
+  'Blended CAC',
+  'New-customer CAC',
   'Target ROAS',
   'Break-even ROAS',
-  'Gross margin',
-  'Contribution margin',
-  'Lifetime value',
+  'MER',
   'Conversion rate',
   'CPM',
   'CPC',
-  'CTR',
-  'Outbound CTR',
-  'New-customer ROAS',
+  'CTR / Outbound CTR',
+];
+
+const profitabilityEconomics = [
+  'AOV',
+  'COGS',
+  'Gross margin',
+  'Contribution margin',
+  'Contribution profit per order',
+  'Discount impact',
+  'Shipping / fulfillment cost',
   'Refund rate',
-  'Repeat-purchase or subscription rate',
-  'Testing budget',
-  'Minimum decision threshold',
-  'Production cost per concept',
 ];
 
-const productAndOffer = [
-  'Primary product',
-  'Supporting products',
-  'Product benefits',
-  'Desired outcomes',
-  'Unique features',
-  'Product mechanism',
-  'Ingredients or materials',
-  'Pricing',
-  'Bundles',
-  'Subscription options',
-  'Discounts',
-  'Bonuses',
-  'Guarantees',
-  'Risk reversal',
-  'Urgency',
-  'Scarcity',
-  'Upsells and cross-sells',
+const businessHealthEconomics = [
+  'LTV',
+  'LTV : CAC',
+  'Payback period',
+  'Repeat-purchase rate',
+  'Subscription rate',
+  'Retention / churn when relevant',
 ];
 
-const customerOverview = [
-  'Primary customer groups',
-  'Highest-value customers',
-  'Most profitable segments',
-  'Common use cases',
-  'Most common problems',
-  'Frequently mentioned benefits',
-  'Common objections',
-  'Buying patterns',
-  'Repeat-purchase behavior',
-  'Subscription customers',
-  'Geographic distribution',
-  'Age and gender data',
-  'New versus returning customers',
-];
-
-const historicalCreativePerformance = [
-  'Current winning ads',
+const creativeHistory = [
+  'Current high-spend winners',
   'Historical winners',
-  'High-spend ads',
-  'Losing concepts',
   'Fatigued creatives',
-  'Best-performing hooks',
-  'Best-performing angles',
-  'Best-performing formats',
-  'Best-performing creators',
-  'Best-performing offers',
-  'Landing pages connected to winners',
-  'Concepts that generated clicks but weak conversion',
-  'Concepts that converted but could not scale',
-  'Tests that produced inconclusive data',
+  'Clear losing concepts',
+  'Inconclusive tests',
+  'Winning hooks',
+  'Winning angles',
+  'Winning formats',
+  'Winning creators',
+  'Winning offers',
 ];
 
-const creativeAssetTags = [
-  'Persona',
-  'Angle',
-  'Concept',
-  'Hook',
-  'Format',
-  'Creator',
-  'Offer',
-  'Product',
-  'Landing page',
-  'Awareness level',
-  'Performance status',
+const portfolioSignals = [
+  'Spend concentration by angle',
+  'Spend concentration by product',
+  'Spend concentration by creator',
+  'Spend concentration by format',
+  'Balance of net-new concepts vs iterations',
+  'Current winner families',
+  'Creative fatigue exposure',
+  'Untested whitespace',
 ];
 
-const currentCreativePortfolio = [
-  'New concepts',
-  'Iterations',
-  'Winning creatives',
-  'Scaling variations',
-  'Experimental ads',
-  'Evergreen ads',
-  'Promotional ads',
-  'Seasonal ads',
-  'Persona-specific creatives',
-  'Awareness-specific creatives',
-  'Offer-specific creatives',
+const funnelAssets = [
+  'Product pages',
+  'Dedicated landing pages',
+  'Advertorials',
+  'Listicles',
+  'Quiz funnels',
+  'Checkout / upsell flow',
+  'Email sequences',
+  'Offer pages',
 ];
 
-const concentrationRisks = [
-  'One angle',
-  'One product',
-  'One creator',
-  'One format',
-  'One audience',
-  'One offer',
-  'One platform',
-  'One landing page',
+const brandIntelligenceGroups = [
+  {
+    number: '01',
+    title: 'Customer Evidence',
+    items: [
+      'Customer surveys',
+      'Reviews and support tickets',
+      'Post-purchase feedback',
+      'Retention / subscription data',
+      'Existing customer segmentation',
+    ],
+  },
+  {
+    number: '02',
+    title: 'Brand & Product',
+    items: [
+      'Brand positioning documents',
+      'Product documentation',
+      'Claims and proof',
+      'Offer history',
+      'Previous research',
+    ],
+  },
+  {
+    number: '03',
+    title: 'Founder / Sales Knowledge',
+    items: [
+      'Founder interviews',
+      'Sales calls',
+      'Customer-service knowledge',
+      'Internal team interviews',
+      'Frequently asked questions',
+    ],
+  },
+  {
+    number: '04',
+    title: 'Marketing History',
+    items: [
+      'Past ads and scripts',
+      'Advertorials and landing pages',
+      'Emails',
+      'Creative briefs',
+      'Previous testing reports',
+    ],
+  },
 ];
 
-const funnelDestinations = [
-  'Product page',
-  'Dedicated landing page',
-  'Advertorial',
-  'Listicle',
-  'Quiz',
-  'Webinar',
-  'Lead form',
-  'Email sequence',
-  'Checkout experience',
-  'Subscription flow',
-  'Upsell flow',
-];
-
-const productionCapacity = [
-  'Creative strategist',
-  'Media buyer',
-  'Copywriter',
-  'Video editors',
-  'Designers',
-  'UGC creators',
-  'Founder',
-  'Brand manager',
-  'Approval process',
-  'Weekly production capacity',
-  'Monthly production budget',
-  'Creator availability',
-  'Shoot frequency',
-  'Editing capacity',
-  'Design capacity',
-  'AI production capability',
-  'Review speed',
-  'Available asset library',
-];
-
-const distributionChannels = [
-  'Meta',
-  'TikTok',
-  'YouTube',
-  'Google',
-  'Native advertising',
-  'Amazon',
-  'Organic social',
-  'Influencer content',
-  'Email',
-  'Other relevant channels',
-];
-
-const platformReview = [
-  'Main acquisition platform',
-  'Primary placements',
-  'Current audience structure',
-  'Platform-specific formats',
-  'Historical platform performance',
-  'Untapped channels',
-  'Creative adaptation by platform',
-  'Technical requirements',
-  'Policy restrictions',
-];
-
-const constraints = [
-  'Legal restrictions',
-  'Platform policies',
-  'Restricted claims',
-  'Required disclaimers',
-  'Brand guidelines',
-  'Founder preferences',
-  'Product availability',
-  'Inventory limitations',
-  'Geographic restrictions',
-  'Shipping limitations',
+const operatingConstraints = [
+  'Restricted claims and compliance requirements',
+  'Platform policy limitations',
+  'Brand non-negotiables',
+  'Inventory / product availability',
+  'Geographic and shipping restrictions',
   'Production budget',
+  'Creator availability',
+  'Editing / design capacity',
+  'Approval speed',
   'Promotional deadlines',
-  'Landing-page limitations',
-  'Restricted visuals',
-  'Restricted language',
-  'Compliance approval',
 ];
 
-const creativeProblemExamples = [
-  'The brand is too dependent on one winning angle.',
-  'Existing winners are fatigued.',
-  'The team produces many variations but few new concepts.',
-  'Ads generate attention but weak buying intent.',
-  'Ads generate clicks but the landing page does not convert.',
-  'The brand lacks strong proof.',
-  'The product mechanism is difficult to explain.',
-  'The messaging is too similar to competitors.',
-  'Testing velocity is too slow.',
-  'Winning concepts are not being expanded properly.',
+const researchQuestions = [
+  'Which customer problems have the strongest emotional intensity?',
+  'Which desires or outcomes are currently underused?',
+  'Why do customers choose this product over alternatives?',
+  'Which objections are preventing conversion?',
+  'Which competitor messages have become saturated?',
+  'Where is there meaningful positioning or creative whitespace?',
+  'Which personas or use cases deserve deeper investigation?',
+  'Which proof, mechanism, offer, or belief requires stronger evidence?',
 ];
 
-const problemStatementRequirements = [
-  'What is happening',
-  'What evidence supports it',
-  'How it affects growth',
-  'What the creative strategy must change',
-];
-
-const researchPriorities = [
-  'Early opportunities',
-  'Main risks',
-  'Missing information',
-  'Untapped customer segments',
-  'Underused proof',
-  'Weak competitor positioning',
-  'Potential offer improvements',
-  'Untested angles',
-  'Untested formats',
-  'Creative whitespace',
-  'Key research questions',
-];
-
-const outputs = [
-  'Clear creative objective connected to the business goal',
-  'Commercial and acquisition guardrails',
-  'Product and offer priorities',
-  'Initial customer overview',
+const finalOutputs = [
+  'Clear business objective',
+  'Defined creative problem',
+  'Commercial acquisition guardrails',
   'Historical creative-performance baseline',
-  'Creative portfolio and concentration-risk audit',
-  'Funnel and message-match assessment',
-  'Production-capacity summary',
-  'Platform and distribution requirements',
-  'Constraint and compliance summary',
-  'Defined creative problem statement',
-  'Initial opportunities and research priorities',
+  'Current portfolio risks',
+  'Existing brand-intelligence inventory',
+  'Operating constraints',
+  'Prioritized research questions',
 ];
 
-/*
-|--------------------------------------------------------------------------
-| COMPONENT
-|--------------------------------------------------------------------------
-*/
+function EconomicsGroup({ label, title, items }) {
+  return (
+    <article className="business-context-economics-group">
+      <header>
+        <span>{label}</span>
+        <h3>{title}</h3>
+      </header>
+
+      <div className="business-context-metric-list">
+        {items.map((item) => (
+          <div className="business-context-metric" key={item}>
+            <strong>{item}</strong>
+          </div>
+        ))}
+      </div>
+    </article>
+  );
+}
+
+function IntelligenceGroup({ number, title, items }) {
+  return (
+    <article className="business-context-intelligence-card">
+      <header>
+        <span>{number}</span>
+        <h3>{title}</h3>
+      </header>
+
+      <StageList items={items} />
+    </article>
+  );
+}
 
 export default function BusinessContext({ stage, onBack }) {
   return (
@@ -284,430 +216,202 @@ export default function BusinessContext({ stage, onBack }) {
       onBack={onBack}
       eyebrow="FOUNDATION & COMMERCIAL REALITY"
       title="Business Context"
-      introduction="Before developing any creative strategy, I first understand the commercial reality behind the brand. This establishes what creative must solve, which products and offers deserve priority, what the business can afford to pay for acquisition, what has already been tested, and which constraints will shape execution."
+      introduction="Before making creative decisions, I understand what the business is trying to achieve, what the economics allow, what has already been proven, and what problem creative actually needs to solve."
       process={[
-        'Business Reality',
+        'Business Goal',
         'Economics',
-        'Current Performance',
-        'Constraints',
+        'Existing Evidence',
         'Creative Problem',
         'Research Priorities',
       ]}
-      outputs={outputs}
-      outputTitle="Business Context Output"
     >
       <StageSection
         number="01"
-        navTitle="Business Goals"
-        title="Business Goals"
-        description="Clarify what the business is trying to achieve and define the role creative is expected to play."
+        navTitle="Objective & Problem"
+        title="Business Objective → Creative Problem"
+        description="Start with the commercial objective, then diagnose the specific creative problem standing between the business and that objective."
       >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Commercial Objectives"
-            description="The measurable outcomes the business is working toward."
-          >
+        <div className="business-context-diagnosis">
+          <article className="business-context-diagnosis-card">
+            <span>BUSINESS GOAL</span>
+            <h3>What is the business actually trying to accomplish?</h3>
             <StageList items={businessGoals} />
-          </StageCard>
+          </article>
 
-          <StageHighlight
-            title="Primary Outcome"
-            type="success"
-          >
-            <p>
-              This section ends with a clear definition of what creative
-              needs to accomplish, within what timeframe, and against which
-              business priority.
-            </p>
-          </StageHighlight>
-        </StageGrid>
+          <div className="business-context-diagnosis-arrow" aria-hidden="true">→</div>
+
+          <article className="business-context-diagnosis-card is-problem">
+            <span>CREATIVE PROBLEM</span>
+            <h3>What is preventing creative from supporting that goal?</h3>
+            <StageList items={creativeProblems} />
+          </article>
+        </div>
+
+        <StageHighlight title="Primary Output" type="success">
+          <p>
+            One clear creative mandate: what creative needs to improve,
+            why it matters commercially, and what evidence shows this is
+            the right problem to solve.
+          </p>
+        </StageHighlight>
       </StageSection>
 
       <StageSection
         number="02"
-        navTitle="Economics"
-        title="Business Economics"
-        description="Review the numbers that determine what the creative strategy can realistically support."
+        navTitle="Unit Economics"
+        title="Unit Economics"
+        description="These numbers define what a commercially acceptable result looks like and how much room the business has to test and scale."
       >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Acquisition Economics"
-            description="The metrics that define an acceptable and commercially viable result."
-          >
-            <StageList items={businessEconomics} />
-          </StageCard>
+        <div className="business-context-economics-intro">
+          <span>HOW ECONOMICS AFFECT CREATIVE STRATEGY</span>
+          <p>
+            They set the allowable acquisition cost, show how much testing
+            risk the business can absorb, influence product and offer
+            priorities, and tell me whether a creative is creating profitable
+            growth rather than only attractive platform metrics.
+          </p>
+        </div>
 
-          <StageHighlight title="Why This Matters">
-            <p>
-              These numbers determine which products, offers, audiences,
-              concepts, and production investments are commercially worth
-              pursuing. A creative idea can look strong while still being
-              incompatible with the brand’s margins or acquisition targets.
-            </p>
-          </StageHighlight>
-        </StageGrid>
+        <div className="business-context-economics-grid">
+          <EconomicsGroup
+            label="ACQUISITION"
+            title="Paid Media Economics"
+            items={acquisitionEconomics}
+          />
+          <EconomicsGroup
+            label="PROFITABILITY"
+            title="Margin & Order Economics"
+            items={profitabilityEconomics}
+          />
+          <EconomicsGroup
+            label="BUSINESS HEALTH"
+            title="Customer Economics"
+            items={businessHealthEconomics}
+          />
+        </div>
+
+        <div className="business-context-economics-decision">
+          <span>DECISION CHAIN</span>
+          <div>
+            <strong>Economics</strong><i>→</i>
+            <strong>Allowable CPA</strong><i>→</i>
+            <strong>Testing Risk</strong><i>→</i>
+            <strong>Product / Offer Priority</strong><i>→</i>
+            <strong>Scale Decision</strong>
+          </div>
+        </div>
       </StageSection>
 
       <StageSection
         number="03"
-        navTitle="Product & Offer"
-        title="Product and Offer"
-        description="Understand what the brand sells, why the product matters, and how the customer is being asked to buy it."
+        navTitle="Creative & Funnel Data"
+        title="Creative & Funnel Evidence"
+        description="Before generating anything new, understand what the account has already proven, where performance is concentrated, and what happens after the click."
       >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Product Truth"
-            description="The features, mechanisms, benefits, and outcomes available to support creative."
-          >
-            <StageList
-              items={[
-                'Primary and supporting products',
-                'Features and unique characteristics',
-                'Functional and emotional benefits',
-                'Desired customer outcomes',
-                'Product mechanism',
-                'Ingredients or materials',
-              ]}
-            />
-          </StageCard>
+        <div className="business-context-evidence-grid">
+          <article className="business-context-evidence-card">
+            <header>
+              <span>HISTORY</span>
+              <h3>Creative Performance</h3>
+              <p>What has already won, failed, fatigued, or produced incomplete evidence?</p>
+            </header>
+            <StageList items={creativeHistory} />
+          </article>
 
-          <StageCard
-            title="Offer Architecture"
-            description="The commercial package presented to the customer."
-          >
-            <StageList
-              items={[
-                'Pricing and bundles',
-                'Subscription options',
-                'Discounts and bonuses',
-                'Guarantees and risk reversal',
-                'Urgency and scarcity',
-                'Upsells and cross-sells',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
+          <article className="business-context-evidence-card">
+            <header>
+              <span>NOW</span>
+              <h3>Current Portfolio</h3>
+              <p>Where is the account currently strong, weak, or dangerously concentrated?</p>
+            </header>
+            <StageList items={portfolioSignals} />
+          </article>
 
-        <StageHighlight title="Strategic Question">
-          <p>
-            Which parts of the product and offer are strong enough to lead
-            the creative, and which elements should remain supporting
-            information?
-          </p>
-        </StageHighlight>
+          <article className="business-context-evidence-card">
+            <header>
+              <span>AFTER THE CLICK</span>
+              <h3>Funnel & Owned Assets</h3>
+              <p>Where does the promise in the ad continue, break, or change?</p>
+            </header>
+            <StageList items={funnelAssets} />
+          </article>
+        </div>
 
-        <div style={{ marginTop: '12px' }}>
-          <StageCard title="Complete Review">
-            <StageList items={productAndOffer} />
-          </StageCard>
+        <div className="business-context-funnel-flow">
+          <span>AD</span><i>→</i>
+          <span>MESSAGE</span><i>→</i>
+          <span>LANDING EXPERIENCE</span><i>→</i>
+          <span>OFFER</span><i>→</i>
+          <span>CONVERSION</span>
         </div>
       </StageSection>
 
       <StageSection
         number="04"
-        navTitle="Customer Overview"
-        title="Customer Overview"
-        description="Review what the business already knows about its current customers before deeper external research begins."
+        navTitle="Existing Intelligence"
+        title="Existing Brand Intelligence"
+        description="Before external research, I inventory what the business already knows and what evidence already exists internally."
       >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Existing Customer Intelligence"
-            description="Current knowledge from customer data, behavior, sales, and internal experience."
-          >
-            <StageList items={customerOverview} />
-          </StageCard>
+        <div className="business-context-intelligence-grid">
+          {brandIntelligenceGroups.map((group) => (
+            <IntelligenceGroup key={group.number} {...group} />
+          ))}
+        </div>
 
-          <StageHighlight title="Purpose">
-            <p>
-              This creates an initial understanding of who currently buys,
-              which groups generate the most value, and which customer
-              groups deserve deeper investigation during Research and
-              Persona Mapping.
-            </p>
-          </StageHighlight>
-        </StageGrid>
+        <StageHighlight title="Practical Principle">
+          <p>
+            Founder interviews, surveys, advertorials, emails, landing pages,
+            sales calls, support conversations, and historical briefs can
+            contain years of customer intelligence. I treat them as evidence,
+            not automatic truth.
+          </p>
+        </StageHighlight>
       </StageSection>
 
       <StageSection
         number="05"
-        navTitle="Creative History"
-        title="Historical Creative Performance"
-        description="Study what the brand has already tested so the next strategy does not repeat old mistakes or ignore existing winners."
+        navTitle="Priorities"
+        title="Constraints → Research Priorities"
+        description="Finish Business Context by defining the boundaries creative must respect and the highest-value questions Research needs to answer."
       >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Performance Audit"
-            description="Review winners, losers, fatigue, scalability, and incomplete tests."
-          >
-            <StageList items={historicalCreativePerformance} />
-          </StageCard>
+        <div className="business-context-priority-grid">
+          <article className="business-context-priority-panel">
+            <header>
+              <span>BOUNDARIES</span>
+              <h3>Operating Constraints</h3>
+            </header>
+            <StageList items={operatingConstraints} />
+          </article>
 
-          <StageCard
-            title="Creative Tagging System"
-            description="Tag each asset consistently so patterns can be identified across the account."
-          >
-            <StageList items={creativeAssetTags} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight
-          title="Important Distinction"
-          type="warning"
-        >
-          <p>
-            An ad that generated strong clicks but weak conversion represents
-            a different problem from an ad that converted efficiently but
-            could not scale. The creative history must preserve those
-            differences instead of classifying everything as simply a
-            winner or loser.
-          </p>
-        </StageHighlight>
-      </StageSection>
-
-      <StageSection
-        number="06"
-        navTitle="Creative Portfolio"
-        title="Current Creative Portfolio"
-        description="Assess whether the brand has a healthy balance between exploration, iteration, active winners, and scalable creative families."
-      >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Portfolio Composition"
-            description="The types of creative currently moving through the account."
-          >
-            <StageList items={currentCreativePortfolio} />
-          </StageCard>
-
-          <StageCard
-            title="Concentration Risk"
-            description="Check whether performance depends too heavily on one variable."
-          >
-            <StageList items={concentrationRisks} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight title="Portfolio Diagnosis">
-          <p>
-            This reveals whether the pipeline is diversified enough to
-            support continued growth or whether the account is vulnerable
-            because too much performance depends on one angle, product,
-            creator, format, audience, offer, platform, or destination.
-          </p>
-        </StageHighlight>
-      </StageSection>
-
-      <StageSection
-        number="07"
-        navTitle="Funnel & Journey"
-        title="Funnel and Customer Journey"
-        description="Review where the creative sends the customer and whether the full experience supports the promise made in the ad."
-      >
-        <StageFlow
-          items={[
-            'Hook',
-            'Core Message',
-            'Landing-Page Headline',
-            'Product Explanation',
-            'Proof',
-            'Offer',
-            'CTA',
-          ]}
-        />
-
-        <div style={{ marginTop: '12px' }}>
-          <StageGrid columns={2}>
-            <StageCard
-              title="Possible Destinations"
-              description="The customer journey may continue through different types of pages and sales systems."
-            >
-              <StageList items={funnelDestinations} />
-            </StageCard>
-
-            <StageHighlight title="Diagnostic Value">
-              <p>
-                Reviewing the complete journey helps separate a creative
-                problem from a landing-page, offer, checkout, subscription,
-                tracking, or funnel problem.
-              </p>
-            </StageHighlight>
-          </StageGrid>
+          <article className="business-context-priority-panel is-research">
+            <header>
+              <span>NEXT STAGE</span>
+              <h3>Research Priorities</h3>
+            </header>
+            <StageList items={researchQuestions} />
+          </article>
         </div>
-      </StageSection>
 
-      <StageSection
-        number="08"
-        navTitle="Team & Capacity"
-        title="Team and Production Capacity"
-        description="Determine what the team can realistically produce and how quickly an idea can move from strategy to launch."
-      >
-        <StageGrid columns={2}>
-          <StageCard
-            title="People and Ownership"
-            description="Understand who contributes to strategy, production, approval, and launch."
-          >
-            <StageList
-              items={[
-                'Creative strategist',
-                'Media buyer',
-                'Copywriter',
-                'Video editors',
-                'Designers',
-                'UGC creators',
-                'Founder',
-                'Brand manager',
-              ]}
-            />
-          </StageCard>
+        <div className="business-context-final-output">
+          <div>
+            <span>BUSINESS CONTEXT OUTPUT</span>
+            <h3>A concise strategic starting point.</h3>
+            <p>
+              By the end of this stage I know what the business wants,
+              what creative needs to solve, what the economics allow,
+              what existing evidence says, and what Research must investigate.
+            </p>
+          </div>
 
-          <StageCard
-            title="Production Reality"
-            description="Understand the practical limits affecting speed and complexity."
-          >
-            <StageList
-              items={[
-                'Approval process',
-                'Weekly production capacity',
-                'Monthly production budget',
-                'Creator availability',
-                'Shoot frequency',
-                'Editing and design capacity',
-                'AI production capability',
-                'Review speed',
-                'Available asset library',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight title="Creative Implication">
-          <p>
-            Production capacity determines which formats are realistic,
-            how much testing velocity is possible, and when a lightweight
-            Minimum Viable Creative Test should be used before investing in
-            full production.
-          </p>
-        </StageHighlight>
-
-        <div style={{ marginTop: '12px' }}>
-          <StageCard title="Complete Capacity Review">
-            <StageList items={productionCapacity} />
-          </StageCard>
+          <div className="business-context-final-output-list">
+            {finalOutputs.map((item, index) => (
+              <div key={item}>
+                <strong>{String(index + 1).padStart(2, '0')}</strong>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </StageSection>
-
-      <StageSection
-        number="09"
-        navTitle="Platforms"
-        title="Platforms and Distribution"
-        description="Identify where the creative will run and how each platform changes the required execution."
-      >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Relevant Channels"
-            description="Identify the platforms currently used and the channels with potential for expansion."
-          >
-            <StageList items={distributionChannels} />
-          </StageCard>
-
-          <StageCard
-            title="Platform Review"
-            description="Evaluate how distribution affects format, production, performance, and compliance."
-          >
-            <StageList items={platformReview} />
-          </StageCard>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="10"
-        navTitle="Constraints"
-        title="Constraints and Non-Negotiables"
-        description="Define the boundaries the strategy must respect before ideas enter development and production."
-      >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Operating Constraints"
-            description="The legal, commercial, platform, brand, inventory, and execution boundaries."
-          >
-            <StageList items={constraints} />
-          </StageCard>
-
-          <StageHighlight
-            title="Why Define Them Early?"
-            type="warning"
-          >
-            <p>
-              This prevents strategically strong concepts from being
-              rejected, delayed, or heavily rewritten after production has
-              already started.
-            </p>
-          </StageHighlight>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="11"
-        navTitle="Problem Definition"
-        title="Creative Problem Definition"
-        description="Translate the business context into one specific problem the creative strategy must solve."
-      >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Common Creative Problems"
-            description="Examples of problems that may emerge from the audit."
-          >
-            <StageList items={creativeProblemExamples} />
-          </StageCard>
-
-          <StageCard
-            title="Problem Statement Requirements"
-            description="The final statement must connect the evidence to a clear strategic requirement."
-          >
-            <StageList
-              items={problemStatementRequirements}
-              ordered
-            />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight
-          title="Problem Statement Structure"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'What Is Happening',
-              'Supporting Evidence',
-              'Growth Impact',
-              'Required Strategic Change',
-            ]}
-          />
-        </StageHighlight>
-      </StageSection>
-
-      <StageSection
-        number="12"
-        navTitle="Research Priorities"
-        title="Initial Opportunities and Research Priorities"
-        description="Identify what needs deeper investigation before the Research phase begins."
-      >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Opportunity and Risk Review"
-            description="Record early hypotheses without treating them as validated insights."
-          >
-            <StageList items={researchPriorities} />
-          </StageCard>
-
-          <StageHighlight title="Transition Into Research">
-            <p>
-              The final Business Context output becomes the starting point
-              for the Research Engine. It defines the most valuable
-              questions, missing evidence, risks, and potential creative
-              whitespace that research must investigate.
-            </p>
-          </StageHighlight>
-        </StageGrid>
       </StageSection>
     </StageDeepDiveLayout>
   );

@@ -1,0 +1,589 @@
+/* ==========================================================================
+   KNOWLEDGE & LEARNING SYSTEM
+   140 • System Memory
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   SHARED OPERATING QUESTION
+   -------------------------------------------------------------------------- */
+
+.kls-operating-question {
+  overflow: hidden;
+
+  padding: 20px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--stage-color) 25%,
+      var(--workspace-border)
+    );
+
+  border-radius: 14px;
+
+  background:
+    radial-gradient(
+      circle at 92% 0%,
+      color-mix(
+        in srgb,
+        var(--stage-color) 8%,
+        transparent
+      ),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(20, 35, 53, 0.96),
+      rgba(13, 25, 39, 0.94)
+    );
+}
+
+.kls-operating-question.is-loss {
+  border-color: rgba(255, 107, 107, 0.18);
+
+  background:
+    radial-gradient(
+      circle at 92% 0%,
+      rgba(255, 107, 107, 0.07),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(20, 35, 53, 0.96),
+      rgba(13, 25, 39, 0.94)
+    );
+}
+
+.kls-operating-question > span,
+.kls-field-grid > article > span,
+.kls-diagnosis-strip > span,
+.kls-loss-types article > span,
+.kls-strength-copy > span,
+.kls-strength-grid article > span,
+.kls-final-rule > span {
+  display: block;
+
+  color: var(--stage-color);
+
+  font-size: 0.73rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+}
+
+.kls-operating-question.is-loss > span {
+  color: #ff8181;
+}
+
+.kls-operating-question h3 {
+  max-width: 860px;
+
+  margin: 7px 0 0;
+
+  color: #f4f7fa;
+
+  font-size: 1.08rem;
+  line-height: 1.4;
+  font-weight: 900;
+}
+
+.kls-operating-flow {
+  margin-top: 16px;
+  padding-top: 15px;
+
+  border-top: 1px solid rgba(150, 170, 197, 0.09);
+}
+
+/* --------------------------------------------------------------------------
+   WINNER + LOSER FIELD LIBRARIES
+   -------------------------------------------------------------------------- */
+
+.kls-field-grid {
+  margin-top: 12px;
+
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  overflow: hidden;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 34, 52, 0.9),
+      rgba(13, 25, 39, 0.86)
+    );
+}
+
+.kls-field-grid > article {
+  min-width: 0;
+
+  padding: 15px;
+
+  border-right: 1px solid rgba(150, 170, 197, 0.08);
+}
+
+.kls-field-grid > article:last-child {
+  border-right: 0;
+}
+
+.kls-field-grid.is-winner > article > span {
+  color: #ccff00;
+}
+
+.kls-field-grid.is-loss > article > span {
+  color: #ff8181;
+}
+
+.kls-field-grid > article > div {
+  margin-top: 11px;
+
+  display: grid;
+  gap: 8px;
+}
+
+.kls-field-grid p {
+  margin: 0;
+
+  display: grid;
+  grid-template-columns:
+    18px
+    minmax(0, 1fr);
+
+  gap: 6px;
+
+  color: #a5b2c0;
+
+  font-size: 0.8rem;
+  line-height: 1.42;
+}
+
+.kls-field-grid p b {
+  font-weight: 950;
+}
+
+.kls-field-grid.is-winner p b {
+  color: #ccff00;
+}
+
+.kls-field-grid.is-loss p b {
+  color: #ff8181;
+}
+
+/* --------------------------------------------------------------------------
+   DIAGNOSIS STRIPS
+   -------------------------------------------------------------------------- */
+
+.kls-diagnosis-strip {
+  margin-top: 12px;
+
+  padding: 15px 16px;
+
+  display: grid;
+  grid-template-columns:
+    180px
+    minmax(0, 1fr);
+
+  gap: 18px;
+  align-items: start;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 11px;
+
+  background: rgba(255, 255, 255, 0.016);
+}
+
+.kls-diagnosis-strip.is-winner {
+  border-color: rgba(204, 255, 0, 0.17);
+}
+
+.kls-diagnosis-strip.is-loss {
+  border-color: rgba(255, 107, 107, 0.17);
+}
+
+.kls-diagnosis-strip.is-winner > span {
+  color: #ccff00;
+}
+
+.kls-diagnosis-strip.is-loss > span {
+  color: #ff8181;
+}
+
+.kls-diagnosis-strip strong {
+  display: block;
+
+  color: #eef3f7;
+
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.kls-diagnosis-strip p {
+  margin: 5px 0 0;
+
+  color: #96a5b6;
+
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   LOSS TYPE CLASSIFICATION
+   -------------------------------------------------------------------------- */
+
+.kls-loss-types {
+  margin-top: 12px;
+
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 8px;
+}
+
+.kls-loss-types article {
+  min-width: 0;
+
+  padding: 14px;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 34, 52, 0.82),
+      rgba(13, 25, 39, 0.74)
+    );
+}
+
+.kls-loss-types article > span {
+  color: #f4b84a;
+
+  font-size: 0.67rem;
+}
+
+.kls-loss-types article p {
+  margin: 7px 0 0;
+
+  color: #96a5b6;
+
+  font-size: 0.77rem;
+  line-height: 1.48;
+}
+
+/* --------------------------------------------------------------------------
+   REUSE THE LEARNING
+   -------------------------------------------------------------------------- */
+
+.kls-reuse-flow {
+  padding: 16px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--stage-color) 22%,
+      var(--workspace-border)
+    );
+
+  border-radius: 12px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 4%,
+      rgba(255, 255, 255, 0.014)
+    );
+}
+
+.kls-reuse-grid {
+  margin-top: 12px;
+
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  overflow: hidden;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 34, 52, 0.92),
+      rgba(13, 25, 39, 0.88)
+    );
+}
+
+.kls-reuse-grid > article {
+  min-width: 0;
+
+  padding: 15px;
+
+  display: grid;
+  grid-template-columns:
+    36px
+    minmax(0, 1fr);
+
+  gap: 11px;
+
+  border-right: 1px solid rgba(150, 170, 197, 0.08);
+  border-bottom: 1px solid rgba(150, 170, 197, 0.08);
+}
+
+.kls-reuse-grid > article:nth-child(2n) {
+  border-right: 0;
+}
+
+.kls-reuse-grid > article > span {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--stage-color);
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--stage-color) 28%,
+      var(--workspace-border)
+    );
+
+  border-radius: 9px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 5%,
+      rgba(255, 255, 255, 0.012)
+    );
+
+  font-family: monospace;
+  font-size: 0.7rem;
+  font-weight: 950;
+}
+
+.kls-reuse-grid h3 {
+  margin: 0;
+
+  color: #eef3f7;
+
+  font-size: 0.91rem;
+  font-weight: 900;
+}
+
+.kls-reuse-grid p {
+  margin: 6px 0 0;
+
+  color: #95a4b5;
+
+  font-size: 0.78rem;
+  line-height: 1.48;
+}
+
+/* --------------------------------------------------------------------------
+   LEARNING CONFIDENCE
+   -------------------------------------------------------------------------- */
+
+.kls-strength-block {
+  margin-top: 12px;
+
+  display: grid;
+  grid-template-columns:
+    minmax(260px, 0.72fr)
+    minmax(0, 1.28fr);
+
+  overflow: hidden;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 13px;
+
+  background: rgba(255, 255, 255, 0.014);
+}
+
+.kls-strength-copy {
+  padding: 17px;
+
+  border-right: 1px solid var(--workspace-border);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 4%,
+      rgba(255, 255, 255, 0.01)
+    );
+}
+
+.kls-strength-copy h3 {
+  margin: 6px 0 0;
+
+  color: #f1f5f8;
+
+  font-size: 0.98rem;
+  line-height: 1.4;
+  font-weight: 900;
+}
+
+.kls-strength-copy p {
+  margin: 7px 0 0;
+
+  color: #95a4b5;
+
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.kls-strength-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+}
+
+.kls-strength-grid article {
+  min-width: 0;
+
+  padding: 16px;
+
+  border-right: 1px solid rgba(150, 170, 197, 0.08);
+}
+
+.kls-strength-grid article:last-child {
+  border-right: 0;
+}
+
+.kls-strength-grid article > span {
+  color: #7c83ff;
+
+  font-size: 0.66rem;
+}
+
+.kls-strength-grid strong {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #edf2f6;
+
+  font-size: 0.88rem;
+  font-weight: 900;
+}
+
+.kls-strength-grid p {
+  margin: 6px 0 0;
+
+  color: #93a2b3;
+
+  font-size: 0.75rem;
+  line-height: 1.48;
+}
+
+/* --------------------------------------------------------------------------
+   FINAL PRINCIPLE
+   -------------------------------------------------------------------------- */
+
+.kls-final-rule {
+  margin-top: 12px;
+
+  padding: 16px 18px;
+
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0, 1fr);
+
+  gap: 16px;
+  align-items: center;
+
+  border: 1px solid rgba(204, 255, 0, 0.18);
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(204, 255, 0, 0.045),
+      rgba(255, 255, 255, 0.012)
+    );
+}
+
+.kls-final-rule > span {
+  color: #ccff00;
+}
+
+.kls-final-rule strong {
+  color: #f2f6f9;
+
+  font-size: 0.91rem;
+  line-height: 1.46;
+  font-weight: 900;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1450px) {
+  .kls-field-grid,
+  .kls-loss-types {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .kls-field-grid > article:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .kls-field-grid > article:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(150, 170, 197, 0.08);
+  }
+
+  .kls-loss-types {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .kls-strength-block {
+    grid-template-columns: 1fr;
+  }
+
+  .kls-strength-copy {
+    border-right: 0;
+    border-bottom: 1px solid var(--workspace-border);
+  }
+}
+
+@media (max-width: 760px) {
+  .kls-field-grid,
+  .kls-loss-types,
+  .kls-reuse-grid,
+  .kls-strength-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kls-field-grid > article,
+  .kls-loss-types article,
+  .kls-reuse-grid > article,
+  .kls-strength-grid article {
+    border-right: 0;
+  }
+
+  .kls-field-grid > article,
+  .kls-reuse-grid > article,
+  .kls-strength-grid article {
+    border-bottom: 1px solid rgba(150, 170, 197, 0.08);
+  }
+
+  .kls-diagnosis-strip,
+  .kls-final-rule {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+}

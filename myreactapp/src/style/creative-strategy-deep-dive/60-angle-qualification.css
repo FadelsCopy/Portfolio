@@ -1,0 +1,862 @@
+/* ==========================================================================
+   ANGLE QUALIFICATION & PRIORITIZATION — ONE-PAGE SOP
+   ========================================================================== */
+
+.angle-qual-gate,
+.angle-qual-scorecard,
+.angle-qual-priority,
+.angle-qual-example,
+.angle-qual-tiebreakers {
+  margin-bottom: 14px;
+}
+
+.angle-qual-gate,
+.angle-qual-scorecard,
+.angle-qual-priority,
+.angle-qual-tiebreakers {
+  overflow: hidden;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 35, 53, 0.96),
+      rgba(13, 25, 39, 0.94)
+    );
+}
+
+.angle-qual-section-heading {
+  padding: 17px 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  border-bottom: 1px solid var(--workspace-border);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 4%,
+      rgba(255, 255, 255, 0.018)
+    );
+}
+
+.angle-qual-section-heading > span {
+  flex: 0 0 auto;
+
+  color: var(--stage-color);
+
+  font-size: 0.76rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+}
+
+.angle-qual-section-heading > div {
+  min-width: 0;
+  flex: 1;
+}
+
+.angle-qual-section-heading h3 {
+  margin: 0;
+
+  color: #f4f7fa;
+
+  font-size: 1.08rem;
+  font-weight: 900;
+}
+
+.angle-qual-section-heading p {
+  margin: 5px 0 0;
+
+  color: #9ca9ba;
+
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+
+/* HARD GATE */
+
+.angle-qual-gate-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+}
+
+.angle-qual-gate-grid > article {
+  min-width: 0;
+  padding: 17px;
+
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 11px;
+
+  border-right: 1px solid rgba(150, 170, 197, 0.09);
+}
+
+.angle-qual-gate-grid > article:last-child {
+  border-right: 0;
+}
+
+.angle-qual-check {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(112, 229, 151, 0.38);
+  border-radius: 9px;
+
+  background: rgba(112, 229, 151, 0.08);
+}
+
+.angle-qual-check span {
+  color: #78df9d;
+
+  font-size: 0.95rem;
+  font-weight: 950;
+}
+
+.angle-qual-gate-grid small {
+  display: block;
+  margin-bottom: 3px;
+
+  color: var(--stage-color);
+
+  font-family: monospace;
+  font-size: 0.7rem;
+  font-weight: 950;
+}
+
+.angle-qual-gate-grid h4 {
+  margin: 0 0 6px;
+
+  color: #f1f5f9;
+
+  font-size: 0.94rem;
+  font-weight: 900;
+}
+
+.angle-qual-gate-grid p {
+  margin: 0;
+
+  color: #96a4b5;
+
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.angle-qual-gate-decision {
+  padding: 13px 17px;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  border-top: 1px solid var(--workspace-border);
+
+  background: rgba(255, 255, 255, 0.016);
+}
+
+.angle-qual-gate-decision strong {
+  padding: 7px 9px;
+
+  color: #b8c4d1;
+
+  border: 1px solid rgba(112, 229, 151, 0.25);
+  border-radius: 7px;
+
+  font-size: 0.76rem;
+}
+
+.angle-qual-gate-decision strong.is-fail {
+  border-color: rgba(255, 105, 105, 0.26);
+  color: #ff9d9d;
+}
+
+.angle-qual-gate-decision > span {
+  color: var(--stage-color);
+
+  font-size: 0.8rem;
+  font-weight: 950;
+}
+
+.angle-qual-gate-decision > i {
+  width: 1px;
+  height: 24px;
+  margin: 0 5px;
+
+  background: var(--workspace-border);
+}
+
+
+/* SCORECARD */
+
+.angle-qual-max-score {
+  flex: 0 0 auto !important;
+  padding-left: 15px;
+
+  text-align: right;
+}
+
+.angle-qual-max-score strong {
+  display: block;
+
+  color: var(--stage-color);
+
+  font-size: 1.35rem;
+  font-weight: 950;
+}
+
+.angle-qual-max-score small {
+  display: block;
+
+  color: #74859a;
+
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+.angle-qual-score-row {
+  display: grid;
+  grid-template-columns:
+    48px
+    minmax(0, 1.35fr)
+    minmax(260px, 0.65fr);
+
+  gap: 14px;
+
+  padding: 16px 18px;
+
+  border-bottom: 1px solid rgba(150, 170, 197, 0.09);
+}
+
+.angle-qual-score-row:last-child {
+  border-bottom: 0;
+}
+
+.angle-qual-score-number {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--stage-color);
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--stage-color) 30%,
+      var(--workspace-border)
+    );
+
+  border-radius: 10px;
+
+  font-family: monospace;
+  font-size: 0.75rem;
+  font-weight: 950;
+}
+
+.angle-qual-score-main h4 {
+  margin: 0;
+
+  color: #f4f7fa;
+
+  font-size: 0.98rem;
+  font-weight: 900;
+}
+
+.angle-qual-score-main > p {
+  margin: 5px 0 10px;
+
+  color: #9aa8b9;
+
+  font-size: 0.83rem;
+  line-height: 1.5;
+}
+
+.angle-qual-signal-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.angle-qual-signal-chips span {
+  padding: 6px 8px;
+
+  color: #acb8c6;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.018);
+
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.angle-qual-score-scale {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.angle-qual-score-scale span {
+  padding: 8px 9px;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 7px;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.angle-qual-score-scale .is-zero {
+  color: #ef9b9b;
+  border-color: rgba(255, 105, 105, 0.2);
+}
+
+.angle-qual-score-scale .is-one {
+  color: #d8c27b;
+  border-color: rgba(238, 196, 91, 0.2);
+}
+
+.angle-qual-score-scale .is-two {
+  color: #8edfa9;
+  border-color: rgba(112, 229, 151, 0.22);
+}
+
+
+/* PRIORITY BANDS */
+
+.angle-qual-priority-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 0;
+}
+
+.angle-qual-priority-card {
+  min-width: 0;
+  padding: 17px;
+
+  border-right: 1px solid rgba(150, 170, 197, 0.09);
+}
+
+.angle-qual-priority-card:last-child {
+  border-right: 0;
+}
+
+.angle-qual-priority-card > span {
+  display: block;
+  margin-bottom: 5px;
+
+  font-size: 1.05rem;
+  font-weight: 950;
+}
+
+.angle-qual-priority-card > small {
+  display: block;
+  margin-bottom: 6px;
+
+  color: #7e8da0;
+
+  font-size: 0.62rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+}
+
+.angle-qual-priority-card h4 {
+  margin: 0 0 7px;
+
+  color: #f4f7fa;
+
+  font-size: 0.96rem;
+  font-weight: 900;
+}
+
+.angle-qual-priority-card p {
+  margin: 0;
+
+  color: #96a4b5;
+
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.angle-qual-priority-card.is-green > span {
+  color: #78df9d;
+}
+
+.angle-qual-priority-card.is-cyan > span {
+  color: #61e8f2;
+}
+
+.angle-qual-priority-card.is-yellow > span {
+  color: #efd56a;
+}
+
+.angle-qual-priority-card.is-red > span {
+  color: #ff8383;
+}
+
+
+/* EXAMPLE */
+
+.angle-qual-example {
+  padding: 18px;
+
+  display: grid;
+  grid-template-columns:
+    minmax(260px, 0.95fr)
+    minmax(0, 1.2fr)
+    160px;
+
+  gap: 16px;
+  align-items: center;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--stage-color) 30%,
+      var(--workspace-border)
+    );
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      120deg,
+      color-mix(
+        in srgb,
+        var(--stage-color) 6%,
+        rgba(21, 36, 55, 0.95)
+      ),
+      rgba(14, 26, 41, 0.93)
+    );
+}
+
+.angle-qual-example-copy > span {
+  display: block;
+  margin-bottom: 6px;
+
+  color: var(--stage-color);
+
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+}
+
+.angle-qual-example-copy h3 {
+  margin: 0;
+
+  color: #f4f7fa;
+
+  font-size: 1rem;
+  line-height: 1.42;
+  font-weight: 900;
+}
+
+.angle-qual-example-copy p {
+  margin: 7px 0 0;
+
+  color: #8f9daf;
+
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.angle-qual-example-scores {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 7px;
+}
+
+.angle-qual-example-scores > div {
+  padding: 8px 9px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.angle-qual-example-scores span,
+.angle-qual-example-scores strong {
+  font-size: 0.72rem;
+}
+
+.angle-qual-example-scores span {
+  color: #9ca9b8;
+}
+
+.angle-qual-example-scores strong {
+  color: #f0f4f8;
+}
+
+.angle-qual-example-result {
+  min-height: 120px;
+  padding: 14px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border: 1px solid rgba(112, 229, 151, 0.28);
+  border-radius: 11px;
+
+  background: rgba(112, 229, 151, 0.05);
+}
+
+.angle-qual-example-result small {
+  color: #78df9d;
+
+  font-size: 0.62rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+}
+
+.angle-qual-example-result strong {
+  margin: 4px 0;
+
+  color: #f4f7fa;
+
+  font-size: 1.35rem;
+  font-weight: 950;
+}
+
+.angle-qual-example-result span {
+  color: #8de0a9;
+
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+
+/* TIE-BREAKERS */
+
+.angle-qual-tiebreaker-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+}
+
+.angle-qual-tiebreaker-grid > article {
+  min-width: 0;
+  padding: 17px;
+
+  border-right: 1px solid rgba(150, 170, 197, 0.09);
+}
+
+.angle-qual-tiebreaker-grid > article:last-child {
+  border-right: 0;
+}
+
+.angle-qual-tiebreaker-grid h4 {
+  margin: 0 0 10px;
+
+  color: #f2f6f9;
+
+  font-size: 0.94rem;
+  font-weight: 900;
+}
+
+.angle-qual-tiebreaker-grid .stage-workspace-list li {
+  font-size: 0.82rem;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1450px) {
+  .angle-qual-gate-grid,
+  .angle-qual-priority-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .angle-qual-gate-grid > article:nth-child(2),
+  .angle-qual-priority-card:nth-child(2) {
+    border-right: 0;
+  }
+
+  .angle-qual-gate-grid > article:nth-child(-n + 2),
+  .angle-qual-priority-card:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(150, 170, 197, 0.09);
+  }
+
+  .angle-qual-example {
+    grid-template-columns:
+      minmax(240px, 0.9fr)
+      minmax(0, 1.1fr);
+  }
+
+  .angle-qual-example-result {
+    grid-column: 1 / -1;
+    min-height: auto;
+  }
+}
+
+@media (max-width: 1100px) {
+  .angle-qual-score-row {
+    grid-template-columns:
+      48px
+      minmax(0, 1fr);
+  }
+
+  .angle-qual-score-scale {
+    grid-column: 2;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .angle-qual-score-scale span {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .angle-qual-tiebreaker-grid,
+  .angle-qual-example {
+    grid-template-columns: 1fr;
+  }
+
+  .angle-qual-tiebreaker-grid > article {
+    border-right: 0;
+    border-bottom: 1px solid rgba(150, 170, 197, 0.09);
+  }
+
+  .angle-qual-tiebreaker-grid > article:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 820px) {
+  .angle-qual-gate-grid,
+  .angle-qual-priority-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .angle-qual-gate-grid > article,
+  .angle-qual-priority-card {
+    border-right: 0;
+    border-bottom: 1px solid rgba(150, 170, 197, 0.09);
+  }
+
+  .angle-qual-gate-grid > article:last-child,
+  .angle-qual-priority-card:last-child {
+    border-bottom: 0;
+  }
+
+  .angle-qual-score-row {
+    grid-template-columns: 1fr;
+  }
+
+  .angle-qual-score-scale {
+    grid-column: auto;
+  }
+
+  .angle-qual-example-scores {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ==========================================================================
+   SINGLE PAGE DEEP DIVE MODE
+   Used by Angle Qualification so there is no sidebar, no system count,
+   no section summary, and no Previous / Next controls.
+   ========================================================================== */
+
+.stage-workspace-layout.is-single-page {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.stage-workspace-layout.is-single-page .stage-workspace-main {
+  grid-column: 1;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.stage-workspace-layout.is-single-page .stage-workspace-main-scroll {
+  padding:
+    24px
+    clamp(22px, 3vw, 48px)
+    34px;
+
+  overflow-y: auto;
+}
+
+.stage-workspace-layout.is-single-page .stage-workspace-section {
+  width: min(100%, 1500px);
+  margin-inline: auto;
+}
+
+/* Give the topbar better balance when the system count is hidden */
+.stage-workspace-page:has(.stage-workspace-layout.is-single-page)
+.stage-workspace-topbar {
+  grid-template-columns:
+    minmax(250px, 1fr)
+    minmax(360px, 1.2fr)
+    minmax(250px, 1fr);
+}
+
+.stage-workspace-page:has(.stage-workspace-layout.is-single-page)
+.stage-workspace-title {
+  grid-column: 2;
+}
+
+
+/* ==========================================================================
+   ANGLE QUALIFICATION REFINEMENT
+   ========================================================================== */
+
+.angle-qual-section-heading {
+  padding: 19px 20px;
+}
+
+.angle-qual-section-heading h3 {
+  font-size: 1.16rem;
+}
+
+.angle-qual-section-heading p {
+  font-size: 0.9rem;
+}
+
+.angle-qual-gate-grid > article {
+  padding: 19px;
+}
+
+.angle-qual-gate-grid h4 {
+  font-size: 1rem;
+}
+
+.angle-qual-gate-grid p {
+  font-size: 0.86rem;
+}
+
+.angle-qual-score-row {
+  grid-template-columns:
+    54px
+    minmax(0, 1.3fr)
+    minmax(290px, 0.7fr);
+
+  padding: 18px 20px;
+}
+
+.angle-qual-score-number {
+  width: 42px;
+  height: 42px;
+
+  font-size: 0.82rem;
+}
+
+.angle-qual-score-main h4 {
+  font-size: 1.04rem;
+}
+
+.angle-qual-score-main > p {
+  font-size: 0.87rem;
+}
+
+.angle-qual-signal-chips span {
+  padding: 7px 9px;
+
+  font-size: 0.76rem;
+}
+
+.angle-qual-score-scale span {
+  padding: 9px 10px;
+
+  font-size: 0.76rem;
+}
+
+.angle-qual-priority-card {
+  padding: 19px;
+}
+
+.angle-qual-priority-card > span {
+  font-size: 1.15rem;
+}
+
+.angle-qual-priority-card h4 {
+  font-size: 1.02rem;
+}
+
+.angle-qual-priority-card p {
+  font-size: 0.84rem;
+}
+
+.angle-qual-example {
+  grid-template-columns:
+    minmax(290px, 0.9fr)
+    minmax(0, 1.2fr)
+    175px;
+
+  padding: 20px;
+}
+
+.angle-qual-example-copy h3 {
+  font-size: 1.06rem;
+}
+
+.angle-qual-example-copy p {
+  font-size: 0.82rem;
+}
+
+.angle-qual-example-scores span,
+.angle-qual-example-scores strong {
+  font-size: 0.77rem;
+}
+
+.angle-qual-example-result strong {
+  font-size: 1.5rem;
+}
+
+.angle-qual-tiebreaker-grid.is-two {
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+}
+
+.angle-qual-tiebreaker-grid.is-two > article:nth-child(2) {
+  border-right: 0;
+}
+
+.angle-qual-tiebreaker-grid h4 {
+  font-size: 1rem;
+}
+
+.angle-qual-tiebreaker-grid .stage-workspace-list li {
+  font-size: 0.87rem;
+}
+
+@media (max-width: 1100px) {
+  .stage-workspace-page:has(.stage-workspace-layout.is-single-page)
+  .stage-workspace-topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .stage-workspace-page:has(.stage-workspace-layout.is-single-page)
+  .stage-workspace-title {
+    grid-column: auto;
+  }
+
+  .angle-qual-tiebreaker-grid.is-two {
+    grid-template-columns: 1fr;
+  }
+}

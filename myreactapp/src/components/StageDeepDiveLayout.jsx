@@ -299,6 +299,7 @@ export default function StageDeepDiveLayout({
   outputTitle = 'Final Output',
   sops = [],
   sopDescription,
+  singlePage = false,
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [mobileNavigationOpen, setMobileNavigationOpen] =
@@ -339,7 +340,7 @@ export default function StageDeepDiveLayout({
       }),
     );
 
-    if (sops.length > 0 || outputs.length > 0) {
+    if (!singlePage && (sops.length > 0 || outputs.length > 0)) {
       sectionItems.push({
         id: 'sop-library',
         type: 'sop',
@@ -350,7 +351,7 @@ export default function StageDeepDiveLayout({
     }
 
     return sectionItems;
-  }, [stageSections, sops, outputs]);
+  }, [stageSections, sops, outputs, singlePage]);
 
   const activeNavigationItem =
     navigationItems[activeIndex] || navigationItems[0];
@@ -519,35 +520,39 @@ export default function StageDeepDiveLayout({
           </span>
 
           <h1>{stageTitle}</h1>
-
-          {introduction && <p>{introduction}</p>}
         </div>
 
-        <div className="stage-workspace-count">
-          <strong>{stageSections.length}</strong>
-          <span>Systems</span>
-        </div>
+        {!singlePage && (
+          <div className="stage-workspace-count">
+            <strong>{stageSections.length}</strong>
+            <span>Systems</span>
+          </div>
+        )}
       </header>
 
-      <div className="stage-workspace-mobile-navigation">
-        <button
-          type="button"
-          onClick={() =>
-            setMobileNavigationOpen((current) => !current)
-          }
-        >
-          <span>
-            {activeNavigationItem?.number}{' '}
-            {activeNavigationItem?.title}
-          </span>
+      {!singlePage && (
+        <div className="stage-workspace-mobile-navigation">
+          <button
+            type="button"
+            onClick={() =>
+              setMobileNavigationOpen((current) => !current)
+            }
+          >
+            <span>
+              {activeNavigationItem?.number}{' '}
+              {activeNavigationItem?.title}
+            </span>
 
-          <span aria-hidden="true">
-            {mobileNavigationOpen ? '−' : '+'}
-          </span>
-        </button>
-      </div>
+            <span aria-hidden="true">
+              {mobileNavigationOpen ? '−' : '+'}
+            </span>
+          </button>
+        </div>
+      )}
 
-      <div className="stage-workspace-layout">
+      <div className={`stage-workspace-layout ${singlePage ? 'is-single-page' : ''}`}>
+        {!singlePage && (
+          <>
         <aside
           className={`stage-workspace-sidebar ${
             mobileNavigationOpen ? 'is-open' : ''
@@ -637,44 +642,50 @@ export default function StageDeepDiveLayout({
           <span aria-hidden="true" />
         </div>
 
+          </>
+        )}
+
         <section className="stage-workspace-main">
-          <div className="stage-workspace-active-summary">
-            <div className="stage-workspace-active-icon">
-              <CreativeStrategyOPIcon
-                type={
-                  activeNavigationItem?.type === 'sop'
-                    ? 'research'
-                    : stageIcon
-                }
-                size={22}
-              />
-            </div>
-
-            <div>
-              <span>
-                {activeNavigationItem?.number}
-              </span>
-
-              <h2>{activeNavigationItem?.title}</h2>
-            </div>
-
-            <div className="stage-workspace-progress">
-              <span>
-                {String(activeIndex + 1).padStart(2, '0')}
-              </span>
-
-              <small>/</small>
-
-              <span>
-                {String(navigationItems.length).padStart(
-                  2,
-                  '0',
-                )}
-              </span>
-            </div>
-          </div>
-
           <div className="stage-workspace-main-scroll">
+            {!singlePage && (
+            <div className="stage-workspace-active-summary">
+              <div className="stage-workspace-active-icon">
+                <CreativeStrategyOPIcon
+                  type={
+                    activeNavigationItem?.type === 'sop'
+                      ? 'research'
+                      : stageIcon
+                  }
+                  size={22}
+                />
+              </div>
+
+              <div>
+                <span>
+                  {activeNavigationItem?.number}
+                </span>
+
+                <h2>{activeNavigationItem?.title}</h2>
+              </div>
+
+              <div className="stage-workspace-progress">
+                <span>
+                  {String(activeIndex + 1).padStart(2, '0')}
+                </span>
+
+                <small>/</small>
+
+                <span>
+                  {String(navigationItems.length).padStart(
+                    2,
+                    '0',
+                  )}
+                </span>
+              </div>
+            </div>
+
+            )}
+
             <AnimatePresence mode="wait">
               {activeNavigationItem?.type === 'sop' ? (
                 <StageSOPPanel
@@ -693,6 +704,7 @@ export default function StageDeepDiveLayout({
             </AnimatePresence>
           </div>
 
+          {!singlePage && (
           <footer className="stage-workspace-controls">
             <button
               type="button"
@@ -720,6 +732,7 @@ export default function StageDeepDiveLayout({
               Next →
             </button>
           </footer>
+          )}
         </section>
       </div>
     </main>

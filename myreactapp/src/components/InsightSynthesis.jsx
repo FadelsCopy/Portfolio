@@ -11,343 +11,229 @@ import StageDeepDiveLayout, {
 
 /*
 |--------------------------------------------------------------------------
-| INSIGHT SYNTHESIS DATA
+| INSIGHT SYNTHESIS — PRACTICAL INTERVIEW VERSION
 |--------------------------------------------------------------------------
 */
 
-const painTypes = [
-  'Physical pain',
-  'Functional pain',
-  'Emotional pain',
-  'Social pain',
-  'Financial pain',
-  'Practical inconvenience',
-  'Daily frustration',
-  'Loss of control',
-  'Embarrassment',
-  'Anxiety',
-  'Guilt',
-  'Disappointment',
-  'Fear of the problem becoming worse',
-  'Consequences of leaving the problem unresolved',
-];
-
 const painDepthLevels = [
   {
-    title: 'Surface Pain',
-    items: [
-      'What the customer notices immediately',
-      'Hair shedding',
-      'Joint stiffness',
-      'Skin breakouts',
-      'Low energy',
-      'Poor sleep',
-    ],
+    title: 'Surface',
+    description: 'What the customer notices immediately.',
+    examples: ['Hair shedding', 'Joint stiffness', 'Skin breakouts', 'Low energy'],
   },
   {
-    title: 'Functional Pain',
-    items: [
-      'What the problem prevents the customer from doing',
-      'Avoiding stairs',
-      'Struggling to exercise',
-      'Taking longer to get ready',
-      'Avoiding certain foods',
-      'Losing focus at work',
-    ],
+    title: 'Functional',
+    description: 'What the problem prevents them from doing.',
+    examples: ['Avoiding stairs', 'Struggling to exercise', 'Losing focus at work'],
   },
   {
-    title: 'Emotional Pain',
-    items: [
-      'How the problem makes the customer feel',
-      'Frustrated',
-      'Ashamed',
-      'Anxious',
-      'Powerless',
-      'Older',
-      'Less attractive',
-      'Less confident',
-    ],
+    title: 'Emotional',
+    description: 'How the problem makes them feel.',
+    examples: ['Frustrated', 'Anxious', 'Powerless', 'Less confident'],
   },
   {
-    title: 'Social and Identity Pain',
-    items: [
-      'How the problem affects relationships and self-perception',
-      'Avoiding photographs',
-      'Feeling judged',
-      'Hiding from social situations',
-      'Feeling like a bad pet owner',
-      'No longer recognizing themselves',
-      'Losing independence',
-    ],
+    title: 'Social / Identity',
+    description: 'How it changes self-perception or participation in life.',
+    examples: ['Avoiding photos', 'Feeling judged', 'Losing independence'],
   },
 ];
 
-const usefulPainCriteria = [
-  'Repeated across multiple sources',
-  'Specific',
-  'Emotionally meaningful',
-  'Connected to behavior',
-  'Relevant to the product',
-  'Strong enough to influence action',
-  'Capable of producing multiple creative directions',
-];
-
-const desiredOutcomeTypes = [
-  {
-    title: 'Functional Outcome',
-    items: [
-      'Reduce shedding',
-      'Improve mobility',
-      'Clear breakouts',
-      'Sleep through the night',
-      'Increase energy',
-    ],
-  },
-  {
-    title: 'Experiential Outcome',
-    items: [
-      'Get out of bed without stiffness',
-      'Wear hair down again',
-      'Leave the house without makeup',
-      'Play with their dog',
-      'Finish the workday with energy',
-    ],
-  },
-  {
-    title: 'Emotional Outcome',
-    items: [
-      'Confidence',
-      'Relief',
-      'Security',
-      'Attractiveness',
-      'Control',
-      'Hope',
-      'Pride',
-    ],
-  },
-  {
-    title: 'Social Outcome',
-    items: [
-      'Accept photographs',
-      'Attend social events confidently',
-      'Keep up with friends',
-      'Feel comfortable around a partner',
-      'Stop explaining or hiding the problem',
-    ],
-  },
-];
-
-const desiredOutcomeCapture = [
-  'Immediate outcome',
+const desiredOutcomes = [
+  'Immediate functional improvement',
   'Short-term result',
   'Long-term result',
-  'Functional improvement',
   'Lifestyle improvement',
   'Emotional relief',
-  'Social result',
-  'Financial result',
+  'Social outcome',
   'Convenience',
   'Speed',
-  'Simplicity',
   'Control',
   'Certainty',
 ];
 
-const dreamOutcomeCapture = [
-  'The ideal future',
-  'The customer’s best-case transformation',
+const dreamOutcomes = [
+  'The ideal future the customer wants',
+  'The larger transformation they imagine',
   'The identity they want to recover',
   'The identity they want to become',
   'The lifestyle they want access to',
   'What success would make possible',
   'What they would stop worrying about',
-  'What they would begin doing again',
-  'What they want to protect',
-  'What they fear losing',
-];
-
-const dreamOutcomeUses = [
-  'Aspirational messaging',
-  'Transformation concepts',
-  'Identity angles',
-  'Story-driven creative',
-  'Before-and-after narratives',
-  'Long-term emotional promises',
+  'What they would start doing again',
 ];
 
 const emotionalDrivers = [
-  'Fear',
-  'Hope',
-  'Guilt',
-  'Pride',
-  'Relief',
-  'Shame',
-  'Frustration',
-  'Anger',
-  'Anxiety',
-  'Love',
-  'Protection',
-  'Belonging',
-  'Status',
-  'Control',
-  'Security',
-  'Independence',
-  'Nostalgia',
-  'Regret',
-  'Self-respect',
-  'Validation',
+  {
+    type: 'Fear',
+    examples: [
+      'Fear of rejection',
+      'Fear of losing a relationship',
+      'Fear of getting older',
+      'Fear of sickness / serious consequences',
+      'Fear of financial loss',
+    ],
+  },
+  {
+    type: 'Frustration / Anger',
+    examples: [
+      'Tried everything and nothing worked',
+      'Wasting time or money',
+      'Problem keeps coming back',
+      'Feeling ignored or misunderstood',
+      'Category feels full of empty promises',
+    ],
+  },
+  {
+    type: 'Shame / Embarrassment',
+    examples: [
+      'Feeling judged',
+      'Hiding appearance or behavior',
+      'Avoiding photos or social situations',
+      'Feeling less attractive',
+      'Feeling like they should have solved it already',
+    ],
+  },
+  {
+    type: 'Hope / Relief',
+    examples: [
+      'Finally finding something that works',
+      'Getting normal life back',
+      'Stopping daily worry',
+      'Feeling in control again',
+      'Avoiding a worse future',
+    ],
+  },
+  {
+    type: 'Love / Protection',
+    examples: [
+      'Protecting a partner, child, pet, or family member',
+      'Being present for people who depend on them',
+      'Avoiding guilt',
+      'Keeping someone safe or comfortable',
+      'Doing the responsible thing',
+    ],
+  },
+  {
+    type: 'Status / Validation',
+    examples: [
+      'Feeling attractive again',
+      'Earning respect',
+      'Feeling successful',
+      'Stopping comparison with others',
+      'Wanting visible proof of progress',
+    ],
+  },
+  {
+    type: 'Control / Security',
+    examples: [
+      'Regaining control',
+      'Wanting certainty',
+      'Avoiding dependence on others',
+      'Feeling financially secure',
+      'Feeling safe about the future',
+    ],
+  },
+  {
+    type: 'Belonging / Acceptance',
+    examples: [
+      'Wanting to fit in',
+      'Fear of social exclusion',
+      'Wanting partner approval',
+      'Wanting peer acceptance',
+      'Wanting to feel understood',
+    ],
+  },
 ];
 
-const emotionalDriverQuestions = [
-  'Why does this problem matter emotionally?',
-  'What does the customer fear it says about them?',
-  'Who else is affected?',
-  'What emotional reward does success provide?',
-  'What emotion creates urgency?',
-  'What emotion prevents action?',
-  'What feeling appears repeatedly in customer stories?',
-  'What emotion exists even when the customer does not name it directly?',
+
+const misconceptionSignals = [
+  'The problem is inevitable and cannot be improved',
+  'All products in the category work the same way',
+  'A natural solution cannot be strong enough',
+  'A higher price automatically means better results',
+  'The customer must accept the problem as part of age, genetics, or lifestyle',
+  'Previous failure means every future solution will fail',
 ];
 
-const identityCategories = [
+const massDesireLens = [
+  'What existing desire already creates demand in this market?',
+  'How urgent and emotionally intense is that desire?',
+  'How many people share it?',
+  'How long is that desire likely to remain relevant?',
+  'Which hopes, fears, frustrations, or aspirations already exist before our advertising?',
+];
+
+const identitySignals = [
   'Current identity',
   'Threatened identity',
   'Rejected identity',
   'Desired identity',
   'Recovered identity',
-  'Social identity',
   'Aspirational identity',
-];
-
-const identityExamples = [
-  'From someone losing control to someone taking action',
-  'From an exhausted parent to an energetic parent',
-  'From someone hiding their skin to someone comfortable being seen',
-  'From a guilty dog owner to a responsible protector',
-  'From someone accepting aging to someone preserving vitality',
-  'From someone dependent on complicated routines to someone with a simple solution',
-];
-
-const identityCapture = [
-  'How customers describe themselves',
-  'What version of themselves they miss',
-  'What identity the problem threatens',
-  'What identity the solution supports',
-  'What behaviors represent the desired identity',
-  'What language signals pride, guilt, confidence, or self-image',
 ];
 
 const objections = [
   'Price',
-  'Product effectiveness',
+  'Will it actually work?',
   'Time to results',
-  'Safety',
-  'Side effects',
+  'Safety / side effects',
   'Trust',
-  'Ingredients',
-  'Quality',
-  'Complexity',
+  'Ingredients / quality',
   'Ease of use',
-  'Taste',
-  'Consistency',
   'Suitability',
   'Subscription',
   'Shipping',
-  'Refund policy',
-  'Brand credibility',
-  'Claim credibility',
   'Previous disappointment',
   'Fear of wasting money',
 ];
 
-const objectionRecord = [
-  'Exact customer language',
-  'What creates the objection',
-  'How frequently it appears',
-  'Which customer group expresses it',
-  'Which awareness level it appears in',
-  'What proof could reduce it',
-  'Whether it is a product, offer, trust, or communication problem',
-];
-
-const beliefCategories = [
-  'Beliefs about the cause of the problem',
-  'Beliefs about which solutions work',
-  'Beliefs about which solutions do not work',
-  'Beliefs about the product category',
-  'Beliefs about the brand',
-  'Beliefs about price',
-  'Beliefs about natural versus medical solutions',
-  'Beliefs about age, genetics, lifestyle, or responsibility',
-  'Beliefs about how long results should take',
-  'Beliefs about themselves',
-];
-
-const misconceptions = [
-  'Block the product',
-  'Support a competing solution',
-  'Cause customers to use the product incorrectly',
-  'Create unrealistic expectations',
-  'Make the problem feel unsolvable',
-  'Reduce perceived urgency',
+const beliefSignals = [
+  'What they believe causes the problem',
+  'What they believe works',
+  'What they believe does not work',
+  'What they believe about the category',
+  'What they believe about the brand',
+  'What they believe about price',
+  'What they believe about themselves',
+  'What they expect results to look like and how fast they should happen',
 ];
 
 const failedAlternativeCapture = [
-  'Previous products',
-  'Competing brands',
-  'Home remedies',
-  'Professional services',
-  'Prescription solutions',
-  'Lifestyle changes',
-  'DIY approaches',
-  'Doing nothing',
-  'Waiting for the problem to improve',
-  'Why the customer selected the alternative',
+  'What they already tried',
+  'Why they chose it',
   'What they expected',
-  'What happened',
+  'What actually happened',
   'Why they stopped',
-  'What they disliked',
+  'What disappointed them',
   'What they still want',
   'What they are now skeptical about',
 ];
 
-const failedAlternativeUses = [
-  'Comparison angles',
-  'Contrarian angles',
-  'Mechanism angles',
-  'New-opportunity angles',
-  'Objection handling',
-  'Product differentiation',
-];
-
 const buyingTriggers = [
-  'A visible worsening of the problem',
-  'A photograph',
+  'Visible worsening of the problem',
+  'A photograph or mirror moment',
   'A social event',
   'A comment from another person',
-  'A doctor or expert conversation',
+  'A doctor / expert conversation',
   'A failed alternative',
   'A painful daily moment',
   'A major life event',
   'A comparison with someone else',
   'A seasonal event',
   'A health scare',
-  'A relationship moment',
-  'A financial consequence',
-  'A limited-time offer',
   'Running out of patience',
   'Seeing convincing proof',
   'Discovering a new explanation',
 ];
 
-const triggerCapture = [
-  'What happened',
-  'Why that moment mattered',
-  'What emotion it created',
-  'What action followed',
-  'Which customer group experiences it',
-  'How urgent the customer becomes',
-  'What message would feel relevant in that moment',
+const behavioralContext = [
+  'When the moment happens',
+  'Where it happens',
+  'What the customer is trying to do',
+  'What makes the problem visible',
+  'Who else is present',
+  'What emotion appears',
+  'What action follows',
 ];
 
 const proofTypes = [
@@ -362,168 +248,97 @@ const proofTypes = [
   'Founder authority',
   'Certifications',
   'Third-party testing',
-  'Usage numbers',
-  'Customer volume',
-  'Ratings',
-  'Media mentions',
+  'Ratings / customer volume',
   'Guarantees',
   'Comparison evidence',
   'Product transparency',
-  'Detailed mechanism explanation',
+  'Mechanism explanation',
 ];
 
-const proofGaps = [
-  'Claims without enough evidence',
-  'Strong evidence the brand is not using',
-  'Proof competitors use more effectively',
-  'Proof that feels too technical',
-  'Proof requiring simpler explanation',
-  'Customer groups requiring different proof',
-  'Places in the funnel where proof appears too late',
-];
-
-const customerLanguageCapture = [
-  'Repeated phrases',
-  'Emotional wording',
-  'Metaphors',
-  'Comparisons',
-  'Descriptions of the problem',
-  'Descriptions of failed alternatives',
-  'Questions',
-  'Complaints',
-  'Desired outcomes',
-  'Transformation language',
-  'Identity language',
-  'Urgency language',
-  'Skeptical language',
-  'Recommendation language',
-  'Product descriptions',
-  'Language used before and after purchase',
-];
-
-const customerLanguageCategories = [
-  'Problem language',
-  'Desire language',
-  'Emotional language',
-  'Belief language',
-  'Objection language',
-  'Trigger language',
-  'Proof language',
-  'Transformation language',
-  'Product language',
-  'Offer language',
-];
-
-const customerLanguageUses = [
-  'Hooks',
-  'Headlines',
-  'Scripts',
-  'Static copy',
-  'Advertorial leads',
-  'Listicle headlines',
-  'Objection handling',
-  'Product-page copy',
-];
-
-const useContextCapture = [
-  'Time of day',
-  'Physical environment',
-  'Social environment',
-  'Who else is present',
-  'What the customer is trying to do',
-  'What interrupts them',
-  'What the problem prevents',
-  'What action they take',
-  'Which objects, places, or routines are involved',
-  'How the product fits into daily life',
-  'When the problem feels most emotionally intense',
-];
-
-const behavioralMoments = [
-  'Seeing hair in the shower drain',
-  'Struggling to stand after sitting',
-  'Covering a breakout before an event',
-  'Losing energy halfway through the workday',
-  'A dog refusing to climb onto the bed',
-  'Waking repeatedly during the night',
+const customerLanguageFields = [
+  'Exact phrase',
+  'Full context',
+  'Source',
+  'Customer type',
+  'Category',
+  'Emotional tone',
+  'Frequency / repetition',
 ];
 
 const awarenessLevels = [
   {
-    title: 'Unaware',
-    description:
-      'The customer does not clearly recognize the problem or its impact.',
+    level: 'Unaware',
+    knows: 'Does not clearly recognize the problem or its impact.',
+    implication: 'Start with the lived symptom, situation, story, or hidden problem — not the product.',
   },
   {
-    title: 'Problem-Aware',
-    description:
-      'The customer recognizes the problem but does not understand the available solutions.',
+    level: 'Problem Aware',
+    knows: 'Recognizes the problem but does not yet understand the available solutions.',
+    implication: 'Deepen the problem, consequences, urgency, and introduce the solution category.',
   },
   {
-    title: 'Solution-Aware',
-    description:
-      'The customer knows that solutions exist but has not selected a product.',
+    level: 'Solution Aware',
+    knows: 'Knows solutions exist and is comparing approaches.',
+    implication: 'Differentiate the mechanism, approach, proof, and why this solution is better suited.',
   },
   {
-    title: 'Product-Aware',
-    description:
-      'The customer knows the product or brand but has not purchased.',
+    level: 'Product Aware',
+    knows: 'Knows the product or brand but has not purchased.',
+    implication: 'Resolve objections, strengthen proof, clarify differentiation, and reduce perceived risk.',
   },
   {
-    title: 'Most Aware',
-    description:
-      'The customer understands the product and mainly needs the right offer, timing, or reminder.',
+    level: 'Most Aware',
+    knows: 'Already understands the product and mainly needs a reason to act now.',
+    implication: 'Lead with offer, urgency, reminder, new proof, bundle, bonus, or a strong reason to return.',
   },
 ];
 
-const sophisticationInsights = [
-  'Promises the market has seen repeatedly',
+const sophisticationLevels = [
+  {
+    level: 'Level 1',
+    market: 'The promise is still relatively new.',
+    implication: 'A clear direct promise can work because the market has not heard it repeatedly.',
+  },
+  {
+    level: 'Level 2',
+    market: 'Competitors are making similar promises.',
+    implication: 'Make the promise more specific, vivid, measurable, or differentiated.',
+  },
+  {
+    level: 'Level 3',
+    market: 'Promises are familiar and customers need a reason to believe.',
+    implication: 'Introduce or strengthen the unique mechanism — why the problem happens or why this solution works differently.',
+  },
+  {
+    level: 'Level 4',
+    market: 'Competing mechanisms are now common.',
+    implication: 'Deepen mechanism specificity and strengthen proof, authority, evidence, and differentiation.',
+  },
+  {
+    level: 'Level 5',
+    market: 'Customers are highly skeptical and have seen nearly every version of the category pitch.',
+    implication: 'Shift framing: lead with identity, story, experience, contrarian positioning, new context, or a fresh way of understanding the problem.',
+  },
+];
+
+const marketGapSignals = [
+  'Overused promises',
+  'Saturated mechanisms',
   'Claims customers no longer trust',
-  'Mechanisms competitors already use',
-  'Proof standards customers expect',
-  'Visual styles that feel overused',
-  'Hooks that have become interchangeable',
-  'New explanations appearing in the category',
-  'Areas where the market requires greater specificity',
-];
-
-const competitorGapCapture = [
-  'Dominant category promises',
-  'Repeated hooks',
-  'Common mechanisms',
-  'Common proof',
-  'Common creator types',
-  'Common visual styles',
-  'Common offers',
-  'Common objections handled',
-  'Common objections ignored',
+  'Ignored objections',
   'Underused customer groups',
   'Underused emotional drivers',
-  'Underused use cases',
-  'Product strengths competitors fail to explain',
-  'Customer complaints competitors do not solve',
-  'Overused messaging',
-  'Overused visual execution',
-  'Potential whitespace',
-];
-
-const gapTypes = [
-  'Messaging gap',
-  'Emotional gap',
-  'Product gap',
-  'Mechanism gap',
-  'Proof gap',
-  'Persona gap',
-  'Awareness gap',
-  'Format gap',
-  'Visual gap',
-  'Offer gap',
-  'Funnel gap',
+  'Unresolved competitor complaints',
+  'Proof gaps',
+  'Positioning gaps',
+  'Visual / format whitespace',
+  'Offer or funnel gaps',
 ];
 
 const hookSources = [
-  'Brand ads',
-  'Competitor ads',
+  'Brand and competitor ads',
+  'Meta Ad Library',
+  'TikTok creative research',
   'Organic short-form content',
   'Creator videos',
   'Customer language',
@@ -531,103 +346,70 @@ const hookSources = [
   'Reviews',
   'Advertorial headlines',
   'Listicle headlines',
-  'Email subject lines',
   'Landing-page headlines',
+  'Email subject lines',
   'Founder content',
   'Podcast clips',
-  'Native ads',
-  'YouTube titles and thumbnails',
+  'YouTube titles / thumbnails',
 ];
 
-const verbalHooks = [
-  'Problem statement',
-  'Direct callout',
-  'Question',
-  'Contrarian claim',
-  'Curiosity gap',
-  'Story opening',
-  'Confession',
-  'Warning',
-  'Discovery',
-  'Demonstration setup',
-  'Comparison',
-  'Proof-led statement',
-  'Customer quote',
-  'Authority statement',
-  'What nobody tells you',
-  'Why this keeps happening',
-  'I tried everything',
-  'Before you buy',
-  'Stop doing this',
-];
-
-const visualHooks = [
-  'Problem-state image',
-  'Unexpected product use',
-  'Product demonstration',
-  'Before and after',
-  'Close-up',
-  'Movement',
-  'Pattern interruption',
-  'Native screenshot',
-  'Comment screenshot',
-  'Review screenshot',
-  'Text message',
-  'Comparison',
-  'Reaction',
-  'Transformation',
-  'Unusual object',
-  'Strong facial expression',
-  'Product reveal',
-  'Visual metaphor',
-];
-
-const editingHooks = [
-  'Fast cuts',
-  'Sudden zoom',
-  'Abrupt scene change',
-  'Text-first opening',
-  'Sound interruption',
-  'Reverse footage',
-  'Split screen',
-  'Countdown',
-  'Rapid comparison',
-  'Loop',
-  'Freeze frame',
-  'Comment overlay',
-  'Screen recording',
-  'Before-and-after transition',
-  'Immediate subtitle emphasis',
-];
-
-const structuralHooks = [
-  'Start with the result',
-  'Start with the strongest proof',
-  'Start in the middle of the story',
-  'Start with the objection',
-  'Start with a failed alternative',
-  'Start with the mechanism',
-  'Start with a demonstration',
-  'Start with controversy',
-  'Start with a customer moment',
-  'Start with a specific number',
-];
-
-const hookRecord = [
-  'Hook wording or description',
-  'Screenshot or clip',
-  'Source',
-  'Platform',
-  'Brand or creator',
-  'Hook type',
-  'Visual opening',
-  'Editing pattern',
-  'Target customer',
-  'Possible angle',
-  'Why it gained attention',
-  'How it might be adapted',
-  'Whether it is overused',
-  'Whether it fits the brand',
+const hookTypes = [
+  {
+    title: 'Verbal',
+    items: [
+      'Problem statement',
+      'Direct callout',
+      'Question',
+      'Contrarian claim',
+      'Curiosity gap',
+      'Story opening',
+      'Warning',
+      'Discovery',
+      'Comparison',
+      'Proof-led statement',
+      'Customer quote',
+    ],
+  },
+  {
+    title: 'Visual',
+    items: [
+      'Problem-state image',
+      'Demonstration',
+      'Before / after',
+      'Close-up',
+      'Pattern interruption',
+      'Review / comment screenshot',
+      'Comparison',
+      'Reaction',
+      'Transformation',
+      'Visual metaphor',
+    ],
+  },
+  {
+    title: 'Structural',
+    items: [
+      'Start with the result',
+      'Start with proof',
+      'Start in the middle of the story',
+      'Start with the objection',
+      'Start with a failed alternative',
+      'Start with the mechanism',
+      'Start with a customer moment',
+    ],
+  },
+  {
+    title: 'Editing',
+    items: [
+      'Fast cuts',
+      'Sudden zoom',
+      'Abrupt scene change',
+      'Text-first opening',
+      'Sound interruption',
+      'Split screen',
+      'Comment overlay',
+      'Screen recording',
+    ],
+  },
 ];
 
 const customerPatterns = [
@@ -647,275 +429,167 @@ const productPatterns = [
   'Benefits repeatedly praised',
   'Features customers misunderstand',
   'Results customers notice first',
-  'Product weaknesses',
   'Common usage problems',
   'Unexpected use cases',
   'Proof repeatedly requested',
 ];
 
-const competitorPatterns = [
+const marketPatterns = [
   'Repeated promises',
   'Repeated mechanisms',
   'Repeated hooks',
   'Repeated formats',
-  'Repeated creators',
+  'Repeated creator types',
   'Repeated offers',
-  'Repeated landing-page structures',
-  'Repeated customer complaints',
+  'Repeated competitor complaints',
+  'Repeated positioning gaps',
 ];
 
-const creativePatterns = [
-  'Visual openings repeated among strong ads',
-  'Editing structures appearing across creators',
-  'Hooks repeated in long-running ads',
-  'Proof formats that attract engagement',
-  'Topics performing across paid and organic content',
-  'Formats connected to specific awareness levels',
-  'Concepts adapted by multiple competitors',
-];
-
-const performancePatterns = [
+const creativePerformancePatterns = [
   'Angles associated with higher spend',
   'Hooks associated with stronger CTR',
   'Formats associated with stronger hold rate',
   'Concepts producing clicks but weak conversion',
-  'Proof types connected to lower CPA',
+  'Proof types associated with better conversion',
   'Creators associated with stronger performance',
-  'Offers increasing conversion',
   'Patterns of fatigue',
 ];
 
-const patternQuality = [
-  'Frequency',
-  'Emotional intensity',
-  'Source diversity',
-  'Specificity',
-  'Commercial relevance',
-  'Customer relevance',
-  'Recency',
-  'Available proof',
-  'Connection to actual behavior or performance',
-];
-
-const patternRecord = [
-  'Pattern name',
-  'Evidence sources',
-  'What repeats',
-  'Who it applies to',
-  'Why it matters',
-  'Strategic implication',
-  'Possible creative use',
-  'Confidence level',
-];
-
-const commonTensions = [
+const tensions = [
   'Wants fast results but distrusts exaggerated promises',
   'Wants premium quality but resists the price',
   'Wants a natural solution but also wants clinical proof',
   'Wants a simple routine but expects a complete transformation',
   'Wants to believe the product but fears another disappointment',
   'Wants change but delays action',
-  'Wants strong claims but distrusts advertising',
-  'Wants convenience but expects personalization',
 ];
 
-const tensionValue = [
-  'What makes the decision difficult',
-  'Why the customer hesitates',
-  'What proof is missing',
-  'What message must be balanced carefully',
-  'What emotional conflict can drive a concept',
-  'What the offer must resolve',
+const patternQuality = [
+  'Frequency',
+  'Source diversity',
+  'Emotional intensity',
+  'Specificity',
+  'Customer relevance',
+  'Commercial relevance',
+  'Recency',
+  'Available proof',
+  'Connection to actual behavior or performance',
 ];
 
-const implicationQuestions = [
-  'What did I observe?',
-  'What pattern does it form?',
-  'Why does it matter?',
-  'What should change because of it?',
-  'What creative opportunity does it create?',
-];
-
-const strategicImplications = [
-  'Prioritize a specific persona',
-  'Lead with a deeper emotional pain',
-  'Explain the problem through a new mechanism',
-  'Address a dominant misconception',
-  'Use stronger proof earlier',
-  'Build concepts around a buying trigger',
-  'Avoid an overused category promise',
-  'Use behavioral demonstrations',
-  'Develop a new comparison',
-  'Build an advertorial before sending traffic to the product page',
-  'Create proof-led concepts',
-  'Emphasize identity rather than features',
-  'Develop content for a different awareness level',
-  'Test a different creator type',
-  'Adapt a strong organic pattern into paid creative',
-];
-
-const creativeOpportunityRecord = [
+const synthesisRecord = [
+  'Insight',
   'Supporting evidence',
-  'Relevant customer group',
-  'Problem or desire',
-  'Belief or objection',
-  'Strategic implication',
-  'Possible angle territories',
-  'Possible hooks',
-  'Possible formats',
-  'Required proof',
-  'Confidence level',
-  'Priority',
-];
-
-const insightRecord = [
-  'Insight title',
-  'Category',
-  'Exact evidence',
-  'Source links',
-  'Pattern',
-  'Interpretation',
+  'Source',
   'Customer group',
   'Frequency',
-  'Emotional intensity',
-  'Strategic implication',
-  'Possible creative opportunity',
-  'Supporting proof',
+  'Confidence',
   'Contradictory evidence',
-  'Confidence level',
-  'Priority',
-  'Status',
-];
-
-const insightStatuses = [
-  'Raw cluster',
-  'Pattern detected',
-  'Needs more evidence',
-  'Validated insight',
-  'Persona input',
-  'Angle opportunity',
-  'Hook opportunity',
-  'Proof opportunity',
-  'Offer opportunity',
-  'Archived',
 ];
 
 const outputs = [
-  'Organized pain-point system',
-  'Desired-outcome and dream-outcome maps',
-  'Emotional-driver and identity-goal maps',
-  'Objection, perceived-risk, belief, and misconception maps',
+  'Pain-point map',
+  'Desired and dream-outcome map',
+  'Emotional-driver and identity map',
+  'Objection and belief map',
   'Failed-alternative analysis',
-  'Buying-trigger and urgency library',
-  'Proof-requirement and trust-signal map',
+  'Buying-trigger and behavioral-context library',
+  'Proof-requirement map',
   'Customer-language bank',
-  'Use-context and behavioral-moment library',
-  'Awareness and sophistication insights',
-  'Competitor and market-gap map',
+  'Awareness and market-sophistication map',
+  'Market-gap map',
   'Hook Intelligence Library',
-  'Validated patterns and tensions',
-  'Strategic implications',
-  'Prioritized creative opportunities',
-  'Structured insight records ready for Persona Mapping and Angle Development',
+  'Validated pattern library',
 ];
 
 const sops = [
   {
-    title: 'Pain-Point Extraction',
+    title: 'Pain & Outcome Extraction',
     description:
-      'Separates surface, functional, emotional, social, and identity-level pains while preserving the evidence behind them.',
+      'Organizes surface, functional, emotional, and identity-level pains alongside desired and dream outcomes.',
   },
   {
-    title: 'Desired-Outcome Extraction',
+    title: 'Emotional Driver & Identity Mapping',
     description:
-      'Organizes functional, emotional, experiential, and social outcomes without confusing immediate results with larger aspirations.',
+      'Documents the emotions and identity shifts repeatedly supported by customer evidence.',
   },
   {
-    title: 'Dream-Outcome and Aspiration Mapping',
+    title: 'Objection & Belief Mapping',
     description:
-      'Identifies the larger future, lifestyle, or identity customers want while keeping it connected to believable product outcomes.',
+      'Clusters hesitation, perceived risk, beliefs, misconceptions, and the evidence behind them.',
   },
   {
-    title: 'Emotional-Driver Extraction',
+    title: 'Failed Alternative & Trigger Extraction',
     description:
-      'Identifies emotions underneath customer language and behavior without inventing unsupported psychological conclusions.',
+      'Captures what customers tried, why it failed, and the moments that move them toward action.',
   },
   {
-    title: 'Identity-Goal Mapping',
+    title: 'Proof & Customer Language Extraction',
     description:
-      'Organizes current, threatened, rejected, desired, aspirational, and recovered identities.',
+      'Maps proof requirements and preserves exact customer wording with source and context.',
   },
   {
-    title: 'Objection and Risk Mapping',
+    title: 'Awareness, Sophistication & Market Gap Mapping',
     description:
-      'Clusters stated objections, possible hidden objections, and the proof or explanation each objection requires.',
-  },
-  {
-    title: 'Belief and Misconception Mapping',
-    description:
-      'Documents existing beliefs, identifies purchase-blocking beliefs, and defines the belief shift required.',
-  },
-  {
-    title: 'Failed-Alternative Analysis',
-    description:
-      'Organizes what customers tried, what they expected, why it failed, and what they now require.',
-  },
-  {
-    title: 'Buying-Trigger Extraction',
-    description:
-      'Identifies events, frustrations, comparisons, and moments of urgency that move customers toward action.',
-  },
-  {
-    title: 'Proof-Requirement Mapping',
-    description:
-      'Connects promises and objections to required proof and identifies strong or missing evidence.',
-  },
-  {
-    title: 'Customer-Language Organization',
-    description:
-      'Preserves exact wording, context, source, emotional tone, customer type, and intended future use.',
-  },
-  {
-    title: 'Use-Context and Behavioral-Moment Mapping',
-    description:
-      'Extracts the real environments, routines, and visible moments where the problem or outcome appears.',
-  },
-  {
-    title: 'Awareness and Sophistication Mapping',
-    description:
-      'Classifies customer awareness and category sophistication so later messaging matches current understanding.',
-  },
-  {
-    title: 'Competitor and Market-Gap Analysis',
-    description:
-      'Identifies meaningful messaging, persona, mechanism, proof, visual, format, offer, and funnel gaps.',
+      'Classifies what customers know, how mature the category is, and where credible positioning gaps remain.',
   },
   {
     title: 'Hook Intelligence Capture',
     description:
-      'Collects and classifies verbal, visual, editing, and structural hooks from research sources.',
+      'Organizes verbal, visual, structural, and editing-hook patterns discovered during research.',
   },
   {
     title: 'Pattern Recognition',
     description:
-      'Clusters repeated evidence and separates commercially meaningful patterns from coincidence.',
-  },
-  {
-    title: 'Tension and Contradiction Mapping',
-    description:
-      'Identifies conflicts between what customers want, fear, believe, say, and do.',
-  },
-  {
-    title: 'Insight Prioritization',
-    description:
-      'Scores insights by evidence strength, specificity, intensity, distinctiveness, actionability, and commercial relevance.',
-  },
-  {
-    title: 'Insight-to-Opportunity Translation',
-    description:
-      'Converts validated insights into implications and opportunities for personas, angles, hooks, concepts, proof, offers, and tests.',
+      'Clusters repeated evidence across customer, product, market, creative, and performance sources.',
   },
 ];
+
+/*
+|--------------------------------------------------------------------------
+| SMALL COMPONENTS
+|--------------------------------------------------------------------------
+*/
+
+function InsightPair({
+  label,
+  title,
+  description,
+  items,
+}) {
+  return (
+    <article className="insight-pair-card">
+      <header>
+        <span>{label}</span>
+        <h3>{title}</h3>
+        {description && <p>{description}</p>}
+      </header>
+
+      <StageList items={items} />
+    </article>
+  );
+}
+
+function LevelRow({
+  level,
+  knows,
+  implication,
+}) {
+  return (
+    <div className="insight-level-row">
+      <strong>{level}</strong>
+
+      <div>
+        <span>WHAT THEY KNOW / MARKET STATE</span>
+        <p>{knows}</p>
+      </div>
+
+      <div>
+        <span>WHAT I DO</span>
+        <p>{implication}</p>
+      </div>
+    </div>
+  );
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -923,680 +597,702 @@ const sops = [
 |--------------------------------------------------------------------------
 */
 
-export default function InsightSynthesis({ stage, onBack }) {
+export default function InsightSynthesis({
+  stage,
+  onBack,
+}) {
   return (
     <StageDeepDiveLayout
       stage={stage}
       onBack={onBack}
-      eyebrow="EVIDENCE-TO-STRATEGY SYSTEM"
+      eyebrow="EVIDENCE → CUSTOMER INTELLIGENCE"
       title="Insight Synthesis"
-      introduction="Research gives me raw evidence. Insight Synthesis turns that evidence into an organized intelligence system that can influence personas, angles, hooks, concepts, proof strategies, offers, and creative tests. I do not treat every quote or observation as an insight. I group evidence, identify patterns, interpret what those patterns mean, and translate them into decisions."
+      introduction="Research gives me a large volume of raw evidence. Here I compress that evidence into structured customer intelligence by grouping similar signals, extracting what repeatedly matters, preserving the evidence behind it, and identifying the strongest patterns before moving into Persona Mapping and Angle Development."
       process={[
-        'Evidence',
-        'Pattern',
-        'Interpretation',
-        'Strategic Implication',
-        'Creative Opportunity',
+        'Raw Evidence',
+        'Cluster Similar Signals',
+        'Extract & Classify',
+        'Validate',
+        'Recognize Patterns',
       ]}
       outputs={outputs}
       outputTitle="Insight Synthesis Output"
       sops={sops}
-      sopDescription="The Insight Synthesis SOP Library defines how raw evidence becomes organized, prioritized, and usable strategic intelligence."
+      sopDescription="Planned SOPs for consistently turning raw research into structured, evidence-backed customer intelligence."
     >
+      {/* ================================================================
+          00 — SYNTHESIS METHOD
+         ================================================================ */}
+
       <StageSection
         number="00"
         navTitle="Synthesis Method"
-        title="The Synthesis Method"
-        description="Connect isolated evidence to a concrete creative opportunity."
+        title="How I Turn Research Into Insights"
+        description="The goal is to compress large amounts of research without losing the source, context, or evidence behind what customers repeatedly show us."
       >
-        <StageHighlight
-          title="Core Synthesis Chain"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'Evidence',
-              'Pattern',
-              'Interpretation',
-              'Strategic Implication',
-              'Creative Opportunity',
-            ]}
-          />
-        </StageHighlight>
-
-        <div style={{ marginTop: '12px' }}>
-          <StageGrid columns={2}>
-            <StageCard
-              title="Example Evidence"
-              description="Customers repeatedly mention hiding their hair in photos, changing hairstyles, and avoiding certain camera angles."
+        <div className="insight-synthesis-chain">
+          {[
+            ['01', 'Raw Evidence', 'Quotes, reviews, comments, ads, pages, interviews, performance data.'],
+            ['02', 'Cluster', 'Group similar customer statements, behaviors, objections, outcomes, and market signals.'],
+            ['03', 'Extract', 'Name the underlying pain, desire, belief, trigger, proof need, language pattern, or market signal.'],
+            ['04', 'Validate', 'Check repetition, source diversity, specificity, contradictory evidence, and confidence.'],
+            ['05', 'Pattern', 'Identify what repeatedly appears across multiple insight categories and evidence sources.'],
+          ].map(([number, title, copy], index, array) => (
+            <div
+              className="insight-synthesis-chain-step"
+              key={title}
             >
-              <StageList
-                items={[
-                  'The behavior appears across multiple customer stories.',
-                  'The consequence extends beyond physical appearance.',
-                  'The customer changes how she participates in normal life.',
-                ]}
-              />
-            </StageCard>
+              <article>
+                <span>{number}</span>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
 
-            <StageCard
-              title="Strategic Translation"
-              description="The problem affects identity and everyday confidence."
-            >
-              <StageFlow
-                items={[
-                  'Identity Pattern',
-                  'Recovery Interpretation',
-                  'Identity-Restoration Message',
-                  'Behavioral Transformation Concepts',
-                ]}
-              />
-            </StageCard>
-          </StageGrid>
+              {index < array.length - 1 && (
+                <i aria-hidden="true">→</i>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="insight-synthesis-record">
+          <span>MINIMUM INSIGHT RECORD</span>
+
+          <div>
+            {synthesisRecord.map((item) => (
+              <strong key={item}>{item}</strong>
+            ))}
+          </div>
         </div>
       </StageSection>
+
+      {/* ================================================================
+          01 — PAIN POINTS
+         ================================================================ */}
 
       <StageSection
         number="01"
         navTitle="Pain Points"
         title="Pain Points"
-        description="Separate surface-level complaints from deeper functional, emotional, social, and identity consequences."
+        description="I separate the visible symptom from the deeper functional, emotional, social, and identity consequences supported by customer evidence."
       >
-        <StageGrid columns={2}>
-          <StageCard title="What I Capture">
-            <StageList items={painTypes} />
-          </StageCard>
+        <div className="insight-depth-grid">
+          {painDepthLevels.map((level, index) => (
+            <article
+              className="insight-depth-card"
+              key={level.title}
+            >
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{level.title}</h3>
+              <p>{level.description}</p>
 
-          <StageCard
-            title="Strategic-Use Criteria"
-            description="A pain must be strong enough to influence creative direction."
-          >
-            <StageList items={usefulPainCriteria} />
-          </StageCard>
-        </StageGrid>
-
-        <div style={{ marginTop: '12px' }}>
-          <StageGrid columns={2}>
-            {painDepthLevels.map((level) => (
-              <StageCard
-                key={level.title}
-                title={level.title}
-              >
-                <StageList items={level.items} />
-              </StageCard>
-            ))}
-          </StageGrid>
+              <div>
+                {level.examples.map((example) => (
+                  <small key={example}>{example}</small>
+                ))}
+              </div>
+            </article>
+          ))}
         </div>
+
+        <StageHighlight
+          title="Evidence Standard"
+          type="success"
+        >
+          <p>
+            The strongest pain insights are repeated, specific,
+            emotionally meaningful, behaviorally visible, relevant
+            to the product, and supported across more than one source
+            when possible.
+          </p>
+        </StageHighlight>
       </StageSection>
+
+      {/* ================================================================
+          02 — OUTCOMES
+         ================================================================ */}
 
       <StageSection
         number="02"
-        navTitle="Desired Outcomes"
-        title="Desired Outcomes"
-        description="Organize what customers explicitly want to achieve after solving the problem."
+        navTitle="Outcomes"
+        title="Desired Outcomes & Dream Outcomes"
+        description="I separate what customers practically want the problem to change from the larger future, lifestyle, or identity they ultimately want access to."
       >
-        <StageGrid columns={2}>
-          <StageCard title="What I Capture">
-            <StageList items={desiredOutcomeCapture} />
-          </StageCard>
+        <div className="insight-pair-grid">
+          <InsightPair
+            label="DESIRED OUTCOME"
+            title="What they want to change"
+            description="The direct result the customer wants from solving the problem."
+            items={desiredOutcomes}
+          />
 
-          <StageHighlight title="Outcome Standard">
-            <p>
-              Desired outcomes should describe what the customer wants the
-              product to change in practical, experiential, emotional, or
-              social terms.
-            </p>
-          </StageHighlight>
-        </StageGrid>
-
-        <div style={{ marginTop: '12px' }}>
-          <StageGrid columns={2}>
-            {desiredOutcomeTypes.map((outcome) => (
-              <StageCard
-                key={outcome.title}
-                title={outcome.title}
-              >
-                <StageList items={outcome.items} />
-              </StageCard>
-            ))}
-          </StageGrid>
+          <InsightPair
+            label="DREAM OUTCOME"
+            title="What that result makes possible"
+            description="The larger transformation, lifestyle, or identity behind the practical result."
+            items={dreamOutcomes}
+          />
         </div>
-      </StageSection>
-
-      <StageSection
-        number="03"
-        navTitle="Dream Outcomes"
-        title="Dream Outcomes and Aspirations"
-        description="Identify the larger transformation, future, lifestyle, or identity the customer imagines."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="What I Capture">
-            <StageList items={dreamOutcomeCapture} />
-          </StageCard>
-
-          <StageCard title="Strategic Uses">
-            <StageList items={dreamOutcomeUses} />
-          </StageCard>
-        </StageGrid>
 
         <StageHighlight
           title="Credibility Boundary"
           type="warning"
         >
           <p>
-            The dream outcome must remain connected to a believable product
-            result. It should not become an exaggerated fantasy unsupported
-            by the product.
+            Dream outcomes stay connected to believable customer
+            evidence and realistic product outcomes. They are not
+            invented fantasies.
           </p>
         </StageHighlight>
       </StageSection>
+
+      {/* ================================================================
+          03 — EMOTIONAL DRIVERS
+         ================================================================ */}
+
+      <StageSection
+        number="03"
+        navTitle="Emotional Drivers"
+        title="Emotional Drivers"
+        description="I group emotional drivers by type, then look for the specific fear, frustration, hope, status need, or emotional consequence that repeatedly appears in the customer evidence."
+      >
+        <div className="insight-emotional-drivers-board">
+          <div className="insight-emotional-drivers-header">
+            <div>
+              <span>DRIVER TYPE</span>
+              <span>COMMON EXAMPLES</span>
+            </div>
+          </div>
+
+          <div className="insight-emotional-drivers-list">
+            {emotionalDrivers.map((group) => (
+              <article
+                className="insight-emotional-driver-row"
+                key={group.type}
+              >
+                <div className="insight-emotional-driver-name">
+                  <strong>{group.type}</strong>
+                </div>
+
+                <div className="insight-emotional-driver-examples">
+                  {group.examples.map((example) => (
+                    <span key={example}>{example}</span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="insight-emotional-drivers-more">
+            <strong>+ MORE</strong>
+            <p>
+              These are common examples, not a fixed list. The actual
+              emotional drivers come from repeated customer language,
+              behavior, stories, and context inside the research.
+            </p>
+          </div>
+        </div>
+
+        <StageHighlight title="Practical Standard" type="success">
+          <p>
+            “Fear” is too broad. “Fear of rejection because the customer
+            feels less attractive” is specific enough to be useful. I always
+            connect the emotion to the concrete consequence, relationship,
+            identity, or future the customer cares about.
+          </p>
+        </StageHighlight>
+      </StageSection>
+
+      {/* ================================================================
+          04 — IDENTITY GOALS
+         ================================================================ */}
 
       <StageSection
         number="04"
-        navTitle="Emotional Drivers"
-        title="Emotional Drivers"
-        description="Identify the deeper emotion underneath the customer’s stated problem, desire, or behavior."
+        navTitle="Identity Goals"
+        title="Identity Goals"
+        description="I map who the customer feels they are now, what identity the problem threatens, and who they want to become, recover, or protect."
       >
-        <StageGrid columns={2}>
-          <StageCard title="Common Emotional Drivers">
-            <StageList items={emotionalDrivers} />
-          </StageCard>
+        <div className="insight-identity-map is-standalone">
+          <span>IDENTITY MOVEMENT</span>
+          <div>
+            {identitySignals.map((item, index) => (
+              <div key={item}>
+                <small>{String(index + 1).padStart(2, '0')}</small>
+                <strong>{item}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
 
-          <StageCard title="Questions I Ask">
-            <StageList items={emotionalDriverQuestions} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight title="Strategic Value">
+        <StageHighlight title="Practical Read">
           <p>
-            Two people with the same functional problem may respond to
-            completely different messages because the problem carries a
-            different emotional meaning for each person.
+            I look for identity language in the customer’s own words:
+            what version of themselves they miss, what they are embarrassed
+            to become, what they want to protect, and what the transformation
+            would let them feel like again.
           </p>
         </StageHighlight>
       </StageSection>
+
+      {/* ================================================================
+          05 — OBJECTIONS + MISCONCEPTIONS
+         ================================================================ */}
 
       <StageSection
         number="05"
-        navTitle="Identity Goals"
-        title="Identity Goals"
-        description="Organize who the customer wants to become, recover, protect, or stop being."
-      >
-        <StageGrid columns={3}>
-          <StageCard title="Identity Categories">
-            <StageList items={identityCategories} />
-          </StageCard>
-
-          <StageCard title="Identity Transitions">
-            <StageList items={identityExamples} />
-          </StageCard>
-
-          <StageCard title="What I Capture">
-            <StageList items={identityCapture} />
-          </StageCard>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="06"
         navTitle="Objections"
-        title="Objections and Perceived Risks"
-        description="Organize the reasons customers hesitate, delay, distrust, or reject the purchase."
+        title="Objections & Misconceptions"
+        description="Objections are the stated reasons customers hesitate. Misconceptions are inaccurate or limiting assumptions about the problem, category, or solution that can create hesitation."
       >
-        <StageGrid columns={2}>
-          <StageCard title="Common Objections">
-            <StageList items={objections} />
-          </StageCard>
+        <div className="insight-pair-grid">
+          <InsightPair
+            label="OBJECTIONS"
+            title="What stops or delays the purchase"
+            items={objections}
+          />
 
-          <StageCard title="Objection Record">
-            <StageList items={objectionRecord} />
-          </StageCard>
-        </StageGrid>
+          <InsightPair
+            label="MISCONCEPTIONS"
+            title="What they may misunderstand"
+            items={misconceptionSignals}
+          />
+        </div>
 
         <StageHighlight
-          title="Hidden Objections"
+          title="Evidence Rule"
           type="warning"
         >
           <p>
-            A stated price objection may actually mean the customer does not
-            trust the product will work. A request for more time may reflect
-            disappointment with previous solutions. Hidden objections remain
-            hypotheses until repeated evidence supports them.
+            A misconception is only treated as meaningful when customer
+            evidence supports it. I do not invent a hidden psychological
+            reason because it sounds persuasive.
           </p>
         </StageHighlight>
       </StageSection>
+
+      {/* ================================================================
+          06 — BELIEFS
+         ================================================================ */}
+
+      <StageSection
+        number="06"
+        navTitle="Beliefs"
+        title="Beliefs"
+        description="I map what customers already believe about the problem, possible solutions, the category, the brand, and themselves because those beliefs shape how new information is interpreted."
+      >
+        <div className="insight-beliefs-layout">
+          <article>
+            <span>EXISTING BELIEFS</span>
+            <StageList items={beliefSignals} />
+          </article>
+
+          <article className="insight-mass-desire-panel">
+            <span>BREAKTHROUGH ADVERTISING LENS — MASS DESIRE</span>
+            <p>
+              Advertising does not manufacture the market’s underlying
+              desire. It identifies and channels desires that already exist,
+              then connects them to the product.
+            </p>
+            <StageList items={massDesireLens} />
+          </article>
+        </div>
+
+        <div className="insight-belief-flow">
+          <span>Existing Belief</span>
+          <i>→</i>
+          <span>Evidence Behind It</span>
+          <i>→</i>
+          <span>What It Makes Them Accept / Reject</span>
+          <i>→</i>
+          <span>Proof Needed</span>
+        </div>
+      </StageSection>
+
+      {/* ================================================================
+          05 — FAILED ALTERNATIVES
+         ================================================================ */}
 
       <StageSection
         number="07"
-        navTitle="Beliefs"
-        title="Beliefs and Misconceptions"
-        description="Map what customers currently believe and what they must believe before purchasing."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Belief Categories">
-            <StageList items={beliefCategories} />
-          </StageCard>
-
-          <StageCard
-            title="Misconception Effects"
-            description="Misconceptions may weaken urgency, trust, product fit, or correct usage."
-          >
-            <StageList items={misconceptions} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight
-          title="Belief-Mapping Structure"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'Current Belief',
-              'Supporting Evidence',
-              'Why It Matters',
-              'Belief Needed',
-              'Required Proof',
-            ]}
-          />
-        </StageHighlight>
-      </StageSection>
-
-      <StageSection
-        number="08"
         navTitle="Failed Alternatives"
         title="Failed Alternatives"
-        description="Understand what customers tried, why it failed, and how that experience changed what they now require."
+        description="Previous failures shape what customers now distrust, expect, and require from the next solution."
       >
-        <StageGrid columns={2}>
-          <StageCard title="What I Capture">
-            <StageList items={failedAlternativeCapture} />
-          </StageCard>
-
-          <StageCard title="Creative Uses">
-            <StageList items={failedAlternativeUses} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight title="Failed-Alternative Structure">
+        <div className="insight-failed-alternative">
           <StageFlow
             items={[
               'Alternative Tried',
-              'Original Expectation',
+              'Expectation',
+              'What Happened',
               'Why It Failed',
-              'Emotional Consequence',
-              'New Buying Requirement',
+              'New Skepticism / Requirement',
             ]}
           />
-        </StageHighlight>
+        </div>
+
+        <div style={{ marginTop: '12px' }}>
+          <StageCard title="What I Extract">
+            <StageList items={failedAlternativeCapture} />
+          </StageCard>
+        </div>
       </StageSection>
 
+      {/* ================================================================
+          08 — BUYING TRIGGERS
+         ================================================================ */}
+
       <StageSection
-        number="09"
+        number="08"
         navTitle="Buying Triggers"
-        title="Buying Triggers and Moments of Urgency"
-        description="Identify the specific events that move customers from tolerating the problem to searching or purchasing."
+        title="Buying Triggers"
+        description="I identify the specific events or moments that move the customer from tolerating the problem to actively searching, comparing, or buying."
       >
-        <StageGrid columns={2}>
-          <StageCard title="Trigger Categories">
+        <div className="insight-trigger-grid is-single">
+          <article>
+            <span>WHAT TRIGGERS ACTION</span>
             <StageList items={buyingTriggers} />
-          </StageCard>
+          </article>
+        </div>
 
-          <StageCard title="What I Capture">
-            <StageList items={triggerCapture} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight title="Creative Use">
+        <StageHighlight title="Trigger Question">
           <p>
-            Buying triggers create concrete hooks, scenarios, narratives,
-            and situational concepts because they show the exact moment the
-            problem becomes difficult to ignore.
+            What happened right before the customer decided the problem
+            could no longer be ignored?
           </p>
         </StageHighlight>
       </StageSection>
+
+      {/* ================================================================
+          09 — BEHAVIORAL CONTEXT
+         ================================================================ */}
+
+      <StageSection
+        number="09"
+        navTitle="Behavioral Context"
+        title="Behavioral Context"
+        description="I capture the real-world situation around the problem so the insight stays connected to observable behavior instead of becoming an abstract label."
+      >
+        <div className="insight-trigger-grid is-single">
+          <article>
+            <span>WHAT I CAPTURE AROUND THE MOMENT</span>
+            <StageList items={behavioralContext} />
+          </article>
+        </div>
+
+        <div className="insight-trigger-example">
+          <span>EXAMPLE</span>
+          <strong>Hair covering the shower drain</strong>
+          <i>→</i>
+          <strong>Before getting ready for work</strong>
+          <i>→</i>
+          <strong>Anxiety / loss of control</strong>
+          <i>→</i>
+          <strong>Starts searching for a solution</strong>
+        </div>
+      </StageSection>
+
+      {/* ================================================================
+          07 — PROOF
+         ================================================================ */}
 
       <StageSection
         number="10"
         navTitle="Proof"
-        title="Proof Requirements and Trust Signals"
-        description="Organize what customers need to see, hear, or understand before believing the claim and feeling safe enough to buy."
+        title="Proof Requirements & Trust Signals"
+        description="I map what customers need to see, hear, or understand before a claim feels believable and the purchase feels safe."
       >
-        <StageGrid columns={2}>
-          <StageCard title="Types of Proof">
-            <StageList items={proofTypes} />
-          </StageCard>
+        <div className="insight-proof-layout">
+          <article>
+            <span>AVAILABLE PROOF TYPES</span>
 
-          <StageCard title="Proof Gaps">
-            <StageList items={proofGaps} />
-          </StageCard>
-        </StageGrid>
+            <div>
+              {proofTypes.map((item) => (
+                <strong key={item}>{item}</strong>
+              ))}
+            </div>
+          </article>
 
-        <StageHighlight
-          title="Proof-Mapping Structure"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'Claim or Doubt',
-              'Customer Uncertainty',
-              'Required Proof',
-              'Available Proof',
-              'Missing Proof',
-            ]}
-          />
-        </StageHighlight>
+          <article className="insight-proof-map">
+            <span>PROOF MAPPING</span>
+
+            <StageFlow
+              items={[
+                'Claim / Doubt',
+                'Customer Uncertainty',
+                'Proof Required',
+                'Proof Available',
+                'Proof Missing',
+              ]}
+            />
+          </article>
+        </div>
       </StageSection>
+
+      {/* ================================================================
+          08 — CUSTOMER LANGUAGE
+         ================================================================ */}
 
       <StageSection
         number="11"
         navTitle="Customer Language"
         title="Customer Language"
-        description="Organize the exact words customers use to describe problems, desires, beliefs, objections, experiences, and outcomes."
+        description="I preserve the exact words customers use instead of rewriting everything into marketing language too early."
       >
-        <StageGrid columns={3}>
-          <StageCard title="What I Collect">
-            <StageList items={customerLanguageCapture} />
-          </StageCard>
+        <div className="insight-language-record">
+          {customerLanguageFields.map((item, index) => (
+            <div key={item}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <strong>{item}</strong>
+            </div>
+          ))}
+        </div>
 
-          <StageCard title="Language Categories">
-            <StageList items={customerLanguageCategories} />
-          </StageCard>
-
-          <StageCard title="Future Uses">
-            <StageList items={customerLanguageUses} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight title="Language Preservation Rule">
+        <StageHighlight
+          title="Preservation Rule"
+          type="success"
+        >
           <p>
-            Every language record should preserve the exact wording, full
-            context, source, customer type, emotional tone, and relevant
-            insight category.
+            Quotes stay connected to their full context, source,
+            customer type, emotional tone, and repetition. The
+            customer’s wording is evidence — not just copy inspiration.
           </p>
         </StageHighlight>
       </StageSection>
+
+      {/* ================================================================
+          12 — LEVEL OF AWARENESS
+         ================================================================ */}
 
       <StageSection
         number="12"
-        navTitle="Use Context"
-        title="Use Context and Behavioral Moments"
-        description="Organize when, where, and how the problem appears in the customer’s real life."
+        navTitle="Level of Awareness"
+        title="Level of Awareness"
+        description="Awareness tells me how much the customer already understands. I match the amount of education, proof, differentiation, and offer emphasis to that starting point."
       >
-        <StageGrid columns={2}>
-          <StageCard title="What I Capture">
-            <StageList items={useContextCapture} />
-          </StageCard>
+        <div className="insight-market-system is-single">
+          <section>
+            <header>
+              <span>CUSTOMER AWARENESS</span>
+              <h3>What does the customer already know — and what should the message do?</h3>
+            </header>
 
-          <StageCard title="Behavioral-Moment Examples">
-            <StageList items={behavioralMoments} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight title="Creative Value">
-          <p>
-            Behavioral moments provide specific scenes, objects,
-            environments, opening situations, and relatable visual ideas
-            instead of abstract descriptions of the problem.
-          </p>
-        </StageHighlight>
+            <div>
+              {awarenessLevels.map((item) => (
+                <LevelRow
+                  key={item.level}
+                  level={item.level}
+                  knows={item.knows}
+                  implication={item.implication}
+                />
+              ))}
+            </div>
+          </section>
+        </div>
       </StageSection>
+
+      {/* ================================================================
+          13 — MARKET SOPHISTICATION
+         ================================================================ */}
 
       <StageSection
         number="13"
-        navTitle="Awareness"
-        title="Awareness and Sophistication Insights"
-        description="Organize how much customers understand and how exposed the market is to similar promises, mechanisms, and creative patterns."
+        navTitle="Market Sophistication"
+        title="Market Sophistication"
+        description="Sophistication tells me how many similar promises and mechanisms the market has already seen. The more sophisticated the market becomes, the harder generic positioning has to work."
       >
-        <StageGrid columns={2}>
-          <StageCard title="Awareness Levels">
-            {awarenessLevels.map((level) => (
-              <div
-                key={level.title}
-                style={{ marginBottom: '18px' }}
-              >
-                <strong
-                  style={{
-                    display: 'block',
-                    marginBottom: '5px',
-                    color: 'var(--stage-color)',
-                  }}
-                >
-                  {level.title}
-                </strong>
+        <div className="insight-market-system is-single">
+          <section>
+            <header>
+              <span>MARKET SOPHISTICATION</span>
+              <h3>How mature is the category — and how should positioning evolve?</h3>
+            </header>
 
-                <p
-                  style={{
-                    margin: 0,
-                    color: '#8390a3',
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {level.description}
-                </p>
-              </div>
-            ))}
-          </StageCard>
+            <div>
+              {sophisticationLevels.map((item) => (
+                <LevelRow
+                  key={item.level}
+                  level={item.level}
+                  knows={item.market}
+                  implication={item.implication}
+                />
+              ))}
+            </div>
+          </section>
+        </div>
 
-          <StageCard title="Sophistication Insights">
-            <StageList items={sophisticationInsights} />
-          </StageCard>
-        </StageGrid>
+        <div className="insight-positioning-rule">
+          <span>POSITIONING RULE</span>
+          <p>
+            As sophistication rises, move from a simple promise toward
+            greater specificity, a differentiated mechanism, stronger proof,
+            deeper mechanism detail, and eventually a fresh framing, story,
+            identity, experience, or way of understanding the problem.
+          </p>
+        </div>
       </StageSection>
+
+      {/* ================================================================
+          10 — MARKET GAPS
+         ================================================================ */}
 
       <StageSection
         number="14"
         navTitle="Market Gaps"
-        title="Competitor and Market Gaps"
-        description="Organize what competitors repeatedly communicate, what they ignore, and where credible whitespace may exist."
+        title="Market Gaps & Positioning Whitespace"
+        description="After understanding awareness and sophistication, I look for credible areas the market is overusing, ignoring, explaining badly, or failing to support with enough proof."
       >
-        <StageGrid columns={2}>
-          <StageCard title="What I Capture">
-            <StageList items={competitorGapCapture} />
-          </StageCard>
-
-          <StageCard title="Gap Types">
-            <StageList items={gapTypes} />
-          </StageCard>
-        </StageGrid>
+        <div className="insight-gap-grid">
+          {marketGapSignals.map((item, index) => (
+            <div key={item}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <strong>{item}</strong>
+            </div>
+          ))}
+        </div>
 
         <StageHighlight
-          title="Opportunity Standard"
+          title="Gap Standard"
           type="warning"
         >
           <p>
-            A gap is not automatically an opportunity. It must be relevant
-            to the customer, commercially useful, and credibly supportable
-            by the product.
+            A gap is only useful when it is relevant to the customer,
+            credibly supportable by the product, and meaningful enough
+            to create a differentiated position. “Nobody is saying it”
+            is not enough.
           </p>
         </StageHighlight>
       </StageSection>
+
+      {/* ================================================================
+          11 — HOOK INTELLIGENCE
+         ================================================================ */}
 
       <StageSection
         number="15"
         navTitle="Hook Intelligence"
-        title="Hook Intelligence Library"
-        description="Collect hook patterns discovered during research before final hooks are developed."
+        title="Hook Intelligence"
+        description="I organize attention patterns discovered during research without turning this stage into final hook writing."
       >
-        <StageGrid columns={2}>
-          <StageCard title="Hook Sources">
-            <StageList items={hookSources} />
-          </StageCard>
+        <div className="insight-hook-sources">
+          <span>WHERE HOOK SIGNALS COME FROM</span>
 
-          <StageCard title="Hook Record">
-            <StageList items={hookRecord} />
-          </StageCard>
-        </StageGrid>
-
-        <div style={{ marginTop: '12px' }}>
-          <StageGrid columns={2}>
-            <StageCard title="Verbal and Script Hooks">
-              <StageList items={verbalHooks} />
-            </StageCard>
-
-            <StageCard title="Visual Hooks">
-              <StageList items={visualHooks} />
-            </StageCard>
-
-            <StageCard title="Editing Hooks">
-              <StageList items={editingHooks} />
-            </StageCard>
-
-            <StageCard title="Structural Hooks">
-              <StageList items={structuralHooks} />
-            </StageCard>
-          </StageGrid>
+          <div>
+            {hookSources.map((item) => (
+              <strong key={item}>{item}</strong>
+            ))}
+          </div>
         </div>
 
-        <StageHighlight title="Important Boundary">
+        <div className="insight-hook-grid">
+          {hookTypes.map((group) => (
+            <article key={group.title}>
+              <span>{group.title}</span>
+              <StageList items={group.items} />
+            </article>
+          ))}
+        </div>
+
+        <StageHighlight title="Boundary">
           <p>
-            This library stores potentially useful patterns. Final hooks are
-            written later during Concept Development and must be adapted to
-            the selected persona, angle, concept, and execution.
+            This is an intelligence library of repeated attention
+            patterns. Final hooks are developed later around the
+            selected persona, angle, concept, and execution.
           </p>
         </StageHighlight>
       </StageSection>
+
+      {/* ================================================================
+          12 — PATTERNS — FINAL
+         ================================================================ */}
 
       <StageSection
         number="16"
         navTitle="Patterns"
         title="Pattern Recognition"
-        description="Identify repeated relationships, behavior, emotional tensions, market responses, and performance signals."
+        description="This is the final synthesis step. After individual insights are extracted, I look across the full evidence base for signals that repeatedly appear in different sources and categories."
       >
-        <StageGrid columns={3}>
-          <StageCard title="Customer Patterns">
-            <StageList items={customerPatterns} />
-          </StageCard>
+        <div className="insight-pattern-convergence">
+          <div className="insight-pattern-inputs">
+            {[
+              'Pain',
+              'Outcomes',
+              'Emotion',
+              'Identity',
+              'Objections',
+              'Beliefs',
+              'Failed Alternatives',
+              'Triggers',
+              'Proof',
+              'Language',
+              'Market Gaps',
+              'Hook Signals',
+            ].map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
 
-          <StageCard title="Product Patterns">
-            <StageList items={productPatterns} />
-          </StageCard>
+          <div className="insight-pattern-arrow">
+            →
+          </div>
 
-          <StageCard title="Competitor Patterns">
-            <StageList items={competitorPatterns} />
-          </StageCard>
+          <div className="insight-pattern-core">
+            <small>FINAL SYNTHESIS</small>
+            <strong>Repeated Patterns</strong>
+            <p>
+              The strongest signals are the ones that repeat across
+              multiple sources, insight categories, customer behavior,
+              market evidence, or real performance.
+            </p>
+          </div>
+        </div>
 
-          <StageCard title="Creative Patterns">
-            <StageList items={creativePatterns} />
-          </StageCard>
+        <div className="insight-pattern-grid">
+          <InsightPair
+            label="CUSTOMER"
+            title="Customer Patterns"
+            items={customerPatterns}
+          />
 
-          <StageCard title="Performance Patterns">
-            <StageList items={performancePatterns} />
-          </StageCard>
+          <InsightPair
+            label="PRODUCT"
+            title="Product Patterns"
+            items={productPatterns}
+          />
 
-          <StageCard title="Pattern Quality">
+          <InsightPair
+            label="MARKET"
+            title="Market Patterns"
+            items={marketPatterns}
+          />
+
+          <InsightPair
+            label="PERFORMANCE"
+            title="Creative / Performance Patterns"
+            items={creativePerformancePatterns}
+          />
+        </div>
+
+        <div className="insight-pattern-bottom">
+          <article>
+            <span>TENSIONS & CONTRADICTIONS</span>
+            <StageList items={tensions} />
+          </article>
+
+          <article>
+            <span>WHAT MAKES A PATTERN STRONG</span>
             <StageList items={patternQuality} />
-          </StageCard>
-        </StageGrid>
-
-        <div style={{ marginTop: '12px' }}>
-          <StageCard
-            title="Pattern Record"
-            description="Every meaningful pattern should preserve the evidence, interpretation, and confidence behind it."
-          >
-            <StageList items={patternRecord} />
-          </StageCard>
+          </article>
         </div>
 
         <StageHighlight
-          title="Pattern Example"
+          title="Transition"
           type="success"
         >
           <p>
-            Customers may not describe joint improvement as “less pain.”
-            They may describe climbing stairs, walking longer, jumping onto
-            beds, or playing again. The strategic implication is that visible
-            behavioral transformation may communicate the benefit more
-            powerfully than abstract pain-reduction language.
-          </p>
-        </StageHighlight>
-      </StageSection>
-
-      <StageSection
-        number="17"
-        navTitle="Tensions"
-        title="Tensions and Contradictions"
-        description="Organize conflicts between what customers want, fear, believe, say, and do."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Common Tensions">
-            <StageList items={commonTensions} />
-          </StageCard>
-
-          <StageCard title="Why Tensions Matter">
-            <StageList items={tensionValue} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight title="Strategic Value">
-          <p>
-            Tensions often produce stronger insights than simple categories
-            because they reveal why the decision feels difficult and what
-            the message, proof, or offer must resolve.
-          </p>
-        </StageHighlight>
-      </StageSection>
-
-      <StageSection
-        number="18"
-        navTitle="Implications"
-        title="Strategic Implications and Creative Opportunities"
-        description="Translate the strongest patterns into decisions and opportunity territories."
-      >
-        <StageGrid columns={3}>
-          <StageCard title="Questions Every Insight Must Answer">
-            <StageList
-              items={implicationQuestions}
-              ordered
-            />
-          </StageCard>
-
-          <StageCard title="Possible Strategic Implications">
-            <StageList items={strategicImplications} />
-          </StageCard>
-
-          <StageCard title="Creative Opportunity Record">
-            <StageList items={creativeOpportunityRecord} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight
-          title="Insight-to-Opportunity Chain"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'Validated Insight',
-              'Strategic Implication',
-              'Persona Input',
-              'Angle Territory',
-              'Concept Opportunity',
-            ]}
-          />
-        </StageHighlight>
-      </StageSection>
-
-      <StageSection
-        number="19"
-        navTitle="Insight System"
-        title="Insight Organization System"
-        description="Store each insight with enough evidence, interpretation, and status information to support future decisions."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Insight Record Fields">
-            <StageList items={insightRecord} />
-          </StageCard>
-
-          <StageCard title="Suggested Statuses">
-            <StageList items={insightStatuses} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight title="System Logic">
-          <p>
-            The system should connect evidence to patterns, interpretations,
-            implications, and opportunities. Isolated categories should not
-            be presented as final strategic answers without showing how they
-            influence the next creative decision.
+            The strongest validated patterns become high-confidence
+            inputs for Persona Mapping and Angle Development. This
+            stage stops here.
           </p>
         </StageHighlight>
       </StageSection>

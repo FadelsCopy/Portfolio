@@ -1,9 +1,7 @@
 // src/components/Research.jsx
 
 import StageDeepDiveLayout, {
-  StageCard,
   StageFlow,
-  StageGrid,
   StageHighlight,
   StageList,
   StageSection,
@@ -11,69 +9,321 @@ import StageDeepDiveLayout, {
 
 /*
 |--------------------------------------------------------------------------
-| DOCUMENT-GROUNDED RESEARCH ENGINE DATA
+| PRACTICAL RESEARCH ENGINE DATA
 |--------------------------------------------------------------------------
 */
 
-const researchOutputs = [
-  'Brand, product, customer, competitor, market, offer, funnel, creative, trend, and first-party evidence',
-  'Voice-of-customer language with its source and original context',
-  'Research records classified by fact, customer belief, interpretation, and verification status',
-  'Structured evidence prepared for Insight Synthesis',
+const customerSources = [
+  'Reddit communities and threads',
+  'Trustpilot',
+  'Amazon and retailer reviews',
+  'YouTube comments',
+  'TikTok comments',
+  'Instagram comments',
+  'Facebook Groups and comments',
+  'Quora and niche forums',
+  'Customer interviews',
+  'Surveys and post-purchase surveys',
+  'Support tickets and live chat',
+  'Refund, return, and cancellation responses',
+  'Competitor reviews',
 ];
 
-const researchSops = [
-  {
-    title: 'Research Capture and Tagging',
-    description:
-      'Defines what evidence should be saved, how sources are preserved, and how every quote, screenshot, ad, and observation is tagged for later use.',
-  },
-  {
-    title: 'Customer Review Mining',
-    description:
-      'Explains how to research brand and competitor reviews across Trustpilot, Amazon, retailer sites, and product pages while separating useful evidence from generic feedback.',
-  },
-  {
-    title: 'Reddit and Community Mining',
-    description:
-      'Provides a repeatable method for finding relevant threads, reading deeper comments, capturing complete customer stories, and validating patterns across communities.',
-  },
-  {
-    title: 'Social Comment Mining',
-    description:
-      'Explains how to research comments beneath ads, creator posts, demonstrations, and organic content to identify objections, questions, skepticism, and buying intent.',
-  },
-  {
-    title: 'Organic Short-Form Research',
-    description:
-      'Covers how to navigate TikTok, Instagram Reels, and YouTube Shorts to find useful hooks, topics, formats, visual devices, and customer reactions.',
-  },
-  {
-    title: 'Competitor Ad Research',
-    description:
-      'Defines how to find, tag, deconstruct, and compare competitor ads across Meta, TikTok, YouTube, and creative-intelligence tools.',
-  },
-  {
-    title: 'Native Image and Visual Mining',
-    description:
-      'Explains how to find authentic problem, product, customer, review, and lifestyle visuals while preserving their source and intended strategic use.',
-  },
-  {
-    title: 'Advertorial and Listicle Research',
-    description:
-      'Covers how to locate and analyze article-style funnels across social ads, search, affiliate publishers, native advertising networks, and competitor destinations.',
-  },
-  {
-    title: 'Competitor Funnel and Offer Audit',
-    description:
-      'Provides a consistent method for comparing landing pages, product pages, quizzes, advertorials, listicles, pricing, bundles, guarantees, and funnel structure.',
-  },
-  {
-    title: 'Research Quality Control',
-    description:
-      'Defines the final checks for source traceability, evidence quality, duplicate removal, claim verification, research gaps, and readiness for Insight Synthesis.',
-  },
+const customerSignals = [
+  'Exact customer language',
+  'Pain points and frustrations',
+  'Desired outcomes',
+  'Emotional desires',
+  'Objections and skepticism',
+  'Failed alternatives',
+  'Buying triggers',
+  'Reasons for delaying purchase',
+  'Trust requirements',
+  'Questions customers repeatedly ask',
+  'Before-and-after states',
+  'Identity and lifestyle language',
+  'Unexpected product benefits',
+  'Reasons customers refund or stop using a solution',
 ];
+
+const productBrandSources = [
+  'Brand website and homepage',
+  'Product pages and FAQs',
+  'Landing pages',
+  'Advertorials and listicles',
+  'Email and SMS campaigns',
+  'Founder interviews and podcasts',
+  'Founder / brand organic content',
+  'Product documentation',
+  'Packaging and inserts',
+  'Scientific or technical support',
+  'Testimonials and demonstrations',
+  'Existing creative briefs',
+  'Previous research and internal marketing documents',
+];
+
+const productBrandSignals = [
+  'Core promise and positioning',
+  'Product mechanism',
+  'Verified product facts',
+  'Features and functional benefits',
+  'Emotional benefits and desired outcomes',
+  'Claims and level of support',
+  'Proof and trust assets',
+  'Guarantees and risk reversal',
+  'Main use cases',
+  'Product limitations',
+  'Differentiators',
+  'Underused founder, customer, or product stories',
+  'Repeated messages across the brand',
+  'Restricted claims or compliance boundaries',
+];
+
+const competitorSources = [
+  'Competitor websites and product pages',
+  'Competitor landing pages and funnels',
+  'Competitor reviews',
+  'Meta Ad Library',
+  'TikTok Creative Center / TikTok One Inspiration',
+  'Google Ads Transparency Center',
+  'YouTube ads and organic content',
+  'Competitor email campaigns',
+  'Competitor organic social',
+  'Affiliate, comparison, and review publishers',
+  'Direct competitors',
+  'Indirect alternatives',
+  'Same-avatar brands',
+];
+
+const competitorSignals = [
+  'Positioning',
+  'Core promises',
+  'Problem and desire framing',
+  'Mechanisms',
+  'Claims and proof',
+  'Objection handling',
+  'Pricing, bundles, guarantees, and offers',
+  'Dominant angles',
+  'Repeated creative concepts',
+  'Category conventions',
+  'Customer praise and complaints',
+  'Saturated promises',
+  'Overused creative styles',
+  'Credible differentiation opportunities',
+  'Market skepticism and trust barriers',
+];
+
+const creativeTools = [
+  'Aetheria',
+  'Foreplay',
+  'TrendTrack',
+  'GetHooked AI',
+  'Meta Ad Library',
+  'TikTok Creative Center / TikTok One Inspiration',
+  'Google Ads Transparency Center',
+  'YouTube',
+  'TikTok organic',
+  'Instagram Reels',
+  'Competitor social accounts',
+  'Creator partnership posts',
+];
+
+const creativeSignals = [
+  'Angle',
+  'Concept',
+  'Hook',
+  'Opening visual',
+  'Format',
+  'Creator type',
+  'Core argument',
+  'Mechanism',
+  'Proof device',
+  'Objection handling',
+  'Offer',
+  'CTA',
+  'Editing and pacing',
+  'Visual device',
+  'Landing-page destination',
+  'Comments and customer reaction',
+  'Repeated variations and creative families',
+];
+
+const funnelSources = [
+  'Product pages',
+  'Dedicated landing pages',
+  'Advertorials',
+  'Listicles',
+  'Quizzes',
+  'Comparison pages',
+  'VSLs',
+  'Checkout flows',
+  'Post-purchase upsells',
+  'Email follow-up',
+  'Retargeting sequences',
+  'Competitor funnels',
+];
+
+const funnelSignals = [
+  'Entry angle',
+  'Headline and lead',
+  'Problem framing',
+  'Story',
+  'Mechanism explanation',
+  'Product reveal',
+  'Proof sequence',
+  'Objection handling',
+  'Offer presentation',
+  'Guarantee',
+  'CTA placement',
+  'Message match from ad to destination',
+  'How much education cold traffic receives',
+];
+
+const socialSources = [
+  'TikTok',
+  'Instagram Reels',
+  'YouTube Shorts',
+  'Reddit',
+  'Creator accounts',
+  'Founder accounts',
+  'Competitor organic accounts',
+  'Niche educators',
+  'Review creators',
+  'Podcast clips',
+  'Product demonstrations',
+  'Trending search and social topics',
+];
+
+const socialSignals = [
+  'Opening lines and first frames',
+  'Native visual hooks',
+  'Recurring questions',
+  'Controversial opinions',
+  'Demonstrations',
+  'Customer stories',
+  'Creator delivery style',
+  'Pacing and editing patterns',
+  'On-screen text and captions',
+  'Comments, saves, and shares',
+  'Recurring topics',
+  'Emerging customer language',
+  'Native problem-state and desired-outcome imagery',
+  'New creator formats',
+  'Relevant category or cultural trends',
+];
+
+const firstPartySources = [
+  'Customer reviews',
+  'Post-purchase surveys',
+  'Customer interviews',
+  'Support tickets',
+  'Live chats',
+  'Email conversations',
+  'Refund requests',
+  'Return reasons',
+  'Cancellation surveys',
+  'Guarantee claims',
+  'Quiz responses',
+  'Sales calls',
+  'Testimonial interviews',
+  'Subscription and repeat-purchase data',
+  'Existing ad performance',
+  'Landing-page performance',
+];
+
+const firstPartySignals = [
+  'Why customers buy',
+  'Why customers hesitate',
+  'Why customers refund',
+  'Expectation gaps',
+  'Repeated questions',
+  'Product confusion',
+  'Common complaints',
+  'Unexpected benefits',
+  'Strongest testimonials',
+  'High-value customer groups',
+  'Repeat-purchase patterns',
+  'Differences between intended and actual customers',
+  'Messages linked to strong or weak performance',
+];
+
+const captureFields = [
+  'Exact quote or observation',
+  'Source',
+  'URL',
+  'Screenshot when useful',
+  'Date collected',
+  'Context',
+  'Research category',
+  'Relevant customer / product / competitor',
+  'Fact, customer belief, or interpretation',
+  'Verification status',
+];
+
+const verificationStates = [
+  'Verified fact',
+  'Customer-reported experience',
+  'Repeated pattern',
+  'Needs verification',
+  'Interpretation / hypothesis',
+  'Duplicate / archived',
+];
+
+const researchOutputs = [
+  'Source-backed customer and Voice-of-Customer evidence',
+  'Product and brand evidence',
+  'Competitor and market evidence',
+  'Creative and funnel references',
+  'Social, native, and trend observations',
+  'First-party evidence',
+  'Traceable research records ready for Insight Synthesis',
+];
+
+/*
+|--------------------------------------------------------------------------
+| SMALL COMPONENTS
+|--------------------------------------------------------------------------
+*/
+
+function ResearchPair({
+  sourceTitle = 'Where I Look',
+  signalTitle = 'What I Look For',
+  sources,
+  signals,
+  className = '',
+}) {
+  return (
+    <div className={`research-practical-pair ${className}`}>
+      <article className="research-practical-panel is-sources">
+        <header>
+          <span>SOURCES</span>
+          <h3>{sourceTitle}</h3>
+        </header>
+
+        <StageList items={sources} />
+      </article>
+
+      <article className="research-practical-panel is-signals">
+        <header>
+          <span>SIGNALS</span>
+          <h3>{signalTitle}</h3>
+        </header>
+
+        <StageList items={signals} />
+      </article>
+    </div>
+  );
+}
+
+function ToolCloud({ tools }) {
+  return (
+    <div className="research-tool-cloud">
+      {tools.map((tool) => (
+        <span key={tool}>{tool}</span>
+      ))}
+    </div>
+  );
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -86,1089 +336,298 @@ export default function Research({ stage, onBack }) {
     <StageDeepDiveLayout
       stage={stage}
       onBack={onBack}
-      eyebrow="RESEARCH ENGINE"
-      title="Research Engine"
-      introduction="Before developing personas, angles, hooks, or concepts, I collect evidence across the brand, product, customer, competitors, market, offers, creative, social platforms, trends, and first-party data."
+      eyebrow="MARKET INTELLIGENCE"
+      title="Research"
+      introduction="I collect source-backed evidence across customers, the product, competitors, creative, funnels, social platforms, and first-party data. The goal here is simple: know where to look, know what to look for, preserve the original context, and hand clean evidence into Insight Synthesis."
       process={[
+        'Define Sources',
         'Collect Evidence',
-        'Preserve Sources',
-        'Organize',
+        'Preserve Context',
         'Verify',
-        'Prepare for Insight Synthesis',
+        'Move to Insight Synthesis',
       ]}
-      outputs={researchOutputs}
-      outputTitle="Structured Research Evidence"
-      sops={researchSops}
-      sopDescription="The Research SOP Library defines how evidence is collected, preserved, classified, verified, and prepared for Insight Synthesis."
     >
       {/* ================================================================
-          01. BRAND RESEARCH
-          ================================================================ */}
+          01 — CUSTOMER + VOC
+         ================================================================ */}
 
       <StageSection
         number="01"
-        navTitle="Brand"
-        title="Brand Research"
-        description="I study the brand to understand how it currently presents the product, customer, problem, solution, and offer."
+        navTitle="Customer & VOC"
+        title="Customer & Voice-of-Customer Research"
+        description="If I want to know how customers actually think and speak, I go where they describe the problem, compare solutions, complain, ask questions, and explain why they bought."
       >
-        <StageGrid columns={3}>
-          <StageCard title="Sources">
-            <StageList
-              items={[
-                'Brand website',
-                'Homepage',
-                'Product pages',
-                'Landing pages',
-                'About page',
-                'FAQ',
-                'Blog',
-                'Advertorials and listicles',
-                'Quizzes',
-                'Email campaigns',
-                'SMS campaigns',
-                'Organic social accounts',
-                'YouTube channel',
-                'Founder videos',
-                'Founder interviews',
-                'Podcast appearances',
-                'Webinars',
-                'Packaging',
-                'Product inserts',
-                'Brand guidelines',
-                'Previous research',
-                'Existing creative briefs',
-                'Internal marketing documents',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard title="What I Examine">
-            <StageList
-              items={[
-                'Brand story',
-                'Founder story',
-                'Positioning',
-                'Core promise',
-                'Value proposition',
-                'Brand voice',
-                'Messaging pillars',
-                'Current target customer',
-                'Existing personas',
-                'Main claims',
-                'Product mechanism',
-                'Proof',
-                'Guarantees',
-                'Visual identity',
-                'Repeated messages',
-                'Restricted claims',
-                'Underused brand assets',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard title="What I Am Looking For">
-            <StageList
-              items={[
-                'What the brand wants to be known for',
-                'How it currently explains the problem',
-                'How it explains why the product works',
-                'Which benefits it emphasizes',
-                'Which proof it relies on',
-                'What is consistent across ads, website, emails, and organic content',
-                'What customers care about that the brand currently underuses',
-                'What the brand says repeatedly without enough evidence',
-                'Strong founder, product, or customer stories that have not been used creatively',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
-      </StageSection>
-
-      {/* ================================================================
-          02. PRODUCT RESEARCH
-          ================================================================ */}
-
-      <StageSection
-        number="02"
-        navTitle="Product"
-        title="Product Research"
-        description="I study the product deeply enough to understand what it does, how it works, why it is different, and which parts can support credible creative."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="What I Examine">
-            <StageList
-              items={[
-                'Product function',
-                'Features',
-                'Functional benefits',
-                'Emotional benefits',
-                'Desired outcomes',
-                'Main use cases',
-                'Product mechanism',
-                'Ingredients or materials',
-                'Formulation',
-                'Dosage or usage',
-                'Time to expected result',
-                'Unique features',
-                'Product limitations',
-                'Who it is for',
-                'Who it is not for',
-                'Manufacturing and sourcing',
-                'Certifications',
-                'Testing',
-                'Patents',
-                'Product-development story',
-                'Product demonstrations',
-                'Before-and-after evidence',
-                'Testimonials',
-                'Scientific or technical support',
-                'Frequently asked questions',
-                'Common misuse or misunderstanding',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard title="Evidence Classification">
-            <StageList
-              items={[
-                'Verified product facts',
-                'Legally supported claims',
-                'Customer-reported experiences',
-                'Brand interpretations',
-                'Strategic hypotheses',
-                'Claims requiring further verification',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
+        <ResearchPair
+          sources={customerSources}
+          signals={customerSignals}
+        />
 
         <StageHighlight
-          title="Product Research Rule"
-          type="warning"
-        >
-          <p>
-            Attractive marketing ideas should not be presented as proven
-            product facts. Every claim and mechanism must be classified by
-            its actual level of support.
-          </p>
-        </StageHighlight>
-      </StageSection>
-
-      {/* ================================================================
-          03. CUSTOMER RESEARCH
-          ================================================================ */}
-
-      <StageSection
-        number="03"
-        navTitle="Customer"
-        title="Customer Research"
-        description="I study the situations, behaviors, motivations, and decision-making process of the people the brand wants to reach."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="What I Examine">
-            <StageList
-              items={[
-                'Who experiences the problem',
-                'When the problem becomes noticeable',
-                'How the problem affects daily life',
-                'What causes the customer to start searching',
-                'What they have already tried',
-                'How they evaluate possible solutions',
-                'What they fear',
-                'What they want to achieve',
-                'What creates urgency',
-                'What delays the purchase',
-                'What they need to believe',
-                'What proof they require',
-                'Who influences the decision',
-                'What content they consume',
-                'Where they search for information',
-                'What happens before, during, and after the purchase',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard title="Customer Context">
-            <StageList
-              items={[
-                'Problem state',
-                'Desired state',
-                'Awareness level',
-                'Level of urgency',
-                'Use case',
-                'Life stage',
-                'Buying situation',
-                'Previous experience',
-                'Existing habits',
-                'Budget sensitivity',
-                'Trust level',
-                'Decision criteria',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight title="Boundary">
-          <p>
-            Formal personas are created later. Customer Research collects the
-            evidence needed to build them.
-          </p>
-        </StageHighlight>
-      </StageSection>
-
-      {/* ================================================================
-          04. VOICE OF CUSTOMER
-          ================================================================ */}
-
-      <StageSection
-        number="04"
-        navTitle="Voice of Customer"
-        title="Voice-of-Customer Research"
-        description="I collect the customer’s exact language instead of relying only on how the brand describes the problem."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Sources">
-            <StageList
-              items={[
-                'Brand reviews',
-                'Trustpilot',
-                'Amazon',
-                'Retailer reviews',
-                'Product Q&A sections',
-                'Reddit',
-                'Quora',
-                'Niche forums',
-                'Facebook Groups',
-                'Social comments',
-                'Customer interviews',
-                'Testimonial calls',
-                'Surveys',
-                'Support tickets',
-                'Refund requests',
-                'Cancellation responses',
-                'Competitor reviews',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard title="What I Capture">
-            <StageList
-              items={[
-                'Exact quote',
-                'Source',
-                'Link or screenshot',
-                'Customer situation',
-                'Problem described',
-                'Desired outcome',
-                'Failed alternative',
-                'Objection',
-                'Buying trigger',
-                'Result',
-                'Emotional language',
-                'Important context',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
-
-        <div style={{ marginTop: '12px' }}>
-          <StageGrid columns={3}>
-            <StageCard title="Positive Reviews Reveal">
-              <StageList
-                items={[
-                  'Desired outcomes',
-                  'Strongest benefits',
-                  'Transformation language',
-                  'Reasons customers recommend the product',
-                  'Unexpected positive outcomes',
-                ]}
-              />
-            </StageCard>
-
-            <StageCard title="Balanced Reviews Reveal">
-              <StageList
-                items={[
-                  'What worked',
-                  'What was missing',
-                  'Product limitations',
-                  'Expectation gaps',
-                  'Situations where the product is useful',
-                ]}
-              />
-            </StageCard>
-
-            <StageCard title="Negative Reviews Reveal">
-              <StageList
-                items={[
-                  'Frustrations',
-                  'Failed expectations',
-                  'Objections',
-                  'Product weaknesses',
-                  'Trust issues',
-                  'Refund reasons',
-                  'Reasons customers stop using the product',
-                ]}
-              />
-            </StageCard>
-          </StageGrid>
-        </div>
-
-        <StageHighlight
-          title="Collection Standard"
+          title="How I Get Customer Voice"
           type="success"
         >
           <p>
-            The objective is not to copy every comment. It is to collect
-            repeated, emotionally meaningful, and strategically useful
-            language.
+            I collect exact customer language from places such as Reddit,
+            Trustpilot, Amazon and retailer reviews, YouTube comments,
+            TikTok and Instagram comments, surveys, interviews, support
+            conversations, refund reasons, and competitor reviews. I keep
+            the original wording and its context instead of paraphrasing it
+            during collection.
           </p>
         </StageHighlight>
       </StageSection>
 
       {/* ================================================================
-          05. DIRECT COMPETITORS
-          ================================================================ */}
+          02 — PRODUCT + BRAND
+         ================================================================ */}
 
       <StageSection
-        number="05"
-        navTitle="Direct Competitors"
-        title="Direct Competitor Research"
-        description="Direct competitors sell a similar product or solution to a similar customer."
+        number="02"
+        navTitle="Product & Brand"
+        title="Product & Brand Research"
+        description="I research what the product can credibly say, what the brand already owns, and which useful facts, proof, stories, and messages already exist internally."
       >
-        <StageGrid columns={2}>
-          <StageCard title="What I Examine">
-            <StageList
-              items={[
-                'Positioning',
-                'Target customer',
-                'Core promise',
-                'Hero product',
-                'Product mechanism',
-                'Features and benefits',
-                'Claims',
-                'Proof',
-                'Price',
-                'Bundles',
-                'Subscription',
-                'Guarantee',
-                'Offers',
-                'Product pages',
-                'Landing pages',
-                'Advertorials',
-                'Listicles',
-                'Quizzes',
-                'Emails',
-                'Organic content',
-                'Paid ads',
-                'Creators',
-                'Formats',
-                'Hooks',
-                'Angles',
-                'Visual identity',
-                'Reviews',
-                'Complaints',
-                'Strengths',
-                'Weaknesses',
-              ]}
-            />
-          </StageCard>
+        <ResearchPair
+          sources={productBrandSources}
+          signals={productBrandSignals}
+        />
 
-          <StageCard title="Questions I Answer">
-            <StageList
-              items={[
-                'What does the competitor want to own in the customer’s mind?',
-                'Which problem or desire does it lead with?',
-                'How does it explain why its product works?',
-                'What proof does it use?',
-                'Which objections does it handle?',
-                'What do customers praise?',
-                'What do customers criticize?',
-                'Which messages and concepts appear repeatedly?',
-                'Which promises dominate the category?',
-                'What has the competitor failed to communicate?',
-                'Where can the brand differentiate credibly?',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
-      </StageSection>
-
-      {/* ================================================================
-          06. INDIRECT AND SAME-AVATAR COMPETITORS
-          ================================================================ */}
-
-      <StageSection
-        number="06"
-        navTitle="Indirect Competitors"
-        title="Indirect and Same-Avatar Competitor Research"
-        description="Not every competitor sells the same product. Some solve the same problem differently, while others sell different products to the same type of customer."
-      >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Indirect Competitors"
-            description="These solve the same underlying problem through a different solution."
-          >
-            <StageList
-              items={[
-                'Supplements versus topical products',
-                'At-home products versus professional treatment',
-                'Natural solutions versus prescription solutions',
-                'Products versus services',
-                'Premium solutions versus low-cost alternatives',
-                'The product versus doing nothing',
-                'Why customers choose the alternative',
-                'What they believe about it',
-                'What they like',
-                'What frustrates them',
-                'Why they abandon it',
-                'What prevents them from switching',
-                'What promise the alternative owns',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard
-            title="Same-Avatar Competitors"
-            description="These sell a different product to the same type of customer."
-          >
-            <StageList
-              items={[
-                'Emotional desires that resonate with the audience',
-                'Identity-based messaging',
-                'Fears and frustrations',
-                'Visual styles',
-                'Creators who build trust',
-                'Formats that attract attention',
-                'Offers the customer already responds to',
-                'Content the audience watches, saves, and shares',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
-      </StageSection>
-
-      {/* ================================================================
-          07. MARKET RESEARCH
-          ================================================================ */}
-
-      <StageSection
-        number="07"
-        navTitle="Market"
-        title="Market Research"
-        description="I study the wider category to understand what customers already know, believe, expect, and distrust."
-      >
-        <StageGrid columns={3}>
-          <StageCard title="What I Examine">
-            <StageList
-              items={[
-                'Main category players',
-                'Major customer groups',
-                'Common use cases',
-                'Standard product features',
-                'Typical prices',
-                'Common offers',
-                'Common guarantees',
-                'Dominant promises',
-                'Popular mechanisms',
-                'Customer expectations',
-                'Category skepticism',
-                'Trust barriers',
-                'Seasonal demand',
-                'New solutions',
-                'Emerging product types',
-                'Cultural changes',
-                'Regulatory conditions',
-                'Overused claims',
-                'Overused creative styles',
-                'Unmet expectations',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard title="Customer Awareness">
-            <StageList
-              ordered
-              items={[
-                'Unaware',
-                'Problem-aware',
-                'Solution-aware',
-                'Product-aware',
-                'Most aware',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard title="Market Sophistication">
-            <StageList
-              items={[
-                'How many similar promises the customer has already seen',
-                'Whether simple claims still feel believable',
-                'Whether the market requires stronger proof',
-                'Whether competitors are using increasingly specific mechanisms',
-                'Whether the category needs a new explanation, positioning, or creative format',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
-      </StageSection>
-
-      {/* ================================================================
-          08. OFFER AND FUNNEL
-          ================================================================ */}
-
-      <StageSection
-        number="08"
-        navTitle="Offer & Funnel"
-        title="Offer and Funnel Research"
-        description="I study how products are packaged, presented, and sold across the brand and its competitors."
-      >
-        <StageGrid columns={3}>
-          <StageCard title="Offer Elements">
-            <StageList
-              items={[
-                'Price',
-                'Bundles',
-                'Subscription',
-                'Discounts',
-                'Free gifts',
-                'Bonuses',
-                'Guarantee',
-                'Trial period',
-                'Free shipping',
-                'Quantity breaks',
-                'Urgency',
-                'Scarcity',
-                'Upsells',
-                'Cross-sells',
-                'Payment options',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard title="Funnel Elements">
-            <StageList
-              items={[
-                'Ad',
-                'Product page',
-                'Dedicated landing page',
-                'Advertorial',
-                'Listicle',
-                'Quiz',
-                'Comparison page',
-                'Video sales letter',
-                'Checkout',
-                'Post-purchase upsell',
-                'Email follow-up',
-                'Retargeting',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard title="What I Examine">
-            <StageList
-              items={[
-                'Entry angle',
-                'Headline',
-                'Lead',
-                'Problem framing',
-                'Story',
-                'Mechanism',
-                'Product reveal',
-                'Proof sequence',
-                'Objection handling',
-                'Offer presentation',
-                'Guarantee',
-                'CTA placement',
-                'Message match between the ad and destination page',
-                'Whether the funnel gives cold traffic enough education',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight title="Funnel Sequence">
-          <StageFlow
-            items={[
-              'Ad',
-              'Entry Angle',
-              'Page Lead',
-              'Mechanism',
-              'Proof',
-              'Offer',
-              'CTA',
-            ]}
-          />
+        <StageHighlight
+          title="Evidence Rule"
+          type="warning"
+        >
+          <p>
+            I separate verified product facts and supported claims from
+            customer-reported experiences, brand interpretations, and ideas
+            that still require verification.
+          </p>
         </StageHighlight>
       </StageSection>
 
       {/* ================================================================
-          09. ADVERTORIAL AND LISTICLE
-          ================================================================ */}
+          03 — COMPETITOR + MARKET
+         ================================================================ */}
 
       <StageSection
-        number="09"
-        navTitle="Advertorials"
-        title="Advertorial and Listicle Research"
-        description="I study advertorials and listicles as complete persuasion systems—not only as landing pages."
+        number="03"
+        navTitle="Competitors & Market"
+        title="Competitor & Market Research"
+        description="I look beyond direct competitors. I also study alternative solutions and brands speaking to the same avatar so I can understand the full messaging environment the customer is exposed to."
       >
-        <StageGrid columns={2}>
-          <StageCard title="Where I Find Them">
-            <StageList
-              items={[
-                'Competitor Meta ads and destination pages',
-                'TikTok and YouTube ad destinations',
-                'Google search and display placements',
-                'Brand email promotions',
-                'Affiliate sites',
-                'Review and comparison publishers',
-                'Native advertising networks',
-                'Content-recommendation placements',
-                'Ad-intelligence and swipe tools',
-                'Competitor website archives',
-                'Search queries around reviews, alternatives, comparisons, and best products',
-              ]}
-            />
-          </StageCard>
+        <ResearchPair
+          sources={competitorSources}
+          signals={competitorSignals}
+        />
 
-          <StageCard title="What I Save">
-            <StageList
-              items={[
-                'Traffic source or platform',
-                'Ad headline',
-                'Thumbnail',
-                'Destination URL',
-                'Page type',
-                'Entry angle',
-                'Persona',
-                'Awareness level',
-                'Core promise',
-                'Mechanism',
-                'Proof',
-                'Offer',
-                'CTA',
-                'Screenshots',
-                'Ideas worth investigating',
-                'Weaknesses and opportunities',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
+        <div className="research-competitor-types">
+          <div>
+            <span>DIRECT</span>
+            <strong>Same / similar solution</strong>
+          </div>
 
-        <div style={{ marginTop: '12px' }}>
-          <StageGrid columns={2}>
-            <StageCard title="Advertorial Research">
-              <StageList
-                items={[
-                  'Headline',
-                  'Entry angle',
-                  'Editorial framing',
-                  'Story or discovery',
-                  'Problem explanation',
-                  'Mechanism',
-                  'Product reveal',
-                  'Proof',
-                  'Expert or authority framing',
-                  'Objection handling',
-                  'Offer transition',
-                  'CTA',
-                  'Connection to the original ad',
-                ]}
-              />
-            </StageCard>
+          <div>
+            <span>INDIRECT</span>
+            <strong>Different solution to the same problem</strong>
+          </div>
 
-            <StageCard title="Listicle Research">
-              <StageList
-                items={[
-                  'Headline format',
-                  'Number and structure',
-                  'Selection criteria',
-                  'Product ranking',
-                  'Comparison logic',
-                  'Pros and cons',
-                  'Why the featured product wins',
-                  'Proof',
-                  'Offer',
-                  'CTA',
-                  'Final recommendation',
-                ]}
-              />
-            </StageCard>
-          </StageGrid>
+          <div>
+            <span>SAME AVATAR</span>
+            <strong>Different product, similar customer</strong>
+          </div>
         </div>
       </StageSection>
 
       {/* ================================================================
-          10. CREATIVE AND COMPETITOR ADS
-          ================================================================ */}
+          04 — CREATIVE RESEARCH
+         ================================================================ */}
 
       <StageSection
-        number="10"
-        navTitle="Creative & Ads"
-        title="Creative and Competitor Ad Research"
-        description="I study paid creative to understand what brands are testing, repeating, and expanding."
+        number="04"
+        navTitle="Creative Research"
+        title="Creative Research"
+        description="I use ad libraries, creative-intelligence platforms, organic feeds, and competitor accounts to see what is being tested, repeated, expanded, and reacted to in the market."
       >
-        <StageGrid columns={3}>
-          <StageCard title="Sources">
-            <StageList
-              items={[
-                'Meta Ad Library',
-                'TikTok Creative Center',
-                'YouTube ads',
-                'Google Ads transparency tools',
-                'Foreplay',
-                'GetHooked',
-                'TrendTrack',
-                'Competitor social accounts',
-                'Creator partnership posts',
-              ]}
-            />
-          </StageCard>
+        <div className="research-creative-stack">
+          <article className="research-creative-tools">
+            <header>
+              <span>WHERE I RESEARCH CREATIVE</span>
+              <h3>Creative Intelligence Stack</h3>
+              <p>
+                I do not depend on one swipe tool. Different sources expose
+                different ads, trends, formats, comments, and creative
+                patterns.
+              </p>
+            </header>
 
-          <StageCard title="What I Capture">
-            <StageList
-              items={[
-                'Brand',
-                'Product',
-                'Platform',
-                'First-seen date',
-                'Format',
-                'Persona',
-                'Awareness level',
-                'Angle',
-                'Concept',
-                'Hook',
-                'Opening visual',
-                'Core promise',
-                'Mechanism',
-                'Proof',
-                'Objection',
-                'Creator type',
-                'Editing style',
-                'Offer',
-                'CTA',
-                'Landing page',
-                'Comments',
-                'Repeated variations',
-              ]}
-            />
-          </StageCard>
+            <ToolCloud tools={creativeTools} />
+          </article>
 
-          <StageCard title="What I Separate">
-            <StageList
-              items={[
+          <article className="research-creative-deconstruct">
+            <header>
+              <span>WHAT I DECONSTRUCT</span>
+              <h3>Separate Strategy From Execution</h3>
+            </header>
+
+            <div className="research-deconstruct-flow">
+              {[
                 'Angle',
                 'Concept',
                 'Hook',
                 'Format',
                 'Execution',
-                'Visual device',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
+              ].map((item, index, items) => (
+                <div key={item}>
+                  <strong>{item}</strong>
+                  {index < items.length - 1 && <i>→</i>}
+                </div>
+              ))}
+            </div>
 
-        <StageHighlight title="Creative Deconstruction">
-          <StageFlow
-            items={[
-              'Hook',
-              'Problem or Desire',
-              'Core Argument',
-              'Mechanism',
-              'Proof',
-              'Product',
-              'Offer',
-              'CTA',
-            ]}
-          />
-        </StageHighlight>
+            <StageList items={creativeSignals} />
+          </article>
+        </div>
 
         <StageHighlight
           title="Interpretation Rule"
           type="warning"
         >
           <p>
-            A long-running ad is treated as a useful signal, not automatic
-            proof that the ad is profitable.
+            A long-running or heavily repeated ad is a useful market signal,
+            not automatic proof that the ad is profitable. I treat public
+            ad-library evidence as directional unless performance data is
+            actually available.
           </p>
         </StageHighlight>
       </StageSection>
 
       {/* ================================================================
-          11. SOCIAL LISTENING
-          ================================================================ */}
+          05 — FUNNEL + PERSUASION
+         ================================================================ */}
 
       <StageSection
-        number="11"
-        navTitle="Social Listening"
-        title="Social Listening and Organic Content Research"
-        description="I study how customers, creators, experts, and brands naturally discuss the category outside structured sales pages."
+        number="05"
+        navTitle="Funnel & Persuasion"
+        title="Funnel & Persuasion Research"
+        description="I follow the creative beyond the ad and study how the promise is continued through product pages, landing pages, advertorials, listicles, quizzes, VSLs, and offers."
       >
-        <StageGrid columns={3}>
-          <StageCard title="Sources">
-            <StageList
-              items={[
-                'TikTok',
-                'Instagram Reels',
-                'YouTube Shorts',
-                'Facebook',
-                'Reddit',
-                'Creator accounts',
-                'Founder accounts',
-                'Competitor organic accounts',
-                'Niche educators',
-                'Review creators',
-                'Influencers',
-                'Podcast clips',
-                'Product demonstrations',
-              ]}
-            />
-          </StageCard>
+        <ResearchPair
+          sources={funnelSources}
+          signals={funnelSignals}
+        />
 
-          <StageCard title="What I Examine">
-            <StageList
-              items={[
-                'Opening lines',
-                'First frames',
-                'Visual hooks',
-                'Questions',
-                'Controversial opinions',
-                'Demonstrations',
-                'Customer stories',
-                'Creator delivery',
-                'Pacing',
-                'Editing',
-                'Captions',
-                'On-screen text',
-                'Comments',
-                'Shares',
-                'Saves',
-                'Repeated formats',
-                'Recurring topics',
-                'Customer reactions',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard title="Native Visual Research">
-            <StageList
-              items={[
-                'Customer selfies',
-                'Product-in-use photos',
-                'Before-and-after images',
-                'Problem-state images',
-                'Desired-outcome images',
-                'Review screenshots',
-                'Comments',
-                'Text messages',
-                'Demonstrations',
-                'Comparisons',
-                'Documentary-style images',
-                'Native Facebook-style images',
-                'Reddit-style screenshots',
-                'Creator environments',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight title="Visual Preservation Rule">
-          <p>
-            Every visual is saved with its source, context, and possible
-            creative use.
-          </p>
-        </StageHighlight>
-      </StageSection>
-
-      {/* ================================================================
-          12. TREND RESEARCH
-          ================================================================ */}
-
-      <StageSection
-        number="12"
-        navTitle="Trends"
-        title="Trend Research"
-        description="I track changes that may affect attention, language, demand, or customer behavior."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="What I Examine">
-            <StageList
-              items={[
-                'Search trends',
-                'Seasonal trends',
-                'Viral topics',
-                'Emerging customer language',
-                'New creator formats',
-                'Platform behaviors',
-                'Cultural conversations',
-                'New ingredients',
-                'New technologies',
-                'Emerging mechanisms',
-                'News events',
-                'Changes in customer skepticism',
-                'Changes in lifestyle, beauty, health, or status ideals',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard title="A Trend Is Useful When It Connects To">
-            <StageList
-              items={[
-                'The product',
-                'The customer',
-                'The problem',
-                'The desired outcome',
-                'A credible creative opportunity',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight
-          title="Trend Standard"
-          type="warning"
-        >
-          <p>
-            A trend is only useful when it connects naturally to the product,
-            customer, problem, desired outcome, and a credible creative
-            opportunity.
-          </p>
-        </StageHighlight>
-      </StageSection>
-
-      {/* ================================================================
-          13. FIRST-PARTY DATA
-          ================================================================ */}
-
-      <StageSection
-        number="13"
-        navTitle="First-Party Data"
-        title="First-Party Data Research"
-        description="I study the data generated by customers who have already interacted with the brand."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Sources">
-            <StageList
-              items={[
-                'Customer reviews',
-                'Post-purchase surveys',
-                'Customer interviews',
-                'Support tickets',
-                'Live chats',
-                'Email conversations',
-                'Refund requests',
-                'Return reasons',
-                'Cancellation surveys',
-                'Guarantee claims',
-                'Quiz responses',
-                'Sales calls',
-                'Testimonial interviews',
-                'Subscription data',
-                'Repeat-purchase behavior',
-                'Existing ad performance',
-                'Landing-page performance',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard title="What I Look For">
-            <StageList
-              items={[
-                'Reasons customers buy',
-                'Reasons customers hesitate',
-                'Reasons customers refund',
-                'Expectation gaps',
-                'Frequently asked questions',
-                'Product confusion',
-                'Common complaints',
-                'Unexpected benefits',
-                'Strongest testimonials',
-                'High-value customer groups',
-                'Repeat-purchase patterns',
-                'Differences between the intended and actual customer',
-                'Messages linked to strong or weak performance',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight
-          title="Strategic Value"
-          type="success"
-        >
-          <p>
-            First-party data has particularly high strategic value because it
-            combines direct customer language with real behavior.
-          </p>
-        </StageHighlight>
-      </StageSection>
-
-      {/* ================================================================
-          14. RESEARCH CAPTURE SYSTEM
-          ================================================================ */}
-
-      <StageSection
-        number="14"
-        navTitle="Capture System"
-        title="Research Capture System"
-        description="Every useful finding is stored with enough source, context, classification, and verification information to support later strategic work."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Every Finding Is Stored With">
-            <StageList
-              items={[
-                'Exact quote or observation',
-                'Source',
-                'URL',
-                'Screenshot',
-                'Date collected',
-                'Brand or product',
-                'Research category',
-                'Context',
-                'Whether it is fact, customer belief, or interpretation',
-                'Relevant customer group',
-                'Potential creative use',
-                'Verification status',
-              ]}
-            />
-          </StageCard>
-
-          <StageCard title="Research Status">
-            <StageList
-              items={[
-                'Raw evidence',
-                'Needs verification',
-                'Repeated pattern',
-                'High-value evidence',
-                'Possible opportunity',
-                'Claim requiring verification',
-                'Duplicate',
-                'Archived',
-              ]}
-            />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight
-          title="Research-to-Synthesis Transition"
-          type="success"
-        >
+        <div className="research-funnel-line">
           <StageFlow
             items={[
-              'Raw Evidence',
-              'Source and Context Preserved',
-              'Verification Status',
-              'Insight Synthesis',
+              'Ad',
+              'Entry Angle',
+              'Lead',
+              'Mechanism',
+              'Proof',
+              'Offer',
+              'CTA',
             ]}
           />
-        </StageHighlight>
+        </div>
+      </StageSection>
 
-        <StageHighlight title="Research Boundary">
+      {/* ================================================================
+          06 — SOCIAL + NATIVE + TRENDS
+         ================================================================ */}
+
+      <StageSection
+        number="06"
+        navTitle="Social & Trends"
+        title="Social, Native & Trend Research"
+        description="I use organic platforms to see how the category behaves outside polished sales pages: how people talk, what catches attention, what visuals feel native, and which relevant topics are emerging."
+      >
+        <ResearchPair
+          sources={socialSources}
+          signals={socialSignals}
+        />
+
+        <StageHighlight title="Trend Standard">
           <p>
-            Research preserves evidence. Pain points, desires, beliefs,
-            opportunities, personas, and angles are formally organized during
-            the next phases.
+            I only treat a trend as strategically relevant when it connects
+            naturally to the customer, product, problem, desired outcome, or
+            category. Random virality is not research value by itself.
           </p>
         </StageHighlight>
+      </StageSection>
+
+      {/* ================================================================
+          07 — FIRST-PARTY + CAPTURE
+         ================================================================ */}
+
+      <StageSection
+        number="07"
+        navTitle="First-Party & Capture"
+        title="First-Party Evidence & Research Capture"
+        description="I finish by combining direct brand evidence with a traceable capture system so every useful finding can be checked later instead of becoming an unattributed note."
+      >
+        <ResearchPair
+          sourceTitle="First-Party Sources"
+          signalTitle="What I Look For"
+          sources={firstPartySources}
+          signals={firstPartySignals}
+          className="is-first-party"
+        />
+
+        <div className="research-capture-system">
+          <article className="research-capture-record">
+            <header>
+              <span>RESEARCH RECORD</span>
+              <h3>Every useful finding keeps its source and context.</h3>
+            </header>
+
+            <div className="research-record-fields">
+              {captureFields.map((field, index) => (
+                <div key={field}>
+                  <strong>
+                    {String(index + 1).padStart(2, '0')}
+                  </strong>
+                  <span>{field}</span>
+                </div>
+              ))}
+            </div>
+          </article>
+
+          <article className="research-verification-panel">
+            <header>
+              <span>STATUS</span>
+              <h3>Verification</h3>
+            </header>
+
+            <StageList items={verificationStates} />
+          </article>
+        </div>
+
+        <div className="research-final-transition">
+          <div>
+            <span>RESEARCH OUTPUT</span>
+            <h3>Clean evidence, not finished insights.</h3>
+            <p>
+              Research ends when the evidence is sufficiently broad,
+              traceable, organized, and verified for the next stage.
+            </p>
+          </div>
+
+          <div className="research-output-list">
+            {researchOutputs.map((item, index) => (
+              <div key={item}>
+                <strong>
+                  {String(index + 1).padStart(2, '0')}
+                </strong>
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="research-to-insights">
+          <strong>Research</strong>
+          <span>→</span>
+          <strong>Insight Synthesis</strong>
+        </div>
       </StageSection>
     </StageDeepDiveLayout>
   );

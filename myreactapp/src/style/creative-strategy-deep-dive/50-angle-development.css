@@ -1,0 +1,311 @@
+/* ==========================================================================
+   ANGLE DEVELOPMENT — PRACTICAL INTERVIEW VERSION
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   00 — PERSONA → ANGLE
+   -------------------------------------------------------------------------- */
+
+.angle-definition-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.angle-definition-grid > article {
+  min-width: 0;
+  min-height: 122px;
+
+  padding: 16px;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 37, 56, 0.93),
+      rgba(15, 27, 42, 0.9)
+    );
+}
+
+.angle-definition-grid > article:first-child {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--stage-color) 38%,
+      var(--workspace-border)
+    );
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--stage-color) 7%,
+        rgba(22, 37, 56, 0.95)
+      ),
+      rgba(15, 27, 42, 0.91)
+    );
+}
+
+.angle-definition-grid span {
+  display: block;
+  margin-bottom: 8px;
+
+  color: var(--stage-color);
+
+  font-size: 0.74rem;
+  font-weight: 950;
+  letter-spacing: 0.11em;
+}
+
+.angle-definition-grid p {
+  margin: 0;
+
+  color: #aab6c5;
+
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.angle-mapping-flow {
+  margin-top: 12px;
+  padding: 16px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--stage-color) 26%,
+      var(--workspace-border)
+    );
+
+  border-radius: 12px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 4%,
+      rgba(255, 255, 255, 0.016)
+    );
+}
+
+.angle-mapping-grid {
+  margin-top: 12px;
+
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+.angle-mapping-grid > article {
+  min-width: 0;
+  padding: 18px;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.angle-mapping-grid > article > span {
+  display: block;
+  margin-bottom: 11px;
+
+  color: var(--stage-color);
+
+  font-size: 0.74rem;
+  font-weight: 950;
+  letter-spacing: 0.11em;
+}
+
+
+/* --------------------------------------------------------------------------
+   SHARED ANGLE FAMILY LAYOUT
+   -------------------------------------------------------------------------- */
+
+.angle-family-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 0.92fr)
+    minmax(0, 1.08fr);
+
+  gap: 12px;
+}
+
+.angle-family-panel {
+  min-width: 0;
+  padding: 18px;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 37, 56, 0.93),
+      rgba(15, 27, 42, 0.9)
+    );
+}
+
+.angle-family-panel header {
+  margin-bottom: 12px;
+}
+
+.angle-family-panel header > span {
+  display: block;
+  margin-bottom: 5px;
+
+  font-size: 0.74rem;
+  font-weight: 950;
+  letter-spacing: 0.11em;
+}
+
+.angle-family-panel h3 {
+  margin: 0;
+
+  color: #f4f7fa;
+
+  font-size: 1.04rem;
+  font-weight: 900;
+}
+
+.angle-family-panel .stage-workspace-list li {
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.angle-family-panel.is-territories {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--angle-family-color, var(--stage-color)) 28%,
+      var(--workspace-border)
+    );
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--angle-family-color, var(--stage-color)) 5%,
+        rgba(22, 37, 56, 0.95)
+      ),
+      rgba(15, 27, 42, 0.9)
+    );
+}
+
+.angle-family-panel header > span,
+.angle-family-section .stage-workspace-section-number {
+  color: var(--angle-family-color, var(--stage-color));
+}
+
+.angle-family-panel.is-territories .stage-workspace-list-marker {
+  color: var(--angle-family-color, var(--stage-color));
+}
+
+
+/* --------------------------------------------------------------------------
+   FAMILY ACCENTS
+   -------------------------------------------------------------------------- */
+
+.angle-family-section.is-red {
+  --angle-family-color: #ff7272;
+}
+
+.angle-family-section.is-orange {
+  --angle-family-color: #ff9f61;
+}
+
+.angle-family-section.is-lime {
+  --angle-family-color: #b9f46e;
+}
+
+.angle-family-section.is-purple {
+  --angle-family-color: #b58aff;
+}
+
+.angle-family-section.is-cyan {
+  --angle-family-color: #61e8f2;
+}
+
+.angle-family-section.is-blue {
+  --angle-family-color: #79aaff;
+}
+
+.angle-family-section.is-pink {
+  --angle-family-color: #ff8ac7;
+}
+
+.angle-family-section.is-yellow {
+  --angle-family-color: #f2d66d;
+}
+
+.angle-family-section.is-green {
+  --angle-family-color: #78df9d;
+}
+
+.angle-family-section.is-violet {
+  --angle-family-color: #9c91ff;
+}
+
+.angle-family-section.is-rose {
+  --angle-family-color: #ff8ca0;
+}
+
+.angle-family-section.is-amber {
+  --angle-family-color: #eeb86d;
+}
+
+
+/* --------------------------------------------------------------------------
+   SCREEN-SHARE READABILITY
+   -------------------------------------------------------------------------- */
+
+.angle-definition-grid span,
+.angle-mapping-grid > article > span,
+.angle-family-panel header > span {
+  font-size: 0.76rem;
+}
+
+.angle-definition-grid p,
+.angle-family-panel .stage-workspace-list li,
+.angle-mapping-grid .stage-workspace-list li {
+  font-size: 0.9rem;
+}
+
+.angle-family-panel h3 {
+  font-size: 1.08rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1450px) {
+  .angle-definition-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1100px) {
+  .angle-family-layout,
+  .angle-mapping-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 820px) {
+  .angle-definition-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+

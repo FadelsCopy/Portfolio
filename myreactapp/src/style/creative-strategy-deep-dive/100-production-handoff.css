@@ -1,0 +1,406 @@
+/* ==========================================================================
+   PRODUCTION HANDOFF + LAUNCH ALIGNMENT
+   Compact single-page execution control
+   ========================================================================== */
+
+.stage-workspace-layout.is-single-page .production-handoff-board {
+  width: 100%;
+}
+
+.production-handoff-board {
+  overflow: hidden;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 18px;
+
+  background:
+    radial-gradient(
+      circle at 88% 2%,
+      rgba(255, 107, 158, 0.08),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(20, 34, 52, 0.98),
+      rgba(11, 22, 35, 0.97)
+    );
+
+  box-shadow:
+    0 24px 58px rgba(0, 0, 0, 0.24);
+}
+
+/* --------------------------------------------------------------------------
+   TOP
+   -------------------------------------------------------------------------- */
+
+.production-handoff-top {
+  padding: 20px 22px;
+
+  display: grid;
+  grid-template-columns:
+    minmax(320px, 0.92fr)
+    minmax(0, 1.08fr);
+
+  gap: 22px;
+  align-items: center;
+
+  border-bottom: 1px solid var(--workspace-border);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 4%,
+      rgba(255, 255, 255, 0.014)
+    );
+}
+
+.production-handoff-top > div:first-child > span,
+.production-handoff-step-header > div > span,
+.production-handoff-person-title > span,
+.production-handoff-live-check > span {
+  display: block;
+
+  color: var(--stage-color);
+
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+}
+
+.production-handoff-top h3 {
+  margin: 6px 0 0;
+
+  color: #f4f7fa;
+
+  font-size: 1.06rem;
+  line-height: 1.4;
+  font-weight: 900;
+}
+
+.production-handoff-flow {
+  min-width: 0;
+}
+
+/* --------------------------------------------------------------------------
+   STEP
+   -------------------------------------------------------------------------- */
+
+.production-handoff-step {
+  padding: 20px 22px;
+
+  border-bottom: 1px solid var(--workspace-border);
+}
+
+.production-handoff-step:last-child {
+  border-bottom: 0;
+}
+
+.production-handoff-step-header {
+  margin-bottom: 14px;
+
+  display: grid;
+  grid-template-columns:
+    40px
+    minmax(0, 1fr);
+
+  gap: 12px;
+  align-items: center;
+}
+
+.production-handoff-step-number {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--stage-color);
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--stage-color) 28%,
+      var(--workspace-border)
+    );
+
+  border-radius: 10px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 5%,
+      rgba(255, 255, 255, 0.015)
+    );
+
+  font-family: monospace;
+  font-size: 0.71rem;
+  font-weight: 950;
+}
+
+.production-handoff-step-header h3 {
+  margin: 4px 0 0;
+
+  color: #f4f7fa;
+
+  font-size: 1.02rem;
+  line-height: 1.35;
+  font-weight: 900;
+}
+
+/* --------------------------------------------------------------------------
+   CREATOR + EDITOR
+   -------------------------------------------------------------------------- */
+
+.production-handoff-people-grid,
+.production-handoff-launch-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 9px;
+}
+
+.production-handoff-people-grid > article,
+.production-handoff-launch-grid > article {
+  min-width: 0;
+  overflow: hidden;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.016);
+}
+
+.production-handoff-person-title {
+  padding: 13px 14px 11px;
+
+  border-bottom: 1px solid rgba(150, 170, 197, 0.08);
+}
+
+.production-handoff-person-title h4 {
+  margin: 4px 0 0;
+
+  color: #eef3f7;
+
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.production-handoff-checks {
+  padding: 10px 14px 13px;
+
+  display: grid;
+  gap: 7px;
+}
+
+.production-handoff-checks > span {
+  display: grid;
+  grid-template-columns:
+    18px
+    minmax(0, 1fr);
+
+  gap: 7px;
+
+  color: #a6b3c1;
+
+  font-size: 0.79rem;
+  line-height: 1.4;
+}
+
+.production-handoff-checks b {
+  color: var(--stage-color);
+}
+
+.production-handoff-rule {
+  margin-top: 10px;
+  padding: 12px 14px;
+
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0, 1fr);
+
+  gap: 12px;
+  align-items: center;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--stage-color) 22%,
+      var(--workspace-border)
+    );
+
+  border-radius: 10px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 4%,
+      rgba(255, 255, 255, 0.012)
+    );
+}
+
+.production-handoff-rule strong {
+  color: var(--stage-color);
+
+  font-size: 0.67rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+}
+
+.production-handoff-rule span {
+  color: #a3b0bf;
+
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+/* --------------------------------------------------------------------------
+   QA
+   -------------------------------------------------------------------------- */
+
+.production-handoff-qa-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 8px;
+}
+
+.production-handoff-qa-item {
+  min-width: 0;
+  padding: 11px 12px;
+
+  display: grid;
+  grid-template-columns:
+    22px
+    minmax(0, 1fr);
+
+  gap: 8px;
+  align-items: center;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.production-handoff-qa-item > span {
+  width: 20px;
+  height: 20px;
+
+  display: grid;
+  place-items: center;
+
+  color: #ccff00;
+
+  border: 1px solid rgba(204, 255, 0, 0.18);
+  border-radius: 6px;
+
+  background: rgba(204, 255, 0, 0.035);
+
+  font-size: 0.68rem;
+  font-weight: 950;
+}
+
+.production-handoff-qa-item strong {
+  color: #d7e0e9;
+
+  font-size: 0.77rem;
+  line-height: 1.35;
+  font-weight: 820;
+}
+
+.production-handoff-rule.is-qa {
+  border-color: rgba(204, 255, 0, 0.16);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(204, 255, 0, 0.035),
+      rgba(255, 255, 255, 0.012)
+    );
+}
+
+.production-handoff-rule.is-qa strong {
+  color: #ccff00;
+}
+
+/* --------------------------------------------------------------------------
+   LAUNCH
+   -------------------------------------------------------------------------- */
+
+.production-handoff-live-check {
+  margin-top: 10px;
+  padding: 14px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--stage-color) 24%,
+      var(--workspace-border)
+    );
+
+  border-radius: 11px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 4%,
+      rgba(255, 255, 255, 0.012)
+    );
+}
+
+.production-handoff-live-check > span {
+  margin-bottom: 9px;
+}
+
+.production-handoff-live-check > strong {
+  display: block;
+
+  margin-top: 10px;
+
+  color: #d9e3ec;
+
+  font-size: 0.8rem;
+  line-height: 1.42;
+  font-weight: 850;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1350px) {
+  .production-handoff-qa-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1100px) {
+  .production-handoff-top,
+  .production-handoff-people-grid,
+  .production-handoff-launch-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .production-handoff-top,
+  .production-handoff-step {
+    padding: 17px;
+  }
+
+  .production-handoff-qa-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .production-handoff-rule {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+}

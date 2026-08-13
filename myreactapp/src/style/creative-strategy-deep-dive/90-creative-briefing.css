@@ -1,0 +1,543 @@
+/* ==========================================================================
+   CREATIVE BRIEFING
+   One page briefing system
+   ========================================================================== */
+
+.stage-workspace-layout.is-single-page .cb-top-launch,
+.stage-workspace-layout.is-single-page .cb-brief-visual,
+.stage-workspace-layout.is-single-page .cb-brief-rule,
+.stage-workspace-layout.is-single-page .cb-speed-section {
+  width: 100%;
+}
+
+.cb-top-launch,
+.cb-brief-visual,
+.cb-brief-rule,
+.cb-speed-section {
+  --cb-purple: #7c83ff;
+  --cb-purple-soft: rgba(124, 131, 255, 0.12);
+  --cb-blue: #00d7e7;
+  --cb-blue-soft: rgba(0, 215, 231, 0.1);
+}
+
+/* --------------------------------------------------------------------------
+   CREATE BRIEF
+   -------------------------------------------------------------------------- */
+
+.cb-top-launch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+
+  padding: 20px 24px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--cb-purple) 30%,
+      var(--workspace-border)
+    );
+
+  border-radius: 14px;
+
+  background:
+    radial-gradient(
+      circle at 92% 0%,
+      color-mix(
+        in srgb,
+        var(--cb-blue) 8%,
+        transparent
+      ),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 12% 0%,
+      rgba(124, 131, 255, 0.12),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(24, 31, 58, 0.97),
+      rgba(15, 24, 44, 0.95)
+    );
+}
+
+.cb-top-launch-copy > span,
+.cb-brief-block-head > span,
+.cb-brief-rule > span,
+.cb-speed-header span {
+  display: block;
+
+  color: var(--cb-purple);
+
+  font-size: 0.73rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+}
+
+.cb-top-launch-copy strong {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #f4f7fa;
+
+  font-size: 1rem;
+  line-height: 1.42;
+  font-weight: 900;
+}
+
+.cb-create-brief-button {
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  appearance: none;
+  cursor: pointer;
+
+  padding: 11px 15px;
+
+  color: #07111c;
+
+  border: 1px solid rgba(0, 215, 231, 0.86);
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #00cfe2,
+      #2de6f3
+    );
+
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 950;
+
+  box-shadow:
+    0 10px 24px
+    rgba(0, 215, 231, 0.17);
+
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.cb-create-brief-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+
+  box-shadow:
+    0 14px 30px
+    rgba(0, 215, 231, 0.24);
+}
+
+.cb-create-brief-button:active {
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   BRIEF VISUAL
+   -------------------------------------------------------------------------- */
+
+.cb-brief-visual {
+  margin-top: 12px;
+
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  overflow: hidden;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 14px;
+
+  background:
+    radial-gradient(
+      circle at 92% 10%,
+      rgba(0, 215, 231, 0.035),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(25, 31, 57, 0.96),
+      rgba(14, 23, 43, 0.95)
+    );
+}
+
+.cb-brief-visual > article {
+  min-width: 0;
+
+  border-right:
+    1px solid
+    rgba(150, 170, 197, 0.09);
+}
+
+.cb-brief-visual > article:last-child {
+  border-right: 0;
+}
+
+.cb-brief-block-head {
+  min-height: 94px;
+
+  padding: 18px 20px 16px;
+
+  border-bottom:
+    1px solid
+    rgba(150, 170, 197, 0.09);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--cb-purple) 5%,
+      rgba(255, 255, 255, 0.012)
+    );
+}
+
+.cb-brief-block-head h3 {
+  margin: 6px 0 0;
+
+  color: #eef3f7;
+
+  font-size: 0.9rem;
+  line-height: 1.36;
+  font-weight: 900;
+}
+
+.cb-brief-items {
+  padding: 14px 20px 18px;
+
+  display: grid;
+  gap: 7px;
+}
+
+.cb-brief-items > span {
+  position: relative;
+
+  padding-left: 14px;
+
+  color: #a3b0bf;
+
+  font-size: 0.78rem;
+  line-height: 1.42;
+}
+
+.cb-brief-items > span::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  top: 0.52em;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: var(--cb-purple);
+
+  opacity: 0.8;
+}
+
+/* Small blue bridge into the Brief Builder */
+.cb-brief-visual
+  > article:nth-child(4)
+  .cb-brief-block-head
+  > span {
+  color: var(--cb-blue);
+}
+
+.cb-brief-visual
+  > article:nth-child(4)
+  .cb-brief-items
+  > span::before {
+  background: var(--cb-blue);
+}
+
+/* --------------------------------------------------------------------------
+   BRIEFING RULE
+   -------------------------------------------------------------------------- */
+
+.cb-brief-rule {
+  margin-top: 10px;
+
+  padding: 15px 20px;
+
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(0, 1fr);
+
+  gap: 14px;
+  align-items: center;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--cb-purple) 26%,
+      var(--workspace-border)
+    );
+
+  border-radius: 10px;
+
+  background:
+    radial-gradient(
+      circle at 96% 50%,
+      rgba(0, 215, 231, 0.045),
+      transparent 22%
+    ),
+    color-mix(
+      in srgb,
+      var(--cb-purple) 5%,
+      rgba(255, 255, 255, 0.012)
+    );
+}
+
+.cb-brief-rule > strong {
+  color: #dbe4ed;
+
+  font-size: 0.84rem;
+  line-height: 1.46;
+  font-weight: 820;
+}
+
+/* --------------------------------------------------------------------------
+   SPEED + MICROMANAGEMENT
+   -------------------------------------------------------------------------- */
+
+.cb-speed-section {
+  margin-top: 14px;
+
+  overflow: hidden;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 14px;
+
+  background:
+    radial-gradient(
+      circle at 88% 4%,
+      rgba(0, 215, 231, 0.035),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(25, 31, 57, 0.95),
+      rgba(14, 23, 43, 0.94)
+    );
+}
+
+.cb-speed-header {
+  padding: 20px 22px 18px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+
+  gap: 7px;
+
+  border-bottom:
+    1px solid
+    var(--workspace-border);
+}
+
+.cb-speed-header h3 {
+  margin: 5px 0 0;
+
+  color: #f3f6f9;
+
+  font-size: 1.02rem;
+  font-weight: 900;
+}
+
+.cb-speed-header p {
+  margin: 0;
+
+  max-width: 760px;
+
+  color: #98a7b8;
+
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.cb-speed-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+}
+
+.cb-speed-grid > article {
+  min-width: 0;
+
+  padding: 16px 20px;
+
+  display: grid;
+  grid-template-columns:
+    34px
+    minmax(0, 1fr);
+
+  gap: 10px;
+
+  border-right:
+    1px solid
+    rgba(150, 170, 197, 0.08);
+
+  border-bottom:
+    1px solid
+    rgba(150, 170, 197, 0.08);
+}
+
+.cb-speed-grid > article:nth-child(2n) {
+  border-right: 0;
+}
+
+.cb-speed-number {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--cb-purple);
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--cb-purple) 30%,
+      var(--workspace-border)
+    );
+
+  border-radius: 8px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--cb-purple) 5%,
+      rgba(255, 255, 255, 0.01)
+    );
+
+  font-family: monospace;
+  font-size: 0.68rem;
+  font-weight: 950;
+}
+
+/* Alternating blue accents so the page connects visually to Brief Builder */
+.cb-speed-grid
+  > article:nth-child(2n)
+  .cb-speed-number {
+  color: var(--cb-blue);
+
+  border-color:
+    rgba(0, 215, 231, 0.22);
+
+  background:
+    rgba(0, 215, 231, 0.035);
+}
+
+.cb-speed-grid h4 {
+  margin: 0;
+
+  color: #edf2f7;
+
+  font-size: 0.88rem;
+  line-height: 1.35;
+  font-weight: 900;
+}
+
+.cb-speed-grid p {
+  margin: 5px 0 0;
+
+  color: #93a2b3;
+
+  font-size: 0.77rem;
+  line-height: 1.48;
+}
+
+.cb-feedback-flow {
+  padding: 16px 20px;
+
+  border-top:
+    1px solid
+    rgba(150, 170, 197, 0.08);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(124, 131, 255, 0.045),
+      rgba(0, 215, 231, 0.025)
+    );
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1450px) {
+  .cb-brief-visual {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .cb-brief-visual
+    > article:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .cb-brief-visual
+    > article:nth-child(-n + 2) {
+    border-bottom:
+      1px solid
+      rgba(150, 170, 197, 0.09);
+  }
+}
+
+@media (max-width: 1100px) {
+  .cb-speed-header {
+    gap: 7px;
+  }
+}
+
+@media (max-width: 760px) {
+  .cb-top-launch {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cb-brief-visual,
+  .cb-speed-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cb-brief-visual > article,
+  .cb-speed-grid > article {
+    border-right: 0 !important;
+  }
+
+  .cb-brief-visual > article {
+    border-bottom:
+      1px solid
+      rgba(150, 170, 197, 0.09);
+  }
+
+  .cb-brief-visual
+    > article:last-child {
+    border-bottom: 0;
+  }
+
+  .cb-brief-rule {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cb-create-brief-button {
+    transition: none !important;
+  }
+}

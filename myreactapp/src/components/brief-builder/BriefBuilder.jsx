@@ -1695,12 +1695,6 @@ export default function BriefBuilder({
             <h1>
               Brief Builder
             </h1>
-
-            <p>
-              Turn the strategic
-              concept into a clean
-              production handoff.
-            </p>
           </div>
         </div>
 

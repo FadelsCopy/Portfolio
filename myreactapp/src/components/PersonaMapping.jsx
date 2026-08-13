@@ -16,8 +16,9 @@ import StageDeepDiveLayout, {
 */
 
 const personaInputs = [
-  'Problems',
+  'Pain points',
   'Desired outcomes',
+  'Dream outcomes',
   'Emotional drivers',
   'Identity goals',
   'Beliefs',
@@ -25,174 +26,193 @@ const personaInputs = [
   'Objections',
   'Failed alternatives',
   'Buying triggers',
+  'Behavioral context',
   'Proof requirements',
-  'Use contexts',
-  'Awareness levels',
+  'Awareness level',
   'Customer language',
-  'Purchase behavior',
+  'Validated patterns',
 ];
 
-const personaCreationCriteria = [
-  'Core message',
-  'Emotional framing',
-  'Hook direction',
-  'Proof strategy',
-  'Product benefit',
-  'Offer',
-  'Creator type',
-  'Format',
-  'Awareness-level approach',
-  'Landing-page experience',
+const personaDecisionSignals = [
+  'Different problem or problem context',
+  'Different desired transformation',
+  'Different dominant emotional driver',
+  'Different identity tension',
+  'Different beliefs or awareness',
+  'Different objections or previous failures',
+  'Different buying trigger',
+  'Different proof requirement',
+  'Different customer language',
+  'Different creative treatment',
 ];
 
-const customerContext = [
-  'Current situation',
-  'Problem state',
-  'Life stage',
-  'Use case',
-  'Level of urgency',
-  'Existing behavior',
-  'Current solution',
-  'Relevant environment',
-  'Buying situation',
-];
-
-const coreProblems = [
-  'Surface pain',
-  'Functional pain',
-  'Emotional pain',
-  'Social pain',
-  'Identity-level pain',
-  'Consequences of inaction',
-];
-
-const desiredTransformation = [
-  'Immediate desired outcome',
-  'Functional outcome',
-  'Emotional outcome',
-  'Social outcome',
-  'Dream outcome',
-  'Desired identity',
-  'Behaviors the customer wants to recover or begin',
-];
-
-const emotionalIdentityDrivers = [
-  'Main emotional driver',
-  'Main fear',
-  'Main frustration',
-  'Identity being threatened',
-  'Identity being rejected',
-  'Identity the customer wants to become or recover',
-];
-
-const beliefsAndAwareness = [
-  'Current beliefs',
-  'Misconceptions',
-  'Beliefs supporting competing solutions',
-  'Beliefs blocking the purchase',
-  'Belief required for conversion',
-  'Problem awareness',
-  'Solution awareness',
-  'Product awareness',
-  'Market sophistication',
-];
-
-const previousAttempts = [
-  'Alternatives already tried',
-  'Reasons those alternatives were selected',
-  'Why they failed',
-  'Emotional consequences of failure',
-  'New expectations created by those failures',
-];
-
-const objectionsAndRisks = [
-  'Price objection',
-  'Trust objection',
-  'Effectiveness objection',
-  'Safety concern',
-  'Time-to-result concern',
-  'Product-fit concern',
-  'Subscription concern',
-  'Brand-credibility concern',
-  'Fear of another disappointment',
-];
-
-const buyingLogic = [
-  'Buying trigger',
-  'Moment of urgency',
-  'Decision criteria',
-  'What delays action',
-  'What creates confidence',
-  'What proof is required',
-  'Who influences the decision',
-  'Why the customer chooses one solution over another',
-];
-
-const customerLanguage = [
-  'Exact problem language',
-  'Desire language',
-  'Emotional phrases',
-  'Objection language',
-  'Transformation language',
-  'Frequently repeated questions',
-  'Comparisons and metaphors',
-  'Words the customer naturally uses',
+const personaDimensions = [
+  {
+    number: '01',
+    title: 'Situation & Context',
+    description:
+      'The real-world conditions surrounding the customer and the problem.',
+    items: [
+      'Current situation',
+      'Life stage',
+      'Use case',
+      'Environment',
+      'Level of urgency',
+      'Current behavior',
+      'Current solution',
+    ],
+  },
+  {
+    number: '02',
+    title: 'Problem Structure',
+    description:
+      'The visible problem and the deeper consequences that make it matter.',
+    items: [
+      'Surface problem',
+      'Functional problem',
+      'Emotional consequence',
+      'Social consequence',
+      'Identity consequence',
+      'Cost of inaction',
+    ],
+  },
+  {
+    number: '03',
+    title: 'Desired Transformation',
+    description:
+      'What the customer wants to change and what that change makes possible.',
+    items: [
+      'Immediate outcome',
+      'Functional outcome',
+      'Emotional outcome',
+      'Social outcome',
+      'Dream outcome',
+      'Behaviors they want back',
+    ],
+  },
+  {
+    number: '04',
+    title: 'Emotional Drivers',
+    description:
+      'The emotional force underneath the problem, urgency, and desired result.',
+    items: [
+      'Dominant emotional driver',
+      'Specific fear',
+      'Frustration',
+      'Hope / relief',
+      'Control / security',
+      'Emotional urgency',
+    ],
+  },
+  {
+    number: '05',
+    title: 'Identity',
+    description:
+      'How the problem changes self-perception and who the customer wants to become.',
+    items: [
+      'Current identity',
+      'Threatened identity',
+      'Rejected identity',
+      'Desired identity',
+      'Recovered identity',
+      'Aspirational identity',
+    ],
+  },
+  {
+    number: '06',
+    title: 'Beliefs & Awareness',
+    description:
+      'What the customer already believes and how much they understand.',
+    items: [
+      'Beliefs about the problem',
+      'Beliefs about solutions',
+      'Misconceptions',
+      'Beliefs supporting alternatives',
+      'Purchase-blocking beliefs',
+      'Awareness level',
+      'Market sophistication context',
+    ],
+  },
+  {
+    number: '07',
+    title: 'Resistance & Previous Attempts',
+    description:
+      'What has already failed and what now creates hesitation or skepticism.',
+    items: [
+      'What they already tried',
+      'Why they chose it',
+      'Why it failed',
+      'New skepticism created',
+      'Price objection',
+      'Trust / effectiveness objection',
+      'Safety / fit concern',
+      'Fear of another disappointment',
+    ],
+  },
+  {
+    number: '08',
+    title: 'Buying Logic, Proof & Language',
+    description:
+      'The conditions that move the customer toward action and the evidence they need.',
+    items: [
+      'Buying trigger',
+      'Moment of urgency',
+      'Decision criteria',
+      'What delays action',
+      'Proof required',
+      'Who influences the purchase',
+      'Exact customer language',
+      'Repeated questions / phrases',
+    ],
+  },
 ];
 
 const creativeDirection = [
-  'Most relevant angles',
   'Most relevant benefits',
   'Most relevant proof',
-  'Strong hook territories',
+  'Angle territories',
+  'Hook territories',
   'Suitable creator types',
   'Suitable formats',
-  'Suitable visual situations',
-  'Relevant offers',
+  'Visual situations',
+  'Offer considerations',
   'Landing-page requirements',
   'Messaging to avoid',
 ];
 
-const subPersonaDifferences = [
-  'Cause of the problem',
-  'Life stage',
-  'Use case',
-  'Level of urgency',
-  'Desired outcome',
-  'Emotional context',
-  'Awareness level',
-  'Failed alternatives',
-  'Main objection',
-  'Buying trigger',
-  'Proof requirement',
-  'Product application',
-  'Customer language',
-  'Offer preference',
+const subPersonaTriggers = [
+  'Cause of the problem changes',
+  'Desired outcome changes',
+  'Emotional context changes',
+  'Awareness level changes',
+  'Failed alternatives change',
+  'Main objection changes',
+  'Buying trigger changes',
+  'Proof requirement changes',
+  'Customer language changes',
+  'Creative treatment changes',
 ];
 
 const hairSubPersonaExamples = [
   'Postpartum shedding',
   'Menopause-related thinning',
   'Stress-related hair loss',
-  'Damage caused by styling or chemical treatments',
+  'Styling / chemical damage',
   'Genetically influenced thinning',
   'Sudden shedding before an important event',
 ];
 
-const subPersonaDecisionCriteria = [
-  'What the customer believes caused the problem',
-  'What they want from the solution',
-  'What they have already tried',
-  'What they fear',
-  'What they need to believe',
-  'What proof persuades them',
-  'Which hook feels relevant',
-  'Which scenario feels relatable',
-  'Which offer fits their situation',
-  'Which creative format is most suitable',
+const subPersonaGeneration = [
+  'Start with the broad persona',
+  'Spot a repeated meaningful difference',
+  'Validate that difference across evidence',
+  'Check whether buying logic changes',
+  'Check whether creative treatment changes',
+  'Create the sub-persona only if the difference matters strategically',
 ];
 
 const unnecessarySegmentation = [
-  'Age without a meaningful behavior change',
+  'Age without meaningful behavior change',
   'Location without a meaningful market difference',
   'Gender without different buying logic',
   'Job title without creative relevance',
@@ -200,216 +220,182 @@ const unnecessarySegmentation = [
   'Minor preference that does not change strategy',
 ];
 
-const subPersonaProfile = [
-  'Specific problem context',
-  'Specific cause',
-  'Specific emotional tension',
-  'Specific desired outcome',
-  'Specific failed alternatives',
-  'Specific objection',
-  'Specific buying trigger',
-  'Specific proof requirement',
-  'Specific language',
-  'Specific creative direction',
-];
-
-const prioritizationCriteria = [
-  'Size of the opportunity',
-  'Severity of the problem',
-  'Level of urgency',
-  'Product fit',
-  'Offer fit',
-  'Evidence strength',
-  'Existing customer volume',
-  'Customer value',
-  'Conversion potential',
-  'LTV potential',
-  'Available proof',
-  'Competitive intensity',
-  'Differentiation potential',
-  'Creative potential',
-  'Scalability',
-  'Production feasibility',
-  'Strategic importance',
+const prioritizationGroups = [
+  {
+    title: 'Demand & Urgency',
+    items: [
+      'Severity of the problem',
+      'Level of urgency',
+      'Existing demand',
+      'Existing customer volume',
+    ],
+  },
+  {
+    title: 'Product & Offer Fit',
+    items: [
+      'Product fit',
+      'Offer fit',
+      'Proof availability',
+      'Operational feasibility',
+    ],
+  },
+  {
+    title: 'Evidence Strength',
+    items: [
+      'Research depth',
+      'Source diversity',
+      'Validated patterns',
+      'Performance evidence when available',
+    ],
+  },
+  {
+    title: 'Commercial Value',
+    items: [
+      'Audience size',
+      'Conversion potential',
+      'Customer value',
+      'LTV potential',
+      'Acceptable acquisition economics',
+    ],
+  },
+  {
+    title: 'Creative & Scaling Potential',
+    items: [
+      'Differentiation potential',
+      'Creative range',
+      'Scalability',
+      'Production feasibility',
+      'Strategic importance',
+    ],
+  },
 ];
 
 const priorityLevels = [
   {
-    title: 'Primary Persona',
-    description:
-      'The customer group with the strongest combination of product fit, commercial value, evidence, urgency, and creative potential.',
-    items: [
-      'Receives the largest share of research attention',
-      'Receives the largest share of angle development',
-      'Receives the largest share of concept development',
-      'Receives the largest share of testing budget',
-      'Receives the largest share of production volume',
-      'Receives the largest share of iteration',
-    ],
+    level: 'Primary',
+    meaning:
+      'Strongest combination of demand, product fit, evidence, economics, and creative potential.',
+    action:
+      'Highest share of angle development, production, testing budget, and iteration.',
   },
   {
-    title: 'Secondary Persona',
-    description:
-      'A commercially relevant customer group with strong potential but lower priority than the primary persona.',
-    items: [
-      'Receives controlled testing',
-      'Enters production after the primary persona is sufficiently supported',
-      'Maintains an active place in the strategic pipeline',
-    ],
+    level: 'Secondary',
+    meaning:
+      'Commercially relevant and well-supported, but lower priority than the core persona.',
+    action:
+      'Controlled testing and active pipeline support.',
   },
   {
-    title: 'Experimental Persona',
-    description:
-      'A less-proven customer group with promising signals but insufficient evidence.',
-    items: [
-      'Tested through lower-cost concepts',
-      'Often tested through an MVP',
-      'Receives limited investment until stronger signals appear',
-    ],
+    level: 'Experimental',
+    meaning:
+      'Promising signals exist, but evidence or economics are not strong enough yet.',
+    action:
+      'Low-cost validation / MVP testing before larger investment.',
   },
   {
-    title: 'Low-Priority Persona',
-    description:
-      'A customer group with weak product fit, weak economics, low urgency, limited proof, or poor scalability.',
-    items: [
-      'May remain in the backlog',
-      'Receives little or no immediate production capacity',
-      'Requires stronger evidence before entering active testing',
-    ],
+    level: 'Low Priority',
+    meaning:
+      'Some relevance exists, but fit, urgency, proof, economics, or scalability are weak.',
+    action:
+      'Keep in backlog until stronger evidence appears.',
   },
   {
-    title: 'Not Currently Suitable',
-    description:
-      'A group the current product, offer, proof, economics, or business cannot support.',
-    items: [
-      'Removed from the active pipeline',
-      'May be reconsidered only if the underlying conditions change',
-      'Prevents resources from being wasted on attractive but impractical audiences',
-    ],
+    level: 'Not Suitable',
+    meaning:
+      'The product, offer, proof, economics, or operation cannot credibly support the group.',
+    action:
+      'Remove from active testing.',
   },
 ];
 
 const personaPriorityRecord = [
   'Priority level',
-  'Reason for the priority',
   'Supporting evidence',
   'Commercial potential',
   'Main risk',
   'Testing recommendation',
   'Required proof',
-  'Recommended creative investment',
-  'Conditions that would change the priority',
+  'Recommended investment',
+  'What would change the priority',
 ];
 
 const expansionPaths = [
   {
-    title: 'Sub-Persona Expansion',
+    title: 'Sub-Persona',
     description:
-      'Expand one broad persona into more specific customer groups with meaningfully different buying logic.',
+      'Split a broad persona into narrower groups with different buying logic.',
+    tone: 'cyan',
   },
   {
-    title: 'Use-Case Expansion',
+    title: 'Use Case',
     description:
-      'Find new situations where the same product solves a relevant problem.',
+      'Find another situation where the same product solves a credible problem.',
+    tone: 'lime',
   },
   {
-    title: 'Problem-State Expansion',
+    title: 'Problem State',
     description:
-      'Reach customers experiencing a different version or stage of the same problem.',
+      'Reach a different stage or version of the same core problem.',
+    tone: 'orange',
   },
   {
-    title: 'Life-Stage Expansion',
+    title: 'Life Stage',
     description:
-      'Adapt the product and message to customers at a different life stage.',
+      'Adapt the message to customers at a different life stage.',
+    tone: 'pink',
   },
   {
-    title: 'Awareness Expansion',
+    title: 'Awareness',
     description:
-      'Create messaging for audiences who know less or more about the problem, solution, or product.',
+      'Expand messaging to customers who know less or more about the category.',
+    tone: 'purple',
   },
   {
-    title: 'Geographic Expansion',
+    title: 'Geographic',
     description:
-      'Enter markets where the product remains relevant but language, proof, creators, or cultural framing may change.',
+      'Enter markets where language, proof, culture, or creators need adaptation.',
+    tone: 'blue',
   },
   {
-    title: 'Adjacent-Persona Expansion',
+    title: 'Adjacent Persona',
     description:
-      'Reach customers with similar motivations, identities, or emotional needs.',
+      'Reach groups with similar motivations, identities, or emotional needs.',
+    tone: 'cyan',
   },
   {
-    title: 'Indirect-Alternative Expansion',
+    title: 'Indirect Alternative',
     description:
-      'Target customers currently relying on a different category of solution.',
+      'Reach customers currently solving the problem through another category.',
+    tone: 'orange',
   },
   {
-    title: 'Same-Avatar Expansion',
-    description:
-      'Reach the same type of person through a different problem, desire, or buying occasion.',
-  },
-  {
-    title: 'Product-Application Expansion',
-    description:
-      'Identify additional credible applications for the same product.',
-  },
-  {
-    title: 'Occasion Expansion',
+    title: 'Occasion',
     description:
       'Create demand around a new event, season, trigger, or usage moment.',
+    tone: 'pink',
   },
 ];
 
 const expansionCriteria = [
-  'Relevant customer demand',
+  'Real customer demand',
   'Clear product fit',
   'Strong emotional relevance',
-  'A differentiated message',
+  'Differentiated message',
   'Sufficient proof',
   'Acceptable economics',
   'Scalable audience size',
-  'A realistic offer',
   'Operational feasibility',
+  'Paid-media reachability',
   'Creative potential',
-];
-
-const expansionQuestions = [
-  'Does this group experience a problem the product can credibly solve?',
-  'Does the group use language different enough to require new messaging?',
-  'Does it require different proof?',
-  'Does it have different objections?',
-  'Is the buying trigger different?',
-  'Can the brand serve this group operationally?',
-  'Is the opportunity large enough to justify testing?',
-  'Does expansion strengthen or weaken the brand’s positioning?',
-  'Can the existing product and offer support the promise?',
-  'Can the group be reached efficiently through paid media?',
-];
-
-const expansionRecord = [
-  'New persona or market',
-  'Relationship to the core persona',
-  'Supporting evidence',
-  'Shared characteristics',
-  'Important differences',
-  'Product fit',
-  'Message changes',
-  'Proof requirements',
-  'Offer changes',
-  'Creative opportunities',
-  'Main risks',
-  'Recommended test',
 ];
 
 const outputs = [
   'Evidence-based persona groups',
-  'Complete strategic persona profiles',
-  'Sub-personas created only where creative treatment meaningfully changes',
-  'Defined buying logic for each persona',
-  'Mapped beliefs, objections, triggers, proof requirements, and customer language',
+  'Complete persona intelligence profiles',
+  'Sub-personas only where buying logic meaningfully changes',
+  'Persona priority hierarchy',
   'Persona-specific creative direction',
-  'Primary, secondary, experimental, low-priority, and unsuitable classifications',
-  'Persona prioritization records',
-  'Structured persona and market expansion opportunities',
+  'Qualified persona / TAM expansion opportunities',
   'Clear inputs for Angle Development',
 ];
 
@@ -417,24 +403,73 @@ const sops = [
   {
     title: 'Insight-to-Persona Translation',
     description:
-      'Explains how to group repeated insights into distinct customer profiles and determine whether the differences justify a separate persona.',
+      'Groups repeated insight patterns into distinct customer profiles and defines when differences justify a separate persona.',
   },
   {
-    title: 'Persona and Sub-Persona Development',
+    title: 'Persona & Sub-Persona Development',
     description:
-      'Defines how to build a complete persona, when a broad persona is sufficient, and when sub-personas require separate treatment.',
+      'Builds complete persona profiles and separates meaningful sub-personas from unnecessary segmentation.',
   },
   {
     title: 'Persona Prioritization',
     description:
-      'Provides a practical system for ranking personas based on evidence, urgency, product fit, economics, proof, scalability, and creative potential.',
+      'Ranks personas using evidence, urgency, product fit, economics, proof, scalability, and creative potential.',
   },
   {
-    title: 'Persona and Market Expansion',
+    title: 'Persona & TAM Expansion',
     description:
-      'Explains how to identify, qualify, and test new sub-personas, use cases, awareness levels, adjacent audiences, and markets.',
+      'Identifies and qualifies adjacent customer groups, use cases, awareness levels, occasions, and markets.',
   },
 ];
+
+/*
+|--------------------------------------------------------------------------
+| SMALL COMPONENTS
+|--------------------------------------------------------------------------
+*/
+
+function PersonaDimensionCard({
+  number,
+  title,
+  description,
+  items,
+}) {
+  return (
+    <article className="persona-dimension-card">
+      <header>
+        <span>{number}</span>
+        <div>
+          <h3>{title}</h3>
+          <p>{description}</p>
+        </div>
+      </header>
+
+      <StageList items={items} />
+    </article>
+  );
+}
+
+function PriorityRow({
+  level,
+  meaning,
+  action,
+}) {
+  return (
+    <div className="persona-priority-row">
+      <strong>{level}</strong>
+
+      <div>
+        <span>WHAT IT MEANS</span>
+        <p>{meaning}</p>
+      </div>
+
+      <div>
+        <span>WHAT I DO</span>
+        <p>{action}</p>
+      </div>
+    </div>
+  );
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -442,216 +477,194 @@ const sops = [
 |--------------------------------------------------------------------------
 */
 
-export default function PersonaMapping({ stage, onBack }) {
+export default function PersonaMapping({
+  stage,
+  onBack,
+}) {
   return (
     <StageDeepDiveLayout
       stage={stage}
       onBack={onBack}
       eyebrow="CUSTOMER SEGMENTATION SYSTEM"
       title="Persona Mapping"
-      introduction="After organizing the research into clear insights, I group customers according to the differences that meaningfully change the creative strategy. The objective is not to create fictional profiles filled with irrelevant demographics. Each persona represents a distinct customer group with different problems, motivations, buying logic, objections, proof requirements, or messaging needs."
+      introduction="After Insight Synthesis, I group customers according to the differences that meaningfully change buying logic, proof requirements, messaging, and creative treatment. The goal is not fictional demographic profiles — it is strategically useful customer segmentation."
       process={[
         'Validated Insights',
-        'Shared Customer Patterns',
+        'Shared Patterns',
         'Distinct Buying Logic',
         'Persona',
         'Priority',
-        'Creative Direction',
+        'Angle Input',
       ]}
       outputs={outputs}
       outputTitle="Persona Mapping Output"
       sops={sops}
-      sopDescription="The Persona Mapping SOP Library defines how evidence becomes usable customer groups, how those groups are prioritized, and how expansion opportunities are evaluated."
+      sopDescription="Planned SOPs for translating insights into usable personas, prioritizing them, and expanding the addressable market without random segmentation."
     >
+      {/* ================================================================
+          01 — INSIGHT → PERSONA
+         ================================================================ */}
+
       <StageSection
         number="01"
-        navTitle="Insight Translation"
-        title="Insight-to-Persona Translation"
-        description="Turn repeated insights into strategically meaningful customer groups."
+        navTitle="Insight → Persona"
+        title="How Insights Become Personas"
+        description="I group repeated insights into customer clusters, then create a persona only when the differences are strong enough to change buying logic or creative treatment."
       >
-        <StageHighlight
-          title="Translation Logic"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'Repeated Evidence',
-              'Shared Problem and Context',
-              'Shared Motivation and Behavior',
-              'Distinct Buying Logic',
-              'Persona',
-            ]}
-          />
-        </StageHighlight>
-
-        <div style={{ marginTop: '12px' }}>
-          <StageGrid columns={2}>
-            <StageCard
-              title="Inputs Used"
-              description="The strongest synthesis outputs are compared across customer groups."
+        <div className="persona-transition-flow">
+          {[
+            ['01', 'Validated Insights', 'Pains, desires, beliefs, objections, triggers, language, proof needs, patterns.'],
+            ['02', 'Shared Pattern', 'Group customers repeatedly showing the same problem, motivation, context, or behavior.'],
+            ['03', 'Distinct Buying Logic', 'Check whether they buy for meaningfully different reasons or require different proof.'],
+            ['04', 'Persona', 'Create a strategic customer group only when the distinction changes the work.'],
+          ].map(([number, title, copy], index, array) => (
+            <div
+              className="persona-transition-step"
+              key={title}
             >
-              <StageList items={personaInputs} />
-            </StageCard>
+              <article>
+                <span>{number}</span>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
 
-            <StageCard
-              title="When a Separate Persona Is Justified"
-              description="Create a new persona only when the distinction changes an important strategic decision."
-            >
-              <StageList items={personaCreationCriteria} />
-            </StageCard>
-          </StageGrid>
+              {index < array.length - 1 && (
+                <i aria-hidden="true">→</i>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="persona-insight-check">
+          <article>
+            <span>INSIGHT INPUTS</span>
+            <StageList items={personaInputs} />
+          </article>
+
+          <article>
+            <span>SEPARATION TEST</span>
+            <p>
+              A separate persona is justified when one or more of these
+              differences repeatedly changes the strategy.
+            </p>
+            <StageList items={personaDecisionSignals} />
+          </article>
         </div>
 
         <StageHighlight
-          title="Important Distinction"
-          type="warning"
+          title="Persona Rule"
+          type="success"
         >
           <p>
-            Two customers may experience the same broad problem but still
-            require separate personas because they understand the problem
-            differently, want different outcomes, trust different proof, or
-            need different reasons to purchase.
+            If two groups look different demographically but would receive
+            the same message, proof, offer, creator, format, and buying logic,
+            I do not force them into separate personas.
           </p>
         </StageHighlight>
       </StageSection>
+
+      {/* ================================================================
+          02 — PERSONA DEVELOPMENT
+         ================================================================ */}
 
       <StageSection
         number="02"
         navTitle="Persona Development"
         title="Persona Development"
-        description="Organize the information that meaningfully changes how creative should be developed, produced, tested, or interpreted."
+        description="Each persona is built as a strategic intelligence profile. Every dimension below answers a different question and earns its place by changing how the customer should be understood or addressed."
       >
-        <StageGrid columns={3}>
-          <StageCard
-            title="Customer Context"
-            description="The real situation surrounding the customer and the problem."
-          >
-            <StageList items={customerContext} />
-          </StageCard>
+        <div className="persona-dimension-grid">
+          {personaDimensions.map((dimension) => (
+            <PersonaDimensionCard
+              key={dimension.number}
+              {...dimension}
+            />
+          ))}
+        </div>
 
-          <StageCard
-            title="Core Problems"
-            description="The pain structure shaping urgency and relevance."
-          >
-            <StageList items={coreProblems} />
-          </StageCard>
+        <div className="persona-creative-direction">
+          <div>
+            <span>PROFILE OUTPUT</span>
+            <h3>Persona-Specific Creative Direction</h3>
+            <p>
+              Once the persona is clear, I convert the profile into practical
+              creative guidance without developing the final angles yet.
+            </p>
+          </div>
 
-          <StageCard
-            title="Desired Transformation"
-            description="The result, experience, emotion, and identity the customer wants."
-          >
-            <StageList items={desiredTransformation} />
-          </StageCard>
-
-          <StageCard
-            title="Emotional and Identity Drivers"
-            description="The deeper meaning attached to the problem and solution."
-          >
-            <StageList items={emotionalIdentityDrivers} />
-          </StageCard>
-
-          <StageCard
-            title="Beliefs and Awareness"
-            description="What the customer currently understands and what they need to believe."
-          >
-            <StageList items={beliefsAndAwareness} />
-          </StageCard>
-
-          <StageCard
-            title="Previous Attempts"
-            description="How failed alternatives shape skepticism and expectations."
-          >
-            <StageList items={previousAttempts} />
-          </StageCard>
-
-          <StageCard
-            title="Objections and Risks"
-            description="The reasons the customer may hesitate or reject the purchase."
-          >
-            <StageList items={objectionsAndRisks} />
-          </StageCard>
-
-          <StageCard
-            title="Buying Logic"
-            description="The conditions that move the customer toward or away from action."
-          >
-            <StageList items={buyingLogic} />
-          </StageCard>
-
-          <StageCard
-            title="Customer Language"
-            description="The exact wording later used to guide messaging and hooks."
-          >
-            <StageList items={customerLanguage} />
-          </StageCard>
-        </StageGrid>
-
-        <div style={{ marginTop: '12px' }}>
-          <StageCard
-            title="Persona-Specific Creative Direction"
-            description="Translate the profile into practical creative guidance."
-          >
-            <StageList items={creativeDirection} />
-          </StageCard>
+          <div className="persona-creative-direction-items">
+            {creativeDirection.map((item) => (
+              <strong key={item}>{item}</strong>
+            ))}
+          </div>
         </div>
 
         <StageHighlight
-          title="Persona Quality Standard"
+          title="Quality Standard"
           type="success"
         >
           <p>
-            A persona should contain only information that changes the
-            message, proof, format, creator, offer, production direction,
-            testing plan, or interpretation of performance.
+            A persona should be rich enough to explain the customer’s
+            situation, motivation, resistance, buying logic, proof needs,
+            and language — but every field must still have strategic value.
           </p>
         </StageHighlight>
       </StageSection>
+
+      {/* ================================================================
+          03 — SUB-PERSONAS
+         ================================================================ */}
 
       <StageSection
         number="03"
         navTitle="Sub-Personas"
         title="Sub-Persona Development"
-        description="Create a narrower profile when customers share the same broad problem but require meaningfully different creative treatment."
+        description="A sub-persona is only useful when people inside the same broad persona require meaningfully different treatment."
       >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Differences That May Justify a Sub-Persona"
-            description="A sub-persona becomes useful when one or more of these differences change the strategy."
-          >
-            <StageList items={subPersonaDifferences} />
-          </StageCard>
+        <div className="persona-subpersona-decision">
+          <article>
+            <span>WHEN IS A SUB-PERSONA NECESSARY?</span>
+            <p>
+              When a repeated difference changes the buying logic,
+              persuasion, proof, scenario, or creative treatment.
+            </p>
 
-          <StageCard
-            title="Example: Women Experiencing Hair Thinning"
-            description="The broad persona may contain several distinct causes, emotions, and buying requirements."
-          >
-            <StageList items={hairSubPersonaExamples} />
-          </StageCard>
-        </StageGrid>
+            <div>
+              {subPersonaTriggers.map((item) => (
+                <strong key={item}>{item}</strong>
+              ))}
+            </div>
+          </article>
 
-        <div style={{ marginTop: '12px' }}>
-          <StageGrid columns={3}>
-            <StageCard
-              title="When a Sub-Persona Is Necessary"
-              description="Create one when the distinction changes the persuasive or production approach."
-            >
-              <StageList items={subPersonaDecisionCriteria} />
-            </StageCard>
+          <article>
+            <span>WHEN IS IT NOT NECESSARY?</span>
+            <StageList items={unnecessarySegmentation} />
+          </article>
+        </div>
 
-            <StageCard
-              title="When It Is Not Necessary"
-              description="Do not segment customers using differences that do not change creative strategy."
-            >
-              <StageList items={unnecessarySegmentation} />
-            </StageCard>
+        <div className="persona-subpersona-process">
+          <span>HOW I GENERATE SUB-PERSONAS</span>
+          <StageFlow items={subPersonaGeneration} />
+        </div>
 
-            <StageCard
-              title="What Goes Inside"
-              description="Focus only on the elements that distinguish the sub-persona from the broader persona."
-            >
-              <StageList items={subPersonaProfile} />
-            </StageCard>
-          </StageGrid>
+        <div className="persona-subpersona-example">
+          <header>
+            <span>EXAMPLE</span>
+            <h3>Broad Persona: Women Experiencing Hair Thinning</h3>
+            <p>
+              The broad problem is shared, but cause, emotion, urgency,
+              proof, and buying logic may create distinct sub-personas.
+            </p>
+          </header>
+
+          <div>
+            {hairSubPersonaExamples.map((item, index) => (
+              <article key={item}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>{item}</strong>
+              </article>
+            ))}
+          </div>
         </div>
 
         <StageHighlight
@@ -659,133 +672,122 @@ export default function PersonaMapping({ stage, onBack }) {
           type="warning"
         >
           <p>
-            The objective is not to create the largest possible number of
-            profiles. The objective is to separate groups only when the
-            distinction improves creative relevance, credibility, testing,
-            or conversion.
+            The goal is not to produce more profiles. The goal is to separate
+            customer groups only when the distinction improves relevance,
+            credibility, testing quality, or conversion.
           </p>
         </StageHighlight>
       </StageSection>
+
+      {/* ================================================================
+          04 — PRIORITIZATION
+         ================================================================ */}
 
       <StageSection
         number="04"
         navTitle="Prioritization"
         title="Persona Prioritization"
-        description="Decide which personas deserve the most research, production capacity, testing budget, and creative investment."
+        description="Not every credible persona deserves equal attention. I prioritize the groups with the strongest combination of customer need, evidence, commercial value, product fit, and scalable creative potential."
       >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Prioritization Criteria"
-            description="Compare personas using customer need, evidence, economics, proof, feasibility, and strategic opportunity."
-          >
-            <StageList items={prioritizationCriteria} />
-          </StageCard>
+        <div className="persona-priority-scorecard">
+          <header>
+            <span>PRIORITIZATION SCORECARD</span>
+            <h3>Five questions before I allocate creative resources.</h3>
+          </header>
 
-          <StageCard
-            title="Persona Priority Record"
-            description="Document why each group receives its current priority."
-          >
-            <StageList items={personaPriorityRecord} />
-          </StageCard>
-        </StageGrid>
-
-        <div style={{ marginTop: '12px' }}>
-          <StageGrid columns={2}>
-            {priorityLevels.map((priority) => (
-              <StageCard
-                key={priority.title}
-                title={priority.title}
-                description={priority.description}
-              >
-                <StageList items={priority.items} />
-              </StageCard>
+          <div>
+            {prioritizationGroups.map((group, index) => (
+              <article key={group.title}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h4>{group.title}</h4>
+                <StageList items={group.items} />
+              </article>
             ))}
-          </StageGrid>
+          </div>
         </div>
 
-        <StageHighlight
-          title="Resource Allocation Logic"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'Persona Evidence',
-              'Commercial Potential',
-              'Product and Offer Fit',
-              'Creative Potential',
-              'Priority Level',
-              'Investment Decision',
-            ]}
-          />
-        </StageHighlight>
+        <div className="persona-priority-table">
+          <header>
+            <span>PRIORITY</span>
+            <span>WHAT IT MEANS</span>
+            <span>RESOURCE DECISION</span>
+          </header>
+
+          <div>
+            {priorityLevels.map((priority) => (
+              <PriorityRow
+                key={priority.level}
+                {...priority}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="persona-priority-record">
+          <span>MINIMUM PRIORITY RECORD</span>
+
+          <div>
+            {personaPriorityRecord.map((item) => (
+              <strong key={item}>{item}</strong>
+            ))}
+          </div>
+        </div>
       </StageSection>
+
+      {/* ================================================================
+          05 — PERSONA & TAM EXPANSION
+         ================================================================ */}
 
       <StageSection
         number="05"
-        navTitle="Expansion"
-        title="Persona and Market Expansion"
-        description="Expand beyond the core customer only when the opportunity is supported by proven similarities in problem, desire, behavior, product fit, or buying logic."
+        navTitle="Persona & TAM Expansion"
+        title="Persona & TAM Expansion"
+        description="TAM means Total Addressable Market. Here I use persona learning to identify credible ways to expand the reachable market without targeting random audiences."
       >
-        <StageGrid columns={3}>
-          {expansionPaths.map((path) => (
-            <StageCard
-              key={path.title}
-              title={path.title}
-              description={path.description}
-            />
-          ))}
-        </StageGrid>
-
-        <div style={{ marginTop: '12px' }}>
-          <StageGrid columns={3}>
-            <StageCard
-              title="Expansion Criteria"
-              description="A new group must be strategically and commercially supportable."
-            >
-              <StageList items={expansionCriteria} />
-            </StageCard>
-
-            <StageCard
-              title="Expansion Questions"
-              description="Evaluate whether the opportunity deserves a real test."
-            >
-              <StageList items={expansionQuestions} />
-            </StageCard>
-
-            <StageCard
-              title="Expansion Record"
-              description="Document the logic, changes, risks, and recommended test."
-            >
-              <StageList items={expansionRecord} />
-            </StageCard>
-          </StageGrid>
-        </div>
-
-        <StageHighlight
-          title="Expansion Decision Logic"
-          type="success"
-        >
+        <div className="persona-tam-intro">
+          <span>EXPANSION LOGIC</span>
           <StageFlow
             items={[
               'Core Persona Learning',
-              'Adjacent Opportunity',
+              'Adjacent Customer Truth',
               'Product Fit',
-              'Message and Proof Changes',
-              'Operational Feasibility',
+              'Message / Proof Adaptation',
               'Controlled Test',
             ]}
           />
-        </StageHighlight>
+        </div>
+
+        <div className="persona-expansion-grid">
+          {expansionPaths.map((path) => (
+            <article
+              className={`persona-expansion-card is-${path.tone}`}
+              key={path.title}
+            >
+              <span>{path.title}</span>
+              <p>{path.description}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="persona-expansion-filter">
+          <span>EXPANSION FILTER</span>
+
+          <div>
+            {expansionCriteria.map((item) => (
+              <strong key={item}>{item}</strong>
+            ))}
+          </div>
+        </div>
 
         <StageHighlight
           title="Expansion Boundary"
           type="warning"
         >
           <p>
-            Expansion should not target random audiences simply because they
-            are available. It should extend a proven customer truth into a
-            group the product, offer, proof, economics, and operation can
-            realistically support.
+            Expansion only makes sense when the product can credibly serve
+            the group, the demand is real, the economics are acceptable,
+            the proof can support the promise, and the audience can be
+            reached efficiently.
           </p>
         </StageHighlight>
       </StageSection>

@@ -1,0 +1,637 @@
+/* ==========================================================================
+   BUSINESS CONTEXT — PRACTICAL INTERVIEW VERSION
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   01 — BUSINESS OBJECTIVE → CREATIVE PROBLEM
+   -------------------------------------------------------------------------- */
+
+.business-context-diagnosis {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    42px
+    minmax(0, 1fr);
+
+  align-items: stretch;
+  gap: 10px;
+}
+
+.business-context-diagnosis-card {
+  min-width: 0;
+  padding: 19px;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 38, 58, 0.92),
+      rgba(15, 28, 44, 0.9)
+    );
+}
+
+.business-context-diagnosis-card > span {
+  display: block;
+  margin-bottom: 8px;
+
+  color: var(--stage-color);
+
+  font-family: monospace;
+  font-size: 0.54rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+}
+
+.business-context-diagnosis-card h3 {
+  margin: 0 0 14px;
+
+  color: #f5f8fb;
+
+  font-size: 0.94rem;
+  line-height: 1.35;
+  font-weight: 850;
+}
+
+.business-context-diagnosis-card.is-problem {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--stage-color) 24%,
+      var(--workspace-border)
+    );
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--stage-color) 6%,
+        rgba(22, 38, 58, 0.92)
+      ),
+      rgba(15, 28, 44, 0.9)
+    );
+}
+
+.business-context-diagnosis-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--stage-color);
+
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+/* --------------------------------------------------------------------------
+   02 — UNIT ECONOMICS
+   -------------------------------------------------------------------------- */
+
+.business-context-economics-intro {
+  margin-bottom: 13px;
+  padding: 16px 18px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--stage-color) 19%,
+      var(--workspace-border)
+    );
+
+  border-radius: 12px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 4%,
+      rgba(255, 255, 255, 0.016)
+    );
+}
+
+.business-context-economics-intro span {
+  display: block;
+  margin-bottom: 7px;
+
+  color: var(--stage-color);
+
+  font-size: 0.53rem;
+  font-weight: 950;
+  letter-spacing: 0.13em;
+}
+
+.business-context-economics-intro p {
+  max-width: 980px;
+  margin: 0;
+
+  color: #a8b4c4;
+
+  font-size: 0.74rem;
+  line-height: 1.6;
+}
+
+.business-context-economics-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 11px;
+}
+
+.business-context-economics-group {
+  min-width: 0;
+
+  overflow: hidden;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(21, 36, 54, 0.93),
+      rgba(14, 26, 41, 0.91)
+    );
+}
+
+.business-context-economics-group > header {
+  padding: 14px 15px 12px;
+
+  border-bottom: 1px solid var(--workspace-border);
+
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.business-context-economics-group > header span {
+  display: block;
+  margin-bottom: 5px;
+
+  color: #c6ff00;
+
+  font-size: 0.49rem;
+  font-weight: 950;
+  letter-spacing: 0.14em;
+}
+
+.business-context-economics-group > header h3 {
+  margin: 0;
+
+  color: #f3f6fa;
+
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.business-context-metric-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.business-context-metric {
+  padding: 11px 14px;
+
+  border-bottom: 1px solid rgba(150, 170, 197, 0.09);
+}
+
+.business-context-metric:last-child {
+  border-bottom: 0;
+}
+
+.business-context-metric strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #eef3f8;
+
+  font-size: 0.7rem;
+  font-weight: 850;
+}
+
+.business-context-metric p {
+  margin: 0;
+
+  color: #8190a4;
+
+  font-size: 0.63rem;
+  line-height: 1.45;
+}
+
+.business-context-economics-decision {
+  margin-top: 12px;
+  padding: 14px 16px;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 11px;
+
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.business-context-economics-decision > span {
+  display: block;
+  margin-bottom: 10px;
+
+  color: var(--stage-color);
+
+  font-size: 0.49rem;
+  font-weight: 950;
+  letter-spacing: 0.13em;
+}
+
+.business-context-economics-decision > div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.business-context-economics-decision strong {
+  padding: 7px 9px;
+
+  color: #b6c1cf;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.02);
+
+  font-size: 0.64rem;
+}
+
+.business-context-economics-decision i {
+  color: var(--stage-color);
+
+  font-style: normal;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+/* --------------------------------------------------------------------------
+   03 — CREATIVE + FUNNEL EVIDENCE
+   -------------------------------------------------------------------------- */
+
+.business-context-evidence-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 11px;
+}
+
+.business-context-evidence-card {
+  min-width: 0;
+  padding: 16px;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      var(--workspace-card),
+      rgba(16, 28, 44, 0.88)
+    );
+}
+
+.business-context-evidence-card header {
+  min-height: 92px;
+  margin-bottom: 13px;
+}
+
+.business-context-evidence-card header > span {
+  display: block;
+  margin-bottom: 5px;
+
+  color: var(--stage-color);
+
+  font-size: 0.49rem;
+  font-weight: 950;
+  letter-spacing: 0.13em;
+}
+
+.business-context-evidence-card h3 {
+  margin: 0;
+
+  color: #f4f7fa;
+
+  font-size: 0.87rem;
+  font-weight: 850;
+}
+
+.business-context-evidence-card header p {
+  margin: 6px 0 0;
+
+  color: #8291a5;
+
+  font-size: 0.65rem;
+  line-height: 1.47;
+}
+
+.business-context-funnel-flow {
+  margin-top: 12px;
+  padding: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.016);
+}
+
+.business-context-funnel-flow span {
+  padding: 6px 9px;
+
+  color: #b6c1ce;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 7px;
+
+  font-size: 0.55rem;
+  font-weight: 850;
+}
+
+.business-context-funnel-flow i {
+  color: var(--stage-color);
+
+  font-style: normal;
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+/* --------------------------------------------------------------------------
+   04 — BRAND INTELLIGENCE
+   -------------------------------------------------------------------------- */
+
+.business-context-intelligence-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 11px;
+}
+
+.business-context-intelligence-card {
+  min-width: 0;
+  padding: 16px;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 37, 56, 0.9),
+      rgba(15, 27, 42, 0.88)
+    );
+}
+
+.business-context-intelligence-card header {
+  margin-bottom: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.business-context-intelligence-card header span {
+  flex: 0 0 auto;
+
+  color: var(--stage-color);
+
+  font-family: monospace;
+  font-size: 0.55rem;
+  font-weight: 900;
+}
+
+.business-context-intelligence-card h3 {
+  margin: 0;
+
+  color: #f3f6f9;
+
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+/* --------------------------------------------------------------------------
+   05 — CONSTRAINTS → RESEARCH
+   -------------------------------------------------------------------------- */
+
+.business-context-priority-grid {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 0.85fr)
+    minmax(0, 1.15fr);
+
+  gap: 11px;
+}
+
+.business-context-priority-panel {
+  min-width: 0;
+  padding: 17px;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 37, 56, 0.92),
+      rgba(15, 27, 42, 0.9)
+    );
+}
+
+.business-context-priority-panel.is-research {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--stage-color) 26%,
+      var(--workspace-border)
+    );
+
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--stage-color) 5%,
+        rgba(22, 37, 56, 0.92)
+      ),
+      rgba(15, 27, 42, 0.9)
+    );
+}
+
+.business-context-priority-panel header {
+  margin-bottom: 13px;
+}
+
+.business-context-priority-panel header span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--stage-color);
+
+  font-size: 0.5rem;
+  font-weight: 950;
+  letter-spacing: 0.13em;
+}
+
+.business-context-priority-panel h3 {
+  margin: 0;
+
+  color: #f4f7fa;
+
+  font-size: 0.86rem;
+  font-weight: 850;
+}
+
+/* --------------------------------------------------------------------------
+   FINAL OUTPUT
+   -------------------------------------------------------------------------- */
+
+.business-context-final-output {
+  margin-top: 13px;
+  padding: 18px;
+
+  display: grid;
+  grid-template-columns:
+    minmax(240px, 0.8fr)
+    minmax(0, 1.2fr);
+
+  gap: 22px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--stage-color) 30%,
+      var(--workspace-border)
+    );
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      120deg,
+      color-mix(
+        in srgb,
+        var(--stage-color) 6%,
+        var(--workspace-panel)
+      ),
+      var(--workspace-panel)
+    );
+}
+
+.business-context-final-output > div:first-child > span {
+  display: block;
+  margin-bottom: 7px;
+
+  color: var(--stage-color);
+
+  font-size: 0.51rem;
+  font-weight: 950;
+  letter-spacing: 0.14em;
+}
+
+.business-context-final-output h3 {
+  margin: 0;
+
+  color: #f4f7fa;
+
+  font-size: 0.91rem;
+  line-height: 1.35;
+  font-weight: 850;
+}
+
+.business-context-final-output p {
+  margin: 8px 0 0;
+
+  color: #8c9bad;
+
+  font-size: 0.68rem;
+  line-height: 1.55;
+}
+
+.business-context-final-output-list {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 7px;
+}
+
+.business-context-final-output-list > div {
+  min-width: 0;
+  padding: 8px 9px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  border: 1px solid var(--workspace-border);
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.business-context-final-output-list strong {
+  flex: 0 0 auto;
+
+  color: var(--stage-color);
+
+  font-family: monospace;
+  font-size: 0.5rem;
+}
+
+.business-context-final-output-list span {
+  color: #a4b0c0;
+
+  font-size: 0.62rem;
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1350px) {
+  .business-context-economics-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .business-context-economics-group:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 900px) {
+  .business-context-diagnosis,
+  .business-context-evidence-grid,
+  .business-context-priority-grid,
+  .business-context-final-output {
+    grid-template-columns: 1fr;
+  }
+
+  .business-context-diagnosis-arrow {
+    transform: rotate(90deg);
+  }
+
+  .business-context-economics-grid,
+  .business-context-intelligence-grid,
+  .business-context-final-output-list {
+    grid-template-columns: 1fr;
+  }
+
+  .business-context-economics-group:last-child {
+    grid-column: auto;
+  }
+}
+

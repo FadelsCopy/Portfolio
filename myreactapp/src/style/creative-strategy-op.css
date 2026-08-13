@@ -1464,3 +1464,298 @@
     will-change: auto !important;
   }
 }
+
+
+/* ==========================================================================
+   NEED MVP? — DECISION POPUP
+   ========================================================================== */
+
+/*
+  The Need MVP? diamond is the only logic gate on the map that opens
+  supporting decision context. It keeps the existing gate look while
+  gaining a clear interactive hover state.
+*/
+
+.creative-op-flow-node.is-mvp-gate {
+  cursor: pointer;
+
+  padding: 34px 54px;
+
+  color: #eef6ff;
+
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.3),
+    0 0 24px
+      color-mix(
+        in srgb,
+        var(--stage-color) 14%,
+        transparent
+      );
+}
+
+.creative-op-flow-node.is-mvp-gate::before {
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 72%,
+      rgba(255, 255, 255, 0.12)
+    );
+}
+
+.creative-op-flow-node.is-mvp-gate::after {
+  background:
+    linear-gradient(
+      160deg,
+      rgba(20, 38, 60, 0.995),
+      rgba(10, 21, 34, 0.995)
+    );
+}
+
+.creative-op-flow-node.is-mvp-gate .creative-op-flow-node-copy {
+  width: 100%;
+  align-items: center;
+}
+
+.creative-op-flow-node.is-mvp-gate .creative-op-flow-node-label {
+  width: 100%;
+
+  color: #f4f8ff;
+
+  font-size: 0.94rem;
+  font-weight: 900;
+  line-height: 1.18;
+  text-align: center;
+}
+
+.creative-op-flow-node.is-mvp-gate:hover {
+  cursor: pointer;
+}
+
+.creative-op-mvp-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: grid;
+  place-items: center;
+
+  padding: 38px;
+
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(92, 155, 255, 0.1),
+      transparent 36%
+    ),
+    rgba(2, 7, 12, 0.76);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.creative-op-mvp-modal {
+  position: relative;
+
+  width: min(780px, 100%);
+  max-height: min(88vh, 860px);
+  overflow-y: auto;
+
+  padding: 8px 14px 14px;
+
+  color: #f7fbff;
+
+  border: 1px solid rgba(137, 180, 255, 0.2);
+  border-radius: 20px;
+
+  background:
+    radial-gradient(
+      circle at 88% 0%,
+      rgba(92, 155, 255, 0.11),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(16, 29, 45, 0.995),
+      rgba(8, 17, 28, 0.995)
+    );
+
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, 0.58),
+    0 0 42px rgba(92, 155, 255, 0.08);
+}
+
+.creative-op-mvp-modal-header {
+  position: relative;
+
+  padding: 28px 72px 22px 28px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.creative-op-mvp-modal-kicker {
+  display: inline-block;
+  margin-bottom: 8px;
+
+  color: #78adff;
+
+  font-size: 0.68rem;
+  font-weight: 950;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.creative-op-mvp-modal-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: -0.045em;
+}
+
+.creative-op-mvp-modal-close {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  appearance: none;
+  cursor: pointer;
+
+  padding: 0;
+
+  color: #9caec2;
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  font-family: inherit;
+  font-size: 1.3rem;
+  line-height: 1;
+
+  transition:
+    color 0.18s ease,
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.creative-op-mvp-modal-close:hover {
+  transform: translateY(-1px);
+
+  color: #ffffff;
+
+  border-color: rgba(92, 155, 255, 0.32);
+  background: rgba(92, 155, 255, 0.07);
+}
+
+.creative-op-mvp-checklist {
+  padding: 10px 28px 18px;
+}
+
+.creative-op-mvp-check {
+  display: grid;
+  grid-template-columns:
+    24px
+    minmax(0, 1fr);
+
+  gap: 14px;
+  align-items: start;
+
+  padding: 19px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.creative-op-mvp-check:last-child {
+  border-bottom: 0;
+}
+
+.creative-op-mvp-checkmark {
+  width: 22px;
+  height: 22px;
+
+  display: grid;
+  place-items: center;
+
+  margin-top: 1px;
+
+  color: #78adff;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      #5c9bff 36%,
+      rgba(255, 255, 255, 0.08)
+    );
+
+  border-radius: 7px;
+
+  background:
+    color-mix(
+      in srgb,
+      #5c9bff 7%,
+      rgba(255, 255, 255, 0.015)
+    );
+
+  font-size: 0.74rem;
+  font-weight: 950;
+}
+
+.creative-op-mvp-check h3 {
+  margin: 0;
+
+  color: #f4f8fc;
+
+  font-size: 0.98rem;
+  font-weight: 900;
+  line-height: 1.32;
+}
+
+.creative-op-mvp-check p {
+  margin: 6px 0 0;
+
+  color: #91a1b4;
+
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+  .creative-op-mvp-modal-backdrop {
+    padding: 18px;
+  }
+
+  .creative-op-mvp-modal {
+    padding-inline: 8px;
+  }
+
+  .creative-op-mvp-modal-header {
+    padding: 24px 60px 19px 20px;
+  }
+
+  .creative-op-mvp-modal-close {
+    top: 18px;
+    right: 18px;
+  }
+
+  .creative-op-mvp-checklist {
+    padding: 8px 20px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .creative-op-mvp-modal-close {
+    transition: none !important;
+  }
+}

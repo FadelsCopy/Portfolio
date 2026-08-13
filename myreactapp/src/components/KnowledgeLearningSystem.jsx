@@ -1,11 +1,7 @@
 // src/components/KnowledgeLearningSystem.jsx
 
 import StageDeepDiveLayout, {
-  StageCard,
   StageFlow,
-  StageGrid,
-  StageHighlight,
-  StageList,
   StageSection,
 } from './StageDeepDiveLayout';
 
@@ -15,58 +11,165 @@ import StageDeepDiveLayout, {
 |--------------------------------------------------------------------------
 */
 
-const performanceHistoryFields = [
-  'Creative and variation',
-  'Persona',
-  'Angle',
-  'Concept',
-  'Hook',
-  'Format',
-  'Creator',
-  'Proof',
-  'Offer',
-  'Performance data',
-  'Diagnosis',
-  'Final decision',
-  'Main learning',
+const winnerFields = [
+  {
+    group: 'STRATEGY',
+    items: [
+      'Persona / sub-persona',
+      'Awareness level',
+      'Angle',
+      'Concept',
+    ],
+  },
+  {
+    group: 'MESSAGE',
+    items: [
+      'Hook / opening',
+      'Narrative',
+      'Mechanism / belief shift',
+      'Proof',
+    ],
+  },
+  {
+    group: 'EXECUTION',
+    items: [
+      'Format',
+      'Creator / delivery style',
+      'Visual / static layout',
+      'Offer + CTA',
+    ],
+  },
+  {
+    group: 'PERFORMANCE',
+    items: [
+      'Spend + key metrics',
+      'Iteration history',
+      'Scaling result',
+      'Fatigue / ceiling',
+    ],
+  },
 ];
 
-const winningAndLosingPatterns = [
-  'Winning and losing personas',
-  'Winning and losing angles',
-  'Strong and weak concepts',
-  'Strong and weak hooks',
-  'High-performing formats',
-  'Creator performance',
-  'Proof that increased belief',
-  'Offers and CTAs',
-  'Iteration outcomes',
-  'Scaling results',
+const loserFields = [
+  {
+    group: 'WHAT FAILED',
+    items: [
+      'Persona / audience fit',
+      'Angle / concept',
+      'Hook / narrative',
+      'Proof / offer',
+    ],
+  },
+  {
+    group: 'EXECUTION',
+    items: [
+      'Creator fit',
+      'Visual / static direction',
+      'Editing / pacing',
+      'Production mistake',
+    ],
+  },
+  {
+    group: 'INTERFERENCE',
+    items: [
+      'Landing page / funnel',
+      'Offer mismatch',
+      'Tracking / delivery issue',
+      'Insufficient signal',
+    ],
+  },
+  {
+    group: 'NEXT DECISION',
+    items: [
+      'Do not repeat',
+      'Salvageable element',
+      'Retest condition',
+      'Main learning',
+    ],
+  },
 ];
 
-const reusableKnowledgeDestinations = [
-  'Research',
-  'Persona development',
-  'Angle development',
-  'Concept creation',
-  'Briefing',
-  'Iteration',
-  'Scaling',
+const lossTypes = [
+  {
+    label: 'MESSAGE FAILURE',
+    description:
+      'The idea was represented fairly, but the angle, concept, hook, proof, or message did not create enough response.',
+  },
+  {
+    label: 'EXECUTION FAILURE',
+    description:
+      'The strategic idea may still be valid, but creator fit, visual treatment, pacing, editing, or production weakened the test.',
+  },
+  {
+    label: 'SYSTEM INTERFERENCE',
+    description:
+      'Audience, offer, landing page, delivery, tracking, or another external variable contaminated the result.',
+  },
+  {
+    label: 'INCONCLUSIVE',
+    description:
+      'The test did not generate enough reliable evidence to label the creative idea a winner or loser.',
+  },
 ];
 
-const lightweightSystemRequirements = [
-  'Consistent creative tracker',
-  'Learning log',
-  'Naming structure',
-  'Central knowledge library',
+const reuseStages = [
+  {
+    number: '01',
+    title: 'Research',
+    description:
+      'Feed new objections, language, questions, proof gaps, and customer reactions back into the research library.',
+  },
+  {
+    number: '02',
+    title: 'Personas + Angles',
+    description:
+      'Increase confidence in proven persona-angle combinations, deprioritize weak ones, and create adjacent angles from repeated winners.',
+  },
+  {
+    number: '03',
+    title: 'Concept Development',
+    description:
+      'Recombine proven hooks, narratives, proof, formats, and visual patterns instead of restarting from a blank page.',
+  },
+  {
+    number: '04',
+    title: 'Creative Briefing',
+    description:
+      'Bake proven message and execution patterns into new briefs while explicitly flagging known failure patterns to avoid.',
+  },
+  {
+    number: '05',
+    title: 'Production',
+    description:
+      'Repeat creator, visual, editing, and production choices that consistently help performance and remove recurring production mistakes.',
+  },
+  {
+    number: '06',
+    title: 'Iteration + Scaling',
+    description:
+      'Use the library to decide what to preserve, what variable to change next, and how to expand proven structures without losing the winner.',
+  },
 ];
 
-const outputs = [
-  'Creative performance history',
-  'Winning and losing pattern library',
-  'Reusable insight library',
-  'Updated creative tracker',
-  'Clear record of what should be repeated, improved, or avoided',
+const learningStrength = [
+  {
+    level: 'SIGNAL',
+    title: 'One test',
+    description:
+      'Useful evidence, but not enough to turn into a universal rule.',
+  },
+  {
+    level: 'PATTERN',
+    title: 'Repeated across variants',
+    description:
+      'The same behavior appears across multiple controlled creative executions.',
+  },
+  {
+    level: 'PRINCIPLE',
+    title: 'Repeated across contexts',
+    description:
+      'A durable learning that can guide future creative decisions with higher confidence.',
+  },
 ];
 
 /*
@@ -75,195 +178,207 @@ const outputs = [
 |--------------------------------------------------------------------------
 */
 
-export default function KnowledgeLearningSystem({ stage, onBack }) {
+export default function KnowledgeLearningSystem({
+  stage,
+  onBack,
+}) {
   return (
     <StageDeepDiveLayout
       stage={stage}
       onBack={onBack}
       eyebrow="SYSTEM MEMORY"
       title="Knowledge & Learning System"
-      introduction="Every completed test adds new knowledge to the creative system. The goal is to document what worked, what failed, why it happened, and how that learning should influence future creative decisions."
+      introduction="Every test should make the next creative cycle smarter. Winners, losers, production mistakes, and reusable patterns are stored with enough context to guide future decisions."
       process={[
         'Every Test',
-        'Capture the Learning',
-        'Store the Pattern',
-        'Reuse It in the Next Creative Cycle',
+        'Save Winners + Losers',
+        'Extract Patterns',
+        'Feed the Next Creative Cycle',
       ]}
-      outputs={outputs}
-      outputTitle="Knowledge & Learning System Output"
     >
       <StageSection
         number="00"
-        navTitle="System Overview"
-        title="Knowledge & Learning System"
-        description="Iteration and Scaling both feed the Knowledge & Learning System so every completed test can improve future creative decisions."
+        navTitle="Winning Knowledge"
+        title="Winning Knowledge Library"
+        description="Save more than the winning asset. Save the strategic context, execution pattern, performance, and reason it worked."
       >
-        <StageHighlight
-          title="Continuous Learning Flow"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'Iteration',
-              'Knowledge & Learning System',
-              'Scaling',
-            ]}
-          />
-        </StageHighlight>
+        <div className="kls-operating-question">
+          <span>WINNER RECORD</span>
+          <h3>
+            What exactly worked, under what conditions, and what should we
+            preserve or expand?
+          </h3>
 
-        <StageGrid columns={2}>
-          <StageCard
-            title="Purpose"
-            description="Document what worked, what failed, why it happened, and how that learning should influence future creative decisions."
-          />
+          <div className="kls-operating-flow">
+            <StageFlow
+              items={[
+                'Winning Asset',
+                'Strategic Context',
+                'Performance',
+                'Diagnosis',
+                'Reuse Instruction',
+              ]}
+            />
+          </div>
+        </div>
 
-          <StageHighlight title="Core Principle">
+        <div className="kls-field-grid is-winner">
+          {winnerFields.map((group) => (
+            <article key={group.group}>
+              <span>{group.group}</span>
+
+              <div>
+                {group.items.map((item) => (
+                  <p key={item}>
+                    <b>✓</b>
+                    {item}
+                  </p>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="kls-diagnosis-strip is-winner">
+          <span>THE PART THAT MAKES THE LIBRARY USEFUL</span>
+
+          <div>
+            <strong>Why did it win?</strong>
             <p>
-              Every completed test adds new knowledge to the creative
-              system.
+              Record the strongest likely driver, what must be preserved,
+              what can be changed safely, and the next expansion opportunity.
             </p>
-          </StageHighlight>
-        </StageGrid>
+          </div>
+        </div>
       </StageSection>
 
       <StageSection
         number="01"
-        navTitle="Test History"
-        title="Performance and Test History"
-        description="Store the key information from every creative test."
+        navTitle="Losing Knowledge"
+        title="Losing Knowledge Library"
+        description="A losing creative still has value when the failure is diagnosed correctly and the reusable learning is saved."
       >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Information Stored"
-            description="Every completed test is recorded with its strategic context, performance, diagnosis, decision, and learning."
-          >
-            <StageList items={performanceHistoryFields} />
-          </StageCard>
+        <div className="kls-operating-question is-loss">
+          <span>LOSER RECORD</span>
+          <h3>
+            What failed, why did it fail, and what should we avoid, salvage,
+            or retest?
+          </h3>
 
-          <StageHighlight
-            title="Test Record Flow"
-            type="success"
-          >
+          <div className="kls-operating-flow">
             <StageFlow
               items={[
-                'Creative and Variation',
-                'Strategic Context',
-                'Performance Data',
+                'Losing Asset',
+                'Failure Type',
+                'Evidence',
                 'Diagnosis',
-                'Final Decision',
-                'Main Learning',
+                'Next Rule',
               ]}
             />
-          </StageHighlight>
-        </StageGrid>
+          </div>
+        </div>
+
+        <div className="kls-field-grid is-loss">
+          {loserFields.map((group) => (
+            <article key={group.group}>
+              <span>{group.group}</span>
+
+              <div>
+                {group.items.map((item) => (
+                  <p key={item}>
+                    <b>×</b>
+                    {item}
+                  </p>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="kls-loss-types">
+          {lossTypes.map((item) => (
+            <article key={item.label}>
+              <span>{item.label}</span>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="kls-diagnosis-strip is-loss">
+          <span>IMPORTANT DISTINCTION</span>
+
+          <div>
+            <strong>Do not confuse a bad test with a bad idea.</strong>
+            <p>
+              Production mistakes, weak creator fit, poor delivery, funnel
+              interference, or insufficient signal should not automatically
+              become a permanent “concept failed” rule.
+            </p>
+          </div>
+        </div>
       </StageSection>
 
       <StageSection
         number="02"
-        navTitle="Patterns"
-        title="Winning and Losing Patterns"
-        description="Track recurring patterns across creative strategy, execution, iteration, and scaling."
+        navTitle="Reuse the Learning"
+        title="Turn Learning Into Better Future Creative"
+        description="The library only matters if it changes what gets researched, prioritized, created, briefed, produced, iterated, and scaled next."
       >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Patterns Tracked"
-            description="Recurring performance signals are organized across the major creative variables."
-          >
-            <StageList items={winningAndLosingPatterns} />
-          </StageCard>
+        <div className="kls-reuse-flow">
+          <StageFlow
+            items={[
+              'Winners + Losers',
+              'Extract Learning',
+              'Build Pattern Library',
+              'Update Decisions',
+              'Next Creative Cycle',
+            ]}
+          />
+        </div>
 
-          <StageHighlight title="Pattern Objective">
+        <div className="kls-reuse-grid">
+          {reuseStages.map((item) => (
+            <article key={item.number}>
+              <span>{item.number}</span>
+
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="kls-strength-block">
+          <div className="kls-strength-copy">
+            <span>LEARNING CONFIDENCE</span>
+            <h3>
+              One result is a signal. Repetition turns it into a pattern.
+            </h3>
             <p>
-              The system creates a clear record of what should be repeated,
-              improved, or avoided.
+              This prevents the system from overreacting to one ad and
+              treating every isolated result as a permanent creative rule.
             </p>
-          </StageHighlight>
-        </StageGrid>
-      </StageSection>
+          </div>
 
-      <StageSection
-        number="03"
-        navTitle="Reusable Knowledge"
-        title="Reusable Creative Knowledge"
-        description="Organize the strongest learnings so they can be reused throughout the next creative cycle."
-      >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Where the Knowledge Is Reused"
-            description="The strongest learnings return to the relevant strategic and execution stages."
-          >
-            <StageList items={reusableKnowledgeDestinations} />
-          </StageCard>
+          <div className="kls-strength-grid">
+            {learningStrength.map((item) => (
+              <article key={item.level}>
+                <span>{item.level}</span>
+                <strong>{item.title}</strong>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
 
-          <StageHighlight
-            title="Reusable Knowledge Flow"
-            type="success"
-          >
-            <StageFlow
-              items={[
-                'Every Test',
-                'Capture the Learning',
-                'Store the Pattern',
-                'Reuse It in the Next Creative Cycle',
-              ]}
-            />
-          </StageHighlight>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="04"
-        navTitle="System Structure"
-        title="Lightweight System Structure"
-        description="This stage does not require a full SOP."
-      >
-        <StageGrid columns={2}>
-          <StageCard
-            title="What the Stage Needs"
-            description="The knowledge layer should remain lightweight and consistent."
-          >
-            <StageList items={lightweightSystemRequirements} />
-          </StageCard>
-
-          <StageHighlight
-            title="Documentation Boundary"
-            type="warning"
-          >
-            <p>
-              This stage does not require a full SOP. It only needs a
-              consistent creative tracker, learning log, naming structure,
-              and central knowledge library.
-            </p>
-          </StageHighlight>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="05"
-        navTitle="Final Output"
-        title="Final Output"
-        description="The Knowledge & Learning System preserves creative history, recurring patterns, reusable insights, and clear future direction."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="System Outputs">
-            <StageList items={outputs} />
-          </StageCard>
-
-          <StageHighlight
-            title="Continuous Creative Cycle"
-            type="success"
-          >
-            <StageFlow
-              items={[
-                'Creative Test',
-                'Performance History',
-                'Winning and Losing Patterns',
-                'Reusable Knowledge',
-                'Next Creative Cycle',
-              ]}
-            />
-          </StageHighlight>
-        </StageGrid>
+        <div className="kls-final-rule">
+          <span>CORE PRINCIPLE</span>
+          <strong>
+            Every dollar spent on creative should leave the system smarter
+            than it was before the test.
+          </strong>
+        </div>
       </StageSection>
     </StageDeepDiveLayout>
   );

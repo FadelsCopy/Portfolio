@@ -46,6 +46,29 @@ const personaToAngleQuestions = [
   'What would happen if they delayed taking action?',
 ];
 
+const angleDefinition = [
+  {
+    label: 'ANGLE',
+    value:
+      'The persuasive lens used to frame the product for a specific persona.',
+  },
+  {
+    label: 'NOT A HOOK',
+    value:
+      'A hook is the opening attention device used to enter the angle.',
+  },
+  {
+    label: 'NOT A CONCEPT',
+    value:
+      'A concept is the creative idea used to express the angle.',
+  },
+  {
+    label: 'NOT A FORMAT',
+    value:
+      'UGC, static, VSL, podcast, native, etc. are execution formats.',
+  },
+];
+
 const problemQuestions = [
   'What problem is the persona trying to solve?',
   'How does it appear in everyday life?',
@@ -285,6 +308,144 @@ const opportunityCostTerritories = [
   'Cost of waiting',
 ];
 
+const angleFamilies = [
+  {
+    number: '01',
+    navTitle: 'Problem',
+    title: 'Problem Angles',
+    description:
+      'Focus on what the customer is currently experiencing and why it matters.',
+    questions: problemQuestions,
+    territories: problemTerritories,
+    tone: 'red',
+  },
+  {
+    number: '02',
+    navTitle: 'Fear',
+    title: 'Fear Angles',
+    description:
+      'Focus on what the customer worries may happen when the problem continues or becomes worse.',
+    questions: fearQuestions,
+    territories: fearTerritories,
+    tone: 'orange',
+    boundaryTitle: 'Fear-Angle Boundary',
+    boundary:
+      'Fear angles should be grounded in genuine customer concerns rather than manufactured or exaggerated threats.',
+  },
+  {
+    number: '03',
+    navTitle: 'Desire',
+    title: 'Desire Angles',
+    description:
+      'Focus on the result, experience, or emotional state the customer wants to achieve.',
+    questions: desireQuestions,
+    territories: desireTerritories,
+    tone: 'lime',
+  },
+  {
+    number: '04',
+    navTitle: 'Identity',
+    title: 'Identity Angles',
+    description:
+      'Focus on who the customer believes they are, who they fear becoming, and who they want to become or recover.',
+    questions: identityQuestions,
+    territories: identityTerritories,
+    tone: 'purple',
+  },
+  {
+    number: '05',
+    navTitle: 'Transformation',
+    title: 'Transformation Angles',
+    description:
+      'Focus on the movement between the customer’s current condition and desired condition.',
+    questions: transformationQuestions,
+    territories: transformationTerritories,
+    tone: 'cyan',
+  },
+  {
+    number: '06',
+    navTitle: 'Mechanism',
+    title: 'Mechanism Angles',
+    description:
+      'Explain why the problem happens, why common solutions fail, or why the product works differently.',
+    questions: mechanismQuestions,
+    territories: mechanismTerritories,
+    tone: 'blue',
+  },
+  {
+    number: '07',
+    navTitle: 'Curiosity',
+    title: 'Curiosity Angles',
+    description:
+      'Focus on a relevant discovery, unexpected connection, hidden cause, or unanswered question.',
+    questions: curiosityQuestions,
+    territories: curiosityTerritories,
+    tone: 'pink',
+    boundaryTitle: 'Curiosity Boundary',
+    boundary:
+      'The curiosity must lead to a meaningful explanation rather than an empty clickbait promise.',
+  },
+  {
+    number: '08',
+    navTitle: 'Contrarian',
+    title: 'Contrarian Angles',
+    description:
+      'Challenge common advice, category assumptions, or conventional approaches.',
+    questions: contrarianQuestions,
+    territories: contrarianTerritories,
+    tone: 'yellow',
+    boundaryTitle: 'Contrarian Boundary',
+    boundary:
+      'A contrarian angle should be supported by reasoning and proof, not created only to attract attention.',
+  },
+  {
+    number: '09',
+    navTitle: 'Proof',
+    title: 'Proof Angles',
+    description:
+      'Lead with evidence that supports the product, promise, mechanism, or transformation.',
+    questions: proofQuestions,
+    territories: proofTerritories,
+    tone: 'green',
+  },
+  {
+    number: '10',
+    navTitle: 'Comparison',
+    title: 'Comparison Angles',
+    description:
+      'Position the product against another product, solution, method, habit, or category.',
+    questions: comparisonQuestions,
+    territories: comparisonTerritories,
+    tone: 'violet',
+    boundaryTitle: 'Comparison Standard',
+    boundary:
+      'The comparison should focus on meaningful customer value rather than insignificant product differences.',
+  },
+  {
+    number: '11',
+    navTitle: 'Story',
+    title: 'Story Angles',
+    description:
+      'Communicate the message through a customer, founder, expert, product, or discovery narrative.',
+    questions: storyQuestions,
+    territories: storyTerritories,
+    tone: 'rose',
+  },
+  {
+    number: '12',
+    navTitle: 'Opportunity Cost',
+    title: 'Opportunity-Cost Angles',
+    description:
+      'Focus on what the customer continues to lose, miss, spend, or sacrifice by delaying action or choosing the wrong solution.',
+    questions: opportunityCostQuestions,
+    territories: opportunityCostTerritories,
+    tone: 'amber',
+    boundaryTitle: 'Opportunity-Cost Boundary',
+    boundary:
+      'The angle should make the trade-off of inaction visible without relying on artificial urgency.',
+  },
+];
+
 const outputs = [
   'Persona-specific angle territories',
   'Problem-angle directions',
@@ -376,19 +537,21 @@ const sops = [
 |--------------------------------------------------------------------------
 */
 
-export default function AngleDevelopment({ stage, onBack }) {
+export default function AngleDevelopment({
+  stage,
+  onBack,
+}) {
   return (
     <StageDeepDiveLayout
       stage={stage}
       onBack={onBack}
       eyebrow="PERSUASIVE DIRECTION SYSTEM"
       title="Angle Development"
-      introduction="After defining and prioritizing the personas, I translate the strongest insights attached to each persona into different persuasive angles. An angle is the strategic lens through which the product is presented. It determines which problem, desire, fear, belief, mechanism, comparison, or opportunity the creative focuses on."
+      introduction="After defining the persona, I map multiple persuasive territories from the strongest persona-specific insights. An angle is the strategic lens through which the product is presented — not the hook, concept, format, or final execution."
       process={[
-        'Research',
-        'Insights',
         'Persona',
-        'Angle',
+        'Relevant Insights',
+        'Angle Territories',
         'Concept',
         'Hook',
         'Execution',
@@ -400,307 +563,93 @@ export default function AngleDevelopment({ stage, onBack }) {
     >
       <StageSection
         number="00"
-        navTitle="Persona Mapping"
-        title="Persona-to-Angle Mapping"
-        description="Connect each persona and sub-persona to the insights most relevant to their situation and buying logic."
+        navTitle="Persona → Angle"
+        title="How Persona Insights Become Angles"
+        description="One persona can support multiple angle territories. I map the persona’s strongest pains, desires, fears, beliefs, mechanisms, proof needs, stories, and trade-offs into distinct persuasive lenses."
       >
-        <StageHighlight
-          title="Strategic Sequence"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'Research',
-              'Insights',
-              'Persona',
-              'Angle',
-              'Concept',
-              'Hook',
-              'Execution',
-            ]}
-          />
-        </StageHighlight>
-
-        <div style={{ marginTop: '12px' }}>
-          <StageGrid columns={2}>
-            <StageCard
-              title="What I Map"
-              description="The evidence and customer insight territories that may support an angle."
-            >
-              <StageList items={personaToAngleInputs} />
-            </StageCard>
-
-            <StageCard
-              title="Core Questions"
-              description="Determine which persuasive directions matter most to the selected persona."
-            >
-              <StageList items={personaToAngleQuestions} />
-            </StageCard>
-          </StageGrid>
+        <div className="angle-definition-grid">
+          {angleDefinition.map((item) => (
+            <article key={item.label}>
+              <span>{item.label}</span>
+              <p>{item.value}</p>
+            </article>
+          ))}
         </div>
 
-        <StageHighlight title="Output">
-          <p>
-            The output is a collection of relevant angle territories for
-            each persona rather than one generic message for the entire
-            market.
-          </p>
-        </StageHighlight>
-      </StageSection>
+        <div className="angle-mapping-flow">
+          <StageFlow
+            items={[
+              'Persona',
+              'Relevant Insight',
+              'Persuasive Lens',
+              'Angle Territory',
+            ]}
+          />
+        </div>
 
-      <StageSection
-        number="01"
-        navTitle="Problem"
-        title="Problem Angles"
-        description="Problem angles focus on what the customer is currently experiencing and why it matters."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Core Questions">
-            <StageList items={problemQuestions} />
-          </StageCard>
+        <div className="angle-mapping-grid">
+          <article>
+            <span>WHAT I MAP FROM THE PERSONA</span>
+            <StageList items={personaToAngleInputs} />
+          </article>
 
-          <StageCard title="What I Organize">
-            <StageList items={problemTerritories} />
-          </StageCard>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="02"
-        navTitle="Fear"
-        title="Fear Angles"
-        description="Fear angles focus on what the customer worries may happen when the problem continues or becomes worse."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Core Questions">
-            <StageList items={fearQuestions} />
-          </StageCard>
-
-          <StageCard title="What I Organize">
-            <StageList items={fearTerritories} />
-          </StageCard>
-        </StageGrid>
+          <article>
+            <span>QUESTIONS I USE TO OPEN TERRITORIES</span>
+            <StageList items={personaToAngleQuestions} />
+          </article>
+        </div>
 
         <StageHighlight
-          title="Fear-Angle Boundary"
-          type="warning"
+          title="Output"
+          type="success"
         >
           <p>
-            Fear angles should be grounded in genuine customer concerns
-            rather than manufactured or exaggerated threats.
+            The result is not one generic message. It is a map of multiple
+            persona-specific persuasive territories ready to be qualified
+            and prioritized in the next stage.
           </p>
         </StageHighlight>
       </StageSection>
 
-      <StageSection
-        number="03"
-        navTitle="Desire"
-        title="Desire Angles"
-        description="Desire angles focus on the result, experience, or emotional state the customer wants to achieve."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Core Questions">
-            <StageList items={desireQuestions} />
-          </StageCard>
-
-          <StageCard title="What I Organize">
-            <StageList items={desireTerritories} />
-          </StageCard>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="04"
-        navTitle="Identity"
-        title="Identity Angles"
-        description="Identity angles focus on who the customer believes they are, who they fear becoming, and who they want to become or recover."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Core Questions">
-            <StageList items={identityQuestions} />
-          </StageCard>
-
-          <StageCard title="What I Organize">
-            <StageList items={identityTerritories} />
-          </StageCard>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="05"
-        navTitle="Transformation"
-        title="Transformation Angles"
-        description="Transformation angles focus on the movement between the customer’s current condition and desired condition."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Core Questions">
-            <StageList items={transformationQuestions} />
-          </StageCard>
-
-          <StageCard title="What I Organize">
-            <StageList items={transformationTerritories} />
-          </StageCard>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="06"
-        navTitle="Mechanism"
-        title="Mechanism Angles"
-        description="Mechanism angles explain why the problem happens, why common solutions fail, or why the product works differently."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Core Questions">
-            <StageList items={mechanismQuestions} />
-          </StageCard>
-
-          <StageCard title="What I Organize">
-            <StageList items={mechanismTerritories} />
-          </StageCard>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="07"
-        navTitle="Curiosity"
-        title="Curiosity Angles"
-        description="Curiosity angles focus on a relevant discovery, unexpected connection, hidden cause, or unanswered question."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Core Questions">
-            <StageList items={curiosityQuestions} />
-          </StageCard>
-
-          <StageCard title="What I Organize">
-            <StageList items={curiosityTerritories} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight
-          title="Curiosity Boundary"
-          type="warning"
+      {angleFamilies.map((family) => (
+        <StageSection
+          key={family.number}
+          number={family.number}
+          navTitle={family.navTitle}
+          title={family.title}
+          description={family.description}
+          className={`angle-family-section is-${family.tone}`}
         >
-          <p>
-            The curiosity must lead to a meaningful explanation rather than
-            an empty clickbait promise.
-          </p>
-        </StageHighlight>
-      </StageSection>
+          <div className="angle-family-layout">
+            <article className="angle-family-panel is-questions">
+              <header>
+                <span>CORE QUESTIONS</span>
+                <h3>What I ask</h3>
+              </header>
 
-      <StageSection
-        number="08"
-        navTitle="Contrarian"
-        title="Contrarian Angles"
-        description="Contrarian angles challenge common advice, category assumptions, or conventional approaches."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Core Questions">
-            <StageList items={contrarianQuestions} />
-          </StageCard>
+              <StageList items={family.questions} />
+            </article>
 
-          <StageCard title="What I Organize">
-            <StageList items={contrarianTerritories} />
-          </StageCard>
-        </StageGrid>
+            <article className="angle-family-panel is-territories">
+              <header>
+                <span>ANGLE TERRITORIES</span>
+                <h3>What I map</h3>
+              </header>
 
-        <StageHighlight
-          title="Contrarian Boundary"
-          type="warning"
-        >
-          <p>
-            A contrarian angle should be supported by reasoning and proof,
-            not created only to attract attention.
-          </p>
-        </StageHighlight>
-      </StageSection>
+              <StageList items={family.territories} />
+            </article>
+          </div>
 
-      <StageSection
-        number="09"
-        navTitle="Proof"
-        title="Proof Angles"
-        description="Proof angles lead with evidence that supports the product, promise, mechanism, or transformation."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Core Questions">
-            <StageList items={proofQuestions} />
-          </StageCard>
-
-          <StageCard title="What I Organize">
-            <StageList items={proofTerritories} />
-          </StageCard>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="10"
-        navTitle="Comparison"
-        title="Comparison Angles"
-        description="Comparison angles position the product against another product, solution, method, habit, or category."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Core Questions">
-            <StageList items={comparisonQuestions} />
-          </StageCard>
-
-          <StageCard title="What I Organize">
-            <StageList items={comparisonTerritories} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight
-          title="Comparison Standard"
-          type="warning"
-        >
-          <p>
-            The comparison should focus on meaningful customer value rather
-            than insignificant product differences.
-          </p>
-        </StageHighlight>
-      </StageSection>
-
-      <StageSection
-        number="11"
-        navTitle="Story"
-        title="Story Angles"
-        description="Story angles communicate the message through a customer, founder, expert, product, or discovery narrative."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Core Questions">
-            <StageList items={storyQuestions} />
-          </StageCard>
-
-          <StageCard title="What I Organize">
-            <StageList items={storyTerritories} />
-          </StageCard>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="12"
-        navTitle="Opportunity Cost"
-        title="Opportunity-Cost Angles"
-        description="Opportunity-cost angles focus on what the customer continues to lose, miss, spend, or sacrifice by delaying action or choosing the wrong solution."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Core Questions">
-            <StageList items={opportunityCostQuestions} />
-          </StageCard>
-
-          <StageCard title="What I Organize">
-            <StageList items={opportunityCostTerritories} />
-          </StageCard>
-        </StageGrid>
-
-        <StageHighlight
-          title="Opportunity-Cost Boundary"
-          type="warning"
-        >
-          <p>
-            The angle should make the trade-off of inaction visible without
-            relying on artificial urgency.
-          </p>
-        </StageHighlight>
-      </StageSection>
+          {family.boundary && (
+            <StageHighlight
+              title={family.boundaryTitle}
+              type="warning"
+            >
+              <p>{family.boundary}</p>
+            </StageHighlight>
+          )}
+        </StageSection>
+      ))}
     </StageDeepDiveLayout>
   );
 }

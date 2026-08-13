@@ -272,8 +272,8 @@ const introItemReveal = {
 | structure while re-using the existing card visual language.
 |
 | Every node that maps to a real stage id stays fully clickable and opens
-| the exact same existing deep-dive. "Need MVP?" and "Kill" are visual
-| logic only and are intentionally not clickable.
+| the exact same existing deep-dive. "Need MVP?" opens a compact decision
+| checklist modal. "Kill" remains visual logic only and is not clickable.
 |
 */
 
@@ -296,6 +296,34 @@ const flowLabels = {
 
 const GATE_COLOR = '#5c9bff';
 const KILL_COLOR = '#ff5c5c';
+
+const MVP_DECISION_CHECKS = [
+  {
+    question: 'Is full production expensive?',
+    description:
+      'Would the real asset require meaningful budget, creators, shooting, animation, locations, or other resources?',
+  },
+  {
+    question: 'Is full production slow or complex?',
+    description:
+      'Would it take significant time or coordination before we can get the concept live?',
+  },
+  {
+    question: 'Is the core concept still unproven?',
+    description:
+      'Are we testing a genuinely new idea, mechanism, story, creative direction, or execution we do not have evidence for yet?',
+  },
+  {
+    question: 'Can we test the same core idea with a cheaper version?',
+    description:
+      'Can we simplify the production without changing what we are actually trying to validate?',
+  },
+  {
+    question: 'Can the MVP give us a clear go / no-go decision?',
+    description:
+      'Will the result tell us whether the concept deserves full production, or would the MVP be too different from the final asset to teach us anything useful?',
+  },
+];
 
 // Fixed design-pixel canvas. The desktop diagram is drawn once at this
 // size and centered — below the responsive breakpoint we swap to a
@@ -591,9 +619,16 @@ function FlowConnector({ connector }) {
   );
 }
 
-function FlowNode({ node, stage, onOpen, index }) {
+function FlowNode({
+  node,
+  stage,
+  onOpen,
+  onOpenMvp,
+  index,
+}) {
   const isDiamond = node.shape === 'diamond';
-  const isInteractive = Boolean(node.id);
+  const isMvpGate = node.key === 'need-mvp';
+  const isInteractive = Boolean(node.id) || isMvpGate;
   const label = node.label || flowLabels[node.id] || stage?.title;
 
   const color =
@@ -691,15 +726,28 @@ function FlowNode({ node, stage, onOpen, index }) {
   );
 
   if (isInteractive) {
+    const handleClick = () => {
+      if (isMvpGate) {
+        onOpenMvp?.();
+        return;
+      }
+
+      onOpen(node.id);
+    };
+
     return (
       <motion.button
         type="button"
         className={`creative-op-flow-node ${
           isDiamond ? 'is-diamond' : 'is-rect'
-        }`}
+        } ${isMvpGate ? 'is-gate is-mvp-gate' : ''}`}
         style={style}
-        onClick={() => onOpen(node.id)}
-        aria-label={`Open ${stage?.title || label}`}
+        onClick={handleClick}
+        aria-label={
+          isMvpGate
+            ? 'Open MVP decision checklist'
+            : `Open ${stage?.title || label}`
+        }
         initial={{
           opacity: 0,
           y: 22,
@@ -759,7 +807,10 @@ function FlowNode({ node, stage, onOpen, index }) {
   );
 }
 
-function CreativeStrategyFlowCanvas({ onOpenStage }) {
+function CreativeStrategyFlowCanvas({
+  onOpenStage,
+  onOpenMvp,
+}) {
   return (
     <div
       className="creative-op-flow-canvas"
@@ -806,6 +857,7 @@ function CreativeStrategyFlowCanvas({ onOpenStage }) {
           node={node}
           stage={node.id ? stageById[node.id] : null}
           onOpen={onOpenStage}
+          onOpenMvp={onOpenMvp}
           index={index}
         />
       ))}
@@ -898,7 +950,10 @@ function CreativeStrategyFlowMobile({ onOpenStage }) {
   );
 }
 
-function CreativeStrategyFlow({ onOpenStage }) {
+function CreativeStrategyFlow({
+  onOpenStage,
+  onOpenMvp,
+}) {
   return (
     <motion.div
       className="creative-op-flow"
@@ -907,6 +962,7 @@ function CreativeStrategyFlow({ onOpenStage }) {
     >
       <CreativeStrategyFlowCanvas
         onOpenStage={onOpenStage}
+        onOpenMvp={onOpenMvp}
       />
       <CreativeStrategyFlowMobile onOpenStage={onOpenStage} />
     </motion.div>
@@ -978,6 +1034,118 @@ function KnowledgeLearningCard({ onOpenStage }) {
   );
 }
 
+
+function MvpDecisionModal({ open, onClose }) {
+  useEffect(() => {
+    if (!open) {
+      return undefined;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [open, onClose]);
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="creative-op-mvp-modal-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              onClose();
+            }
+          }}
+        >
+          <motion.section
+            className="creative-op-mvp-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="creative-op-mvp-modal-title"
+            initial={{
+              opacity: 0,
+              y: 18,
+              scale: 0.975,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              y: 10,
+              scale: 0.985,
+            }}
+            transition={{
+              duration: 0.34,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <div className="creative-op-mvp-modal-header">
+              <div>
+                <span className="creative-op-mvp-modal-kicker">
+                  MVP DECISION CHECK
+                </span>
+
+                <h2 id="creative-op-mvp-modal-title">
+                  Need MVP?
+                </h2>
+              </div>
+
+              <button
+                type="button"
+                className="creative-op-mvp-modal-close"
+                onClick={onClose}
+                aria-label="Close MVP decision checklist"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="creative-op-mvp-checklist">
+              {MVP_DECISION_CHECKS.map((check) => (
+                <article
+                  className="creative-op-mvp-check"
+                  key={check.question}
+                >
+                  <span
+                    className="creative-op-mvp-checkmark"
+                    aria-hidden="true"
+                  >
+                    ✓
+                  </span>
+
+                  <div>
+                    <h3>{check.question}</h3>
+                    <p>{check.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </motion.section>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 /*
 |--------------------------------------------------------------------------
 | MAIN STAGE GRID
@@ -985,6 +1153,7 @@ function KnowledgeLearningCard({ onOpenStage }) {
 */
 
 function StageGrid({ onOpenStage }) {
+  const [isMvpModalOpen, setIsMvpModalOpen] = useState(false);
   return (
     <motion.main
       key="creative-op-grid"
@@ -1070,6 +1239,7 @@ function StageGrid({ onOpenStage }) {
         >
           <CreativeStrategyFlow
             onOpenStage={onOpenStage}
+            onOpenMvp={() => setIsMvpModalOpen(true)}
           />
 
           <KnowledgeLearningCard
@@ -1077,6 +1247,11 @@ function StageGrid({ onOpenStage }) {
           />
         </motion.section>
       </section>
+
+      <MvpDecisionModal
+        open={isMvpModalOpen}
+        onClose={() => setIsMvpModalOpen(false)}
+      />
     </motion.main>
   );
 }

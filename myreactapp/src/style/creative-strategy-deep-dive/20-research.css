@@ -1,0 +1,436 @@
+/* ==========================================================================
+   RESEARCH — PRACTICAL INTERVIEW VERSION
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   WHERE I LOOK / WHAT I LOOK FOR
+   -------------------------------------------------------------------------- */
+
+.research-practical-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.research-practical-panel {
+  min-width: 0;
+  padding: 17px;
+  border: 1px solid var(--workspace-border);
+  border-radius: 12px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 37, 56, 0.92),
+      rgba(15, 27, 42, 0.9)
+    );
+}
+
+.research-practical-panel.is-signals {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--stage-color) 23%,
+      var(--workspace-border)
+    );
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--stage-color) 5%,
+        rgba(22, 37, 56, 0.92)
+      ),
+      rgba(15, 27, 42, 0.9)
+    );
+}
+
+.research-practical-panel > header {
+  margin-bottom: 13px;
+}
+
+.research-practical-panel > header span,
+.research-creative-tools > header span,
+.research-creative-deconstruct > header span,
+.research-capture-record > header span,
+.research-verification-panel > header span,
+.research-final-transition > div:first-child > span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--stage-color);
+  font-size: 0.5rem;
+  font-weight: 950;
+  letter-spacing: 0.14em;
+}
+
+.research-practical-panel > header h3,
+.research-creative-tools > header h3,
+.research-creative-deconstruct > header h3,
+.research-capture-record > header h3,
+.research-verification-panel > header h3 {
+  margin: 0;
+  color: #f4f7fa;
+  font-size: 0.88rem;
+  font-weight: 850;
+}
+
+/* --------------------------------------------------------------------------
+   COMPETITOR TYPES
+   -------------------------------------------------------------------------- */
+
+.research-competitor-types {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.research-competitor-types > div {
+  min-width: 0;
+  padding: 12px 13px;
+  border: 1px solid var(--workspace-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.research-competitor-types span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--stage-color);
+  font-size: 0.47rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+}
+
+.research-competitor-types strong {
+  color: #aeb9c8;
+  font-size: 0.66rem;
+  line-height: 1.4;
+  font-weight: 800;
+}
+
+/* --------------------------------------------------------------------------
+   CREATIVE RESEARCH
+   -------------------------------------------------------------------------- */
+
+.research-creative-stack {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+  gap: 12px;
+}
+
+.research-creative-tools,
+.research-creative-deconstruct {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--workspace-border);
+  border-radius: 13px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(21, 36, 54, 0.94),
+      rgba(14, 26, 41, 0.92)
+    );
+}
+
+.research-creative-tools {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--stage-color) 25%,
+      var(--workspace-border)
+    );
+}
+
+.research-creative-tools > header,
+.research-creative-deconstruct > header {
+  margin-bottom: 14px;
+}
+
+.research-creative-tools > header p {
+  margin: 7px 0 0;
+  color: #8493a7;
+  font-size: 0.66rem;
+  line-height: 1.5;
+}
+
+.research-tool-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.research-tool-cloud span {
+  padding: 7px 9px;
+  color: #b8c4d2;
+  border: 1px solid var(--workspace-border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.022);
+  font-size: 0.59rem;
+  font-weight: 800;
+}
+
+.research-tool-cloud span:nth-child(-n + 4) {
+  color: var(--stage-color);
+  border-color:
+    color-mix(
+      in srgb,
+      var(--stage-color) 24%,
+      var(--workspace-border)
+    );
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 4%,
+      rgba(255, 255, 255, 0.02)
+    );
+}
+
+.research-deconstruct-flow {
+  margin: 0 0 14px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  border: 1px solid var(--workspace-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.016);
+}
+
+.research-deconstruct-flow > div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.research-deconstruct-flow strong {
+  padding: 6px 8px;
+  color: #b9c4d1;
+  border: 1px solid var(--workspace-border);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.018);
+  font-size: 0.58rem;
+  font-weight: 850;
+}
+
+.research-deconstruct-flow i {
+  color: var(--stage-color);
+  font-style: normal;
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+/* --------------------------------------------------------------------------
+   FUNNEL
+   -------------------------------------------------------------------------- */
+
+.research-funnel-line {
+  margin-top: 12px;
+  padding: 13px 14px;
+  border: 1px solid var(--workspace-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.016);
+}
+
+/* --------------------------------------------------------------------------
+   CAPTURE SYSTEM
+   -------------------------------------------------------------------------- */
+
+.research-capture-system {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(220px, 0.65fr);
+  gap: 12px;
+}
+
+.research-capture-record,
+.research-verification-panel {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--workspace-border);
+  border-radius: 12px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 37, 56, 0.92),
+      rgba(15, 27, 42, 0.9)
+    );
+}
+
+.research-capture-record {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--stage-color) 24%,
+      var(--workspace-border)
+    );
+}
+
+.research-capture-record > header,
+.research-verification-panel > header {
+  margin-bottom: 13px;
+}
+
+.research-record-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.research-record-fields > div {
+  min-width: 0;
+  padding: 8px 9px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  border: 1px solid var(--workspace-border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.research-record-fields strong {
+  flex: 0 0 auto;
+  color: var(--stage-color);
+  font-family: monospace;
+  font-size: 0.5rem;
+}
+
+.research-record-fields span {
+  color: #a8b4c3;
+  font-size: 0.62rem;
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------------------------------
+   FINAL OUTPUT / TRANSITION
+   -------------------------------------------------------------------------- */
+
+.research-final-transition {
+  margin-top: 13px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.25fr);
+  gap: 20px;
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--stage-color) 30%,
+      var(--workspace-border)
+    );
+  border-radius: 13px;
+  background:
+    linear-gradient(
+      120deg,
+      color-mix(
+        in srgb,
+        var(--stage-color) 6%,
+        var(--workspace-panel)
+      ),
+      var(--workspace-panel)
+    );
+}
+
+.research-final-transition h3 {
+  margin: 0;
+  color: #f4f7fa;
+  font-size: 0.91rem;
+  line-height: 1.35;
+  font-weight: 850;
+}
+
+.research-final-transition p {
+  margin: 8px 0 0;
+  color: #8c9bad;
+  font-size: 0.68rem;
+  line-height: 1.55;
+}
+
+.research-output-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.research-output-list > div {
+  min-width: 0;
+  padding: 8px 9px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  border: 1px solid var(--workspace-border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.research-output-list strong {
+  flex: 0 0 auto;
+  color: var(--stage-color);
+  font-family: monospace;
+  font-size: 0.5rem;
+}
+
+.research-output-list span {
+  color: #a4b0c0;
+  font-size: 0.62rem;
+  line-height: 1.4;
+}
+
+.research-to-insights {
+  margin-top: 12px;
+  min-height: 52px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--stage-color) 26%,
+      var(--workspace-border)
+    );
+  border-radius: 11px;
+  background:
+    color-mix(
+      in srgb,
+      var(--stage-color) 4%,
+      rgba(255, 255, 255, 0.016)
+    );
+}
+
+.research-to-insights strong {
+  color: #edf3f8;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.research-to-insights span {
+  color: var(--stage-color);
+  font-size: 1rem;
+  font-weight: 950;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1200px) {
+  .research-creative-stack,
+  .research-capture-system,
+  .research-final-transition {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .research-practical-pair,
+  .research-competitor-types,
+  .research-output-list,
+  .research-record-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+

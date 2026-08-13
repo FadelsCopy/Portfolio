@@ -1,11 +1,7 @@
 // src/components/ProductionHandoff.jsx
 
 import StageDeepDiveLayout, {
-  StageCard,
   StageFlow,
-  StageGrid,
-  StageHighlight,
-  StageList,
   StageSection,
 } from './StageDeepDiveLayout';
 
@@ -15,57 +11,51 @@ import StageDeepDiveLayout, {
 |--------------------------------------------------------------------------
 */
 
-const productionHandoffItems = [
-  'Final approved brief',
-  'Required assets and references',
-  'Deliverables and variations',
-  'Non-negotiable strategic elements',
-  'Deadline and ownership',
-  'Clear file naming',
+const creatorChecks = [
+  'Concept + angle understood',
+  'Hook / opening understood',
+  'Script or talking points clear',
+  'References available',
+  'Required shots / deliverables clear',
+  'Deadline confirmed',
 ];
 
-const strategicQaChecks = [
-  'Target persona',
-  'Selected angle',
-  'Approved concept',
-  'Hook',
-  'Proof',
-  'Offer',
-  'CTA',
-  'Planned variation',
+const editorChecks = [
+  'Final brief + footage / assets received',
+  'Pacing / structure understood',
+  'Proof + product moments clear',
+  'CTA and end frame clear',
+  'Required variations understood',
+  'Deadline + naming confirmed',
 ];
 
-const launchAlignmentItems = [
-  'Which creatives are being tested',
-  'What changes between each variation',
-  'What remains controlled',
-  'Correct offer and landing page',
-  'Creative naming and tracking',
-  'Launch date and test context',
+const finalQaChecks = [
+  'Correct persona',
+  'Correct angle',
+  'Concept survived execution',
+  'Hook executed properly',
+  'Product / mechanism is clear',
+  'Proof is present where required',
+  'Offer + CTA are correct',
+  'Variations changed the intended variable',
+  'No obvious production mistakes',
+];
+
+const mediaBuyerHandoff = [
+  'Final approved creatives',
+  'Clear creative names',
+  'What each variation is testing',
+  'What should remain controlled',
+  'Correct destination / offer',
+  'Context needed for later analysis',
 ];
 
 const mediaBuyerOwnership = [
   'Campaign setup',
   'Budget',
   'Bidding',
-  'Placements',
-  'Audiences',
+  'Audience / placement',
   'Deployment',
-];
-
-const outputs = [
-  'Approved final assets',
-  'Clear creative and variation labels',
-  'Confirmed test structure',
-  'Launch context ready for analysis',
-];
-
-const sops = [
-  {
-    title: 'Production Handoff and Launch Alignment',
-    description:
-      'Defines how to hand off approved creatives, protect the strategic direction, confirm the test structure, and prepare the launch information required for later performance analysis.',
-  },
 ];
 
 /*
@@ -74,221 +64,202 @@ const sops = [
 |--------------------------------------------------------------------------
 */
 
-export default function ProductionHandoff({ stage, onBack }) {
+export default function ProductionHandoff({
+  stage,
+  onBack,
+}) {
   return (
     <StageDeepDiveLayout
       stage={stage}
       onBack={onBack}
-      eyebrow="HANDOFF & LAUNCH SYSTEM"
+      eyebrow="PRODUCTION + LAUNCH CONTROL"
       title="Production Handoff & Launch Alignment"
-      introduction="Once the creative is approved, I make sure the strategy survives production and the test is launched with enough structure to analyze later."
+      introduction="Make sure the approved creative strategy survives production and the correct asset is launched with the correct test context."
       process={[
-        'Approved Creative',
-        'Production Handoff',
-        'Strategic QA',
+        'Production Alignment',
+        'Final Creative QA',
         'Launch Alignment',
-        'Performance Data',
       ]}
-      outputs={outputs}
-      outputTitle="Launch-Ready Creative Test"
-      sops={sops}
-      sopDescription="The Production Handoff and Launch Alignment SOP defines how approved creative moves into launch without losing the strategy or test structure."
+      singlePage
     >
       <StageSection
         number="00"
-        navTitle="System Overview"
-        title="Production Handoff & Launch Alignment"
-        description="Protect the approved strategy, confirm the test structure, and prepare the creative for clean performance analysis."
-      >
-        <StageHighlight
-          title="Core Handoff Flow"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'Approved Creative',
-              'Production Handoff',
-              'Strategic QA',
-              'Launch Alignment',
-              'Performance Data',
-            ]}
-          />
-        </StageHighlight>
-
-        <StageGrid columns={2}>
-          <StageCard
-            title="Primary Objective"
-            description="Make sure the final asset and launch structure still reflect the approved strategic direction."
-          >
-            <StageList
-              items={[
-                'Protect the original strategy',
-                'Preserve the planned variation',
-                'Maintain clear ownership',
-                'Keep naming and tracking consistent',
-                'Prepare enough context for later analysis',
-              ]}
-            />
-          </StageCard>
-
-          <StageHighlight title="Operating Boundary">
-            <p>
-              The goal is not to manage every production or media-buying
-              detail. The goal is to make sure the strategy survives the
-              handoff and the creative test can be analyzed correctly later.
-            </p>
-          </StageHighlight>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="01"
         navTitle="Production Handoff"
-        title="Production Handoff"
-        description="Provide the production team with the final approved information required to deliver and organize the asset correctly."
+        title="Production Handoff & Launch Alignment"
+        description="Stay involved just enough to protect the strategy from brief to live ad."
       >
-        <StageGrid columns={2}>
-          <StageCard title="What I Provide">
-            <StageList items={productionHandoffItems} />
-          </StageCard>
+        <div className="production-handoff-board">
+          <div className="production-handoff-top">
+            <div>
+              <span>THE HIDDEN INTERVIEW QUESTION</span>
+              <h3>
+                Can I make sure the strategy survives production and the right
+                creative actually goes live?
+              </h3>
+            </div>
 
-          <StageHighlight
-            title="Handoff Standard"
-            type="success"
-          >
-            <p>
-              The handoff should make ownership, deadlines, deliverables,
-              variations, references, and strategic non-negotiables clear
-              before the asset moves toward launch.
-            </p>
-          </StageHighlight>
-        </StageGrid>
+            <div className="production-handoff-flow">
+              <StageFlow
+                items={[
+                  'Creator + Editor',
+                  'Final Creative QA',
+                  'Media Buyer',
+                  'Live Confirmation',
+                ]}
+              />
+            </div>
+          </div>
 
-        <StageHighlight title="Handoff Sequence">
-          <StageFlow
-            items={[
-              'Approved Brief',
-              'Required Assets',
-              'Deliverables',
-              'Ownership',
-              'File Naming',
-              'Final Delivery',
-            ]}
-          />
-        </StageHighlight>
-      </StageSection>
+          <section className="production-handoff-step">
+            <header className="production-handoff-step-header">
+              <span className="production-handoff-step-number">
+                01
+              </span>
 
-      <StageSection
-        number="02"
-        navTitle="Strategic QA"
-        title="Strategic QA"
-        description="Confirm that the final asset still matches the approved strategic direction before launch."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Final Strategic Checks">
-            <StageList items={strategicQaChecks} />
-          </StageCard>
+              <div>
+                <span>PRODUCTION ALIGNMENT</span>
+                <h3>Remove ambiguity before production starts</h3>
+              </div>
+            </header>
 
-          <StageHighlight
-            title="Strategic QA Purpose"
-            type="warning"
-          >
-            <p>
-              The goal is not to manage every production detail. It is to
-              prevent the original strategy from being lost during
-              execution.
-            </p>
-          </StageHighlight>
-        </StageGrid>
+            <div className="production-handoff-people-grid">
+              <article>
+                <div className="production-handoff-person-title">
+                  <span>CREATOR</span>
+                  <h4>What I make sure is clear</h4>
+                </div>
 
-        <StageHighlight
-          title="QA Logic"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'Final Asset',
-              'Persona Check',
-              'Angle and Concept Check',
-              'Hook and Proof Check',
-              'Offer and CTA Check',
-              'Variation Check',
-              'Approved for Launch',
-            ]}
-          />
-        </StageHighlight>
-      </StageSection>
+                <div className="production-handoff-checks">
+                  {creatorChecks.map((item) => (
+                    <span key={item}>
+                      <b>✓</b>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
 
-      <StageSection
-        number="03"
-        navTitle="Launch Alignment"
-        title="Launch Alignment"
-        description="Align with the media buyer on the creative test, the controlled variables, and the context needed for later analysis."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="What I Align On">
-            <StageList items={launchAlignmentItems} />
-          </StageCard>
+              <article>
+                <div className="production-handoff-person-title">
+                  <span>EDITOR</span>
+                  <h4>What I make sure is clear</h4>
+                </div>
 
-          <StageCard
-            title="Media Buyer Ownership"
-            description="The media buyer remains responsible for the campaign deployment."
-          >
-            <StageList items={mediaBuyerOwnership} />
-          </StageCard>
-        </StageGrid>
+                <div className="production-handoff-checks">
+                  {editorChecks.map((item) => (
+                    <span key={item}>
+                      <b>✓</b>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            </div>
 
-        <StageHighlight
-          title="Launch Alignment Rule"
-          type="warning"
-        >
-          <p>
-            The creative strategist confirms what is being tested and what
-            remains controlled. The media buyer owns campaign setup, budget,
-            bidding, placements, audiences, and deployment.
-          </p>
-        </StageHighlight>
+            <div className="production-handoff-rule">
+              <strong>MY JOB</strong>
+              <span>Remove ambiguity before production starts.</span>
+            </div>
+          </section>
 
-        <StageHighlight title="Test Structure">
-          <StageFlow
-            items={[
-              'Creative',
-              'Variation',
-              'Controlled Variables',
-              'Offer and Landing Page',
-              'Naming and Tracking',
-              'Launch Context',
-            ]}
-          />
-        </StageHighlight>
-      </StageSection>
+          <section className="production-handoff-step">
+            <header className="production-handoff-step-header">
+              <span className="production-handoff-step-number">
+                02
+              </span>
 
-      <StageSection
-        number="04"
-        navTitle="Final Output"
-        title="Final Output"
-        description="Prepare the approved assets, labels, test structure, and launch context required for Performance Analysis."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Launch-Ready Outputs">
-            <StageList items={outputs} />
-          </StageCard>
+              <div>
+                <span>FINAL CREATIVE QA</span>
+                <h3>Did the strategy survive production?</h3>
+              </div>
+            </header>
 
-          <StageHighlight
-            title="Transition to Analysis"
-            type="success"
-          >
-            <StageFlow
-              items={[
-                'Approved Final Assets',
-                'Clear Labels',
-                'Confirmed Test Structure',
-                'Launch Context',
-                'Performance Analysis',
-              ]}
-            />
-          </StageHighlight>
-        </StageGrid>
+            <div className="production-handoff-qa-grid">
+              {finalQaChecks.map((item) => (
+                <div
+                  className="production-handoff-qa-item"
+                  key={item}
+                >
+                  <span>✓</span>
+                  <strong>{item}</strong>
+                </div>
+              ))}
+            </div>
+
+            <div className="production-handoff-rule is-qa">
+              <strong>QA RULE</strong>
+              <span>
+                I am not checking whether the edit simply looks nice. I am
+                checking whether the approved strategy survived execution.
+              </span>
+            </div>
+          </section>
+
+          <section className="production-handoff-step">
+            <header className="production-handoff-step-header">
+              <span className="production-handoff-step-number">
+                03
+              </span>
+
+              <div>
+                <span>LAUNCH ALIGNMENT</span>
+                <h3>Give the media buyer the correct asset + test context</h3>
+              </div>
+            </header>
+
+            <div className="production-handoff-launch-grid">
+              <article>
+                <div className="production-handoff-person-title">
+                  <span>I PROVIDE</span>
+                  <h4>Creative + test context</h4>
+                </div>
+
+                <div className="production-handoff-checks">
+                  {mediaBuyerHandoff.map((item) => (
+                    <span key={item}>
+                      <b>✓</b>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
+
+              <article>
+                <div className="production-handoff-person-title">
+                  <span>MEDIA BUYER OWNS</span>
+                  <h4>Campaign deployment</h4>
+                </div>
+
+                <div className="production-handoff-checks">
+                  {mediaBuyerOwnership.map((item) => (
+                    <span key={item}>
+                      <b>→</b>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            </div>
+
+            <div className="production-handoff-live-check">
+              <span>FINAL LIVE CHECK</span>
+
+              <StageFlow
+                items={[
+                  'Approved Asset',
+                  'Correct Test Setup',
+                  'Correct Destination',
+                  'Naming + Tracking',
+                  'LIVE',
+                ]}
+              />
+
+              <strong>
+                Confirm the exact approved asset actually went live.
+              </strong>
+            </div>
+          </section>
+        </div>
       </StageSection>
     </StageDeepDiveLayout>
   );

@@ -1,11 +1,7 @@
 // src/components/MinimumViableCreativeTest.jsx
 
 import StageDeepDiveLayout, {
-  StageCard,
   StageFlow,
-  StageGrid,
-  StageHighlight,
-  StageList,
   StageSection,
 } from './StageDeepDiveLayout';
 
@@ -15,137 +11,133 @@ import StageDeepDiveLayout, {
 |--------------------------------------------------------------------------
 */
 
-const whenToUseMvp = [
-  'Full production is expensive or slow',
-  'The concept requires multiple creators, locations, or assets',
-  'The angle or mechanism is still uncertain',
-  'The visual idea has not been proven',
-  'The concept requires a long VSL, advertorial, or complex funnel',
-  'A simpler version can test the same core idea',
-  'The downside of producing the full concept and failing is meaningful',
+const preserveItems = [
+  'Target persona',
+  'Qualified angle',
+  'Core ad concept',
+  'Main hook direction',
+  'Core promise or mechanism',
+  'Proof required for credibility',
+  'Offer and destination when relevant',
 ];
 
-const whenToSkipMvp = [
-  'The finished asset is already cheap and fast to produce',
-  'The concept is a simple static or basic UGC ad',
-  'The concept is a minor iteration of a proven winner',
-  'A stripped-down version would not save meaningful time or money',
-  'Removing production quality would weaken the exact thing being tested',
+const removeItems = [
+  'Extra creators',
+  'Extra locations',
+  'Secondary scenes',
+  'Heavy editing',
+  'Polish that does not affect the concept',
+  'Long runtime when a shorter version can express the idea',
+  'Secondary variations that do not help validate the concept',
 ];
 
-const coreAssumptions = [
-  'The angle',
-  'The hook',
-  'The mechanism',
-  'The visual idea',
-  'The creator',
-  'The format',
-  'The proof',
-  'The offer',
-  'The advertorial or landing-page direction',
-];
-
-const possibleMvpVersions = [
-  'Static mock-up',
-  'Raw talking-head video',
-  'Rough UGC',
-  'Voiceover with stock footage',
-  'Slideshow',
-  'Short-form cutdown',
-  'AI prototype',
-  'Storyboard or animatic',
-  'One demonstration clip',
-  'One creator version',
-  'Lightweight advertorial',
-  'Basic landing-page variation',
-];
-
-const mvpLaunchRequirements = [
-  'A clear test objective',
-  'A defined audience',
-  'A realistic budget',
-  'A controlled offer and landing page',
-  'A small number of meaningful variations',
-  'Clear success and failure signals',
-];
-
-const fullProductionActions = [
-  'Produce the complete version',
-  'Improve the production quality',
-  'Expand the strongest hook or execution',
-  'Create planned variations',
-  'Prepare the concept for broader testing and scaling',
-];
-
-const reviseAndRetestAdjustments = [
-  'Changing the hook',
-  'Simplifying the mechanism',
-  'Strengthening the proof',
-  'Changing the creator',
-  'Improving the visual execution',
-  'Adjusting the format',
-  'Clarifying the offer',
-];
-
-const inconclusiveReasons = [
-  'The test did not spend enough',
-  'The execution did not fairly represent the concept',
-  'The wrong audience was used',
-  'The landing page or offer created interference',
-  'Too many variables changed',
-  'Tracking was unreliable',
-];
-
-const stopReasons = [
-  'The angle does not resonate',
-  'The core message is weak',
-  'The product connection feels forced',
-  'The concept cannot be expressed credibly',
-  'The available proof is insufficient',
-  'Better opportunities exist in the pipeline',
-];
-
-const finalStatuses = [
+const practicalMvpMethods = [
   {
-    title: 'Full Production',
+    type: 'STATIC MVP',
+    title: 'Static / image ad',
     description:
-      'The MVP proves that the core idea has enough potential to justify full investment.',
-    items: fullProductionActions,
+      'Use a fast static, native image, review layout, comparison, before and after, or headline-led image to test whether the angle and visual direction can earn attention.',
+    bestFor:
+      'Angle • headline • visual direction • proof • offer',
+    speed: 'FASTEST',
   },
   {
-    title: 'Revise and Retest',
+    type: 'AI STATIC',
+    title: 'AI image / composite',
     description:
-      'The MVP shows potential, but a specific weakness is limiting performance.',
-    items: reviseAndRetestAdjustments,
+      'Prototype a visual world, scenario, product moment, transformation, or expensive shoot idea with AI before committing to photography or full production.',
+    bestFor:
+      'Visual concept • scenario • transformation • product world',
+    speed: 'FAST',
   },
   {
-    title: 'Inconclusive',
+    type: 'AI VIDEO',
+    title: 'AI video prototype',
     description:
-      'The MVP did not produce a reliable enough signal to support a decision.',
-    items: inconclusiveReasons,
+      'Create a short AI-generated or AI-assisted version of the key scene, story, transformation, or product moment to validate the creative direction before a real shoot.',
+    bestFor:
+      'Story • visual sequence • transformation • scene concept',
+    speed: 'FAST',
   },
   {
-    title: 'Stop',
+    type: 'AI UGC',
+    title: 'AI UGC / avatar prototype',
     description:
-      'The concept does not show enough positive signal to justify additional investment.',
-    items: stopReasons,
+      'Use an AI creator or avatar to test the script, hook, argument, pacing, and creator-led concept before sourcing multiple real creators.',
+    bestFor:
+      'Hook • script • message • creator-led concept',
+    speed: 'FAST',
+  },
+  {
+    type: 'RAW UGC',
+    title: 'Raw creator test',
+    description:
+      'Use one creator, one location, phone-shot footage, and minimal editing to test the concept before investing in polished creator production.',
+    bestFor:
+      'Creator fit • message • story • testimonial • demo',
+    speed: 'FAST',
+  },
+  {
+    type: 'VOICEOVER',
+    title: 'Voiceover + existing footage',
+    description:
+      'Combine voiceover with stock, product footage, screenshots, reviews, existing B-roll, or simple motion to test the argument without a new shoot.',
+    bestFor:
+      'Mechanism • story • problem • education • proof',
+    speed: 'FAST',
+  },
+  {
+    type: 'ROUGH CUT',
+    title: 'Rough edit / asset remix',
+    description:
+      'Build the concept from existing brand footage, previous shoots, creator clips, product shots, screenshots, and simple text overlays before producing new assets.',
+    bestFor:
+      'Edit concept • hook • pacing • proof stack • narrative',
+    speed: 'FAST',
+  },
+  {
+    type: 'LIGHT NATIVE',
+    title: 'Lightweight native page',
+    description:
+      'If the concept depends on an advertorial or native experience, build only the essential headline, lead, mechanism, proof, product bridge, and offer first.',
+    bestFor:
+      'Advertorial direction • lead • mechanism • persuasion flow',
+    speed: 'MEDIUM',
   },
 ];
 
-const outputs = [
-  'Clear decision on whether an MVP is necessary',
-  'Defined core assumption',
-  'Smallest credible version of the concept',
-  'Controlled MVP test',
-  'Documented result and learning',
-  'Final status: Full Production, Revise and Retest, Inconclusive, or Stop',
-];
-
-const sops = [
+const decisions = [
   {
-    title: 'Minimum Viable Creative Test',
+    status: 'PROMOTE',
+    title: 'Move to Creative Briefing',
     description:
-      'Defines how to decide when an MVP is necessary, identify the riskiest assumption, build the smallest credible version, run the test, and choose whether to move into full production, revise, retest, or stop.',
+      'The MVP produced enough positive signal to justify building the complete production version.',
+    next: 'MVP → Creative Briefing',
+    tone: 'promote',
+  },
+  {
+    status: 'REVISE',
+    title: 'Fix one clear weakness and retest',
+    description:
+      'The idea shows potential, but one identifiable weakness can be improved without rebuilding the entire concept.',
+    next: 'Adjust → MVP Retest',
+    tone: 'revise',
+  },
+  {
+    status: 'INCONCLUSIVE',
+    title: 'Fix the test before judging the concept',
+    description:
+      'The MVP was too weak, too different, poorly delivered, or otherwise failed to give a trustworthy answer.',
+    next: 'Fix MVP → Rerun',
+    tone: 'inconclusive',
+  },
+  {
+    status: 'KILL',
+    title: 'Stop investing in this concept',
+    description:
+      'A valid MVP produced enough evidence that the concept does not deserve additional production investment.',
+    next: 'Document Learning → Next Concept',
+    tone: 'kill',
   },
 ];
 
@@ -163,319 +155,174 @@ export default function MinimumViableCreativeTest({
     <StageDeepDiveLayout
       stage={stage}
       onBack={onBack}
-      eyebrow="CONDITIONAL VALIDATION SYSTEM"
+      eyebrow="LEAN VALIDATION SYSTEM"
       title="Minimum Viable Creative Test"
-      introduction="MVP testing is a conditional step used when full production would require significant time, cost, or resources, and the core idea can be tested through a simpler version first. The goal is to test the most important assumption behind the concept before committing to full production."
+      introduction="When an MVP is required, the goal is to preserve the core concept while removing production complexity that is not necessary to learn."
       process={[
-        'Completed Concept',
-        'MVP Decision',
-        'Smallest Credible Version',
-        'Test',
-        'Scale, Revise, or Stop',
+        'Build Smallest Valid Version',
+        'Produce Fast MVP',
+        'Decide',
       ]}
-      outputs={outputs}
-      outputTitle="MVP Test Decision"
-      sops={sops}
-      sopDescription="The Minimum Viable Creative Test SOP defines how to validate the riskiest assumption before committing to full production."
+      singlePage
     >
       <StageSection
         number="00"
-        navTitle="MVP Overview"
+        navTitle="MVP Test"
         title="Minimum Viable Creative Test"
-        description="Use a simplified but credible version of the concept to validate the core idea before making a larger production investment."
+        description="Build the cheapest credible version that can still tell us whether the concept deserves full production."
       >
-        <StageHighlight
-          title="Core MVP Sequence"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'Completed Concept',
-              'MVP Decision',
-              'Build Smallest Credible Version',
-              'Test',
-              'Scale',
-              'Revise',
-              'Stop',
-            ]}
-          />
-        </StageHighlight>
+        <div className="mvc-board">
+          <div className="mvc-board-top">
+            <div className="mvc-board-top-copy">
+              <span>THE OPERATING QUESTION</span>
+              <h3>
+                What is the cheapest credible version that can validate this concept?
+              </h3>
+            </div>
 
-        <StageGrid columns={2}>
-          <StageCard
-            title="Primary Objective"
-            description="Reduce risk without removing the central persuasive idea."
-          >
-            <StageList
-              items={[
-                'Test the most important assumption',
-                'Reduce unnecessary production cost',
-                'Reduce unnecessary production time',
-                'Generate a useful decision signal',
-                'Protect the team from investing heavily in a weak direction',
-              ]}
-            />
-          </StageCard>
+            <div className="mvc-board-flow">
+              <StageFlow
+                items={[
+                  'Build Valid Version',
+                  'Produce Fast MVP',
+                  'Decide',
+                ]}
+              />
+            </div>
+          </div>
 
-          <StageHighlight title="Main Test Question">
-            <p>
-              Does the core idea create enough positive signal to justify
-              further investment?
-            </p>
-          </StageHighlight>
-        </StageGrid>
-      </StageSection>
+          <section className="mvc-step mvc-step-build">
+            <header className="mvc-step-header">
+              <div className="mvc-step-number">01</div>
 
-      <StageSection
-        number="01"
-        navTitle="When to Use It"
-        title="When to Use an MVP"
-        description="Use an MVP only when it meaningfully reduces risk, production cost, or time."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Use an MVP When">
-            <StageList items={whenToUseMvp} />
-          </StageCard>
+              <div>
+                <span>BUILD THE SMALLEST VALID VERSION</span>
+                <h3>Remove production complexity, preserve the concept</h3>
+              </div>
 
-          <StageCard title="Skip the MVP When">
-            <StageList items={whenToSkipMvp} />
-          </StageCard>
-        </StageGrid>
+              <p>
+                Reduce everything that is expensive or slow unless removing it
+                would change the idea we are trying to validate.
+              </p>
+            </header>
 
-        <StageHighlight
-          title="MVP Decision Rule"
-          type="warning"
-        >
-          <p>
-            An MVP should only be used when the simplified version can test
-            the same central idea while saving meaningful time, money, or
-            production resources.
-          </p>
-        </StageHighlight>
-      </StageSection>
+            <div className="mvc-preserve-remove">
+              <article className="mvc-preserve">
+                <div className="mvc-column-title">
+                  <span>KEEP</span>
+                  <h4>What must survive the simplification</h4>
+                </div>
 
-      <StageSection
-        number="02"
-        navTitle="Core Assumption"
-        title="Identify the Core Assumption"
-        description="Define the part of the concept that most needs validation before anything is produced."
-      >
-        <StageGrid columns={2}>
-          <StageCard
-            title="Possible Core Assumptions"
-            description="The MVP should focus on the single variable carrying the greatest uncertainty."
-          >
-            <StageList items={coreAssumptions} />
-          </StageCard>
+                <div className="mvc-list">
+                  {preserveItems.map((item) => (
+                    <span key={item}>
+                      <b>✓</b>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
 
-          <StageHighlight
-            title="Assumption Rule"
-            type="success"
-          >
-            <p>
-              The MVP should test the core assumption as directly as
-              possible. It should not become a broad test with several
-              unrelated variables changing at once.
-            </p>
-          </StageHighlight>
-        </StageGrid>
-      </StageSection>
+              <article className="mvc-remove">
+                <div className="mvc-column-title">
+                  <span>REMOVE</span>
+                  <h4>What can be stripped away first</h4>
+                </div>
 
-      <StageSection
-        number="03"
-        navTitle="Build the MVP"
-        title="Build the Smallest Credible Version"
-        description="Reduce production complexity without removing the central persuasive idea."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Possible MVP Versions">
-            <StageList items={possibleMvpVersions} />
-          </StageCard>
+                <div className="mvc-list">
+                  {removeItems.map((item) => (
+                    <span key={item}>
+                      <b>×</b>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            </div>
 
-          <StageHighlight
-            title="Quality Standard"
-            type="warning"
-          >
-            <p>
-              The goal is not to create a low-quality version. It is to
-              create the simplest version capable of producing a useful
-              signal.
-            </p>
-          </StageHighlight>
-        </StageGrid>
+            <div className="mvc-validity-rule">
+              <span>VALIDITY CHECK</span>
+              <strong>
+                If simplifying the asset removes the reason the concept might
+                work, it is not a valid MVP.
+              </strong>
+            </div>
+          </section>
 
-        <StageHighlight title="Build Logic">
-          <StageFlow
-            items={[
-              'Core Assumption',
-              'Remove Unnecessary Complexity',
-              'Preserve Central Idea',
-              'Smallest Credible Version',
-            ]}
-          />
-        </StageHighlight>
-      </StageSection>
+          <section className="mvc-step mvc-step-practical">
+            <header className="mvc-step-header">
+              <div className="mvc-step-number">02</div>
 
-      <StageSection
-        number="04"
-        navTitle="Run the Test"
-        title="Test the MVP"
-        description="Launch the MVP with enough control and structure to produce a usable decision."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Launch Requirements">
-            <StageList items={mvpLaunchRequirements} />
-          </StageCard>
+              <div>
+                <span>PRODUCE THE MVP FAST</span>
+                <h3>Use the fastest execution that can still represent the concept</h3>
+              </div>
 
-          <StageHighlight title="Single Test Objective">
-            <p>
-              The test should answer one main question: does the core idea
-              create enough positive signal to justify further investment?
-            </p>
-          </StageHighlight>
-        </StageGrid>
+              <p>
+                The goal is not low quality. The goal is low production friction
+                while keeping the core persuasive idea intact.
+              </p>
+            </header>
 
-        <StageHighlight
-          title="Controlled Test Structure"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'Clear Objective',
-              'Defined Audience',
-              'Controlled Offer and Page',
-              'Meaningful Variations',
-              'Success and Failure Signals',
-            ]}
-          />
-        </StageHighlight>
-      </StageSection>
+            <div className="mvc-practical-grid">
+              {practicalMvpMethods.map((method) => (
+                <article key={method.title}>
+                  <div className="mvc-practical-card-top">
+                    <span>{method.type}</span>
+                    <small>{method.speed}</small>
+                  </div>
 
-      <StageSection
-        number="05"
-        navTitle="MVP Decision"
-        title="MVP Decision"
-        description="Assign one final outcome based on the signal produced by the test."
-      >
-        <StageGrid columns={2}>
-          {finalStatuses.map((status) => (
-            <StageCard
-              key={status.title}
-              title={status.title}
-              description={status.description}
-            >
-              <StageList items={status.items} />
-            </StageCard>
-          ))}
-        </StageGrid>
+                  <h4>{method.title}</h4>
+                  <p>{method.description}</p>
 
-        <StageHighlight
-          title="Final MVP Status"
-          type="success"
-        >
-          <StageFlow
-            items={[
-              'Full Production',
-              'Revise and Retest',
-              'Inconclusive',
-              'Stop',
-            ]}
-          />
-        </StageHighlight>
-      </StageSection>
+                  <div className="mvc-practical-best-for">
+                    <span>BEST FOR</span>
+                    <strong>{method.bestFor}</strong>
+                  </div>
+                </article>
+              ))}
+            </div>
 
-      <StageSection
-        number="06"
-        navTitle="Full Production"
-        title="Move to Full Production"
-        description="The MVP proves that the central idea has enough potential to justify the complete version."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Next Actions">
-            <StageList items={fullProductionActions} />
-          </StageCard>
+            <div className="mvc-rule-strip">
+              <strong>SELECTION RULE</strong>
+              <span>
+                Choose the fastest method that preserves the concept. If a
+                static can answer the question, do not build a video. If the
+                idea depends on motion, story, creator delivery, or sequence,
+                use the lightest video version that can represent it fairly.
+              </span>
+            </div>
+          </section>
 
-          <StageHighlight
-            title="Transition"
-            type="success"
-          >
-            <StageFlow
-              items={[
-                'Positive MVP Signal',
-                'Complete Production',
-                'Planned Variations',
-                'Broader Testing',
-                'Scaling Potential',
-              ]}
-            />
-          </StageHighlight>
-        </StageGrid>
-      </StageSection>
+          <section className="mvc-step mvc-step-decision">
+            <header className="mvc-step-header">
+              <div className="mvc-step-number">03</div>
 
-      <StageSection
-        number="07"
-        navTitle="Revise & Retest"
-        title="Revise and Retest"
-        description="The core idea shows potential, but one identifiable weakness is limiting performance."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Possible Adjustments">
-            <StageList items={reviseAndRetestAdjustments} />
-          </StageCard>
+              <div>
+                <span>DECIDE</span>
+                <h3>Separate concept failure from test failure</h3>
+              </div>
 
-          <StageHighlight
-            title="Retest Rule"
-            type="warning"
-          >
-            <p>
-              The concept should be tested again as an MVP before it moves
-              into full production.
-            </p>
-          </StageHighlight>
-        </StageGrid>
-      </StageSection>
+              <p>
+                Every MVP ends with one explicit status and one next action.
+              </p>
+            </header>
 
-      <StageSection
-        number="08"
-        navTitle="Inconclusive"
-        title="Inconclusive"
-        description="The test did not produce a reliable enough answer to support a confident decision."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Possible Reasons">
-            <StageList items={inconclusiveReasons} />
-          </StageCard>
-
-          <StageHighlight
-            title="Retest Condition"
-            type="warning"
-          >
-            <p>
-              The concept should only be retested after fixing the reason
-              the original MVP was inconclusive.
-            </p>
-          </StageHighlight>
-        </StageGrid>
-      </StageSection>
-
-      <StageSection
-        number="09"
-        navTitle="Stop"
-        title="Stop and Move On"
-        description="The MVP fails to produce enough positive signal to justify additional production, time, or spend."
-      >
-        <StageGrid columns={2}>
-          <StageCard title="Stop When">
-            <StageList items={stopReasons} />
-          </StageCard>
-
-          <StageHighlight title="Learning Requirement">
-            <p>
-              The main learning should still be documented before the team
-              moves to the next concept.
-            </p>
-          </StageHighlight>
-        </StageGrid>
+            <div className="mvc-decision-grid">
+              {decisions.map((decision) => (
+                <article
+                  className={`is-${decision.tone}`}
+                  key={decision.status}
+                >
+                  <span>{decision.status}</span>
+                  <h4>{decision.title}</h4>
+                  <p>{decision.description}</p>
+                  <strong>{decision.next}</strong>
+                </article>
+              ))}
+            </div>
+          </section>
+        </div>
       </StageSection>
     </StageDeepDiveLayout>
   );
